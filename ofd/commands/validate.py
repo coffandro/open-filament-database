@@ -95,6 +95,54 @@ Examples:
         help='Stores directory (default: stores)'
     )
 
+    # Change detection options
+    change_group = parser.add_argument_group('change detection')
+    change_group.add_argument(
+        '--changed-only',
+        action='store_true',
+        help='Only validate files changed since base branch (for PR validation)'
+    )
+    change_group.add_argument(
+        '--base-branch',
+        default='main',
+        help='Base branch for change detection (default: main)'
+    )
+    change_group.add_argument(
+        '--since',
+        help='Validate files changed since timestamp (e.g., "2 hours ago", "2024-01-01")'
+    )
+
+    # Filtering options
+    filter_group = parser.add_argument_group('filtering')
+    filter_group.add_argument(
+        '--brands',
+        nargs='+',
+        help='Only validate specific brands (e.g., prusa bambulab)'
+    )
+    filter_group.add_argument(
+        '--materials',
+        nargs='+',
+        help='Only validate specific materials (e.g., PLA PETG ABS)'
+    )
+    filter_group.add_argument(
+        '--pattern',
+        nargs='+',
+        help='Only validate files matching glob pattern (e.g., "data/prusa/**/*.json")'
+    )
+
+    # Performance options
+    perf_group = parser.add_argument_group('performance')
+    perf_group.add_argument(
+        '--workers',
+        type=int,
+        help='Number of parallel workers (default: CPU count - 2, min 1)'
+    )
+    perf_group.add_argument(
+        '--use-processes',
+        action='store_true',
+        help='Use process pool instead of thread pool (threads recommended for I/O-bound validation)'
+    )
+
     parser.set_defaults(func=run_validate)
 
 
@@ -120,12 +168,65 @@ def run_validate(args: argparse.Namespace) -> int:
         print(f"Error: Stores directory '{stores_dir}' does not exist", file=sys.stderr)
         return 1
 
+    # Determine changed files for filtering
+    changed_files = None
+    if args.changed_only:
+        if not args.json and not args.progress:
+            print(f"Detecting changed files since '{args.base_branch}'...")
+        try:
+            from ofd.validation.change_detection import get_changed_files_in_pr
+            changed_files = get_changed_files_in_pr(args.base_branch, project_root)
+            if not args.json and not args.progress:
+                print(f"Found {len(changed_files)} changed files")
+        except RuntimeError as e:
+            print(f"Error detecting changed files: {e}", file=sys.stderr)
+            return 1
+    elif args.since:
+        if not args.json and not args.progress:
+            print(f"Detecting changed files since '{args.since}'...")
+        try:
+            from ofd.validation.change_detection import get_changed_files_since
+            changed_files = get_changed_files_since(args.since, project_root)
+            if not args.json and not args.progress:
+                print(f"Found {len(changed_files)} changed files")
+        except (RuntimeError, ValueError) as e:
+            print(f"Error detecting changed files: {e}", file=sys.stderr)
+            return 1
+    elif args.brands or args.materials or args.pattern:
+        if not args.json and not args.progress:
+            print("Filtering files by pattern...")
+        try:
+            from ofd.validation.change_detection import get_files_matching_patterns
+            changed_files = get_files_matching_patterns(
+                brands=args.brands,
+                materials=args.materials,
+                patterns=args.pattern,
+                project_root=project_root
+            )
+            if not args.json and not args.progress:
+                print(f"Found {len(changed_files)} matching files")
+        except Exception as e:
+            print(f"Error filtering files: {e}", file=sys.stderr)
+            return 1
+
     # Create orchestrator
+    # Default to using all cores except 2 (leave for desktop/system processes)
+    cpu_count = os.cpu_count() or 4
+    default_workers = max(1, cpu_count - 2)
+    num_workers = args.workers or default_workers
+
+    if not args.json and not args.progress:
+        executor_type = "processes" if args.use_processes else "threads"
+        print(f"Using {num_workers} parallel workers ({executor_type}) on {cpu_count} CPU cores")
+
     orchestrator = ValidationOrchestrator(
         data_dir=data_dir,
         stores_dir=stores_dir,
-        max_workers=os.cpu_count(),
-        progress_mode=args.progress
+        max_workers=num_workers,
+        progress_mode=args.progress,
+        use_processes=args.use_processes,
+        changed_files=changed_files,
+        project_root=project_root
     )
 
     result = ValidationResult()

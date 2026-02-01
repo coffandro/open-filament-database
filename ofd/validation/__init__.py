@@ -22,6 +22,7 @@ from .validators import (
     MissingFileValidator,
     load_json,
     cleanse_folder_name,
+    build_shared_registry,
     ILLEGAL_CHARACTERS,
     LOGO_MIN_SIZE,
     LOGO_MAX_SIZE,
@@ -54,6 +55,7 @@ __all__ = [
     # Utilities
     'load_json',
     'cleanse_folder_name',
+    'build_shared_registry',
     # Task collectors
     'collect_json_validation_tasks',
     'collect_logo_validation_tasks',

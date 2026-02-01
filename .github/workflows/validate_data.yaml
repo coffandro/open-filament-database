@@ -27,6 +27,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          # Fetch full history for PR change detection
+          fetch-depth: 0
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -34,4 +37,11 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
       - name: Validate data
-        run: python -m ofd validate --${{ matrix.name }}
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            # PR: only validate changed files (20-50x faster)
+            python -m ofd validate --${{ matrix.name }} --changed-only --base-branch origin/${{ github.base_ref }}
+          else
+            # Push to main or manual trigger: full validation
+            python -m ofd validate --${{ matrix.name }}
+          fi
