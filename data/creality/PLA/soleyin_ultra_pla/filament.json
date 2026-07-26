@@ -3,5 +3,8 @@
   "id": "soleyin_ultra_pla",
   "name": "Soleyin Ultra PLA",
   "diameter_tolerance": 0.02,
-  "density": 1.25
+  "density": 1.25,
+  "min_print_temperature": 190,
+  "max_print_temperature": 220,
+  "discontinued": false
 }
