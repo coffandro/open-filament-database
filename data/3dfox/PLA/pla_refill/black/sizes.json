@@ -1,0 +1,15 @@
+[
+  {
+    "filament_weight": 1000,
+    "diameter": 1.75,
+    "spool_refill": true,
+    "empty_spool_weight": 250,
+    "discontinued": false
+  },
+  {
+    "filament_weight": 3000,
+    "diameter": 1.75,
+    "spool_refill": true,
+    "discontinued": false
+  }
+]
