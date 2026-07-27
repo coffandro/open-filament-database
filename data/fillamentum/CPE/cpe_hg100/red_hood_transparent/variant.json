@@ -1,0 +1,9 @@
+{
+  "id": "red_hood_transparent",
+  "name": "Red Hood Transparent",
+  "color_hex": "#B72628",
+  "discontinued": false,
+  "traits": {
+    "transparent": true
+  }
+}
