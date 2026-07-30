@@ -1,0 +1,10 @@
+{
+  "id": "light_brown_wood",
+  "name": "Light Brown Wood",
+  "color_hex": "#C7873D",
+  "discontinued": false,
+  "traits": {
+    "without_pigments": true,
+    "contains_wood": true
+  }
+}
