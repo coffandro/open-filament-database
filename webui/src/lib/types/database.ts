@@ -181,7 +181,8 @@ export interface Variant {
 	filament_id: string;
 	slug: string;
 	name: string;
-	color_hex: string;
+	/** A single hex colour, or several for multi-colour variants (co-extruded, gradient…). */
+	color_hex: string | string[];
 	discontinued: boolean;
 	traits?: VariantTraits;
 	sizes?: VariantSize[];

@@ -17,6 +17,7 @@
 	import { prepareDuplicateData } from '$lib/services/clipboardService';
 	import { formDrafts } from '$lib/stores/formDrafts';
 	import { collectSiblingFibers, checkFiberConflict, fibersFromTraits } from '$lib/utils/fiberConflict';
+	import { colorHexList, colorSwatchStyle, formatColorHex } from '$lib/utils/colorHex';
 
 	let brandId: string = $derived($page.params.brand!);
 	let materialType: string = $derived($page.params.material!);
@@ -275,8 +276,8 @@
 				<div class="flex items-center gap-3 mb-2">
 					<div
 						class="w-12 h-12 rounded-full border-2 border-border"
-						style="background-color: {variantData.color_hex}"
-						title={variantData.color_hex}
+						style={colorSwatchStyle(variantData.color_hex)}
+						title={formatColorHex(variantData.color_hex)}
 					></div>
 					<div>
 						<h1 class="text-3xl font-bold">{variantData.name}</h1>
@@ -329,13 +330,16 @@
 						<dd class="mt-1">{variantData.slug}</dd>
 					</div>
 					<div>
-						<dt class="text-sm font-medium text-muted-foreground">Color</dt>
-						<dd class="mt-1 flex items-center gap-2">
-							<div
-								class="w-8 h-8 rounded border-2 border-border"
-								style="background-color: {variantData.color_hex}"
-							></div>
-							<span class="font-mono">{variantData.color_hex}</span>
+						<dt class="text-sm font-medium text-muted-foreground">
+							{colorHexList(variantData.color_hex).length > 1 ? 'Colors' : 'Color'}
+						</dt>
+						<dd class="mt-1 flex items-center gap-2 flex-wrap">
+							{#each colorHexList(variantData.color_hex) as hex, i (i)}
+								<div class="flex items-center gap-2">
+									<div class="w-8 h-8 rounded border-2 border-border" style="background-color: {hex}"></div>
+									<span class="font-mono">{hex}</span>
+								</div>
+							{/each}
 						</dd>
 					</div>
 					<div>

@@ -20,6 +20,7 @@
 	import { removeIdFromSchema } from '$lib/utils/schemaUtils';
 	import { initializeFormData, buildSubmitData } from './schemaFormUtils';
 	import { stripTrackersDeep } from '$lib/utils/urlSanitizer';
+	import { isValidColorHex } from '$lib/utils/colorHex';
 	import type { SchemaFormConfig } from './schemaFormTypes';
 	import { formDrafts } from '$lib/stores/formDrafts';
 	import { generateSlug } from '$lib/services/entityService';
@@ -467,9 +468,10 @@
 	function handleSubmit(data: any) {
 		validationError = null;
 
-		// Validate required fields
-		if (!data.name || !data.color_hex) {
-			validationError = 'Name and color are required fields.';
+		// Validate required fields. `color_hex` may hold several colours (multi-colour
+		// variants) — every one of them has to be a complete hex value.
+		if (!data.name || !isValidColorHex(data.color_hex)) {
+			validationError = 'Name and color are required fields, and every color must be a full 6-digit hex.';
 			return;
 		}
 
@@ -572,7 +574,7 @@
 
 	// Check if form can be submitted
 	let canSubmit = $derived(
-		!!formData.name && /^#[a-fA-F0-9]{6}$/.test(formData.color_hex) && sizes.length > 0 && !fiberConflict
+		!!formData.name && isValidColorHex(formData.color_hex) && sizes.length > 0 && !fiberConflict
 	);
 
 	// Persist form state to the in-memory draft store on every change.
