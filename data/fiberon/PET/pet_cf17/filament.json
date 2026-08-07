@@ -12,6 +12,10 @@
         "crealityprint": {
             "id": "P8001",
             "profile_name": "Fiberon PET-CF17"
+        },
+        "elegooslicer": {
+            "profile_name": "Fiberon PET-CF17",
+            "id": "GFL60"
         }
     }
 }

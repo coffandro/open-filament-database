@@ -19,6 +19,11 @@
             "generic_id": "GFL99",
             "id": "GF_ANPL",
             "profile_name": "addnorth PLA Economy"
+        },
+        "elegooslicer": {
+            "profile_name": "addnorth PLA Economy",
+            "id": "GF_ANPL",
+            "generic_id": "GFL99"
         }
     }
 }

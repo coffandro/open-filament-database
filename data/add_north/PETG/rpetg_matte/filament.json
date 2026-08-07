@@ -15,6 +15,11 @@
             "generic_id": "GFG99",
             "id": "GF_ANRM",
             "profile_name": "addnorth PETG rPETG Matte"
+        },
+        "elegooslicer": {
+            "profile_name": "addnorth PETG rPETG Matte",
+            "id": "GF_ANRM",
+            "generic_id": "GFG99"
         }
     }
 }

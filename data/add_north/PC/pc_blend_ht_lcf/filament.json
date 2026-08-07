@@ -16,6 +16,11 @@
             "generic_id": "GFC99",
             "id": "GF_ANPBX",
             "profile_name": "addnorth PC BLend HT LCF"
+        },
+        "elegooslicer": {
+            "profile_name": "addnorth PC BLend HT LCF",
+            "id": "GF_ANPBX",
+            "generic_id": "GFC99"
         }
     }
 }

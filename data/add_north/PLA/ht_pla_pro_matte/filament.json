@@ -17,6 +17,11 @@
             "generic_id": "GFL99",
             "id": "GF_ANHTP",
             "profile_name": "addnorth PLA HT-PLA PRO Matte"
+        },
+        "elegooslicer": {
+            "profile_name": "addnorth PLA HT-PLA PRO Matte",
+            "id": "GF_ANHTP",
+            "generic_id": "GFL99"
         }
     }
 }

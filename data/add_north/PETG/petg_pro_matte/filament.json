@@ -15,6 +15,11 @@
             "generic_id": "GFG99",
             "id": "GF_ANPM",
             "profile_name": "addnorth PETG PRO Matte"
+        },
+        "elegooslicer": {
+            "profile_name": "addnorth PETG PRO Matte",
+            "id": "GF_ANPM",
+            "generic_id": "GFG99"
         }
     }
 }

@@ -18,6 +18,11 @@
             "generic_id": "GFB99",
             "id": "E3001",
             "profile_name": "eSUN ABS+"
+        },
+        "elegooslicer": {
+            "profile_name": "eSUN ABS+",
+            "id": "E3001",
+            "generic_id": "GFB99"
         }
     }
 }

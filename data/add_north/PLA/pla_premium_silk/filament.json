@@ -15,6 +15,11 @@
             "generic_id": "GFL96",
             "id": "GF_ANPS",
             "profile_name": "addnorth PLA Premium Silk"
+        },
+        "elegooslicer": {
+            "profile_name": "addnorth PLA Premium Silk",
+            "id": "GF_ANPS",
+            "generic_id": "GFL96"
         }
     }
 }

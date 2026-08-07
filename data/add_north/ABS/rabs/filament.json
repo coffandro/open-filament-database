@@ -16,6 +16,11 @@
             "generic_id": "GFB99",
             "id": "GF_ANRA",
             "profile_name": "addnorth ABS rABS"
+        },
+        "elegooslicer": {
+            "profile_name": "addnorth ABS rABS",
+            "id": "GF_ANRA",
+            "generic_id": "GFB99"
         }
     }
 }

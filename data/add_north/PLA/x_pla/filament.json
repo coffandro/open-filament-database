@@ -17,6 +17,11 @@
             "generic_id": "GFL99",
             "id": "GF_ANXP",
             "profile_name": "addnorth PLA X-PLA"
+        },
+        "elegooslicer": {
+            "profile_name": "addnorth PLA X-PLA",
+            "id": "GF_ANXP",
+            "generic_id": "GFL99"
         }
     }
 }

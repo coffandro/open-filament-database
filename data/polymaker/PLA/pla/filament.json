@@ -13,6 +13,11 @@
             "generic_id": "GFL99",
             "id": "GFL78",
             "profile_name": "Polymaker PLA"
+        },
+        "elegooslicer": {
+            "profile_name": "Polymaker PLA",
+            "id": "GFL78",
+            "generic_id": "GFL99"
         }
     }
 }

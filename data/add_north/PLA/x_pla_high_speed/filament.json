@@ -15,6 +15,11 @@
             "generic_id": "GFL99",
             "id": "GF_ANXPH",
             "profile_name": "addnorth PLA X-PLA High Speed"
+        },
+        "elegooslicer": {
+            "profile_name": "addnorth PLA X-PLA High Speed",
+            "id": "GF_ANXPH",
+            "generic_id": "GFL99"
         }
     }
 }

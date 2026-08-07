@@ -21,6 +21,10 @@
         },
         "superslicer": {
             "profile_name": "addnorth Adamant S1"
+        },
+        "elegooslicer": {
+            "profile_name": "addnorth PVDF Adamant S1",
+            "id": "GF_ANPV"
         }
     }
 }

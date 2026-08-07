@@ -14,6 +14,11 @@
             "generic_id": "GFL99",
             "id": "P1004",
             "profile_name": "PolySonic PLA"
+        },
+        "elegooslicer": {
+            "profile_name": "PolySonic PLA",
+            "id": "P1004",
+            "generic_id": "GFL99"
         }
     }
 }

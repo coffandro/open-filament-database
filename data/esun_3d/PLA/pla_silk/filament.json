@@ -18,6 +18,11 @@
             "generic_id": "GFL96",
             "id": "E1002",
             "profile_name": "eSUN PLA-Silk"
+        },
+        "elegooslicer": {
+            "profile_name": "eSUN PLA-Silk",
+            "id": "E1002",
+            "generic_id": "GFL96"
         }
     }
 }

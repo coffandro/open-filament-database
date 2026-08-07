@@ -20,6 +20,11 @@
             "generic_id": "GFL99",
             "id": "GF_ANPLW",
             "profile_name": "addnorth PLA Wood"
+        },
+        "elegooslicer": {
+            "profile_name": "addnorth PLA Wood",
+            "id": "GF_ANPLW",
+            "generic_id": "GFL99"
         }
     }
 }

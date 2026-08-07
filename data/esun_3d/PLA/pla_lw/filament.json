@@ -14,6 +14,11 @@
             "generic_id": "GFL99",
             "id": "E1008",
             "profile_name": "eSUN PLA-LW"
+        },
+        "elegooslicer": {
+            "profile_name": "eSUN PLA-LW",
+            "id": "00035",
+            "generic_id": "GFL99"
         }
     }
 }

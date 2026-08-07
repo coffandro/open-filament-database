@@ -15,6 +15,11 @@
             "generic_id": "GFU99",
             "id": "GF_ANTA",
             "profile_name": "addnorth TPU Pro Matte 85A"
+        },
+        "elegooslicer": {
+            "profile_name": "addnorth TPU Pro Matte 85A",
+            "id": "GF_ANTA",
+            "generic_id": "GFU99"
         }
     }
 }

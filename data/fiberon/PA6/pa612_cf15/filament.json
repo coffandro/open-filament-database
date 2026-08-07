@@ -12,6 +12,10 @@
         "crealityprint": {
             "id": "P7002",
             "profile_name": "Fiberon PA612-CF15"
+        },
+        "elegooslicer": {
+            "profile_name": "Fiberon PA612-CF15",
+            "id": "GFL59"
         }
     }
 }

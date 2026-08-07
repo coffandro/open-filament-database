@@ -14,6 +14,11 @@
             "generic_id": "GFG99",
             "id": "E2003",
             "profile_name": "eSUN PETG-Basic"
+        },
+        "elegooslicer": {
+            "profile_name": "eSUN PETG-Basic",
+            "id": "E2003",
+            "generic_id": "GFG99"
         }
     }
 }

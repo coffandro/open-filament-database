@@ -14,6 +14,11 @@
             "generic_id": "GFG99",
             "id": "P2002",
             "profile_name": "Fiberon PETG-rCF08"
+        },
+        "elegooslicer": {
+            "profile_name": "Fiberon PETG-rCF08",
+            "id": "GFL61",
+            "generic_id": "GFG99"
         }
     }
 }

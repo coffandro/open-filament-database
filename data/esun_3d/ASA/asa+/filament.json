@@ -18,6 +18,11 @@
             "generic_id": "GFB98",
             "id": "E4001",
             "profile_name": "eSUN ASA+"
+        },
+        "elegooslicer": {
+            "profile_name": "eSUN ASA+",
+            "id": "E4001",
+            "generic_id": "GFB98"
         }
     }
 }

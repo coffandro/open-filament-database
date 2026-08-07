@@ -9,6 +9,11 @@
             "generic_id": "GFT97",
             "id": "GFL73",
             "profile_name": "Fiberon PPS-GF20"
+        },
+        "elegooslicer": {
+            "profile_name": "Fiberon PPS-GF20",
+            "id": "GFL73",
+            "generic_id": "GFT97"
         }
     }
 }
