@@ -1,25 +1,25 @@
 {
-    "uuid": "da6e2f1e-1048-4fbd-95ac-05bf8591fd44",
-    "id": "rpetg_matte",
-    "name": "rPETG Matte",
-    "diameter_tolerance": 0.02,
-    "density": 1.25,
-    "max_dry_temperature": 65,
-    "slicer_settings": {
-        "bambustudio": {
-            "generic_id": "GFG99",
-            "id": "GF_ANRM",
-            "profile_name": "addnorth PETG rPETG Matte"
-        },
-        "orcaslicer": {
-            "generic_id": "GFG99",
-            "id": "GF_ANRM",
-            "profile_name": "addnorth PETG rPETG Matte"
-        },
-        "elegooslicer": {
-            "profile_name": "addnorth PETG rPETG Matte",
-            "id": "GF_ANRM",
-            "generic_id": "GFG99"
-        }
+  "uuid": "da6e2f1e-1048-4fbd-95ac-05bf8591fd44",
+  "id": "rpetg_matte",
+  "name": "rPETG Matte",
+  "diameter_tolerance": 0.02,
+  "density": 1.25,
+  "max_dry_temperature": 65,
+  "slicer_settings": {
+    "bambustudio": {
+      "generic_id": "GFG99",
+      "id": "GF_ANRM",
+      "profile_name": "addnorth PETG rPETG Matte"
+    },
+    "orcaslicer": {
+      "generic_id": "GFG99",
+      "id": "GF_ANRM",
+      "profile_name": "addnorth PETG rPETG Matte"
+    },
+    "elegooslicer": {
+      "generic_id": "GFG99",
+      "id": "GF_ANRM",
+      "profile_name": "addnorth PETG rPETG Matte"
     }
+  }
 }
