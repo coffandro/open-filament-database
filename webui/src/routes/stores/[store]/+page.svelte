@@ -128,8 +128,9 @@
 		}
 	}
 
-	// Deleting a store leaves every purchase_link that references it dangling, so the
-	// modal offers a replacement store first.
+	// Deleting a store can break consumers that reference its canonical UUID.
+	// The modal encourages choosing a replacement so the old UUID can be recorded on
+	// the replacement’s `moved_from` list (purchase_links.store_id references still need manual updates).
 	function openDeleteStore() {
 		if (!store) return;
 		deleteFlow.open({

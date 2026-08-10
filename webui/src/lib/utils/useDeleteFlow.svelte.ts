@@ -49,19 +49,23 @@ export function createDeleteFlow(
 		// from the page's own path and would be wrong for a child card.
 		isLocalCreate = isLocallyCreated(req.path);
 		error = null;
-		resolving = false;
-		request = req;
 
 		const token = ++openToken;
 		// List endpoints serve trimmed summaries with no `uuid`/`moved_from`, so a
 		// child card can't say whether a redirect is possible. Fetch the real entity
 		// before the modal decides. (A local create has no canonical UUID either way.)
-		if (!req.uuid && !isLocalCreate) void resolveIdentity(req, token);
+		const shouldResolveIdentity = !req.uuid && !isLocalCreate;
+		resolving = shouldResolveIdentity;
+		request = req;
+		if (shouldResolveIdentity) void resolveIdentity(req, token);
 	}
 
 	async function resolveIdentity(req: DeleteRequest, token: number) {
 		const resolved = opsForPath(req.path);
-		if (!resolved) return;
+		if (!resolved) {
+			if (token === openToken) resolving = false;
+			return;
+		}
 
 		resolving = true;
 		try {
