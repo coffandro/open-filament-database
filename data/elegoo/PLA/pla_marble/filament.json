@@ -12,5 +12,17 @@
   "min_chamber_temperature": 20,
   "max_chamber_temperature": 45,
   "min_nozzle_diameter": 0.4,
-  "discontinued": false
+  "discontinued": false,
+  "slicer_settings": {
+    "orcaslicer": {
+      "generic_id": "GFL99",
+      "id": "EPLAB00",
+      "profile_name": "Elegoo PLA Marble"
+    },
+    "elegooslicer": {
+      "generic_id": "GFL99",
+      "id": "EPLAB00",
+      "profile_name": "Elegoo PLA Marble"
+    }
+  }
 }

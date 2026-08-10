@@ -1,4 +1,5 @@
 {
+  "uuid": "36d64880-f25b-4337-b1cf-0202ff302b5b",
   "id": "pla_pure",
   "name": "PLA Pure",
   "diameter_tolerance": 0.02,
@@ -12,4 +13,11 @@
   "min_nozzle_diameter": 0.2,
   "data_sheet_url": "https://store.bblcdn.com/s7/default/0e7400b878d84516a1ae605c1edaeab0/pla_pure_-TDS.pdf",
   "discontinued": false
+  "slicer_settings": {
+    "bambustudio": {
+      "generic_id": "GFL99",
+      "id": "GFA19",
+      "profile_name": "Bambu PLA Pure"
+    }
+  }
 }

@@ -12,5 +12,15 @@
   "min_chamber_temperature": 45,
   "max_chamber_temperature": 60,
   "min_nozzle_diameter": 0.4,
-  "discontinued": false
+  "discontinued": false,
+  "slicer_settings": {
+    "orcaslicer": {
+      "id": "EPETGB00",
+      "profile_name": "Elegoo PET-CF"
+    },
+    "elegooslicer": {
+      "id": "EPETGB00",
+      "profile_name": "Elegoo PET-CF"
+    }
+  }
 }

@@ -12,5 +12,17 @@
   "min_chamber_temperature": 25,
   "max_chamber_temperature": 50,
   "min_nozzle_diameter": 0.2,
-  "discontinued": false
+  "discontinued": false,
+  "slicer_settings": {
+    "orcaslicer": {
+      "generic_id": "GFG99",
+      "id": "EPETGB00",
+      "profile_name": "Elegoo PETG Translucent"
+    },
+    "elegooslicer": {
+      "generic_id": "GFG99",
+      "id": "EPETGB00",
+      "profile_name": "Elegoo PETG Translucent"
+    }
+  }
 }

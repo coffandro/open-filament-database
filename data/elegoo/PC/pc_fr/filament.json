@@ -12,5 +12,17 @@
   "min_chamber_temperature": 45,
   "max_chamber_temperature": 60,
   "min_nozzle_diameter": 0.4,
-  "discontinued": false
+  "discontinued": false,
+  "slicer_settings": {
+    "orcaslicer": {
+      "generic_id": "GFC99",
+      "id": "EPCB00",
+      "profile_name": "Elegoo PC-FR"
+    },
+    "elegooslicer": {
+      "generic_id": "GFC99",
+      "id": "EPCB00",
+      "profile_name": "Elegoo PC-FR"
+    }
+  }
 }
