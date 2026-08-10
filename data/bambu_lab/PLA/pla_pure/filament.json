@@ -12,7 +12,7 @@
   "max_chamber_temperature": 40,
   "min_nozzle_diameter": 0.2,
   "data_sheet_url": "https://store.bblcdn.com/s7/default/0e7400b878d84516a1ae605c1edaeab0/pla_pure_-TDS.pdf",
-  "discontinued": false
+  "discontinued": false,
   "slicer_settings": {
     "bambustudio": {
       "generic_id": "GFL99",
