@@ -1,0 +1,10 @@
+{
+  "material": "PETG",
+  "material_class": "FFF",
+  "default_slicer_settings": {
+    "generic": {
+      "bed_temp": 80,
+      "nozzle_temp": 250
+    }
+  }
+}
