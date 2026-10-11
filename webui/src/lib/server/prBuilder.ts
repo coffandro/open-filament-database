@@ -10,6 +10,7 @@ import {
 	isUuidSegment,
 	cleanEntityData,
 	preserveCanonicalFields,
+	stripUnanchoredUuid,
 	JSON_INDENT_REPO
 } from '$lib/server/saveUtils';
 import {
@@ -241,6 +242,14 @@ export type NoopDelete = { path: string; description?: string };
 type ExistingTree = Map<string, { sha: string; mode: string; type: string }>;
 
 /**
+ * True only when the tree was listed and holds nothing at `repoPath`. An unlisted
+ * tree (null) is "unknown", not "new" — never strip identity on a failed lookup.
+ */
+function isNewPath(tree: ExistingTree | null, repoPath: string): boolean {
+	return tree !== null && !tree.has(repoPath);
+}
+
+/**
  * Read and parse the JSON currently committed at `repoPath`, or null when the
  * path is new or its blob isn't readable JSON. Used to carry canonical identity
  * fields onto a write that would otherwise replace the file wholesale.
@@ -334,11 +343,14 @@ export async function buildTreeItems(
 			// This write replaces the file, and the payload may predate UUID
 			// assignment (e.g. a `create` staged before the entity was published,
 			// then submitted again after it merged). Keep whatever canonical
-			// identity is already committed here rather than dropping it.
-			cleanData = preserveCanonicalFields(
-				cleanData,
-				await readUpstreamJson(token, upstreamOwner, upstreamRepo, existingTree, repoPath)
-			);
+			// identity is already committed here rather than dropping it. A path
+			// with nothing committed is a new entity: a uuid there was copied.
+			cleanData = isNewPath(existingTree, repoPath)
+				? stripUnanchoredUuid(cleanData)
+				: preserveCanonicalFields(
+						cleanData,
+						await readUpstreamJson(token, upstreamOwner, upstreamRepo, existingTree, repoPath)
+					);
 
 			// For variant entities, extract sizes into a separate file
 			let sizesData = null;
@@ -360,10 +372,12 @@ export async function buildTreeItems(
 				const sizesRepoPath = repoPath.replace(/variant\.json$/, 'sizes.json');
 				// Spools carry their own canonical UUIDs; pair them with the committed
 				// ones by (filament_weight, diameter) so a rewrite keeps them too.
-				let sortedSizes: any = preserveCanonicalFields(
-					sizesData,
-					await readUpstreamJson(token, upstreamOwner, upstreamRepo, existingTree, sizesRepoPath)
-				);
+				let sortedSizes: any = isNewPath(existingTree, sizesRepoPath)
+					? stripUnanchoredUuid(sizesData)
+					: preserveCanonicalFields(
+							sizesData,
+							await readUpstreamJson(token, upstreamOwner, upstreamRepo, existingTree, sizesRepoPath)
+						);
 				if (schemas['sizes']) {
 					sortedSizes = sortJsonKeys(sortedSizes, schemas['sizes']);
 				}

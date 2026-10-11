@@ -181,6 +181,38 @@ describe('buildTreeItems — canonical identity', () => {
 
 		expect(written.get(VARIANT_REPO_FILE).name).toBe('Oliver Green');
 	});
+
+	// PR #636: a duplicated entity arrived at a new path still carrying its source's
+	// uuid (and its spools' uuids). Only a file already at the same path may supply one.
+	it('drops a copied uuid on a new path, but keeps moved_from', async () => {
+		mocks.getRecursiveTree.mockResolvedValue(
+			new Map([['data/other/brand.json', { sha: 's', mode: '100644', type: 'blob' }]])
+		);
+
+		const written = await build(
+			variantChange({
+				uuid: VARIANT_UUID,
+				moved_from: [SIZE_UUID],
+				id: 'oliver_green',
+				name: 'Oliver Green',
+				sizes: [{ uuid: SIZE_UUID, filament_weight: 1000, diameter: 1.75 }]
+			})
+		);
+
+		expect(written.get(VARIANT_REPO_FILE)).not.toHaveProperty('uuid');
+		expect(written.get(VARIANT_REPO_FILE).moved_from).toEqual([SIZE_UUID]);
+		expect(written.get(SIZES_REPO_FILE)).toEqual([{ filament_weight: 1000, diameter: 1.75 }]);
+	});
+
+	it('does not treat a failed tree listing as a new path', async () => {
+		mocks.getRecursiveTree.mockResolvedValue(null);
+
+		const written = await build(
+			variantChange({ uuid: VARIANT_UUID, id: 'oliver_green', name: 'Oliver Green' })
+		);
+
+		expect(written.get(VARIANT_REPO_FILE).uuid).toBe(VARIANT_UUID);
+	});
 });
 
 describe('explainEmptyTree', () => {

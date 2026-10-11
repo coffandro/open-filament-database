@@ -4,7 +4,7 @@ import path from 'path';
 import type { EntityConfig } from './entityConfig';
 import { ENTITY_CONFIGS, normalizeBrandId, normalizeMaterialType } from './entityConfig';
 import { IS_CLOUD, proxyGetToCloud } from './cloudProxy';
-import { preserveCanonicalFields } from './saveUtils';
+import { reconcileWithDisk } from './saveUtils';
 
 // === Shared utilities ===
 
@@ -36,19 +36,6 @@ function resolveCloudPath(
 
 function formatJson(data: unknown): string {
 	return JSON.stringify(data, null, 4) + '\n';
-}
-
-/**
- * Parse the JSON already at `filePath`, or null when it doesn't exist (or can't
- * be parsed). Writes here replace the whole file, so this is what lets a write
- * keep the canonical identity fields the incoming payload doesn't carry.
- */
-async function readJsonIfExists(filePath: string): Promise<unknown> {
-	try {
-		return JSON.parse(await fs.readFile(filePath, 'utf-8'));
-	} catch {
-		return null;
-	}
 }
 
 export function generateSlug(name: string, transform: 'lowercase' | 'uppercase'): string {
@@ -256,9 +243,10 @@ export function createPostHandler(config: EntityConfig) {
 				}
 
 				// A "create" can land on a slug that already exists; don't let it drop
-				// the canonical identity of the entity already stored there.
+				// the canonical identity of the entity already stored there. On a new
+				// slug, a uuid in the payload was copied (duplicate/paste) — drop it.
 				const filePath = path.join(entityDir, config.jsonFilename);
-				storageData = preserveCanonicalFields(storageData, await readJsonIfExists(filePath));
+				storageData = await reconcileWithDisk(storageData, filePath);
 
 				await fs.writeFile(filePath, formatJson(storageData), 'utf-8');
 
@@ -299,10 +287,7 @@ export function createPutHandler(config: EntityConfig) {
 			if (isLocal) {
 				const entityDir = await resolveEntityDir(config, params);
 				const filePath = path.join(entityDir, config.jsonFilename);
-				const cleanData = preserveCanonicalFields(
-					stripFields(data, config.stripFields),
-					await readJsonIfExists(filePath)
-				);
+				const cleanData = await reconcileWithDisk(stripFields(data, config.stripFields), filePath);
 				await fs.writeFile(filePath, formatJson(cleanData), 'utf-8');
 				return json({ success: true });
 			} else {

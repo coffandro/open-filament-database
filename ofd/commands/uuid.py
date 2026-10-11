@@ -11,6 +11,8 @@ Sub-actions:
     ofd uuid assign [--check]  Assign a UUID to every entity missing one (writes files)
     ofd uuid find <uuid>       Locate the entity for a UUID (falls back to moved_from)
     ofd uuid check             Verify UUIDs (incl. moved_from) are valid and unique
+    ofd uuid continuity --base <ref>
+                               Fail if a UUID present at <ref> no longer resolves
     ofd uuid list              Print the uuid -> path index
 
 A former UUID recorded in an entity's ``moved_from`` (see ofd/uuids.py) redirects to
@@ -22,11 +24,16 @@ contributors never author UUIDs by hand.
 
 import argparse
 import json
+import os
+import subprocess
 import sys
+import tarfile
+import tempfile
 from pathlib import Path
 
 from ofd.uuids import (
     UUID_RE,
+    find_lost_uuids,
     generate_canonical_uuid,
     iter_entities,
     resolve_uuid,
@@ -60,6 +67,7 @@ Examples:
   ofd uuid find <uuid>         Print the entity for a UUID (or where a moved_from UUID now lives)
   ofd uuid check               Verify every UUID is present, well-formed, and globally unique
   ofd uuid check --allow-missing-uuids   Skip the presence check (for PR / pre-merge checks)
+  ofd uuid continuity --base origin/main  Fail if a UUID on main vanished without a redirect
   ofd uuid list                Print the uuid -> path index
         """,
     )
@@ -109,6 +117,21 @@ Examples:
     )
     p_check.add_argument("--json", action="store_true", help="Output results as JSON")
     p_check.set_defaults(func=run_check)
+
+    # continuity ------------------------------------------------------------
+    p_cont = actions.add_parser(
+        "continuity",
+        help="Fail if a UUID present at a base git ref no longer resolves in the working tree",
+    )
+    p_cont.add_argument(
+        "--base",
+        required=True,
+        metavar="REF",
+        help="Git ref/commit to compare against (e.g. the PR's base sha)",
+    )
+    _add_dir_args(p_cont)
+    p_cont.add_argument("--json", action="store_true", help="Output results as JSON")
+    p_cont.set_defaults(func=run_continuity)
 
     # list ------------------------------------------------------------------
     p_list = actions.add_parser("list", help="Print the uuid -> path index")
@@ -449,6 +472,105 @@ def run_check(args: argparse.Namespace) -> int:
                 f"({len(entities) - assigned_count} unassigned)."
             )
     return 0 if ok else 1
+
+
+def _extract_ref(ref: str, data_dir: Path, stores_dir: Path, dest: Path) -> tuple[Path, Path]:
+    """Write ``data_dir``/``stores_dir`` as they are at git ``ref`` under ``dest``.
+
+    Returns the extracted (data, stores) directories. Raises CalledProcessError when
+    ``ref`` (or either directory at ``ref``) doesn't exist.
+    """
+    top = Path(
+        subprocess.run(
+            ["git", "-C", str(data_dir), "rev-parse", "--show-toplevel"],
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout.strip()
+    ).resolve()
+    rel = [d.resolve().relative_to(top).as_posix() for d in (data_dir, stores_dir)]
+    with subprocess.Popen(
+        ["git", "-C", str(top), "archive", "--format=tar", ref, "--", *rel],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    ) as proc:
+        tar_error: tarfile.TarError | None = None
+        try:
+            with tarfile.open(fileobj=proc.stdout, mode="r|") as tar:
+                tar.extractall(dest, filter="data")
+        except tarfile.TarError as exc:  # e.g. an unknown ref yields an empty stream
+            tar_error = exc
+        stderr = proc.stderr.read().decode(errors="replace")
+    if proc.returncode:
+        raise subprocess.CalledProcessError(proc.returncode, "git archive", stderr=stderr)
+    if tar_error is not None:
+        raise ValueError(f"unreadable archive: {tar_error}")
+    return dest / rel[0], dest / rel[1]
+
+
+CONTINUITY_HINT = (
+    "Each UUID above existed at the base but is neither live nor listed in any "
+    "moved_from now. A rename/move must keep the entity's uuid (and its children's); "
+    "an entity replaced by another should be deleted with a redirect, so the old uuid "
+    "lands in the replacement's moved_from. If this is a genuine deletion with no "
+    "replacement, a maintainer can accept it with the `uuid-removal-ok` PR label."
+)
+
+
+def _write_step_summary(ref: str, rows: list[dict[str, str]]) -> None:
+    """Append a markdown report to the GitHub Actions job summary, when running there."""
+    summary = os.environ.get("GITHUB_STEP_SUMMARY")
+    if not summary:
+        return
+    lines = [f"### {len(rows)} canonical UUID(s) lost relative to `{ref}`", ""]
+    lines += ["| UUID | Type | Path at base |", "| --- | --- | --- |"]
+    lines += [f"| `{r['uuid']}` | {r['type']} | `{r['path']}` |" for r in rows]
+    lines += ["", CONTINUITY_HINT, ""]
+    with open(summary, "a", encoding="utf-8") as fh:
+        fh.write("\n".join(lines))
+
+
+def run_continuity(args: argparse.Namespace) -> int:
+    """Fail when a canonical UUID present at ``--base`` no longer resolves.
+
+    ``ofd uuid check`` only sees the current tree, so it cannot notice a UUID that
+    disappeared — e.g. an entity deleted and re-created under a new folder (the shape
+    of PR #636), which drops its uuid and every child's. This compares against the
+    base: each base UUID must still be live, or recorded in some ``moved_from``.
+    """
+    dirs = _resolve_dirs(args)
+    if dirs is None:
+        return 1
+    data_dir, stores_dir = dirs
+
+    with tempfile.TemporaryDirectory(prefix="ofd-uuid-base-") as tmp:
+        try:
+            base_data, base_stores = _extract_ref(args.base, data_dir, stores_dir, Path(tmp))
+        except (subprocess.CalledProcessError, ValueError) as exc:
+            detail = getattr(exc, "stderr", "") or str(exc)
+            print(f"Error: could not read '{args.base}': {detail.strip()}", file=sys.stderr)
+            return 1
+        lost = find_lost_uuids(
+            iter_entities(base_data, base_stores), iter_entities(data_dir, stores_dir)
+        )
+        rows = [
+            {"uuid": e.raw_uuid, "type": e.entity_type, "path": e.describe(Path(tmp))} for e in lost
+        ]
+
+    if args.json:
+        print(json.dumps({"success": not rows, "base": args.base, "lost": rows}, indent=2))
+    elif rows:
+        print(f"{len(rows)} canonical UUID(s) present at {args.base} no longer resolve:")
+        for r in rows:
+            print(f"  {r['uuid']}  {r['type']:9} {r['path']}")
+        print()
+        print(CONTINUITY_HINT)
+    else:
+        print(f"Every canonical UUID present at {args.base} still resolves.")
+
+    if rows:
+        _write_step_summary(args.base, rows)
+    return 1 if rows else 0
 
 
 def run_list(args: argparse.Namespace) -> int:
