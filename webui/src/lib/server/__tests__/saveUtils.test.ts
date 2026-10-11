@@ -1,10 +1,14 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, afterAll } from 'vitest';
+import { promises as fs } from 'fs';
+import os from 'os';
 import path from 'path';
 import {
 	entityPathToFsPath,
 	entityPathToDir,
 	cleanEntityData,
 	preserveCanonicalFields,
+	stripUnanchoredUuid,
+	reconcileWithDisk,
 	isUuidSegment,
 	SAFE_SEGMENT,
 	STRIP_FIELDS,
@@ -391,6 +395,52 @@ describe('saveUtils', () => {
 		it('ignores a committed file whose shape does not match the payload', () => {
 			const incoming = [{ filament_weight: 1000, diameter: 1.75 }];
 			expect(preserveCanonicalFields(incoming, { uuid: UUID })).toBe(incoming);
+		});
+	});
+
+	describe('stripUnanchoredUuid', () => {
+		const UUID = '6364853f-a44f-41c7-8f8e-9425a18d0659';
+
+		it('drops the uuid from an entity but keeps moved_from', () => {
+			expect(stripUnanchoredUuid({ uuid: UUID, moved_from: ['x'], id: 'pla' })).toEqual({
+				moved_from: ['x'],
+				id: 'pla'
+			});
+		});
+
+		it('drops the uuid from every spool', () => {
+			expect(
+				stripUnanchoredUuid([{ uuid: UUID, filament_weight: 1000 }, { filament_weight: 250 }])
+			).toEqual([{ filament_weight: 1000 }, { filament_weight: 250 }]);
+		});
+
+		it('returns a payload without a uuid unchanged', () => {
+			const incoming = { id: 'pla' };
+			expect(stripUnanchoredUuid(incoming)).toBe(incoming);
+		});
+	});
+
+	describe('reconcileWithDisk', () => {
+		const UUID = '6364853f-a44f-41c7-8f8e-9425a18d0659';
+		const dirPromise = fs.mkdtemp(path.join(os.tmpdir(), 'ofd-reconcile-'));
+		afterAll(async () => fs.rm(await dirPromise, { recursive: true, force: true }));
+
+		it('drops a copied uuid when nothing is on disk', async () => {
+			const file = path.join(await dirPromise, 'missing.json');
+			expect(await reconcileWithDisk({ uuid: UUID, id: 'pla' }, file)).toEqual({ id: 'pla' });
+		});
+
+		it('carries the uuid already on disk', async () => {
+			const file = path.join(await dirPromise, 'existing.json');
+			await fs.writeFile(file, JSON.stringify({ uuid: UUID, id: 'pla' }));
+			expect(await reconcileWithDisk({ id: 'pla' }, file)).toEqual({ uuid: UUID, id: 'pla' });
+		});
+
+		it('leaves the payload alone when the file is unparseable', async () => {
+			const file = path.join(await dirPromise, 'broken.json');
+			await fs.writeFile(file, '{ not json');
+			const incoming = { uuid: UUID, id: 'pla' };
+			expect(await reconcileWithDisk(incoming, file)).toBe(incoming);
 		});
 	});
 });

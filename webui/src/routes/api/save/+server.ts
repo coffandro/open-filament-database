@@ -4,7 +4,7 @@ import { promises as fs } from 'fs';
 import path from 'path';
 import { spawn } from 'node:child_process';
 import { IS_LOCAL } from '$lib/server/cloudProxy';
-import { entityPathToFsPath, entityPathToDir, cleanEntityData, preserveCanonicalFields, DATA_DIR, STORES_DIR, JSON_INDENT_LOCAL } from '$lib/server/saveUtils';
+import { entityPathToFsPath, entityPathToDir, cleanEntityData, reconcileWithDisk, DATA_DIR, STORES_DIR, JSON_INDENT_LOCAL } from '$lib/server/saveUtils';
 
 import { MAX_IMAGE_SIZE_BYTES } from '$lib/config/imageConfig';
 
@@ -35,19 +35,6 @@ function runPythonCommand(args: string[]): Promise<{ code: number; stdout: strin
 			resolve({ code: 1, stdout, stderr: error.message });
 		});
 	});
-}
-
-/**
- * Parse the JSON already on disk at `filePath`, or null when it doesn't exist
- * (or can't be parsed). Used to carry canonical identity fields onto a write
- * that replaces the file wholesale.
- */
-async function readJsonIfExists(filePath: string): Promise<unknown> {
-	try {
-		return JSON.parse(await fs.readFile(filePath, 'utf-8'));
-	} catch {
-		return null;
-	}
 }
 
 export const POST: RequestHandler = async ({ request }) => {
@@ -128,11 +115,9 @@ export const POST: RequestHandler = async ({ request }) => {
 
 				// Clean and write the data. The write replaces the file, so keep the
 				// canonical identity already on disk when the payload has none (it
-				// may have been staged before the entity got its uuid).
-				const cleanData = preserveCanonicalFields(
-					cleanEntityData(change.data),
-					await readJsonIfExists(fsPath)
-				);
+				// may have been staged before the entity got its uuid). A new path
+				// gets no copied uuid — CI mints one on merge.
+				const cleanData = await reconcileWithDisk(cleanEntityData(change.data), fsPath);
 
 				// For variant entities, extract sizes into a separate file
 				let sizesData = null;
@@ -148,10 +133,7 @@ export const POST: RequestHandler = async ({ request }) => {
 				if (sizesData && Array.isArray(sizesData) && sizesData.length > 0) {
 					const sizesPath = path.join(path.dirname(fsPath), 'sizes.json');
 					// Spools carry their own UUIDs; pair by (filament_weight, diameter).
-					const preservedSizes = preserveCanonicalFields(
-						sizesData,
-						await readJsonIfExists(sizesPath)
-					);
+					const preservedSizes = await reconcileWithDisk(sizesData, sizesPath);
 					await fs.writeFile(sizesPath, JSON.stringify(preservedSizes, null, JSON_INDENT_LOCAL) + '\n', 'utf-8');
 				}
 
