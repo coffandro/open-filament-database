@@ -8,6 +8,7 @@
   ],
   "discontinued": false,
   "traits": {
-    "silk": true
+    "silk": true,
+    "coextruded": true
   }
 }

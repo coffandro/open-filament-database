@@ -5,5 +5,8 @@
   "color_hex": [
     "#307FE2",
     "#54FF9B"
-  ]
+  ],
+  "traits": {
+    "gradual_color_change": true
+  }
 }

@@ -6,5 +6,8 @@
     "#000000",
     "#371a94",
     "#3a88fe"
-  ]
+  ],
+  "traits": {
+    "coextruded": true
+  }
 }
