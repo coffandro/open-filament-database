@@ -512,16 +512,17 @@ def export_api(
                 variants_list = []
                 for var in fil_variants:
                     var_sizes = sizes_by_variant.get(var["id"], [])
-                    variants_list.append(
-                        {
-                            "id": var["id"],
-                            "name": var["name"],
-                            "color_hex": var["color_hex"],
-                            "slug": var["slug"],
-                            "size_count": len(var_sizes),
-                            "path": f"variants/{var['slug']}.json",
-                        }
-                    )
+                    variant_entry = {
+                        "id": var["id"],
+                        "name": var["name"],
+                        "color_hex": var["color_hex"],
+                        "slug": var["slug"],
+                        "size_count": len(var_sizes),
+                        "path": f"variants/{var['slug']}.json",
+                    }
+                    if "color_hexes" in var:
+                        variant_entry["color_hexes"] = var["color_hexes"]
+                    variants_list.append(variant_entry)
 
                 fil_data = entity_to_dict(fil)
                 fil_data["variants"] = variants_list
