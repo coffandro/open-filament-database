@@ -47,6 +47,9 @@ _KEY_ORDER = {
         "color_standards",
         "traits",
         "discontinued",
+        # moved_from is a conditional key that would otherwise sort after color_hexes
+        "moved_from",
+        "color_hexes",
     ],
     "size": [
         "id",
