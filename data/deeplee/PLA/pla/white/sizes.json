@@ -1,0 +1,22 @@
+[
+  {
+    "filament_weight": 1000,
+    "diameter": 1.75,
+    "purchase_links": [
+      {
+        "store_id": "amazon",
+        "url": "https://www.amazon.com/PLA-Filament-Tolerance-Materials-Compatible/dp/B0DCJ7TTDK"
+      }
+    ]
+  },
+  {
+    "filament_weight": 4000,
+    "diameter": 1.75,
+    "purchase_links": [
+      {
+        "store_id": "amazon",
+        "url": "https://www.amazon.com/DEEPLEE-1-75mm-Printer-Filament-White/dp/B0DCJQYCY3"
+      }
+    ]
+  }
+]

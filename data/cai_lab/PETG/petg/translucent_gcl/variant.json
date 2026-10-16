@@ -1,0 +1,8 @@
+{
+  "id": "translucent_gcl",
+  "name": "Translucent GCL",
+  "color_hex": "#C8C8C8",
+  "traits": {
+    "translucent": true
+  }
+}
