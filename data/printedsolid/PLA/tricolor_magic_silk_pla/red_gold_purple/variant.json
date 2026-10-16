@@ -9,6 +9,7 @@
   ],
   "traits": {
     "silk": true,
+    "coextruded": true,
     "industrially_compostable": true
   }
 }
