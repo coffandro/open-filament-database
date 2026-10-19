@@ -1,0 +1,9 @@
+{
+  "id": "army_beige",
+  "name": "Army Beige",
+  "color_hex": "#E6CCB1",
+  "discontinued": false,
+  "traits": {
+    "matte": true
+  }
+}
