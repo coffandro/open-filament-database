@@ -1,0 +1,17 @@
+[
+  {
+    "filament_weight": 1000,
+    "diameter": 1.75,
+    "spool_refill": true,
+    "empty_spool_weight": 34,
+    "spool_core_diameter": 87,
+    "article_number": "RPET-GRN1-175",
+    "discontinued": false,
+    "purchase_links": [
+      {
+        "store_id": "filamentive",
+        "url": "https://www.filamentive.com/product/petg-green-3d-printer-filament/"
+      }
+    ]
+  }
+]

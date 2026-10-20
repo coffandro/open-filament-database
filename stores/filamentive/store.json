@@ -1,0 +1,13 @@
+{
+  "id": "filamentive",
+  "name": "Filamentive",
+  "storefront_url": "https://www.filamentive.com/",
+  "logo": "logo.png",
+  "ships_from": [
+    "GB-ENG"
+  ],
+  "ships_to": [
+    "GB"
+  ],
+  "source": "Regular Customer"
+}
