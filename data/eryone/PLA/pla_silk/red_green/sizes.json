@@ -13,12 +13,6 @@
   {
     "uuid": "4f1b4cec-09ad-461e-b266-253c23cf08d2",
     "filament_weight": 250,
-    "diameter": 1.75,
-    "purchase_links": [
-      {
-        "store_id": "eryone",
-        "url": "https://eryone3d.com/products/pla-silk-dual-color-filament?variant=43308346114282"
-      }
-    ]
+    "diameter": 1.75
   }
 ]

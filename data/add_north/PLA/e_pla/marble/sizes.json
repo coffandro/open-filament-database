@@ -4,18 +4,18 @@
     "filament_weight": 750,
     "diameter": 1.75,
     "empty_spool_weight": 207,
-    "spool_core_diameter": 53,
-    "purchase_links": [
-      {
-        "store_id": "add_north",
-        "url": "https://addnorth.com/product/E-PLA/E-PLA%20-%201.75mm%20-%20750g%20-%20Marble"
-      }
-    ]
+    "spool_core_diameter": 53
   },
   {
     "uuid": "49d21e89-1db4-42a3-8f4e-628f9e2ff2c9",
     "filament_weight": 1000,
     "diameter": 1.75,
-    "gtin": "7340182902420"
+    "gtin": "7340182902420",
+    "purchase_links": [
+      {
+        "store_id": "add_north",
+        "url": "https://addnorth.com/product/E-PLA/E-PLA%20-%201.75mm%20-%201000g%20-%20Marble"
+      }
+    ]
   }
 ]

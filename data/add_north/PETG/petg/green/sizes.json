@@ -4,18 +4,18 @@
     "filament_weight": 750,
     "diameter": 1.75,
     "empty_spool_weight": 207,
-    "spool_core_diameter": 53,
-    "purchase_links": [
-      {
-        "store_id": "add_north",
-        "url": "https://addnorth.com/product/PETG/PETG%20-%201.75mm%20-%20750g%20-%20Green"
-      }
-    ]
+    "spool_core_diameter": 53
   },
   {
     "uuid": "cbb6a098-6fee-488b-b9f9-727fde993bf8",
     "filament_weight": 1000,
     "diameter": 1.75,
-    "gtin": "7340182903779"
+    "gtin": "7340182903779",
+    "purchase_links": [
+      {
+        "store_id": "add_north",
+        "url": "https://addnorth.com/product/PETG/PETG%20-%201.75mm%20-%201000g%20-%20Green"
+      }
+    ]
   }
 ]

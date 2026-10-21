@@ -4,6 +4,7 @@
   "name": "Kimya",
   "website": "https://kimya.com",
   "logo": "logo.png",
+  "discontinued": true,
   "origin": "ES",
   "source": "openprinttag"
 }

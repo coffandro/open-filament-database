@@ -17,6 +17,7 @@
 	import { FixHint } from '$lib/components/ui';
 	import { formDrafts } from '$lib/stores/formDrafts';
 	import { generateSlug } from '$lib/services/entityService';
+	import { useSettledField } from '$lib/utils/settledField.svelte';
 	import { looksLikeProductPage } from '$lib/utils/urlSanitizer';
 	import {
 		checkNameLeadingCase,
@@ -154,9 +155,16 @@
 		return null;
 	});
 
+	// The name hints below read this rather than formData.name, so they wait until the
+	// contributor pauses or leaves the field instead of flashing up mid-word.
+	const settledName = useSettledField(() => String(formData?.name ?? ''), 'name');
+
 	// Stray whitespace in a name is invisible in review and survives into every
 	// downstream consumer — #460 shipped a filament literally named "Silk ".
-	let nameWhitespace = $derived(checkNameWhitespace(String(formData?.name ?? '')));
+	let nameWhitespace = $derived(
+		// A trailing space is normal mid-typing ("Test " on the way to "Test Blue").
+		checkNameWhitespace(settledName.editing ? settledName.value.trimEnd() : settledName.value)
+	);
 
 	function fixNameWhitespace() {
 		if (nameWhitespace) formData.name = nameWhitespace.suggestion;
@@ -164,7 +172,7 @@
 
 	// A display name that starts with a lowercase letter. Only the first letter is
 	// changed — Title Casing the rest would rewrite manufacturer styling.
-	let nameLeadingCase = $derived(checkNameLeadingCase(String(formData?.name ?? '')));
+	let nameLeadingCase = $derived(checkNameLeadingCase(settledName.value));
 
 	function fixNameLeadingCase() {
 		if (nameLeadingCase) formData.name = nameLeadingCase.suggestion;
@@ -222,7 +230,7 @@
 			}));
 	});
 
-	let nameDuplicate = $derived(findDuplicateName(String(formData?.name ?? ''), brandFilaments));
+	let nameDuplicate = $derived(findDuplicateName(settledName.value, brandFilaments));
 
 	// `certifications: [""]` (#453) reads downstream as a certification with a blank
 	// name; an empty list says the true thing.

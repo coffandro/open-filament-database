@@ -9,16 +9,5 @@
         "url": "https://www.prusa3d.com/product/prusament-pla-vanilla-white-1kg/"
       }
     ]
-  },
-  {
-    "uuid": "00a994c9-df7f-4d13-8e27-88387c3519e3",
-    "filament_weight": 1000,
-    "diameter": 1.75,
-    "purchase_links": [
-      {
-        "store_id": "prusa3d",
-        "url": "https://www.prusa3d.com/product/prusament-pla-vanilla-white-1kg-refill/"
-      }
-    ]
   }
 ]

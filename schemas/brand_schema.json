@@ -59,6 +59,11 @@
             "description": "The name of the logo file",
             "$ref": "#/definitions/logo"
         },
+        "discontinued": {
+            "type": "boolean",
+            "title": "Discontinued",
+            "description": "Whether this brand is discontinued or not"
+        },
         "origin": {
             "type": "string",
             "title": "Country of Origin",
