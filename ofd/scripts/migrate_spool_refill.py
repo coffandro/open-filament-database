@@ -45,7 +45,7 @@ def migrate_size(size: dict[str, Any]) -> tuple[dict[str, Any], bool, str | None
     links = size.get("purchase_links")
     is_refill = size.get("spool_refill") is True or (
         isinstance(links, list)
-        and any(isinstance(l, dict) and l.get("spool_refill") is True for l in links)
+        and any(isinstance(link, dict) and link.get("spool_refill") is True for link in links)
     )
     if not is_refill:
         return size, False, None

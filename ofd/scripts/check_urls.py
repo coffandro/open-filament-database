@@ -109,14 +109,18 @@ class CheckUrlsScript(BaseScript):
     description = "List every URL in data/ and stores/ that returns an error or cannot be loaded"
 
     def configure_parser(self, parser: argparse.ArgumentParser) -> None:
-        parser.add_argument("--workers", type=int, default=32, help="Parallel requests (default 32)")
+        parser.add_argument(
+            "--workers", type=int, default=32, help="Parallel requests (default 32)"
+        )
         parser.add_argument(
             "--per-host",
             type=int,
             default=2,
             help="Max simultaneous requests to one host (default 2)",
         )
-        parser.add_argument("--timeout", type=float, default=15.0, help="Seconds per request (default 15)")
+        parser.add_argument(
+            "--timeout", type=float, default=15.0, help="Seconds per request (default 15)"
+        )
         parser.add_argument("--limit", type=int, default=0, help="Only check the first N URLs")
         parser.add_argument("--output", type=Path, help="Also write the failing URLs to this file")
 
