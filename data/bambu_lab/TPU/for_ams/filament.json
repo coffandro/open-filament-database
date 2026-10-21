@@ -4,6 +4,10 @@
     "name": "TPU for AMS",
     "diameter_tolerance": 0.05,
     "density": 1.26,
+    "min_print_temperature": 220,
+    "max_print_temperature": 240,
+    "min_bed_temperature": 30,
+    "max_bed_temperature": 35,
     "data_sheet_url": "https://cdn.shopify.com/s/files/1/0584/7236/6216/files/Bambu_TPU_for_AMS_Technical_Data_Sheet.pdf?v=1730944629",
     "safety_sheet_url": "https://cdn.shopify.com/s/files/1/0584/7236/6216/files/Bambu_TPU_for_AMS_MSDS.pdf?v=1730944633",
     "slicer_settings": {
