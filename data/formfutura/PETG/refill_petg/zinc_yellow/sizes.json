@@ -4,6 +4,7 @@
     "filament_weight": 750,
     "diameter": 1.75,
     "spool_refill": true,
+    "container_material": "refill",
     "empty_spool_weight": 20,
     "gtin": "8720847058874",
     "article_number": "RFPE-175ZYLW-00750",

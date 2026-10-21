@@ -16,6 +16,8 @@
  * shared `schemas/trait_rules.json` table (via `/api/trait-rules`) and is wired into `VariantForm`.
  */
 
+import type { ContainerMaterial } from '$lib/types/database';
+
 /** Words that legitimately stay lowercase inside a title-cased display name. */
 const MINOR_WORDS = new Set([
 	'and',
@@ -159,6 +161,20 @@ export function checkPlaceholderEntries(values: unknown): number[] {
 	}, []);
 }
 
+/**
+ * A size's container material, reading the deprecated `spool_refill: true` as
+ * `'refill'` so data that predates `container_material` keeps its refill flag.
+ * Mirrors `_container_material` in `ofd/validation/data_quality.py`.
+ */
+export function containerMaterialOf(size: {
+	container_material?: unknown;
+	spool_refill?: unknown;
+}): ContainerMaterial | undefined {
+	const material = size.container_material;
+	if (material === 'plastic' || material === 'cardboard' || material === 'refill') return material;
+	return size.spool_refill === true ? 'refill' : undefined;
+}
+
 /** The `(filament_weight, diameter)` spool identity, mirroring `size_dedupe_key`. */
 function sizeKey(size: Record<string, unknown>): string {
 	return `${size.filament_weight ?? ''}|${size.diameter ?? ''}`;
@@ -184,6 +200,9 @@ function meaningfulFields(size: Record<string, unknown>): Array<[string, unknown
 /** True when `size` says nothing `earlier` doesn't already say. */
 function isSubsumed(size: Record<string, unknown>, earlier: Record<string, unknown>): boolean {
 	if (sizeKey(size) !== sizeKey(earlier)) return false;
+	// A spool and its refill share weight and diameter; the container material is
+	// what tells them apart.
+	if (containerMaterialOf(size) !== containerMaterialOf(earlier)) return false;
 	const earlierFields = new Map(meaningfulFields(earlier));
 	return meaningfulFields(size).every(
 		([key, value]) =>

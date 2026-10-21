@@ -4,5 +4,6 @@
   "name": "EasyPrint",
   "website": "https://primacreator.com/",
   "logo": "logo.png",
-  "origin": "SE"
+  "origin": "SE",
+  "parent_brand": "primacreator"
 }

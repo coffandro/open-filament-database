@@ -15,6 +15,7 @@
     "filament_weight": 1000,
     "diameter": 1.75,
     "spool_refill": true,
+    "container_material": "refill",
     "purchase_links": [
       {
         "store_id": "microcenter",

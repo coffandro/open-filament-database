@@ -78,6 +78,7 @@
     "filament_weight": 1000,
     "diameter": 1.75,
     "spool_refill": true,
+    "container_material": "refill",
     "gtin": "6938936717805",
     "article_number": "CA04077"
   }

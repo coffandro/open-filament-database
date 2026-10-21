@@ -37,8 +37,18 @@
             },
             "spool_refill": {
                 "type": "boolean",
-                "description": "Indicates if this size is a refill for a reusable spool (applies to all purchase links)",
+                "description": "(deprecated) Indicates if this size is a refill for a reusable spool. Use container_material: refill instead.",
+                "deprecated": true,
                 "default": false
+            },
+            "container_material": {
+                "type": "string",
+                "description": "The material the filament container is made of, or refill for a spool-less refill",
+                "enum": [
+                    "plastic",
+                    "cardboard",
+                    "refill"
+                ]
             },
             "empty_spool_weight": {
                 "type": "number",
@@ -46,19 +56,19 @@
             },
             "spool_core_diameter": {
                 "type": "number",
-                "description": "The diameter of the core of the spool"
+                "description": "Outer diameter of the spool core: what the filament is wound onto (in mm)"
             },
             "container_width": {
                 "type": "integer",
-                "description": "Width of the filament spool (in mm)"
+                "description": "Width of the filament spool: its height when lying flat on a table (in mm)"
             },
             "container_outer_diameter": {
                 "type": "integer",
-                "description": "Diameter of the spool (in mm)"
+                "description": "Outer diameter of the spool flanges (in mm)"
             },
             "container_hole_diameter": {
                 "type": "integer",
-                "description": "Diameter of the center hole of the spool (in mm)"
+                "description": "Diameter of the spool's center hole (bore), where it sits on a spool holder (in mm)"
             },
             "gtin": {
                 "type": "string",
@@ -105,7 +115,7 @@
                         },
                         "spool_refill": {
                             "type": "boolean",
-                            "description": "(deprecated) Previously indicated a refill per purchase link. Use parent size.spool_refill now.",
+                            "description": "(deprecated) Previously indicated a refill per purchase link. Use parent size.container_material: refill now.",
                             "default": false
                         },
                         "ships_from": {

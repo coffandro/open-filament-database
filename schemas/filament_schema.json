@@ -226,6 +226,18 @@
             "description": "Maximum recommended chamber temperature (°C)",
             "x-placeholder": "e.g., 60"
         },
+        "min_print_speed": {
+            "type": "number",
+            "title": "Min Print Speed (mm/s)",
+            "description": "Minimum recommended print speed (mm/s)",
+            "x-placeholder": "e.g., 30"
+        },
+        "max_print_speed": {
+            "type": "number",
+            "title": "Max Print Speed (mm/s)",
+            "description": "Maximum recommended print speed (mm/s)",
+            "x-placeholder": "e.g., 60"
+        },
         "chamber_temperature": {
             "type": "integer",
             "title": "Chamber Temp (°C)",

@@ -17,6 +17,7 @@
     "filament_weight": 750,
     "diameter": 1.75,
     "spool_refill": true,
+    "container_material": "refill",
     "ean": "5907138403596",
     "article_number": "81624",
     "purchase_links": [

@@ -135,6 +135,17 @@ describe('findRedundantSizes', () => {
 		).toEqual([{ index: 1, duplicateOf: 0 }]);
 	});
 
+	it('keeps a spool that shares weight and diameter with its refill', () => {
+		for (const refill of [{ container_material: 'refill' }, { spool_refill: true }]) {
+			expect(
+				findRedundantSizes([
+					{ filament_weight: 1000, diameter: 1.75, ...refill },
+					{ filament_weight: 1000, diameter: 1.75 }
+				])
+			).toEqual([]);
+		}
+	});
+
 	it('flags a row that only omits fields — the polylite / sunlu shape', () => {
 		expect(
 			findRedundantSizes([

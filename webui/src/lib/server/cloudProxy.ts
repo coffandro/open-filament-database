@@ -154,12 +154,12 @@ function normalizeCloudVariant(variant: any, storeMap: Map<string, string>): any
 	if (Array.isArray(result.sizes)) {
 		result.sizes = result.sizes.map((size: any) => {
 			if (!size || typeof size !== 'object') return size;
-			const { id: _id, variant_id: _vid, ...rest } = size;
-			// Migrate legacy `purchase_links[].spool_refill` to size-level
-			// `spool_refill`. The link-level field is deprecated; the form always
+			const { id: _id, variant_id: _vid, spool_refill: legacySizeRefill, ...rest } = size;
+			// Migrate legacy `spool_refill` (size- and link-level, both
+			// deprecated) to size-level `container_material: 'refill'`; the form always
 			// emits the size-level field, so without migration a no-op save
 			// generates a spurious sizes diff.
-			let migratedRefill = false;
+			let migratedRefill = legacySizeRefill === true;
 			if (Array.isArray(rest.purchase_links)) {
 				rest.purchase_links = rest.purchase_links.map((link: any) => {
 					if (!link || typeof link !== 'object') return link;
@@ -171,7 +171,7 @@ function normalizeCloudVariant(variant: any, storeMap: Map<string, string>): any
 					return linkRest;
 				});
 			}
-			if (rest.spool_refill === undefined) rest.spool_refill = migratedRefill;
+			if (migratedRefill && rest.container_material === undefined) rest.container_material = 'refill';
 			if (rest.discontinued === undefined) rest.discontinued = false;
 			return rest;
 		});

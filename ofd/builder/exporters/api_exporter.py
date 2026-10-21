@@ -432,6 +432,8 @@ def export_api(
             "material_count": len(brand_materials),
             "path": f"{brand['slug']}/index.json",
         }
+        if brand.get("parent_brand_id"):
+            brand_entry["parent_brand_id"] = brand["parent_brand_id"]
         # Add logo_slug if brand has a logo
         if brand["id"] in brand_logo_id_mapping:
             brand_entry["logo_slug"] = brand_logo_id_mapping[brand["id"]]

@@ -48,6 +48,9 @@ class DataCrawler:
         # Crawl main data directory (brands/materials/products/variants)
         self._crawl_data_directory()
 
+        # Needs every brand crawled, since a parent can sort after its sub-brands
+        self._resolve_parent_brands()
+
         # Print summary
         print("\nCrawl complete!")
         print(f"  Brands: {len(self.db.brands)}")
@@ -178,6 +181,30 @@ class DataCrawler:
                 continue
 
             self._process_material_directory(material_dir, brand_id)
+
+    def _resolve_parent_brands(self):
+        """Add ``parent_brand_id``: the generated id of the brand ``parent_brand`` names.
+
+        ``parent_brand`` holds the parent's source id (its directory name), while brand
+        ``id`` in the built database is a generated UUID, so consumers join on this.
+        """
+        ids_by_name = {b["directory_name"]: b["id"] for b in self.db.brands}
+        for brand in self.db.brands:
+            parent = brand.get("parent_brand")
+            if not parent:
+                continue
+            brand_json = self.data_dir / brand["directory_name"] / "brand.json"
+            parent_id = ids_by_name.get(parent)
+            if parent_id is None:
+                self._result.add_warning(
+                    "Invalid Reference", f"parent_brand '{parent}' is not a known brand", brand_json
+                )
+            elif parent_id == brand["id"]:
+                self._result.add_warning(
+                    "Invalid Reference", "parent_brand names the brand itself", brand_json
+                )
+            else:
+                brand["parent_brand_id"] = parent_id
 
     def _process_material_directory(self, material_dir: Path, brand_id: str):
         """Process a material directory under a brand."""
@@ -389,11 +416,20 @@ class DataCrawler:
         self.db.sizes.append(size)
 
         # Process purchase links
+        is_refill = bool(
+            size_entry.get("spool_refill") or size_entry.get("container_material") == "refill"
+        )
         for pl_idx, pl_entry in enumerate(purchase_links_data):
-            self._create_purchase_link(pl_entry, size_id, index, pl_idx, sizes_json)
+            self._create_purchase_link(pl_entry, size_id, index, pl_idx, sizes_json, is_refill)
 
     def _create_purchase_link(
-        self, pl_entry: dict, size_id: str, size_index: int, link_index: int, sizes_json: Path
+        self,
+        pl_entry: dict,
+        size_id: str,
+        size_index: int,
+        link_index: int,
+        sizes_json: Path,
+        is_refill: bool = False,
     ):
         """Create a purchase link entity."""
         original_store_id = pl_entry.get("store_id")
@@ -426,7 +462,7 @@ class DataCrawler:
             "size_id": size_id,
             "store_id": store_uuid,
             "url": url,
-            "spool_refill": pl_entry.get("spool_refill", False),
+            "spool_refill": is_refill or pl_entry.get("spool_refill", False),
         }
         # Normalize ships_from/ships_to if present
         if purchase_link.get("ships_from"):

@@ -34,10 +34,13 @@ CREATE TABLE IF NOT EXISTS brand (
     website TEXT NOT NULL,
     logo_name TEXT NOT NULL,
     origin TEXT NOT NULL,
-    source TEXT
+    source TEXT,
+    parent_brand TEXT,  -- parent's source id (directory name)
+    parent_brand_id TEXT  -- parent's brand.id; no FK so brand rows insert in any order
 );
 CREATE INDEX IF NOT EXISTS ix_brand_name ON brand(name);
 CREATE INDEX IF NOT EXISTS ix_brand_uuid ON brand(uuid);
+CREATE INDEX IF NOT EXISTS ix_brand_parent ON brand(parent_brand_id);
 
 -- Material table (at brand level)
 CREATE TABLE IF NOT EXISTS material (
@@ -77,6 +80,8 @@ CREATE TABLE IF NOT EXISTS filament (
     min_chamber_temperature INTEGER,
     max_chamber_temperature INTEGER,
     chamber_temperature INTEGER,
+    min_print_speed REAL,
+    max_print_speed REAL,
     min_nozzle_diameter REAL,
     data_sheet_url TEXT,
     safety_sheet_url TEXT,
@@ -115,6 +120,7 @@ CREATE TABLE IF NOT EXISTS size (
     diameter REAL NOT NULL,
     empty_spool_weight INTEGER,
     spool_core_diameter REAL,
+    container_material TEXT,  -- plastic | cardboard | refill
     gtin TEXT,
     article_number TEXT,
     barcode_identifier TEXT,

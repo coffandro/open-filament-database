@@ -53,6 +53,12 @@
             "x-placeholder": "https://example.com/...",
             "$ref": "#/definitions/string_limit"
         },
+        "parent_brand": {
+            "type": "string",
+            "title": "Parent Brand",
+            "description": "The ID of the parent brand, if this is a sub-brand",
+            "$ref": "#/definitions/id"
+        },
         "logo": {
             "type": "string",
             "title": "Logo",
@@ -70,8 +76,12 @@
             "description": "ISO 3166 country code, optionally with subdivision (e.g., US, DE, GB-NIR) or Unknown",
             "x-placeholder": "e.g., US",
             "anyOf": [
-                { "$ref": "#/definitions/country_code" },
-                { "const": "Unknown" }
+                {
+                    "$ref": "#/definitions/country_code"
+                },
+                {
+                    "const": "Unknown"
+                }
             ]
         },
         "source": {

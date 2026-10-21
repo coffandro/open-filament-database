@@ -101,6 +101,8 @@
 			'min_chamber_temperature',
 			'max_chamber_temperature',
 			'chamber_temperature',
+			'min_print_speed',
+			'max_print_speed',
 			'shore_hardness_a',
 			'shore_hardness_d',
 			'min_nozzle_diameter',
@@ -115,6 +117,7 @@
 			['min_bed_temperature', 'max_bed_temperature'],
 			['preheat_temperature', 'max_dry_temperature'],
 			['min_chamber_temperature', 'max_chamber_temperature'],
+			['min_print_speed', 'max_print_speed'],
 			['shore_hardness_a', 'shore_hardness_d'],
 			['data_sheet_url', 'safety_sheet_url']
 		],
