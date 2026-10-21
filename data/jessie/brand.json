@@ -4,5 +4,6 @@
   "name": "Jessie",
   "website": "https://www.printedsolid.com/",
   "logo": "logo.png",
-  "origin": "US"
+  "origin": "US",
+  "parent_brand": "printedsolid"
 }
