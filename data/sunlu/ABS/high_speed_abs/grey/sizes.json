@@ -12,7 +12,14 @@
   {
     "uuid": "b31ecbbc-2166-466a-9e04-e23547d6bbe1",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "6933582316921",
+    "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/high-speed-abs-grey"
+      }
+    ]
   },
   {
     "uuid": "6c8e43c0-4825-4daf-8e41-1c0966dc47fe",

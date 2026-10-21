@@ -12,7 +12,14 @@
   {
     "uuid": "eb89dbdf-7dcb-4285-b941-a532bd6b987a",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "6933582323387",
+    "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/abs-klein-blue"
+      }
+    ]
   },
   {
     "uuid": "ab41c254-91f2-4083-9a4a-f59e4430fa29",

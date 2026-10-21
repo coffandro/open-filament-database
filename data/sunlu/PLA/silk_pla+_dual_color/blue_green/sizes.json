@@ -13,10 +13,15 @@
     "uuid": "25ef4bb4-e5a8-414f-b302-36ca91baa807",
     "filament_weight": 1000,
     "diameter": 1.75,
+    "gtin": "6933582315610",
     "purchase_links": [
       {
         "store_id": "sunlu",
         "url": "https://www.sunlu.com/products/over-3kg-bundle-sales-1-75mm-sunlu-multi-color-silk-3d-printer-filament-1kg-roll-dual-color-tri-color-silk-filament"
+      },
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/silk-pla-dual-color-blue-green"
       }
     ]
   },

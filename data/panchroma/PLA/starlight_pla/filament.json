@@ -1,5 +1,8 @@
 {
   "uuid": "451eee6e-b7ec-4155-a9cb-0e0c4b408a18",
+  "moved_from": [
+    "c9db9598-38ad-4038-b017-cd400e1b96a3"
+  ],
   "id": "starlight_pla",
   "name": "Starlight PLA",
   "diameter_tolerance": 0.02,

@@ -13,10 +13,15 @@
     "uuid": "c5e64756-02e1-41c5-9dbc-0b8c39fb2777",
     "filament_weight": 1000,
     "diameter": 1.75,
+    "gtin": "6933582314781",
     "purchase_links": [
       {
         "store_id": "sunlu",
         "url": "https://www.sunlu.com/products/moq-6kg-pla-2-0-upgraded-pla-pla-plus-3d-printer-filament-1kg"
+      },
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/pla-20-lavender-purple"
       }
     ]
   },

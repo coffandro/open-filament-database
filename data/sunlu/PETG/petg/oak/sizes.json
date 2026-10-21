@@ -12,7 +12,14 @@
   {
     "uuid": "615bf146-f5c8-4d87-9b9b-855b441cc662",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "6933582319953",
+    "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/petg-oak"
+      }
+    ]
   },
   {
     "uuid": "98c3e94c-1024-434b-8d92-0e43d6599a1d",

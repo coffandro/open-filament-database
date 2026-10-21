@@ -1,5 +1,8 @@
 {
   "uuid": "dbc6278e-2e6a-4d64-ad48-2ad7b89e5f98",
+  "moved_from": [
+    "c53bc912-3e61-4433-9368-db5903121a68"
+  ],
   "id": "translucent_pla",
   "name": "Translucent PLA",
   "diameter_tolerance": 0.02,

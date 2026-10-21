@@ -202,6 +202,42 @@ describe('Clipboard Service', () => {
 		});
 	});
 
+	describe('canonical identity (a copy is a new entity)', () => {
+		const SOURCE_UUID = 'a6000016-6b66-4ede-bcb4-9ac7bc1a165d';
+		const FORMER_UUID = '11111111-1111-4111-8111-111111111111';
+
+		it.each(['brand', 'material', 'filament', 'variant', 'store'] as const)(
+			'strips uuid and moved_from from a %s',
+			(type) => {
+				const result = prepareEntityData(type, {
+					uuid: SOURCE_UUID,
+					moved_from: [FORMER_UUID],
+					name: 'X',
+					material: 'X'
+				});
+				expect(result.uuid).toBeUndefined();
+				expect(result.moved_from).toBeUndefined();
+			}
+		);
+
+		it('strips spool uuids but keeps the spool data', () => {
+			const result = prepareEntityData('variant', {
+				uuid: SOURCE_UUID,
+				name: 'NATURAL',
+				sizes: [
+					{ uuid: '09b0d8f5-62f0-4c8f-8d3e-5b6acaf2da6e', moved_from: [FORMER_UUID], filament_weight: 1000, diameter: 1.75 }
+				]
+			});
+			expect(result.sizes).toEqual([{ filament_weight: 1000, diameter: 1.75 }]);
+		});
+
+		it('does not mutate the source sizes', () => {
+			const source = { name: 'X', sizes: [{ uuid: SOURCE_UUID, filament_weight: 1000 }] };
+			prepareEntityData('variant', source);
+			expect(source.sizes[0].uuid).toBe(SOURCE_UUID);
+		});
+	});
+
 	describe('field preservation (no silent data loss)', () => {
 		it('preserves all filament data fields', () => {
 			const filament = {

@@ -11,5 +11,11 @@
         "url": "https://addnorth.com/product/PLA%20Premium%20Silk/PLA%20Premium%20Silk%20-%201.75mm%20-%20750g%20-%20Green"
       }
     ]
+  },
+  {
+    "uuid": "d0e0d66f-a476-4146-8523-516855d6a0ae",
+    "filament_weight": 1000,
+    "diameter": 1.75,
+    "gtin": "7340182904103"
   }
 ]

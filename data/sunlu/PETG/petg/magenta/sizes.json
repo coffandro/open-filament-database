@@ -12,7 +12,14 @@
   {
     "uuid": "9f452c81-4929-45dd-a49d-e16e7c41c10f",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "6933582319946",
+    "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/petg-magenta-1"
+      }
+    ]
   },
   {
     "uuid": "f0b3ec98-82f8-4f3c-a6d1-46b8872b6b4e",

@@ -12,7 +12,14 @@
   {
     "uuid": "11dca056-525c-45eb-82f2-cf81572e44c0",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "6933582323370",
+    "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/abs-cyan"
+      }
+    ]
   },
   {
     "uuid": "e800d495-44e9-4e27-80d6-a492fd5c8ea4",

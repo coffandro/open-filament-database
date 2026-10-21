@@ -1,6 +1,13 @@
 {
   "uuid": "aa47f787-8a8b-4e52-b4db-c534182ef4b8",
+  "moved_from": [
+    "7151aa5a-5462-4371-b612-be351e311e03"
+  ],
   "id": "army_dark_green",
   "name": "Army Dark Green",
-  "color_hex": "#515234"
+  "color_hex": "#515234",
+  "traits": {
+    "matte": true,
+    "industrially_compostable": true
+  }
 }

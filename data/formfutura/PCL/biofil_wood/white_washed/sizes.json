@@ -5,6 +5,7 @@
     "diameter": 1.75,
     "spool_refill": true,
     "empty_spool_weight": 20,
+    "gtin": "8720629065779",
     "article_number": "BFWD-175WHTW-00500",
     "discontinued": false,
     "purchase_links": [
@@ -20,6 +21,7 @@
     "diameter": 1.75,
     "spool_refill": true,
     "empty_spool_weight": 40,
+    "gtin": "8720629065786",
     "article_number": "BFWD-175WHTW-02000",
     "discontinued": false,
     "purchase_links": [

@@ -13,10 +13,15 @@
     "uuid": "25e3a3b0-12a9-446b-a5a7-63182bbc08be",
     "filament_weight": 1000,
     "diameter": 1.75,
+    "gtin": "6933582315450",
     "purchase_links": [
       {
         "store_id": "sunlu",
         "url": "https://www.sunlu.com/products/optimized-wood-pla-3d-printer-filament-1kg-optimized-and-upgraded-wood-texture"
+      },
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/pla-maple-wood"
       }
     ]
   },

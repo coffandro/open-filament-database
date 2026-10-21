@@ -11,5 +11,12 @@
         "url": "https://shop.spectrumfilaments.com/product-eng-520-Filament-Spectrum-PLA-Premium-1-75mm-BAHAMA-YELLOW-1kg.html"
       }
     ]
+  },
+  {
+    "uuid": "843a0d92-32e6-44ba-857c-b32a70189907",
+    "filament_weight": 1000,
+    "diameter": 1.75,
+    "spool_refill": true,
+    "gtin": "5905991404378"
   }
 ]

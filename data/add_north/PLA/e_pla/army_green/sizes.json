@@ -11,5 +11,11 @@
         "url": "https://addnorth.com/product/E-PLA/E-PLA%20-%201.75mm%20-%20750g%20-%20Army%20Green"
       }
     ]
+  },
+  {
+    "uuid": "2874774a-1f86-438b-82de-24e9399b459a",
+    "filament_weight": 1000,
+    "diameter": 1.75,
+    "gtin": "7340182901997"
   }
 ]

@@ -13,10 +13,15 @@
     "uuid": "48de79f4-cd54-4d65-ae26-ae17a747daa2",
     "filament_weight": 1000,
     "diameter": 1.75,
+    "gtin": "6933582315498",
     "purchase_links": [
       {
         "store_id": "sunlu",
         "url": "https://www.sunlu.com/products/1-75mm-sunlu-upgraded-pla-rainbow8meters-color-change-length-3d-printer-filament-1kg-roll"
+      },
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/pla-transparent-rainbow-01"
       }
     ]
   },

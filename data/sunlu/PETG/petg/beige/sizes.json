@@ -12,7 +12,14 @@
   {
     "uuid": "370bb837-6b1f-4611-a017-53a79df0ccc2",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "6933582309824",
+    "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/petg-beige-2"
+      }
+    ]
   },
   {
     "uuid": "8f63c0c1-a1f5-4690-a411-89055eb736d4",

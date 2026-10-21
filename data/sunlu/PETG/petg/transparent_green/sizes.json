@@ -2,6 +2,13 @@
   {
     "uuid": "63c5179c-6f24-4823-ba7b-0d7bc887fba0",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "6933582309930",
+    "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/petg-transparent-green-2"
+      }
+    ]
   }
 ]

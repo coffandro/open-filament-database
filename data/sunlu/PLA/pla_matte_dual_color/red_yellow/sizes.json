@@ -12,7 +12,14 @@
   {
     "uuid": "2a7e4481-b418-40b9-adc8-212057554d36",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "6933582320447",
+    "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/pla-matte-dual-color-red-yellow"
+      }
+    ]
   },
   {
     "uuid": "6064ed86-6768-46bd-a258-9674f2f56949",

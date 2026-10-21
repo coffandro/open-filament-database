@@ -12,7 +12,14 @@
   {
     "uuid": "72b2f16b-0b04-4c86-be46-0403ca276f83",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "6933582319984",
+    "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/petg-ceramic"
+      }
+    ]
   },
   {
     "uuid": "b4ce4df7-1ffa-4f55-a1bc-0bde97cebbad",

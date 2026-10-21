@@ -12,7 +12,14 @@
   {
     "uuid": "c34a3c9e-041e-4954-bc57-dfb71abeefac",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "6933582312756",
+    "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/easy-pa-natural"
+      }
+    ]
   },
   {
     "uuid": "cd7d667a-aa4b-4806-af41-8380e4a1057b",

@@ -11,5 +11,11 @@
         "url": "https://addnorth.com/product/TPU%20Pro%20Matte%2085A/TPU%20Pro%20Matte%2085A%20-%201.75mm%20-%20500g%20-%20Brown%20Leather"
       }
     ]
+  },
+  {
+    "uuid": "473539ea-2a9f-486a-8fda-317569842eef",
+    "filament_weight": 1000,
+    "diameter": 1.75,
+    "gtin": "7340182901362"
   }
 ]

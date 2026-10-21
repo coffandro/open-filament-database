@@ -5,6 +5,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 200,
+    "gtin": "8720847069252",
     "article_number": "BPLA-175MARD-01000",
     "discontinued": false,
     "purchase_links": [
@@ -13,5 +14,12 @@
         "url": "https://www.formfutura.com/bulk-pla"
       }
     ]
+  },
+  {
+    "uuid": "ebde5527-282f-4824-b1bf-ff272f491e8d",
+    "filament_weight": 2300,
+    "diameter": 1.75,
+    "gtin": "8720847069269",
+    "article_number": "BPLA-175MARD-02300"
   }
 ]

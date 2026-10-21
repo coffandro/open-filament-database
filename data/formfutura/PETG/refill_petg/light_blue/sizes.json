@@ -5,6 +5,7 @@
     "diameter": 1.75,
     "spool_refill": true,
     "empty_spool_weight": 20,
+    "gtin": "8720847058836",
     "article_number": "RFPE-175LBLU-00750",
     "discontinued": false,
     "purchase_links": [

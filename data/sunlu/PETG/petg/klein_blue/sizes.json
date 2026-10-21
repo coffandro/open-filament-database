@@ -12,7 +12,14 @@
   {
     "uuid": "eb55aede-7473-45ec-849f-f010573b07bc",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "6933582319922",
+    "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/petg-klein-blue"
+      }
+    ]
   },
   {
     "uuid": "2b881bdb-beb1-4d4a-baad-bbc5a55cb1e8",

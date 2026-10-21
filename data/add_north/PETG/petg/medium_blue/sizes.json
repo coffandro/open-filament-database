@@ -11,5 +11,11 @@
         "url": "https://addnorth.com/product/PETG/PETG%20-%201.75mm%20-%20750g%20-%20Medium%20Blue"
       }
     ]
+  },
+  {
+    "uuid": "0c8a7838-a581-4ed9-b09f-4e902587bc75",
+    "filament_weight": 1000,
+    "diameter": 1.75,
+    "gtin": "7340182903830"
   }
 ]

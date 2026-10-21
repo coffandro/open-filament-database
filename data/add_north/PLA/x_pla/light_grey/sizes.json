@@ -25,5 +25,11 @@
         "url": "https://addnorth.com/product/X-PLA/X-PLA%20-%201.75mm%20-%202300g%20-%20Light%20Grey"
       }
     ]
+  },
+  {
+    "uuid": "24ca70d1-9ef5-4ff0-85c6-c69bad97e9d2",
+    "filament_weight": 1000,
+    "diameter": 1.75,
+    "gtin": "7340182904295"
   }
 ]

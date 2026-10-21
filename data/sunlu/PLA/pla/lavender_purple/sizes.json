@@ -12,7 +12,14 @@
   {
     "uuid": "91ad75e4-6a5f-437c-9040-5f04e7422118",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "6933582314590",
+    "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/pla-lavender-purple"
+      }
+    ]
   },
   {
     "uuid": "5b68459a-400b-4d17-8326-7bb68bbaf93a",

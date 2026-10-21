@@ -2,6 +2,13 @@
   {
     "uuid": "cb53e7e1-d9b1-404d-a234-8ec9490623e3",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "6933582309909",
+    "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/petg-transparent-6"
+      }
+    ]
   }
 ]

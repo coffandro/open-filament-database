@@ -13,10 +13,15 @@
     "uuid": "6ce8ef95-21c4-4dee-81a1-eac7cc6d7803",
     "filament_weight": 1000,
     "diameter": 1.75,
+    "gtin": "6933582320126",
     "purchase_links": [
       {
         "store_id": "sunlu",
         "url": "https://www.sunlu.com/products/sunlu-nylon-6-glass-fiber-pa6-gf-3d-printer-filament-1kg"
+      },
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/pa6-gf-black-1"
       }
     ]
   },

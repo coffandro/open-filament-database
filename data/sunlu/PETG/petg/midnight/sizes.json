@@ -12,7 +12,14 @@
   {
     "uuid": "94bd77e6-2a5e-47c6-bfbf-c4b1e2e2cdd0",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "6933582320003",
+    "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/petg-midnight"
+      }
+    ]
   },
   {
     "uuid": "b4d07c13-5d80-4ded-8449-2212c6015294",

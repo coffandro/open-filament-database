@@ -5,5 +5,11 @@
     "diameter": 1.75,
     "gtin": "6938936710134",
     "article_number": "PB01011"
+  },
+  {
+    "uuid": "5f9ac975-14f8-4e30-8048-bffb8180715a",
+    "filament_weight": 3000,
+    "diameter": 1.75,
+    "gtin": "6938936707288"
   }
 ]

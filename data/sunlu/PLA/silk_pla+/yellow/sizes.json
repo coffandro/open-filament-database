@@ -13,10 +13,15 @@
     "uuid": "7a887f13-e527-4841-9ff4-99859f318a87",
     "filament_weight": 1000,
     "diameter": 1.75,
+    "gtin": "6933582309510",
     "purchase_links": [
       {
         "store_id": "sunlu",
         "url": "https://www.sunlu.com/products/over-6kg-of-sunlu-silk-pla-3d-printer-filament-1-75mm-1kg-2-2lbs"
+      },
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/silk-pla-yellow-1"
       }
     ]
   },

@@ -12,7 +12,14 @@
   {
     "uuid": "98123201-5e8a-497f-a89b-28e8abaab105",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "6933582323363",
+    "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/abs-coffee-brown"
+      }
+    ]
   },
   {
     "uuid": "6fc13c68-bb0e-4ce6-b944-f3f8eff54ffc",

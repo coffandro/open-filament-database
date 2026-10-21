@@ -1,8 +1,0 @@
-{
-  "uuid": "a9b77c0c-975b-432a-82cd-0d4da2aed7e4",
-  "id": "test_pla",
-  "name": "Test Pla",
-  "diameter_tolerance": 0.02,
-  "density": 1.24,
-  "discontinued": false
-}

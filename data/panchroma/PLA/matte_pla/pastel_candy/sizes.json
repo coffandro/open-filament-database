@@ -1,6 +1,9 @@
 [
   {
     "uuid": "162e7232-c65f-4b10-9684-c6d0665e142d",
+    "moved_from": [
+      "77bb0471-bbb8-46e2-b595-ea1236da5c2d"
+    ],
     "filament_weight": 1000,
     "diameter": 1.75,
     "empty_spool_weight": 145,
@@ -8,6 +11,8 @@
     "container_width": 66,
     "container_outer_diameter": 200,
     "container_hole_diameter": 55,
+    "gtin": "6938936715078",
+    "article_number": "CA04030",
     "purchase_links": [
       {
         "store_id": "polymaker",
@@ -23,6 +28,7 @@
     "container_width": 117,
     "container_outer_diameter": 250,
     "container_hole_diameter": 55,
+    "discontinued": true,
     "purchase_links": [
       {
         "store_id": "polymaker",
@@ -39,6 +45,7 @@
     "container_width": 66,
     "container_outer_diameter": 200,
     "container_hole_diameter": 55,
+    "discontinued": true,
     "purchase_links": [
       {
         "store_id": "polymaker",
@@ -54,11 +61,20 @@
     "container_width": 117,
     "container_outer_diameter": 250,
     "container_hole_diameter": 55,
+    "discontinued": true,
     "purchase_links": [
       {
         "store_id": "polymaker",
         "url": "https://us.polymaker.com/products/panchroma-matte"
       }
     ]
+  },
+  {
+    "uuid": "f89e5eca-7a12-4786-91ab-277d1496eb42",
+    "filament_weight": 1000,
+    "diameter": 1.75,
+    "spool_refill": true,
+    "gtin": "6938936719809",
+    "article_number": "PC1002015"
   }
 ]

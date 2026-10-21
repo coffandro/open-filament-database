@@ -13,10 +13,15 @@
     "uuid": "b53db006-1bbd-44ed-87c6-547d5c4cbb29",
     "filament_weight": 1000,
     "diameter": 1.75,
+    "gtin": "6933582309299",
     "purchase_links": [
       {
         "store_id": "sunlu",
         "url": "https://www.sunlu.com/products/1-75mm-sunlu-tpu-silk-3d-printer-filament-1kg-roll"
+      },
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/tpu-silk-dark-blue"
       }
     ]
   },

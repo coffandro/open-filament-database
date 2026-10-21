@@ -9,6 +9,8 @@
     "container_width": 66,
     "container_outer_diameter": 200,
     "container_hole_diameter": 55,
+    "gtin": "6938936718314",
+    "article_number": "CA04097",
     "discontinued": false,
     "purchase_links": [
       {
@@ -16,5 +18,13 @@
         "url": "https://shop.polymaker.com/collections/panchroma/products/matte-pla?variant=43631458091065"
       }
     ]
+  },
+  {
+    "uuid": "0e968490-7a20-4a02-be27-097ce6168209",
+    "filament_weight": 1000,
+    "diameter": 1.75,
+    "spool_refill": true,
+    "gtin": "6938936719953",
+    "article_number": "PC1002030"
   }
 ]

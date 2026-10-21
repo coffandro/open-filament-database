@@ -1,5 +1,8 @@
 {
   "uuid": "0af5d9eb-4221-475a-9998-8a77fb25706e",
+  "moved_from": [
+    "6caf81d5-432f-469d-b8ab-723e0720efe5"
+  ],
   "id": "rigid_x",
   "name": "PETG Rigid X",
   "diameter_tolerance": 0.02,

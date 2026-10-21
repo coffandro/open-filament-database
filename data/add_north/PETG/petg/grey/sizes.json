@@ -11,5 +11,11 @@
         "url": "https://addnorth.com/product/PETG/PETG%20-%201.75mm%20-%20750g%20-%20Grey"
       }
     ]
+  },
+  {
+    "uuid": "a52747a7-6bc9-4bc9-9dfe-ed2c6559c54f",
+    "filament_weight": 1000,
+    "diameter": 1.75,
+    "gtin": "7340182903786"
   }
 ]

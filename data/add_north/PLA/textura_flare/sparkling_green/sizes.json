@@ -11,5 +11,11 @@
         "url": "https://addnorth.com/product/Textura%E2%84%A2%20Flare/Textura%E2%84%A2%20Flare%20-%201.75mm%20-%20750g%20-%20Sparkling%20Green"
       }
     ]
+  },
+  {
+    "uuid": "4508c14e-3aa2-451a-b09a-632184656c70",
+    "filament_weight": 1000,
+    "diameter": 1.75,
+    "gtin": "7340182904240"
   }
 ]

@@ -14,10 +14,14 @@
   },
   {
     "uuid": "94854d56-4910-4a25-9646-2979c480276f",
+    "moved_from": [
+      "8e4bfcbf-eb8e-4d02-a6ea-8524bb65daae"
+    ],
     "filament_weight": 1000,
     "diameter": 1.75,
     "empty_spool_weight": 238,
     "spool_core_diameter": 67,
+    "gtin": "7340182903373",
     "purchase_links": [
       {
         "store_id": "add_north",

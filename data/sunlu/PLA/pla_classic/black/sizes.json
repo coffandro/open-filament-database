@@ -12,7 +12,14 @@
   {
     "uuid": "70751cf6-9e84-4bad-b386-b0b195045bf5",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "6933582314071",
+    "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/pla-classic-black"
+      }
+    ]
   },
   {
     "uuid": "8a335a63-6d5a-440d-a9a0-ef50c802e140",

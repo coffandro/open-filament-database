@@ -12,7 +12,14 @@
   {
     "uuid": "80d7f957-1c71-4429-a593-e1900c1ee0ac",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "6933582320430",
+    "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/pla-matte-dual-color-black-red"
+      }
+    ]
   },
   {
     "uuid": "9c3656a4-2e09-43dc-a0d3-71166589377e",

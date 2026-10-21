@@ -12,7 +12,14 @@
   {
     "uuid": "066fefd3-2840-4896-ac03-7c71910a6660",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "6933582314118",
+    "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/pla-classic-sunny-orange"
+      }
+    ]
   },
   {
     "uuid": "f72b28da-7ae4-4abb-9802-1d67c47be6f2",

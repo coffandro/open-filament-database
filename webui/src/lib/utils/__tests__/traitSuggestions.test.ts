@@ -74,6 +74,19 @@ describe('detectSuggestedTraits', () => {
 		expect(detect('PLA', 'pla_premium_highspeed', 'Blue')).toEqual(['high_flow']);
 	});
 
+	it('detects foaming from aero / lw / light weight / foam names', () => {
+		expect(detect('PLA', 'aero', 'White')).toEqual(['foaming']);
+		expect(detect('PLA', 'lw_pla', 'Black')).toEqual(['foaming']);
+		expect(detect('ASA', 'asa_light_weight', 'White')).toEqual(['foaming']);
+		expect(detect('TPU', 'filaflex_95_foamy', 'Red')).toEqual(['foaming']);
+		expect(detect('PLA', 'lw_pla_ultrafoam', 'Pure Red')).toEqual(['foaming']);
+		expect(detect('ASA', 'apollox_foaming', 'Black')).toEqual(['foaming']);
+	});
+
+	it('does not match foam inside a colour name', () => {
+		expect(detect('PLA', 'pla', 'Seafoam Green')).toEqual([]);
+	});
+
 	it('combines rules when a filament matches several', () => {
 		expect(detect('PETG', 'high_speed_cf_petg', 'Black')).toEqual([
 			'contains_carbon_fiber',

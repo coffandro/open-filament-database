@@ -24,5 +24,12 @@
         "url": "https://shop.spectrumfilaments.com/product-eng-626-Filament-Spectrum-PLA-Premium-1-75mm-LIME-GREEN-2kg.html"
       }
     ]
+  },
+  {
+    "uuid": "535a9c39-b383-481a-b0e8-31100134ad9a",
+    "filament_weight": 1000,
+    "diameter": 1.75,
+    "spool_refill": true,
+    "gtin": "5905991404484"
   }
 ]

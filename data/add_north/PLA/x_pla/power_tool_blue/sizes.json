@@ -12,5 +12,11 @@
         "ships_from": "SE"
       }
     ]
+  },
+  {
+    "uuid": "98d5e96e-1c9f-4932-8d33-153547075059",
+    "filament_weight": 1000,
+    "diameter": 1.75,
+    "gtin": "7340182904318"
   }
 ]

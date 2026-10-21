@@ -6,6 +6,10 @@
     "spool_refill": false,
     "empty_spool_weight": 140,
     "spool_core_diameter": 100,
+    "container_outer_diameter": 200,
+    "container_hole_diameter": 55,
+    "gtin": "6938936718024",
+    "article_number": "PA13014",
     "discontinued": false,
     "purchase_links": [
       {

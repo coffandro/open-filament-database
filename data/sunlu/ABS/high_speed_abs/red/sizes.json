@@ -12,7 +12,14 @@
   {
     "uuid": "b6e50ad0-4c34-4514-bcd0-d53d7440649d",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "6933582316945",
+    "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/high-speed-abs-red"
+      }
+    ]
   },
   {
     "uuid": "041add20-8b92-43af-8ab8-5b2dce547309",

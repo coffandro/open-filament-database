@@ -13,10 +13,15 @@
     "uuid": "3f5bd1f6-a6c5-4c01-a13d-c1873bab5823",
     "filament_weight": 1000,
     "diameter": 1.75,
+    "gtin": "6933582309022",
     "purchase_links": [
       {
         "store_id": "sunlu",
         "url": "https://www.sunlu.com/products/over-6kg-bundle-sales-1-75mm-sunlu-pla-metamacaron-colors-3d-printer-filament-1kg-roll"
+      },
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/pla-meta-sakura-pink"
       }
     ]
   },

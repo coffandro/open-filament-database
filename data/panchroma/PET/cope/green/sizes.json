@@ -1,6 +1,9 @@
 [
   {
     "uuid": "962f70b6-7da5-4c23-983d-83a153b35dfa",
+    "moved_from": [
+      "b8507f9b-9fe4-4e0e-92fb-6a922d29aa8b"
+    ],
     "filament_weight": 1000,
     "diameter": 1.75,
     "empty_spool_weight": 145,
@@ -8,6 +11,7 @@
     "container_width": 66,
     "container_outer_diameter": 200,
     "container_hole_diameter": 55,
+    "gtin": "6938936700128",
     "purchase_links": [
       {
         "store_id": "polymaker",

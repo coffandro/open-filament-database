@@ -11,5 +11,11 @@
         "url": "https://addnorth.com/product/rPETG%20Matte/rPETG%20Matte%20-%201.75mm%20-%20750g%20-%20White"
       }
     ]
+  },
+  {
+    "uuid": "7b9fe49a-b11d-488e-a43f-5f2c20a30434",
+    "filament_weight": 1000,
+    "diameter": 1.75,
+    "gtin": "7340182904172"
   }
 ]

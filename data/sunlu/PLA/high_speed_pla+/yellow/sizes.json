@@ -13,10 +13,15 @@
     "uuid": "1a7c9560-1891-4dad-a768-932bb5c3848c",
     "filament_weight": 1000,
     "diameter": 1.75,
+    "gtin": "6933582314460",
     "purchase_links": [
       {
         "store_id": "sunlu",
         "url": "https://www.sunlu.com/products/moq-6kg-high-speed-pla-pla-plus-hs_pla-3d-printer-filament-1kg"
+      },
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/high-speed-pla-yellow-1"
       }
     ]
   },

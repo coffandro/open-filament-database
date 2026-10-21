@@ -13,10 +13,15 @@
     "uuid": "18eecc58-0b3d-4270-a48d-a86a61559245",
     "filament_weight": 1000,
     "diameter": 1.75,
+    "gtin": "6933582317829",
     "purchase_links": [
       {
         "store_id": "sunlu",
         "url": "https://www.sunlu.com/products/1-75mm-sunlu-pvb-3d-printer-filament-0-9kg"
+      },
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/pvb-black"
       }
     ]
   },

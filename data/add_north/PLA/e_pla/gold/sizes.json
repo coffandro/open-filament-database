@@ -11,5 +11,11 @@
         "url": "https://addnorth.com/product/E-PLA/E-PLA%20-%201.75mm%20-%20750g%20-%20Gold"
       }
     ]
+  },
+  {
+    "uuid": "5c4d1a65-f5f1-426e-8736-bf31a675177c",
+    "filament_weight": 1000,
+    "diameter": 1.75,
+    "gtin": "7340182902222"
   }
 ]

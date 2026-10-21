@@ -12,7 +12,14 @@
   {
     "uuid": "23acc510-9da6-4650-9cd2-66cbf8fb8e7a",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "6933582320478",
+    "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/pla-matte-dual-color-green-purple"
+      }
+    ]
   },
   {
     "uuid": "25c15026-963b-4fbe-92c0-58b30a7365bf",

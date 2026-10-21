@@ -12,7 +12,14 @@
   {
     "uuid": "63a2ea1e-ec3b-435c-9d4b-89c53630f50a",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "6933582317874",
+    "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/pvb-transparent-green"
+      }
+    ]
   },
   {
     "uuid": "507600b2-6261-49c8-841a-565609b43d42",

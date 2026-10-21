@@ -5,6 +5,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 165,
+    "gtin": "8720847050601",
     "article_number": "PLAE-175SIYL-01000",
     "discontinued": false,
     "purchase_links": [
@@ -20,6 +21,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 625,
+    "gtin": "8720847051141",
     "article_number": "PLAE-175SIYL-02300",
     "discontinued": false,
     "purchase_links": [
@@ -28,5 +30,12 @@
         "url": "https://www.formfutura.com/easyfil-epla"
       }
     ]
+  },
+  {
+    "uuid": "27c52652-b3b1-4462-9403-0d222b2187b9",
+    "filament_weight": 250,
+    "diameter": 1.75,
+    "gtin": "8720847050069",
+    "article_number": "PLAE-175SIYL-00250"
   }
 ]

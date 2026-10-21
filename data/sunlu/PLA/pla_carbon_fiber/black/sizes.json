@@ -13,10 +13,15 @@
     "uuid": "793ed8ac-4f8d-44b9-8314-399b2d27312c",
     "filament_weight": 1000,
     "diameter": 1.75,
+    "gtin": "6933582310394",
     "purchase_links": [
       {
         "store_id": "sunlu",
         "url": "https://www.sunlu.com/products/over-3kg-bundle-sales-1-75mm-sunlu-pla-carbon-fiber-3d-printer-filament-1kg-roll"
+      },
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/pla-carbon-fiber-black"
       }
     ]
   },

@@ -13,10 +13,15 @@
     "uuid": "2c1a2eda-8466-4cf4-bf79-72a8c35aaa0f",
     "filament_weight": 1000,
     "diameter": 1.75,
+    "gtin": "6933582317270",
     "purchase_links": [
       {
         "store_id": "sunlu",
         "url": "https://www.sunlu.com/products/over-6kg-bundle-sale-pla-and-pla-plus-pla-meta-macaron-filament1kg-roll"
+      },
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/pla-magenta-6"
       }
     ]
   },

@@ -13,10 +13,15 @@
     "uuid": "101bbf63-9651-47fd-a964-e08e76b7915f",
     "filament_weight": 1000,
     "diameter": 1.75,
+    "gtin": "6933582310219",
     "purchase_links": [
       {
         "store_id": "sunlu",
         "url": "https://www.sunlu.com/products/sunlu-asa-filament-1-75mm"
+      },
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/asa-black-5"
       }
     ]
   },

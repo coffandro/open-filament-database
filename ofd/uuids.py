@@ -38,6 +38,7 @@ __all__ = [
     "resolve_uuid",
     "build_redirect_map",
     "record_moved_from",
+    "find_lost_uuids",
 ]
 
 # Canonical UUIDv4 pattern. An empty string means "unassigned" and mirrors the
@@ -399,3 +400,24 @@ def build_redirect_map(entities: Iterator[Entity] | list[Entity]) -> dict[str, s
     for old in ambiguous:
         redirects.pop(old, None)
     return redirects
+
+
+def find_lost_uuids(
+    base: Iterator[Entity] | list[Entity], head: Iterator[Entity] | list[Entity]
+) -> list[Entity]:
+    """Return the ``base`` entities whose canonical UUID no longer resolves in ``head``.
+
+    A UUID survives when ``head`` still carries it live (wherever the entity now
+    lives — a rename/move that keeps the uuid is fine) or lists it in some entity's
+    ``moved_from`` (a redirect). ``moved_from`` counts even on an entity whose own
+    uuid is still unassigned: CI assigns it on merge and the redirect then resolves.
+
+    Everything else is an identity that silently vanished — e.g. an entity deleted and
+    re-created under a new folder, which strips the uuid of it and all its children.
+    Unassigned base entities have nothing to lose and are ignored.
+    """
+    head = list(head)
+    resolvable = {e.raw_uuid.lower() for e in head if e.assigned}
+    for e in head:
+        resolvable.update(e.moved_from)
+    return [e for e in base if e.assigned and e.raw_uuid.lower() not in resolvable]

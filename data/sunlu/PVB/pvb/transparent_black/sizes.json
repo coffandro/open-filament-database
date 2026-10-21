@@ -12,7 +12,14 @@
   {
     "uuid": "c6c626a1-8ac9-437c-b4ad-e01f2e0e1c8c",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "6933582317881",
+    "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/pvb-transparent-black"
+      }
+    ]
   },
   {
     "uuid": "0ac4ab47-134a-46b0-a9b5-957a47de9291",

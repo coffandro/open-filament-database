@@ -13,10 +13,15 @@
     "uuid": "9f1fb216-f38d-4bcf-af1d-5be1a1dbc120",
     "filament_weight": 1000,
     "diameter": 1.75,
+    "gtin": "6933582313944",
     "purchase_links": [
       {
         "store_id": "sunlu",
         "url": "https://www.sunlu.com/products/high-speed-pla-marble-3d-printer-filament-1kg"
+      },
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/high-speed-pla-ashen-concrete"
       }
     ]
   },

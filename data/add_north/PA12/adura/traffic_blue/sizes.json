@@ -11,5 +11,11 @@
         "url": "https://addnorth.com/product/Adura%E2%84%A2/Adura%E2%84%A2%20-%201.75mm%20-%20500g%20-%20Traffic%20Blue"
       }
     ]
+  },
+  {
+    "uuid": "803518ea-32d0-45a2-8634-e2d953edecd1",
+    "filament_weight": 1000,
+    "diameter": 1.75,
+    "gtin": "7340182901966"
   }
 ]

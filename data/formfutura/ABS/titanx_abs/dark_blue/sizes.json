@@ -5,6 +5,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 165,
+    "gtin": "8718924476253",
     "article_number": "TITX-175DBLU-00750",
     "discontinued": false,
     "purchase_links": [
@@ -20,6 +21,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 625,
+    "gtin": "8718924477267",
     "article_number": "TITX-175DBLU-02300",
     "discontinued": false,
     "purchase_links": [
@@ -35,6 +37,7 @@
     "diameter": 2.85,
     "spool_refill": false,
     "empty_spool_weight": 165,
+    "gtin": "8718924476260",
     "article_number": "TITX-285DBLU-00750",
     "discontinued": false,
     "purchase_links": [
@@ -43,5 +46,12 @@
         "url": "https://www.formfutura.com/titanx"
       }
     ]
+  },
+  {
+    "uuid": "c262daef-2394-4f1b-a272-8e2a34536e1b",
+    "filament_weight": 250,
+    "diameter": 2.85,
+    "gtin": "8720574298789",
+    "article_number": "TITX-285DBLU-00250"
   }
 ]

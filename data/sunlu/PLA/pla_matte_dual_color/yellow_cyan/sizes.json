@@ -12,7 +12,14 @@
   {
     "uuid": "ddfcd442-cc69-46e1-84c0-aa3267396b12",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "6933582320461",
+    "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/pla-matte-dual-color-yellow-cyan"
+      }
+    ]
   },
   {
     "uuid": "fa33823b-67e9-4803-8196-4c7d7ddd0ba1",

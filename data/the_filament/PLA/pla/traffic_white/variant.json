@@ -1,6 +1,12 @@
 {
   "uuid": "926d6296-f620-4fa8-ad1a-02f0374ba23a",
+  "moved_from": [
+    "69345294-67be-4c06-9e5a-bc2fdeae67a4"
+  ],
   "id": "traffic_white",
   "name": "Traffic White",
-  "color_hex": "#f2f3ee"
+  "color_hex": "#f2f3ee",
+  "traits": {
+    "industrially_compostable": true
+  }
 }

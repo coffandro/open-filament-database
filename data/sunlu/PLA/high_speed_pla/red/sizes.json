@@ -13,10 +13,15 @@
     "uuid": "198eaa5d-0d51-462d-a24f-20cbf312dade",
     "filament_weight": 1000,
     "diameter": 1.75,
+    "gtin": "6933582309169",
     "purchase_links": [
       {
         "store_id": "sunlu",
         "url": "https://www.sunlu.com/products/moq-6-rolls-high-speed-pla-filament-1kg"
+      },
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/high-speed-pla-red"
       }
     ]
   },

@@ -13,10 +13,15 @@
     "uuid": "b93fc5fe-298e-43ca-b6d1-8d8e81a6e69e",
     "filament_weight": 1000,
     "diameter": 1.75,
+    "gtin": "6933582314682",
     "purchase_links": [
       {
         "store_id": "sunlu",
         "url": "https://www.sunlu.com/products/over-6kg-of-pla-pla-meta-3d-filaments-1kg-2-2lbs-fit-most-of-fdm-printer"
+      },
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/pla-bone-white-2"
       }
     ]
   },

@@ -11,5 +11,11 @@
         "url": "https://addnorth.com/product/PETG/PETG%20-%201.75mm%20-%20750g%20-%20Lucent%20Orange"
       }
     ]
+  },
+  {
+    "uuid": "35d04e5e-7b87-409c-8099-baad37f2feab",
+    "filament_weight": 1000,
+    "diameter": 1.75,
+    "gtin": "7340182903809"
   }
 ]

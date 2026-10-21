@@ -11,5 +11,11 @@
         "url": "https://addnorth.com/product/E-PLA/E-PLA%20-%201.75mm%20-%20750g%20-%20Glitz%20Grey"
       }
     ]
+  },
+  {
+    "uuid": "fa4519fe-6839-44bf-9ad7-9ea19c0eb40e",
+    "filament_weight": 1000,
+    "diameter": 1.75,
+    "gtin": "7340182902079"
   }
 ]

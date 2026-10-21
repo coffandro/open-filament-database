@@ -5,6 +5,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 200,
+    "gtin": "8721496001273",
     "article_number": "BPTG-175COLA-01000",
     "discontinued": false,
     "purchase_links": [
@@ -20,6 +21,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 625,
+    "gtin": "8721496001280",
     "article_number": "BPTG-175COLA-02300",
     "discontinued": false,
     "purchase_links": [

@@ -11,5 +11,11 @@
         "url": "https://addnorth.com/product/rABS/rABS%20-%201.75mm%20-%20750g%20-%20Black"
       }
     ]
+  },
+  {
+    "uuid": "c2db510d-82ec-4f40-9ee3-85a3b41cafe7",
+    "filament_weight": 1000,
+    "diameter": 1.75,
+    "gtin": "7340182904134"
   }
 ]

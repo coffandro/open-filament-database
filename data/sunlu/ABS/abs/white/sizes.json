@@ -13,10 +13,15 @@
     "uuid": "16c58798-459f-4bf7-abe9-f0bd5d38f274",
     "filament_weight": 1000,
     "diameter": 1.75,
+    "gtin": "6933582310141",
     "purchase_links": [
       {
         "store_id": "sunlu",
         "url": "https://www.sunlu.com/products/over-6kg-bundle-sale-abs-filament-1kg-roll"
+      },
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/abs-white-7"
       }
     ]
   },

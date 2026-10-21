@@ -5,6 +5,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 165,
+    "gtin": "8720574292503",
     "article_number": "HPLA-175MGNT-00750",
     "discontinued": false,
     "purchase_links": [
@@ -20,6 +21,7 @@
     "diameter": 2.85,
     "spool_refill": false,
     "empty_spool_weight": 165,
+    "gtin": "8720574292558",
     "article_number": "HPLA-285MGNT-00750",
     "discontinued": false,
     "purchase_links": [

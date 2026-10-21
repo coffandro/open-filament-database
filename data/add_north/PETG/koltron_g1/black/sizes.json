@@ -31,6 +31,7 @@
     "diameter": 2.85,
     "empty_spool_weight": 100,
     "spool_core_diameter": 41,
+    "gtin": "7340182903168",
     "purchase_links": [
       {
         "store_id": "add_north",
@@ -44,6 +45,7 @@
     "diameter": 2.85,
     "empty_spool_weight": 100,
     "spool_core_diameter": 41,
+    "gtin": "7340182903076",
     "purchase_links": [
       {
         "store_id": "add_north",

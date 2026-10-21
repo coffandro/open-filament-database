@@ -19,10 +19,15 @@
     "uuid": "d33138c4-4b27-487e-aa89-00009a76bc27",
     "filament_weight": 1000,
     "diameter": 1.75,
+    "gtin": "6933582317775",
     "purchase_links": [
       {
         "store_id": "sunlu",
         "url": "https://www.sunlu.com/products/nylon-12-carbon-fiber-pa12-cf-3d-printer-filament-1kg"
+      },
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/pa12-cf-black"
       }
     ]
   },

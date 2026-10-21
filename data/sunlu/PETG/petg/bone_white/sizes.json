@@ -12,7 +12,14 @@
   {
     "uuid": "64b6b0fe-fd75-42f1-bb11-2cd0279a7e7e",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "6933582319991",
+    "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/petg-bone-white"
+      }
+    ]
   },
   {
     "uuid": "8eec3573-06e5-48e9-bd59-5d673f77c836",

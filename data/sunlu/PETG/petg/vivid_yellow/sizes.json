@@ -12,7 +12,14 @@
   {
     "uuid": "6c8961b8-c47c-4921-90ee-04735e20e82e",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "6933582319915",
+    "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/petg-vivid-yellow"
+      }
+    ]
   },
   {
     "uuid": "1afa25a1-795b-470d-a9a4-afc2139c01ac",

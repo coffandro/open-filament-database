@@ -5,5 +5,11 @@
     "diameter": 1.75,
     "gtin": "6938936710165",
     "article_number": "PE01002"
+  },
+  {
+    "uuid": "fa831d4c-055e-4ab2-a4af-ff552391415a",
+    "filament_weight": 1000,
+    "diameter": 2.85,
+    "gtin": "6938936711261"
   }
 ]

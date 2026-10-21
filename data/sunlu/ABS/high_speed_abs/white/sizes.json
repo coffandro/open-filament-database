@@ -12,7 +12,14 @@
   {
     "uuid": "9144ba29-2415-4215-be49-dd24f2557dd6",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "6933582315405",
+    "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/high-speed-abs-white"
+      }
+    ]
   },
   {
     "uuid": "c3bea53d-eeab-429b-b96e-1afb1b6295ed",

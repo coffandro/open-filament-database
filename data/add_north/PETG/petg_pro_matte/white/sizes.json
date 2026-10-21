@@ -24,5 +24,11 @@
         "url": "https://addnorth.com/product/PETG%20PRO%20Matte/PETG%20PRO%20Matte%20-%201.75mm%20-%202300g%20-%20White"
       }
     ]
+  },
+  {
+    "uuid": "e208a59e-f8e6-4b56-9567-1e48562ce234",
+    "filament_weight": 1000,
+    "diameter": 1.75,
+    "gtin": "7340182904073"
   }
 ]

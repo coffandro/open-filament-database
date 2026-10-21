@@ -12,7 +12,14 @@
   {
     "uuid": "aea302e4-3a2e-472d-9902-5261532a2161",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "6933582314125",
+    "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/pla-classic-sky-blue"
+      }
+    ]
   },
   {
     "uuid": "f121b491-486c-4f47-8acb-e9b4d586a05e",

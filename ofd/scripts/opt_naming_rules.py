@@ -556,6 +556,12 @@ MOVE_RULES: dict[str, dict[str, dict[str, list[tuple[str, str, str, list[str]]]]
         },
     },
     "add_north": {
+        "PETG": {
+            # add:north sells one carbon-fibre PETG, "Rigid X" (#606)
+            "rigid_x_cf_petg": [
+                ("", "rigid_x", "PETG Rigid X", []),
+            ],
+        },
         "PLA": {
             "pla": [
                 ("economy_", "economy_pla", "Economy PLA", ["Economy "]),

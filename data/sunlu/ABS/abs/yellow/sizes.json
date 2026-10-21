@@ -12,7 +12,14 @@
   {
     "uuid": "d388fdc2-e3e6-41cf-8304-62f6909c2488",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "6933582323356",
+    "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/abs-yellow-8"
+      }
+    ]
   },
   {
     "uuid": "880d95a9-d85b-4c77-af9f-9b883c3fdb7a",

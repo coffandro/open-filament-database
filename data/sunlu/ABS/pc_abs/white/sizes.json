@@ -13,10 +13,15 @@
     "uuid": "3f07f35d-069f-4b9f-b600-3927ae36bc65",
     "filament_weight": 1000,
     "diameter": 1.75,
+    "gtin": "6933582317799",
     "purchase_links": [
       {
         "store_id": "sunlu",
         "url": "https://www.sunlu.com/products/pc-abs-3d-printer-filament-high-performance-3d-filament-1kg"
+      },
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/pc-abs-white-1"
       }
     ]
   },

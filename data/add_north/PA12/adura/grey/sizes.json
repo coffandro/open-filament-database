@@ -11,5 +11,11 @@
         "url": "https://addnorth.com/product/Adura%E2%84%A2/Adura%E2%84%A2%20-%201.75mm%20-%20500g%20-%20Grey"
       }
     ]
+  },
+  {
+    "uuid": "c64923c7-a6b6-481b-b1be-0ac5c2c3b0c1",
+    "filament_weight": 1000,
+    "diameter": 1.75,
+    "gtin": "7340182901874"
   }
 ]

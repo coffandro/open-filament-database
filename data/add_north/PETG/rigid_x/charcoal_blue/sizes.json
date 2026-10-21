@@ -11,5 +11,14 @@
         "url": "https://addnorth.com/product/Rigid%20X/Rigid%20X%20-%201.75mm%20-%20500g%20-%20Charcoal%20Blue"
       }
     ]
+  },
+  {
+    "uuid": "0f088106-befa-4181-aa38-3a5bb3595fbd",
+    "moved_from": [
+      "24b2692b-540f-4f54-a4ce-ef87e9abdd66"
+    ],
+    "filament_weight": 1000,
+    "diameter": 1.75,
+    "gtin": "7340182904141"
   }
 ]

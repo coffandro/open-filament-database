@@ -1,7 +1,22 @@
 [
   {
     "uuid": "6d28bb11-579e-49fa-b255-ad6ab84544b0",
-    "filament_weight": 1000,
-    "diameter": 1.75
+    "moved_from": [
+      "783e1054-ea6d-4e95-bee1-3e3c391b53f9"
+    ],
+    "filament_weight": 750,
+    "diameter": 1.75,
+    "gtin": "6938936710547"
+  },
+  {
+    "uuid": "cf5df3d5-69cf-4718-8625-f1adf96a70c6",
+    "filament_weight": 750,
+    "diameter": 2.85,
+    "purchase_links": [
+      {
+        "store_id": "polymaker",
+        "url": "https://us.polymaker.com/products/polymax-petg"
+      }
+    ]
   }
 ]

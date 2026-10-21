@@ -2,6 +2,14 @@
   {
     "uuid": "d298aa98-7ba0-4256-b209-9a3fcabbe5f7",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "6922572210417",
+    "article_number": "PLA-MT175Q-U1RS1",
+    "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/esun/pla-matte-light-blue-1"
+      }
+    ]
   }
 ]

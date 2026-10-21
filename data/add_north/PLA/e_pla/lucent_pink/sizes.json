@@ -11,5 +11,11 @@
         "url": "https://addnorth.com/product/E-PLA/E-PLA%20-%201.75mm%20-%20750g%20-%20Lucent%20Pink"
       }
     ]
+  },
+  {
+    "uuid": "5f699919-ccdc-4d2c-b97e-a55628adaf52",
+    "filament_weight": 1000,
+    "diameter": 1.75,
+    "gtin": "7340182902345"
   }
 ]

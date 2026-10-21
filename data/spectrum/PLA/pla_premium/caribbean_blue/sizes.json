@@ -11,5 +11,12 @@
         "url": "https://shop.spectrumfilaments.com/product-eng-1264-Filament-Spectrum-PLA-Premium-1-75mm-CARIBBEAN-BLUE-1kg.html"
       }
     ]
+  },
+  {
+    "uuid": "cbd805b4-37ea-4192-980c-e2a563d0bb9b",
+    "filament_weight": 1000,
+    "diameter": 1.75,
+    "spool_refill": true,
+    "gtin": "5905991404408"
   }
 ]

@@ -1,6 +1,13 @@
 {
   "uuid": "81fa0796-ee62-4d4f-8e5a-77c5401d009b",
+  "moved_from": [
+    "9f3687bd-a3c5-43d7-989f-c69f415cf7fd"
+  ],
   "id": "pastel_peanut",
   "name": "Pastel Peanut",
-  "color_hex": "#C29572"
+  "color_hex": "#C29572",
+  "traits": {
+    "matte": true,
+    "industrially_compostable": true
+  }
 }

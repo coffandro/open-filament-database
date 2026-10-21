@@ -5,6 +5,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 165,
+    "gtin": "8720629060590",
     "article_number": "RAPO-175CCGY-01000",
     "discontinued": false,
     "purchase_links": [
@@ -20,6 +21,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 625,
+    "gtin": "8720629060620",
     "article_number": "RAPO-175CCGY-02300",
     "discontinued": false,
     "purchase_links": [
@@ -35,6 +37,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 700,
+    "gtin": "8720629060651",
     "article_number": "RAPO-175CCGY-03500",
     "discontinued": false,
     "purchase_links": [
@@ -50,6 +53,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 785,
+    "gtin": "8720629060675",
     "article_number": "RAPO-175CCGY-04500",
     "discontinued": false,
     "purchase_links": [
@@ -58,5 +62,12 @@
         "url": "https://www.formfutura.com/reform-rapollo"
       }
     ]
+  },
+  {
+    "uuid": "a0b9c3bf-4a1c-4a39-9801-81c48c78e391",
+    "filament_weight": 250,
+    "diameter": 2.85,
+    "gtin": "8720629060583",
+    "article_number": "RAPO-285CCGY-00250"
   }
 ]

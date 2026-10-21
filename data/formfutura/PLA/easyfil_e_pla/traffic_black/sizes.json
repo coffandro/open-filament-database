@@ -5,6 +5,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 165,
+    "gtin": "8720847051073",
     "article_number": "PLAE-175TBLK-01000",
     "discontinued": false,
     "purchase_links": [
@@ -20,6 +21,7 @@
     "diameter": 1.75,
     "spool_refill": true,
     "empty_spool_weight": 20,
+    "gtin": "8720629067308",
     "article_number": "PLAE-175TBLK-C1000",
     "discontinued": false,
     "purchase_links": [
@@ -35,6 +37,7 @@
     "diameter": 1.75,
     "spool_refill": true,
     "empty_spool_weight": 20,
+    "gtin": "8720629067353",
     "article_number": "PLAE-175TBLK-B1000",
     "discontinued": false,
     "purchase_links": [
@@ -50,6 +53,7 @@
     "diameter": 1.75,
     "spool_refill": true,
     "empty_spool_weight": 40,
+    "gtin": "8720629067315",
     "article_number": "PLAE-175TBLK-C2000",
     "discontinued": false,
     "purchase_links": [
@@ -65,6 +69,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 625,
+    "gtin": "8720847051615",
     "article_number": "PLAE-175TBLK-02300",
     "discontinued": false,
     "purchase_links": [
@@ -80,6 +85,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 785,
+    "gtin": "8720847052155",
     "article_number": "PLAE-175TBLK-04500",
     "discontinued": false,
     "purchase_links": [
@@ -95,6 +101,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 1040,
+    "gtin": "8720847052698",
     "article_number": "PLAE-175TBLK-08000",
     "discontinued": false,
     "purchase_links": [
@@ -110,6 +117,7 @@
     "diameter": 2.85,
     "spool_refill": false,
     "empty_spool_weight": 165,
+    "gtin": "8720847055477",
     "article_number": "PLAE-285TBLK-01000",
     "discontinued": false,
     "purchase_links": [
@@ -125,6 +133,7 @@
     "diameter": 2.85,
     "spool_refill": false,
     "empty_spool_weight": 625,
+    "gtin": "8720847056016",
     "article_number": "PLAE-285TBLK-02300",
     "discontinued": false,
     "purchase_links": [
@@ -140,6 +149,7 @@
     "diameter": 2.85,
     "spool_refill": false,
     "empty_spool_weight": 785,
+    "gtin": "8720847056559",
     "article_number": "PLAE-285TBLK-04500",
     "discontinued": false,
     "purchase_links": [
@@ -155,6 +165,7 @@
     "diameter": 2.85,
     "spool_refill": false,
     "empty_spool_weight": 1040,
+    "gtin": "8720847057099",
     "article_number": "PLAE-285TBLK-08000",
     "discontinued": false,
     "purchase_links": [
@@ -163,5 +174,12 @@
         "url": "https://www.formfutura.com/easyfil-epla"
       }
     ]
+  },
+  {
+    "uuid": "cb12a52f-e4e7-4599-9864-d6dc9a3b8352",
+    "filament_weight": 250,
+    "diameter": 2.85,
+    "gtin": "8720847054937",
+    "article_number": "PLAE-285TBLK-00250"
   }
 ]

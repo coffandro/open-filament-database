@@ -50,5 +50,12 @@
         "url": "https://shop.spectrumfilaments.com/product-eng-1450-Filament-Spectrum-PLA-Premium-1-75mm-BLOODY-RED-8kg.html"
       }
     ]
+  },
+  {
+    "uuid": "a2e1aafa-f482-444b-a94f-6919dcd773d9",
+    "filament_weight": 1000,
+    "diameter": 1.75,
+    "spool_refill": true,
+    "gtin": "5905991404385"
   }
 ]

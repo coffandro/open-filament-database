@@ -13,10 +13,15 @@
     "uuid": "d124f45d-726d-49fd-bf61-b40de1a42ad0",
     "filament_weight": 1000,
     "diameter": 1.75,
+    "gtin": "6933582309077",
     "purchase_links": [
       {
         "store_id": "sunlu",
         "url": "https://www.sunlu.com/products/over-6kg-bulk-sale-pla-matte-filament-neatly-wound-filament"
+      },
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/pla-meta-chocolate"
       }
     ]
   },

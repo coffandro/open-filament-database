@@ -5,5 +5,23 @@
     "diameter": 1.75,
     "gtin": "6938936709695",
     "article_number": "PA02004"
+  },
+  {
+    "uuid": "77e91182-eb55-43b5-af2c-912aa30511cd",
+    "filament_weight": 3000,
+    "diameter": 1.75,
+    "gtin": "6938936707295"
+  },
+  {
+    "uuid": "a542ce8d-6d98-45f2-af0d-c95a9a961da7",
+    "filament_weight": 1000,
+    "diameter": 2.85,
+    "gtin": "6938936711056"
+  },
+  {
+    "uuid": "86198954-984f-43aa-a769-476f564ce9d8",
+    "filament_weight": 3000,
+    "diameter": 2.85,
+    "gtin": "6938936712534"
   }
 ]

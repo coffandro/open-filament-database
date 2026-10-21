@@ -12,7 +12,14 @@
   {
     "uuid": "b02ab69a-762a-4061-be4d-bd95b7a7d48c",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "6933582319939",
+    "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/petg-lavender-purple"
+      }
+    ]
   },
   {
     "uuid": "36a8da96-f2e7-4946-b749-767fe04c0ec4",

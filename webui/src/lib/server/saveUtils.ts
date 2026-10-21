@@ -1,3 +1,4 @@
+import { promises as fs } from 'fs';
 import path from 'path';
 
 const REPO_ROOT = path.resolve(process.cwd(), '..');
@@ -130,6 +131,53 @@ export function preserveCanonicalFields<T>(incoming: T, existing: unknown): T {
 		return mergeIdentity(incoming, existing) as T;
 	}
 	return incoming;
+}
+
+function withoutUuid(entry: unknown): unknown {
+	if (!isPlainObject(entry) || !('uuid' in entry)) return entry;
+	const { uuid: _uuid, ...rest } = entry;
+	return rest;
+}
+
+/**
+ * Drop the `uuid` from data about to be written to a path that holds no committed
+ * file — on the entity, or on each spool of a `sizes.json` array.
+ *
+ * A `uuid` is only ever carried from the file already at the *same* path (see
+ * `preserveCanonicalFields`). One arriving at a new path was copied from somewhere
+ * else — e.g. a duplicated entity, as in PR #636 — and keeping it would either
+ * collide with its source or silently "move" an identity whose children were not
+ * moved with it. CI mints a fresh one on merge. `moved_from` is kept: a redirect
+ * onto a not-yet-published entity is legitimate, and `ofd uuid check` rejects
+ * conflicting ones.
+ *
+ * Callers must only use this when the path is *known* to be new (absent from the
+ * tree / filesystem), never because reading the existing file failed. If the
+ * editor ever gains a real move/rename, that path must preserve the uuid instead.
+ */
+export function stripUnanchoredUuid<T>(incoming: T): T {
+	if (Array.isArray(incoming)) return incoming.map(withoutUuid) as T;
+	return withoutUuid(incoming) as T;
+}
+
+/**
+ * Local-filesystem counterpart of the PR builder's identity handling: preserve the
+ * canonical fields already on disk at `filePath`, or — when nothing is there —
+ * drop a copied `uuid` (`stripUnanchoredUuid`). An unreadable or unparseable file
+ * leaves `incoming` untouched rather than guessing.
+ */
+export async function reconcileWithDisk<T>(incoming: T, filePath: string): Promise<T> {
+	let text: string;
+	try {
+		text = await fs.readFile(filePath, 'utf-8');
+	} catch (error: any) {
+		return error?.code === 'ENOENT' ? stripUnanchoredUuid(incoming) : incoming;
+	}
+	try {
+		return preserveCanonicalFields(incoming, JSON.parse(text));
+	} catch {
+		return incoming;
+	}
 }
 
 /**

@@ -5,5 +5,17 @@
     "diameter": 1.75,
     "gtin": "6938936709732",
     "article_number": "PA02008"
+  },
+  {
+    "uuid": "72b03fcb-9050-4ee5-89d4-812cd157018d",
+    "filament_weight": 1000,
+    "diameter": 2.85,
+    "gtin": "6938936711094"
+  },
+  {
+    "uuid": "159f3317-13b6-49f6-b7e8-e4f34ae09127",
+    "filament_weight": 3000,
+    "diameter": 2.85,
+    "gtin": "6938936707585"
   }
 ]

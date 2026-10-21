@@ -12,7 +12,14 @@
   {
     "uuid": "b533914b-d652-461a-a967-1784233af8e1",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "6933582320492",
+    "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/pla-matte-dual-color-orange-red"
+      }
+    ]
   },
   {
     "uuid": "586eea20-9169-4ce7-830e-0da8e776f8fe",

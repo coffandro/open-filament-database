@@ -13,10 +13,15 @@
     "uuid": "d704cf0d-3216-4bf3-89b1-bb521ce54bf1",
     "filament_weight": 1000,
     "diameter": 1.75,
+    "gtin": "6933582314644",
     "purchase_links": [
       {
         "store_id": "sunlu",
         "url": "https://www.sunlu.com/products/over-6kg-of-pla-pla-meta-3d-filaments-1kg-2-2lbs-fit-most-of-fdm-printer"
+      },
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/pla-oak"
       }
     ]
   },

@@ -1,5 +1,8 @@
 {
   "uuid": "f9012705-61eb-4bfb-85e5-1f913d45d901",
+  "moved_from": [
+    "9e73b464-006e-4985-b37e-9ef262efeeda"
+  ],
   "id": "celestial_pla",
   "name": "Celestial PLA",
   "diameter_tolerance": 0.02,

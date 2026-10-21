@@ -5,5 +5,8 @@
   "color_hex": [
     "#0047BB",
     "#BB22A3"
-  ]
+  ],
+  "traits": {
+    "coextruded": true
+  }
 }

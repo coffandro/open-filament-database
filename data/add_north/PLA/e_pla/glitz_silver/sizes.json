@@ -11,5 +11,11 @@
         "url": "https://addnorth.com/product/E-PLA/E-PLA%20-%201.75mm%20-%20750g%20-%20Glitz%20Silver"
       }
     ]
+  },
+  {
+    "uuid": "4b9ab0ce-bcd8-46ca-9734-44d9f72dee56",
+    "filament_weight": 1000,
+    "diameter": 1.75,
+    "gtin": "7340182902192"
   }
 ]

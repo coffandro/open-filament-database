@@ -5,6 +5,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 165,
+    "gtin": "8720629060422",
     "article_number": "RAPO-175BLCK-01000",
     "discontinued": false,
     "purchase_links": [
@@ -20,6 +21,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 625,
+    "gtin": "8720629060439",
     "article_number": "RAPO-175BLCK-02300",
     "discontinued": false,
     "purchase_links": [
@@ -35,6 +37,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 700,
+    "gtin": "8720629060453",
     "article_number": "RAPO-175BLCK-03500",
     "discontinued": false,
     "purchase_links": [
@@ -50,6 +53,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 785,
+    "gtin": "8720629060460",
     "article_number": "RAPO-175BLCK-04500",
     "discontinued": false,
     "purchase_links": [
@@ -65,6 +69,7 @@
     "diameter": 2.85,
     "spool_refill": false,
     "empty_spool_weight": 165,
+    "gtin": "8720629060507",
     "article_number": "RAPO-285BLCK-01000",
     "discontinued": false,
     "purchase_links": [
@@ -80,6 +85,7 @@
     "diameter": 2.85,
     "spool_refill": false,
     "empty_spool_weight": 625,
+    "gtin": "8720629060514",
     "article_number": "RAPO-285BLCK-02300",
     "discontinued": false,
     "purchase_links": [
@@ -95,6 +101,7 @@
     "diameter": 2.85,
     "spool_refill": false,
     "empty_spool_weight": 700,
+    "gtin": "8720629060538",
     "article_number": "RAPO-285BLCK-03500",
     "discontinued": false,
     "purchase_links": [
@@ -110,6 +117,7 @@
     "diameter": 2.85,
     "spool_refill": false,
     "empty_spool_weight": 785,
+    "gtin": "8720629060545",
     "article_number": "RAPO-285BLCK-04500",
     "discontinued": false,
     "purchase_links": [
@@ -118,5 +126,12 @@
         "url": "https://www.formfutura.com/reform-rapollo"
       }
     ]
+  },
+  {
+    "uuid": "01a73a6b-9e7f-41eb-998d-3b204d55b2ee",
+    "filament_weight": 250,
+    "diameter": 2.85,
+    "gtin": "8720629060491",
+    "article_number": "RAPO-285BLCK-00250"
   }
 ]

@@ -1,6 +1,9 @@
 [
   {
     "uuid": "10630a31-7b0a-4464-800e-77bd4a7eda14",
+    "moved_from": [
+      "5a95aa5d-98d3-47d6-838b-0c77da0b4391"
+    ],
     "filament_weight": 1000,
     "diameter": 1.75,
     "spool_refill": false,
@@ -9,6 +12,7 @@
     "container_width": 66,
     "container_outer_diameter": 200,
     "container_hole_diameter": 55,
+    "gtin": "6938936715788",
     "article_number": "CA02022",
     "discontinued": false,
     "purchase_links": [

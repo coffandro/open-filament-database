@@ -29,6 +29,7 @@
     "uuid": "f014641d-3728-4ffa-ac9d-05fefac5e52d",
     "filament_weight": 5000,
     "diameter": 1.75,
+    "discontinued": true,
     "purchase_links": [
       {
         "store_id": "polymaker",
@@ -53,6 +54,7 @@
     "uuid": "bcc0172c-8aec-4d5b-9ffe-2d74e278fa48",
     "filament_weight": 3000,
     "diameter": 2.85,
+    "discontinued": true,
     "purchase_links": [
       {
         "store_id": "polymaker",
@@ -64,6 +66,7 @@
     "uuid": "1fa21827-e519-41aa-9c65-fa37bf1c6621",
     "filament_weight": 5000,
     "diameter": 2.85,
+    "discontinued": true,
     "purchase_links": [
       {
         "store_id": "polymaker",

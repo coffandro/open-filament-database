@@ -11,5 +11,12 @@
         "url": "https://shop.spectrumfilaments.com/product-eng-511-Filament-Spectrum-PLA-Premium-1-75mm-PINK-PANTHER-1kg.html"
       }
     ]
+  },
+  {
+    "uuid": "de33e813-e5e2-482e-86c5-8377d58e8553",
+    "filament_weight": 1000,
+    "diameter": 1.75,
+    "spool_refill": true,
+    "gtin": "5905991404521"
   }
 ]

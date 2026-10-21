@@ -13,10 +13,15 @@
     "uuid": "1bc785fd-3c57-4d19-a21b-1b88e7533c45",
     "filament_weight": 1000,
     "diameter": 1.75,
+    "gtin": "6933582314743",
     "purchase_links": [
       {
         "store_id": "sunlu",
         "url": "https://www.sunlu.com/products/moq-6kg-pla-2-0-upgraded-pla-pla-plus-3d-printer-filament-1kg"
+      },
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/pla-20-vivid-yellow"
       }
     ]
   },

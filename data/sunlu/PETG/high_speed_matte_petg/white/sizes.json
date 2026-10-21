@@ -13,10 +13,15 @@
     "uuid": "5632cf2c-9ad6-462f-9916-2712b6ece2d9",
     "filament_weight": 1000,
     "diameter": 1.75,
+    "gtin": "6933582315306",
     "purchase_links": [
       {
         "store_id": "sunlu",
         "url": "https://www.sunlu.com/products/high-speed-matte-petg-3d-printer-filament-1kg"
+      },
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/high-speed-matte-petg-white"
       }
     ]
   },

@@ -24,5 +24,11 @@
         "url": "https://addnorth.com/product/E-PLA/E-PLA%20-%201.75mm%20-%202300g%20-%20White"
       }
     ]
+  },
+  {
+    "uuid": "43c04c00-c5c3-4e79-addc-1b5f6d4f9608",
+    "filament_weight": 1000,
+    "diameter": 1.75,
+    "gtin": "7340182902758"
   }
 ]

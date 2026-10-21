@@ -12,7 +12,14 @@
   {
     "uuid": "ccfef6ea-8674-4970-9c91-7e927dbcdcb4",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "6933582309855",
+    "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/petg-cyan"
+      }
+    ]
   },
   {
     "uuid": "e2f5495f-4582-4f70-bcd6-f916f093f909",

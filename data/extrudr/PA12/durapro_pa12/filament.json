@@ -7,5 +7,7 @@
   "min_print_temperature": 240,
   "max_print_temperature": 270,
   "min_bed_temperature": 80,
-  "max_bed_temperature": 100
+  "max_bed_temperature": 100,
+  "data_sheet_url": "https://s3.extrudr.com/extrudr-media/datasheets/tds/tds-en/durapro-pa12-TDS-en.pdf",
+  "safety_sheet_url": "https://s3.extrudr.com/extrudr-media/datasheets/msds/msds-en/durapro-pa12-MSDS-en.pdf"
 }

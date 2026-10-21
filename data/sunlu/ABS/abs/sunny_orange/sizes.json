@@ -12,7 +12,14 @@
   {
     "uuid": "f69f7816-d1ac-48ed-9a8b-ef446be4ce08",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "6933582323400",
+    "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/abs-sunny-orange"
+      }
+    ]
   },
   {
     "uuid": "0b4e22a7-50b1-493c-afea-2a8795b8216a",

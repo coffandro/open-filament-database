@@ -3,5 +3,11 @@
   "id": "grey",
   "name": "Grey",
   "color_hex": "#CCD3DE",
-  "discontinued": false
+  "hex_variants": [
+    "#959FA1"
+  ],
+  "discontinued": false,
+  "traits": {
+    "high_flow": true
+  }
 }

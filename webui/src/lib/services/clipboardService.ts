@@ -25,8 +25,16 @@ const STORAGE_KEY = 'ofd_clipboard';
  * Identity/routing fields that must be stripped when duplicating or pasting.
  * These are regenerated on creation (slug from name, id from slug, etc).
  * ALL entity data fields NOT in this list are preserved as-is.
+ *
+ * `uuid`/`moved_from` are the canonical identity of the *source* entity (minted by
+ * CI on merge). A copy is a new entity, so carrying them over would hand it the
+ * source's uuid — and a later delete-with-redirect of the source then records
+ * nothing, since the target already "is" that uuid.
  */
-const IDENTITY_FIELDS = ['id', 'slug', 'brandId', 'filamentDir'] as const;
+const IDENTITY_FIELDS = ['id', 'slug', 'brandId', 'filamentDir', 'uuid', 'moved_from'] as const;
+
+/** Canonical identity carried by each spool in a variant's `sizes` array. */
+const SIZE_IDENTITY_FIELDS = ['uuid', 'moved_from'] as const;
 
 /**
  * Additional identity fields to strip per entity type.
@@ -74,6 +82,16 @@ export function prepareEntityData(
 	if (extraFields) {
 		for (const field of extraFields) {
 			delete clone[field];
+		}
+	}
+
+	// Spools carry their own canonical identity
+	if (Array.isArray(clone.sizes)) {
+		for (const size of clone.sizes) {
+			if (!size || typeof size !== 'object') continue;
+			for (const field of SIZE_IDENTITY_FIELDS) {
+				delete size[field];
+			}
 		}
 	}
 

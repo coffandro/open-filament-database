@@ -13,10 +13,15 @@
     "uuid": "84b6963e-773c-4467-98b1-1284c7f3e025",
     "filament_weight": 1000,
     "diameter": 1.75,
+    "gtin": "6933582314811",
     "purchase_links": [
       {
         "store_id": "sunlu",
         "url": "https://www.sunlu.com/products/moq-6kg-pla-2-0-upgraded-pla-pla-plus-3d-printer-filament-1kg"
+      },
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/pla-20-beige"
       }
     ]
   },

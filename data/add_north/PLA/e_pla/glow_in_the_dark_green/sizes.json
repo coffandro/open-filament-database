@@ -11,5 +11,11 @@
         "url": "https://addnorth.com/product/E-PLA/E-PLA%20-%201.75mm%20-%20750g%20-%20Glow%20in%20the%20Dark%20Green"
       }
     ]
+  },
+  {
+    "uuid": "4d7ea162-e732-4868-8822-46ffb08488df",
+    "filament_weight": 1000,
+    "diameter": 1.75,
+    "gtin": "7340182902208"
   }
 ]

@@ -41,6 +41,8 @@ Every entity (brand, material, filament, variant, and each spool in `sizes.json`
 
 **You never write this field by hand.** When you add or edit data — manually or via the WebUI — simply omit `uuid` (or leave it empty). Continuous integration assigns a UUID to every new entry automatically when your pull request is merged. The `id`/folder-name slug is still what you set and what other files reference; the `uuid` is an additional identifier managed for you.
 
+**Never rename by deleting and re-creating.** A UUID only survives a rename if the existing files (with their `uuid` fields) are moved — a deleted-and-recreated entity, and every variant and spool under it, comes back with *new* UUIDs, breaking every external reference. Pull requests are checked for this (see [UUID continuity](validation.md#canonical-uuids)).
+
 If you're working locally and want to preview or manage these IDs, use the [`ofd uuid`](validation.md#canonical-uuids) commands (e.g. `ofd uuid assign`, `ofd uuid find <uuid>`).
 
 ### Moved / former UUIDs (`moved_from`)

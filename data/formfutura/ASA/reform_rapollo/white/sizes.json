@@ -5,6 +5,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 165,
+    "gtin": "8720629060743",
     "article_number": "RAPO-175WHTE-01000",
     "discontinued": false,
     "purchase_links": [
@@ -20,6 +21,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 625,
+    "gtin": "8720629060750",
     "article_number": "RAPO-175WHTE-02300",
     "discontinued": false,
     "purchase_links": [
@@ -35,6 +37,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 700,
+    "gtin": "8720629060774",
     "article_number": "RAPO-175WHTE-03500",
     "discontinued": false,
     "purchase_links": [
@@ -50,6 +53,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 785,
+    "gtin": "8720629060781",
     "article_number": "RAPO-175WHTE-04500",
     "discontinued": false,
     "purchase_links": [
@@ -65,6 +69,7 @@
     "diameter": 2.85,
     "spool_refill": false,
     "empty_spool_weight": 165,
+    "gtin": "8720629060828",
     "article_number": "RAPO-285WHTE-01000",
     "discontinued": false,
     "purchase_links": [
@@ -80,6 +85,7 @@
     "diameter": 2.85,
     "spool_refill": false,
     "empty_spool_weight": 625,
+    "gtin": "8720629060835",
     "article_number": "RAPO-285WHTE-02300",
     "discontinued": false,
     "purchase_links": [
@@ -95,6 +101,7 @@
     "diameter": 2.85,
     "spool_refill": false,
     "empty_spool_weight": 700,
+    "gtin": "8720629060859",
     "article_number": "RAPO-285WHTE-03500",
     "discontinued": false,
     "purchase_links": [
@@ -110,6 +117,7 @@
     "diameter": 2.85,
     "spool_refill": false,
     "empty_spool_weight": 785,
+    "gtin": "8720629060866",
     "article_number": "RAPO-285WHTE-04500",
     "discontinued": false,
     "purchase_links": [
@@ -118,5 +126,19 @@
         "url": "https://www.formfutura.com/reform-rapollo"
       }
     ]
+  },
+  {
+    "uuid": "67d26a28-904d-4ea8-a8d3-5d053d8eac43",
+    "filament_weight": 250,
+    "diameter": 1.75,
+    "gtin": "8720629060736",
+    "article_number": "RAPO-175WHTE-00250"
+  },
+  {
+    "uuid": "0f6f3c74-f91e-41d7-acff-2de6c14b2145",
+    "filament_weight": 250,
+    "diameter": 2.85,
+    "gtin": "8720629060811",
+    "article_number": "RAPO-285WHTE-00250"
   }
 ]

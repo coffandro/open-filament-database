@@ -5,6 +5,7 @@
     "diameter": 1.75,
     "spool_refill": true,
     "empty_spool_weight": 20,
+    "gtin": "8720629068312",
     "article_number": "PGFR-175TWHT-B0500",
     "discontinued": false,
     "purchase_links": [
@@ -20,6 +21,7 @@
     "diameter": 1.75,
     "spool_refill": true,
     "empty_spool_weight": 20,
+    "gtin": "8720629068305",
     "article_number": "PGFR-175TWHT-B1000",
     "discontinued": false,
     "purchase_links": [

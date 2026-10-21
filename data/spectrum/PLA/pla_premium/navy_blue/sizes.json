@@ -50,5 +50,12 @@
         "url": "https://shop.spectrumfilaments.com/product-eng-1453-Filament-Spectrum-PLA-Premium-1-75mm-NAVY-BLUE-8kg.html"
       }
     ]
+  },
+  {
+    "uuid": "65ad3058-1c57-4f4b-9490-cbec63ffd72d",
+    "filament_weight": 1000,
+    "diameter": 1.75,
+    "spool_refill": true,
+    "gtin": "5905991404507"
   }
 ]

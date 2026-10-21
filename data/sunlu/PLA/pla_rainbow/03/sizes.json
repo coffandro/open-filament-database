@@ -2,6 +2,13 @@
   {
     "uuid": "52500b4f-03a1-4177-8f47-fa234f89d3cf",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "6933582316624",
+    "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/pla-rainbow-03"
+      }
+    ]
   }
 ]

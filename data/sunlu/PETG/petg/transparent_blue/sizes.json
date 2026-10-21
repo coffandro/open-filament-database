@@ -2,6 +2,13 @@
   {
     "uuid": "d3313076-7f65-44c1-ad20-1bfa5bea05fb",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "6933582309923",
+    "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/petg-transparent-blue-3"
+      }
+    ]
   }
 ]

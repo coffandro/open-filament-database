@@ -47,6 +47,18 @@
             "note": "Often marketed as high-speed. 719/720 matching variants already carry it."
         },
         {
+            "id": "foaming",
+            "code": "LW",
+            "pattern": "(?:^|[^a-z])aero(?![a-z])|(?:^|[^a-z])lw(?![a-z])|light[\\s_+-]?weight|(?:^|[^a-z])(?:ultra)?foam(?:ing|y)?(?![a-z])",
+            "traits": [
+                "foaming"
+            ],
+            "applies_to": [
+                "suggest"
+            ],
+            "note": "Lightweight filaments sold as LW / Aero / Foamy / UltraFoam usually foam actively when printed hot, but not all: Polymaker PolyLite LW-PLA is pre-foamed during manufacturing and does not expand in the nozzle. Not true by definition, so suggest only. Bare 'air' is deliberately not matched (too generic)."
+        },
+        {
             "id": "bicolor",
             "pattern": "bi[\\s_+-]?colou?r",
             "traits": [

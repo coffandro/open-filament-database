@@ -11,5 +11,11 @@
         "url": "https://addnorth.com/product/E-PLA/E-PLA%20-%201.75mm%20-%20750g%20-%20Ultramarine%20Blue"
       }
     ]
+  },
+  {
+    "uuid": "47b70026-5fc3-469b-9331-1f48bca3e04d",
+    "filament_weight": 1000,
+    "diameter": 1.75,
+    "gtin": "7340182902741"
   }
 ]

@@ -12,7 +12,14 @@
   {
     "uuid": "1077773b-d7ba-4614-818b-966949d828fb",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "6933582323394",
+    "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/abs-magenta"
+      }
+    ]
   },
   {
     "uuid": "782692e0-308f-4da3-9af9-7d143326bc13",

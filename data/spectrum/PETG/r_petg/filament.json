@@ -4,8 +4,10 @@
   "name": "R PETG",
   "diameter_tolerance": 0.02,
   "density": 1.27,
-  "min_print_temperature": 220,
-  "max_print_temperature": 250,
-  "min_bed_temperature": 70,
-  "max_bed_temperature": 90
+  "min_print_temperature": 230,
+  "max_print_temperature": 255,
+  "min_bed_temperature": 60,
+  "max_bed_temperature": 80,
+  "data_sheet_url": "https://spectrumfilaments.com/wp-content/uploads/2022/05/en_tds_spectrum_rpetg.pdf",
+  "safety_sheet_url": "https://spectrumfilaments.com/wp-content/uploads/2022/05/en_msds_spectrum_rpetg.pdf"
 }

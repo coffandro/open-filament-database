@@ -11,5 +11,11 @@
         "url": "https://addnorth.com/product/E-PLA/E-PLA%20-%201.75mm%20-%20750g%20-%20Tropical%20Turquoise"
       }
     ]
+  },
+  {
+    "uuid": "51a329a2-b7d2-4a8d-be04-c05c85e7ba4e",
+    "filament_weight": 1000,
+    "diameter": 1.75,
+    "gtin": "7340182902598"
   }
 ]

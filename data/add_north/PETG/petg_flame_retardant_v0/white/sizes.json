@@ -11,5 +11,11 @@
         "url": "https://addnorth.com/product/PETG%20Flame%20Retardant%20V0/PETG%20Flame%20Retardant%20V0%20-%201.75mm%20-%20750g%20-%20White"
       }
     ]
+  },
+  {
+    "uuid": "2119a53b-0a45-4b58-9137-9d18a6290347",
+    "filament_weight": 1000,
+    "diameter": 1.75,
+    "gtin": "7340182903991"
   }
 ]

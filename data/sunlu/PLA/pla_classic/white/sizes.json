@@ -12,7 +12,14 @@
   {
     "uuid": "768ede78-63f5-40ff-a1bc-9d10d2b8e559",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "6933582314064",
+    "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/pla-classic-white"
+      }
+    ]
   },
   {
     "uuid": "254a5d02-e62b-46fa-b4c2-32081f444d0b",

@@ -12,7 +12,14 @@
   {
     "uuid": "95199def-f328-44f4-a70b-53a25e953f40",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "6933582317867",
+    "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/pvb-transparent-blue"
+      }
+    ]
   },
   {
     "uuid": "b2ab2f5c-3aac-405e-abe1-9553538470a9",

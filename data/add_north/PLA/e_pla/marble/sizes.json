@@ -11,5 +11,11 @@
         "url": "https://addnorth.com/product/E-PLA/E-PLA%20-%201.75mm%20-%20750g%20-%20Marble"
       }
     ]
+  },
+  {
+    "uuid": "49d21e89-1db4-42a3-8f4e-628f9e2ff2c9",
+    "filament_weight": 1000,
+    "diameter": 1.75,
+    "gtin": "7340182902420"
   }
 ]

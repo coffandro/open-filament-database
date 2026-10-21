@@ -12,7 +12,14 @@
   {
     "uuid": "036c057e-ee54-4d39-a1ad-fa4db9af8a5a",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "6933582314088",
+    "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/pla-classic-grey"
+      }
+    ]
   },
   {
     "uuid": "ee6bde27-5af3-4e36-90a4-61e83df827df",

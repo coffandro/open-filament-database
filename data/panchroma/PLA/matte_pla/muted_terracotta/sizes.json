@@ -9,6 +9,16 @@
     "container_width": 66,
     "container_outer_diameter": 200,
     "container_hole_diameter": 55,
+    "gtin": "6938936718321",
+    "article_number": "CA04098",
     "discontinued": false
+  },
+  {
+    "uuid": "b88094e4-b43e-4908-b72c-333c3e6109ab",
+    "filament_weight": 1000,
+    "diameter": 1.75,
+    "spool_refill": true,
+    "gtin": "6938936719960",
+    "article_number": "PC1002031"
   }
 ]

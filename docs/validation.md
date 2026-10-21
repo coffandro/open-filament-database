@@ -71,11 +71,13 @@ python -m ofd uuid find <uuid>      # print the file (and spool index) for a can
 python -m ofd uuid check            # verify every UUID (incl. moved_from) is present, well-formed, and globally unique
 python -m ofd uuid check --allow-missing-uuids   # skip the presence requirement (for PR / pre-merge checks)
 python -m ofd uuid list             # print the uuid -> path index
+python -m ofd uuid continuity --base origin/main   # fail if a uuid on main no longer resolves here
 ```
 
 By default, **a missing UUID is a validation error** — `ofd uuid check` requires every entity to have a valid, unique UUID. The one exception is pre-merge contexts, where UUIDs are *meant* to be empty (CI assigns them on merge); those pass `--allow-missing-uuids`, which still flags malformed or duplicated UUIDs but tolerates absent ones. In CI:
 - **On pull requests** (and on the raw merge commit, which also precedes assignment), the check runs with `--allow-missing-uuids`, so leaving the field empty is fine.
 - **After merge**, CI runs `ofd uuid assign` to backfill the empty ones, then `ofd uuid check` (strict) to guarantee every entity on `main` has a valid, unique UUID.
+- **UUID continuity (pull requests):** `ofd uuid continuity --base <base sha>` compares the PR against its base. Every UUID on the base must still be live somewhere in the PR (a rename/move that keeps the file's `uuid` is fine) or be listed in some entity's `moved_from`. A UUID that simply vanishes — typically an entity deleted and re-created under a new folder, which drops its `uuid` and every child's — fails the check. A genuine deletion with no replacement is accepted by a maintainer adding the `uuid-removal-ok` label to the PR.
 
 The JSON schemas accept an empty string or a valid UUIDv4 for `uuid`; any other value fails schema validation.
 

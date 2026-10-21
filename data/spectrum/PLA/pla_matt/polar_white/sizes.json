@@ -3,7 +3,7 @@
     "uuid": "a27b7244-2a1e-4f36-909c-9d5b8f7920a3",
     "filament_weight": 1000,
     "diameter": 1.75,
-    "ean": "5903175658272",
+    "gtin": "5903175651747",
     "article_number": "80102",
     "purchase_links": [
       {
@@ -50,5 +50,11 @@
         "url": "https://shop.spectrumfilaments.com/product-eng-1460-Filament-Spectrum-PLA-Pro-1-75mm-POLAR-WHITE-8kg-RAL-9003.html"
       }
     ]
+  },
+  {
+    "uuid": "90c4ef5c-d03f-4c5a-9b99-1c57e09d75bd",
+    "filament_weight": 1000,
+    "diameter": 2.85,
+    "gtin": "5903175658890"
   }
 ]

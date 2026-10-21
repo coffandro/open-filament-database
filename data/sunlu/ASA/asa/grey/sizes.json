@@ -12,7 +12,14 @@
   {
     "uuid": "4a617e9f-7edc-4ad2-8bca-29e9a53dd56d",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "6933582310271",
+    "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/asa-grey-2"
+      }
+    ]
   },
   {
     "uuid": "10a6c706-4c12-4914-9a3c-59934f342830",

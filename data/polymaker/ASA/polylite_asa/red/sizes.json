@@ -5,5 +5,11 @@
     "diameter": 1.75,
     "gtin": "6938936709978",
     "article_number": "PF01004"
+  },
+  {
+    "uuid": "8bb8359f-6d51-4e28-bb62-f1d2f24bf099",
+    "filament_weight": 1000,
+    "diameter": 2.85,
+    "gtin": "6938936711384"
   }
 ]

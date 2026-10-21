@@ -13,10 +13,15 @@
     "uuid": "bd7e5fd4-c653-41b5-bfb0-f7b5c77db8fe",
     "filament_weight": 1000,
     "diameter": 1.75,
+    "gtin": "6933582314705",
     "purchase_links": [
       {
         "store_id": "sunlu",
         "url": "https://www.sunlu.com/products/over-6kg-of-pla-pla-meta-3d-filaments-1kg-2-2lbs-fit-most-of-fdm-printer"
+      },
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/pla-roasted-chestnut"
       }
     ]
   },

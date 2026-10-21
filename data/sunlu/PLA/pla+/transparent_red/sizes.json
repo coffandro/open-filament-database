@@ -3,10 +3,15 @@
     "uuid": "e8adb1c5-2bc2-488b-835a-1a35609f3a53",
     "filament_weight": 1000,
     "diameter": 1.75,
+    "gtin": "6933582308896",
     "purchase_links": [
       {
         "store_id": "sunlu",
         "url": "https://www.sunlu.com/products/over-6kg-bundle-sale-pla-and-pla-plus-pla-meta-macaron-filament1kg-roll"
+      },
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/pla-transparent-red-2"
       }
     ]
   }

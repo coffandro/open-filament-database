@@ -11,5 +11,11 @@
         "url": "https://addnorth.com/product/Textura%E2%84%A2%20Flare/Textura%E2%84%A2%20Flare%20-%201.75mm%20-%20750g%20-%20Twilight%20Blue"
       }
     ]
+  },
+  {
+    "uuid": "1c3ec9d9-7950-425f-8d61-63bf497e5eec",
+    "filament_weight": 1000,
+    "diameter": 1.75,
+    "gtin": "7340182904257"
   }
 ]

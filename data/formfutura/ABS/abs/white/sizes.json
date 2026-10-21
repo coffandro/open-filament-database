@@ -5,6 +5,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 140,
+    "gtin": "8718924471418",
     "article_number": "APRO-175WHTE-00500",
     "discontinued": false,
     "purchase_links": [
@@ -20,6 +21,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 625,
+    "gtin": "8718924476888",
     "article_number": "APRO-175WHTE-02300",
     "discontinued": false,
     "purchase_links": [
@@ -35,6 +37,7 @@
     "diameter": 2.85,
     "spool_refill": false,
     "empty_spool_weight": 140,
+    "gtin": "8718924471432",
     "article_number": "APRO-285WHTE-00500",
     "discontinued": false,
     "purchase_links": [
@@ -43,5 +46,12 @@
         "url": "https://www.formfutura.com/abspro"
       }
     ]
+  },
+  {
+    "uuid": "c7280252-00e1-4bf1-8d40-f3aa31e8d485",
+    "filament_weight": 250,
+    "diameter": 2.85,
+    "gtin": "8720574297782",
+    "article_number": "APRO-285WHTE-00250"
   }
 ]
