@@ -74,10 +74,17 @@ def collect_urls(roots: list[Path], project_root: Path) -> dict[str, list[str]]:
 def check_url(session: requests.Session, url: str, timeout: float) -> str | None:
     """Return a failure description, or None when the URL loads."""
     try:
-        resp = session.head(url, timeout=timeout, allow_redirects=True)
-        # Many servers mishandle HEAD; confirm with a GET before reporting.
-        if resp.status_code >= 400:
-            resp.close()
+        # Many servers mishandle HEAD (an error status, or hanging until the read times
+        # out or the connection drops); confirm with a GET before reporting.
+        try:
+            resp = session.head(url, timeout=timeout, allow_redirects=True)
+        except (requests.exceptions.ReadTimeout, requests.exceptions.ConnectionError) as e:
+            if isinstance(e, (requests.exceptions.SSLError, requests.exceptions.ConnectTimeout)):
+                raise
+            resp = None
+        if resp is None or resp.status_code >= 400:
+            if resp is not None:
+                resp.close()
             resp = session.get(url, timeout=timeout, allow_redirects=True, stream=True)
         status = resp.status_code
         resp.close()

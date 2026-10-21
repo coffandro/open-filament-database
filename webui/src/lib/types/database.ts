@@ -62,6 +62,8 @@ export interface Filament {
 	min_chamber_temperature?: number;
 	max_chamber_temperature?: number;
 	chamber_temperature?: number;
+	min_print_speed?: number;
+	max_print_speed?: number;
 	min_nozzle_diameter?: number;
 	data_sheet_url?: string;
 	safety_sheet_url?: string;
@@ -92,9 +94,13 @@ export interface VariantSize {
 	gtin?: string;
 	article_number?: string;
 	discontinued?: boolean;
-	container_material?: 'plastic' | 'cardboard' | 'refill';
+	/** @deprecated Use `container_material: 'refill'`; read through `containerMaterialOf`. */
+	spool_refill?: boolean;
+	container_material?: ContainerMaterial;
 	purchase_links?: PurchaseLink[];
 }
+
+export type ContainerMaterial = 'plastic' | 'cardboard' | 'refill';
 
 export interface VariantTraits {
 	translucent?: boolean;

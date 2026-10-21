@@ -4,6 +4,7 @@
     "filament_weight": 1000,
     "diameter": 1.75,
     "spool_refill": true,
+    "container_material": "refill",
     "empty_spool_weight": 34,
     "spool_core_diameter": 87,
     "article_number": "RPET-BK1-175",

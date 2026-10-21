@@ -4,6 +4,7 @@
     "filament_weight": 1000,
     "diameter": 1.75,
     "spool_refill": true,
+    "container_material": "refill",
     "ean": "5907138402841",
     "article_number": "TF-24169",
     "purchase_links": [

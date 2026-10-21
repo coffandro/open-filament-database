@@ -20,6 +20,7 @@
     "filament_weight": 1000,
     "diameter": 1.75,
     "spool_refill": true,
+    "container_material": "refill",
     "empty_spool_weight": 20,
     "gtin": "8720629068442",
     "article_number": "PTGE-175TRNS-B1000",

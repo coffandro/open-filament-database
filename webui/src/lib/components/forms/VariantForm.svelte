@@ -17,6 +17,7 @@
 		checkNameCasing,
 		checkNameLeadingCase,
 		checkNameWhitespace,
+		containerMaterialOf,
 		findRedundantSizes,
 		suggestTraitsFromSiblings
 	} from '$lib/utils/dataQuality';
@@ -473,7 +474,7 @@
 					gtin: s.gtin || '',
 					article_number: s.article_number || '',
 					discontinued: s.discontinued || false,
-					container_material: s.container_material,
+					container_material: containerMaterialOf(s),
 					purchase_links: (s.purchase_links || []).map((pl: PurchaseLink, plIndex: number) => ({
 						id: plIndex + 1,
 						value: { store_id: pl.store_id || '', url: pl.url || '' }

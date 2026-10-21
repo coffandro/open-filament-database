@@ -227,6 +227,26 @@ def test_rows_distinguished_by_a_gtin_are_kept(tmp_path):
     assert messages(check_data_quality(data), "adds nothing over size") == []
 
 
+def test_a_spool_is_not_redundant_to_its_refill(tmp_path):
+    # Same weight and diameter; only the container tells the refill apart, whether
+    # recorded as container_material or the deprecated spool_refill.
+    for refill in ({"container_material": "refill"}, {"spool_refill": True}):
+        data = build(
+            tmp_path / "data" / str(len(refill)),
+            variants=[
+                {
+                    "id": "black",
+                    "name": "Black",
+                    "sizes": [
+                        {"filament_weight": 1000, "diameter": 1.75, **refill},
+                        {"filament_weight": 1000, "diameter": 1.75},
+                    ],
+                }
+            ],
+        )
+        assert messages(check_data_quality(data), "adds nothing over size") == []
+
+
 def test_different_diameters_are_not_duplicates(tmp_path):
     data = build(
         tmp_path / "data",
@@ -523,3 +543,35 @@ def test_only_definitional_rules_are_enforced():
 
     enforced = [r.id for r in load_trait_rules() if VALIDATE in r.applies_to]
     assert enforced == ["carbon_fiber", "glass_fiber", "high_flow"]
+
+
+def _brand(data_dir, brand, parent=None):
+    obj = {"id": brand, "name": brand.title()}
+    if parent:
+        obj["parent_brand"] = parent
+    write(data_dir / brand / "brand.json", obj)
+
+
+def test_parent_brand_must_exist(tmp_path):
+    data = tmp_path / "data"
+    _brand(data, "polymaker")
+    _brand(data, "panchroma", "polymaker")
+    _brand(data, "fiberon", "polymakr")
+    found = messages(check_data_quality(data), "parent_brand")
+    assert [e.message for e in found] == [
+        "parent_brand 'polymakr' is not a brand folder under data/"
+    ]
+    assert found[0].level.value == "ERROR"
+
+
+def test_parent_brand_cannot_be_itself_or_a_cycle(tmp_path):
+    data = tmp_path / "data"
+    _brand(data, "solo", "solo")
+    _brand(data, "a", "b")
+    _brand(data, "b", "a")
+    found = messages(check_data_quality(data), "parent_brand")
+    assert sorted(e.message for e in found) == [
+        "parent_brand forms a cycle through 'a'",
+        "parent_brand forms a cycle through 'b'",
+        "parent_brand names the brand itself",
+    ]

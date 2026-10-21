@@ -16,6 +16,7 @@
     "filament_weight": 1000,
     "diameter": 1.75,
     "spool_refill": true,
+    "container_material": "refill",
     "gtin": "6975337030263",
     "article_number": "10800",
     "purchase_links": [

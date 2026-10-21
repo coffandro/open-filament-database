@@ -13,7 +13,18 @@ from ..serialization import entity_to_dict, serialize_for_csv
 # Preferred key ordering per entity type for stable CSV columns.
 # Keys not listed here are appended alphabetically after these.
 _KEY_ORDER = {
-    "brand": ["id", "uuid", "name", "slug", "website", "logo_name", "origin", "source"],
+    "brand": [
+        "id",
+        "uuid",
+        "name",
+        "slug",
+        "website",
+        "logo_name",
+        "origin",
+        "source",
+        "parent_brand",
+        "parent_brand_id",
+    ],
     "material": [
         "id",
         "uuid",
@@ -34,6 +45,8 @@ _KEY_ORDER = {
         "material",
         "density",
         "diameter_tolerance",
+        "min_print_speed",
+        "max_print_speed",
         "discontinued",
     ],
     "variant": [
@@ -59,6 +72,7 @@ _KEY_ORDER = {
         "diameter",
         "empty_spool_weight",
         "spool_core_diameter",
+        "container_material",
         "gtin",
         "article_number",
         "discontinued",

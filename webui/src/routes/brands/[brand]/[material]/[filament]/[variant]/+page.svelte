@@ -20,7 +20,7 @@
 	import { formDrafts } from '$lib/stores/formDrafts';
 	import { collectSiblingFibers, checkFiberConflict, fibersFromTraits } from '$lib/utils/fiberConflict';
 	import { trueTraitKeys } from '$lib/utils/traitSuggestions';
-	import { findSharedPurchaseLinks } from '$lib/utils/dataQuality';
+	import { findSharedPurchaseLinks, containerMaterialOf } from '$lib/utils/dataQuality';
 	import { colorHexList, colorSwatchStyle, formatColorHex } from '$lib/utils/colorHex';
 
 	let brandId: string = $derived($page.params.brand!);
@@ -410,7 +410,7 @@
 										{#if size.discontinued}
 											<span class="px-2 py-0.5 text-xs bg-destructive/10 text-destructive rounded">Discontinued</span>
 										{/if}
-										{#if size.container_material === 'refill'}
+										{#if containerMaterialOf(size) === 'refill'}
 											<span class="px-2 py-0.5 text-xs bg-primary/10 text-primary rounded">Refill</span>
 										{/if}
 									</div>

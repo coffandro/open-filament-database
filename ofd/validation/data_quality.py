@@ -168,6 +168,17 @@ def _redundant_size_fields(size: dict) -> dict:
     }
 
 
+def _container_material(size: dict) -> str | None:
+    """``container_material``, reading the deprecated ``spool_refill: true`` as ``refill``.
+
+    The webui's ``containerMaterialOf`` does the same.
+    """
+    material = size.get("container_material")
+    if material:
+        return material
+    return "refill" if size.get("spool_refill") is True else None
+
+
 def _is_subsumed(size: dict, earlier: dict) -> bool:
     """True when `size` says nothing `earlier` doesn't already say.
 
@@ -182,9 +193,9 @@ def _is_subsumed(size: dict, earlier: dict) -> bool:
     """
     if size_dedupe_key(size) != size_dedupe_key(earlier):
         return False
-    # A spool and its refill share weight and diameter; an unset container_material
-    # (the old ``spool_refill: false``) is what tells the spool apart from the refill.
-    if size.get("container_material") != earlier.get("container_material"):
+    # A spool and its refill share weight and diameter; the container material is what
+    # tells them apart.
+    if _container_material(size) != _container_material(earlier):
         return False
     earlier_fields = _redundant_size_fields(earlier)
     return all(
@@ -412,6 +423,57 @@ def _check_sibling_duplicates(ids: list[tuple[str, Path]], base: Path) -> list[V
     return errors
 
 
+# --- Rule: parent brand -------------------------------------------------------
+
+
+def _check_parent_brands(data_dir: Path, base: Path) -> list[ValidationError]:
+    """``parent_brand`` must name another existing brand, without forming a cycle.
+
+    The schema only checks the id pattern, so a typo such as ``polymakr`` would
+    otherwise pass and leave the build with nothing to resolve it to.
+    """
+    parents: dict[str, str] = {}
+    files: dict[str, Path] = {}
+    for brand_dir in sorted(p for p in data_dir.iterdir() if p.is_dir()):
+        files[brand_dir.name] = brand_dir / "brand.json"
+        brand_data = _load_json(files[brand_dir.name])
+        if isinstance(brand_data, dict) and isinstance(brand_data.get("parent_brand"), str):
+            parents[brand_dir.name] = brand_data["parent_brand"]
+
+    errors: list[ValidationError] = []
+    for brand, parent in parents.items():
+        path = _rel(files[brand], base)
+        if parent == brand:
+            errors.append(_err(ValidationLevel.Error, "parent_brand names the brand itself", path))
+            continue
+        if parent not in files:
+            errors.append(
+                _err(
+                    ValidationLevel.Error,
+                    f"parent_brand '{parent}' is not a brand folder under data/",
+                    path,
+                )
+            )
+            continue
+        # Walk up the chain; coming back to this brand means a cycle.
+        seen = {brand}
+        current = parent
+        while current in parents:
+            if current in seen:
+                if current == brand:
+                    errors.append(
+                        _err(
+                            ValidationLevel.Error,
+                            f"parent_brand forms a cycle through '{parent}'",
+                            path,
+                        )
+                    )
+                break
+            seen.add(current)
+            current = parents[current]
+    return errors
+
+
 # --- Entry point --------------------------------------------------------------
 
 
@@ -503,5 +565,7 @@ def check_data_quality(data_dir) -> list[ValidationError]:
 
             errors.extend(_check_sibling_casing(filament_names, base))
             errors.extend(_check_sibling_duplicates(filament_ids, base))
+
+    errors.extend(_check_parent_brands(data_dir, base))
 
     return errors
