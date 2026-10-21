@@ -3,5 +3,10 @@
   "id": "tpu90",
   "name": "TPU90",
   "diameter_tolerance": 0.02,
-  "density": 1.12
+  "density": 1.21,
+  "min_print_temperature": 210,
+  "max_print_temperature": 230,
+  "min_bed_temperature": 25,
+  "max_bed_temperature": 60,
+  "data_sheet_url": "https://cdn.shopify.com/s/files/1/0548/7299/7945/files/PolyFlex_TPU90_TDS_EN_V5.4.pdf"
 }
