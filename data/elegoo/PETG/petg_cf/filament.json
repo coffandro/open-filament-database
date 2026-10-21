@@ -4,6 +4,10 @@
     "name": "PETG-CF",
     "diameter_tolerance": 0.02,
     "density": 1.29,
+    "min_print_temperature": 240,
+    "max_print_temperature": 270,
+    "min_bed_temperature": 65,
+    "max_bed_temperature": 75,
     "slicer_settings": {
         "orcaslicer": {
             "generic_id": "GFG99",
