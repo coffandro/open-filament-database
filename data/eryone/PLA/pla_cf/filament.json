@@ -4,6 +4,11 @@
     "name": "PLA-CF",
     "diameter_tolerance": 0.03,
     "density": 1.24,
+    "min_print_temperature": 190,
+    "max_print_temperature": 220,
+    "min_bed_temperature": 60,
+    "max_bed_temperature": 70,
+    "data_sheet_url": "https://cdn.shopify.com/s/files/1/0252/0412/9841/files/ERYONE-PLA-CF-TDS.pdf?v=1747276572",
     "slicer_settings": {
         "orcaslicer": {
             "generic_id": "GFL99",
