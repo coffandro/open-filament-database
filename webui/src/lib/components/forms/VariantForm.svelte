@@ -379,7 +379,7 @@
 			gtin?: string;
 			article_number?: string;
 			discontinued?: boolean;
-			spool_refill?: boolean;
+			container_material?: 'plastic' | 'cardboard' | 'refill';
 			purchase_links: Array<{ id: number; value: { store_id: string; url: string } }>;
 		};
 	}
@@ -473,7 +473,7 @@
 					gtin: s.gtin || '',
 					article_number: s.article_number || '',
 					discontinued: s.discontinued || false,
-					spool_refill: s.spool_refill || false,
+					container_material: s.container_material,
 					purchase_links: (s.purchase_links || []).map((pl: PurchaseLink, plIndex: number) => ({
 						id: plIndex + 1,
 						value: { store_id: pl.store_id || '', url: pl.url || '' }
@@ -500,7 +500,6 @@
 						gtin: '',
 						article_number: '',
 						discontinued: false,
-						spool_refill: false,
 						purchase_links: []
 					}
 				}
@@ -523,7 +522,6 @@
 					gtin: '',
 					article_number: '',
 					discontinued: false,
-					spool_refill: false,
 					purchase_links: []
 				}
 			}
@@ -627,7 +625,7 @@
 			if (s.value.gtin) sizeValue.gtin = s.value.gtin;
 			if (s.value.article_number) sizeValue.article_number = s.value.article_number;
 			sizeValue.discontinued = s.value.discontinued ?? false;
-			sizeValue.spool_refill = s.value.spool_refill ?? false;
+			if (s.value.container_material) sizeValue.container_material = s.value.container_material;
 
 			const validLinks = s.value.purchase_links
 				.filter((pl) => pl.value.store_id && pl.value.url)

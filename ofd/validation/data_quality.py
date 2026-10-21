@@ -182,6 +182,10 @@ def _is_subsumed(size: dict, earlier: dict) -> bool:
     """
     if size_dedupe_key(size) != size_dedupe_key(earlier):
         return False
+    # A spool and its refill share weight and diameter; an unset container_material
+    # (the old ``spool_refill: false``) is what tells the spool apart from the refill.
+    if size.get("container_material") != earlier.get("container_material"):
+        return False
     earlier_fields = _redundant_size_fields(earlier)
     return all(
         key in earlier_fields and earlier_fields[key] == value

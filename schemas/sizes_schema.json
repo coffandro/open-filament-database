@@ -37,8 +37,18 @@
             },
             "spool_refill": {
                 "type": "boolean",
-                "description": "Indicates if this size is a refill for a reusable spool (applies to all purchase links)",
+                "description": "(deprecated) Indicates if this size is a refill for a reusable spool. Use container_material: refill instead.",
+                "deprecated": true,
                 "default": false
+            },
+            "container_material": {
+                "type": "string",
+                "description": "The material the filament container is made of, or refill for a spool-less refill",
+                "enum": [
+                    "plastic",
+                    "cardboard",
+                    "refill"
+                ]
             },
             "empty_spool_weight": {
                 "type": "number",
@@ -46,7 +56,11 @@
             },
             "spool_core_diameter": {
                 "type": "number",
-                "description": "The diameter of the core of the spool"
+                "description": "The diameter of the core of the spool (in mm)"
+            },
+            "spool_core_outer_diameter": {
+                "type": "number",
+                "description": "The outer diameter of the core of the spool (in mm)"
             },
             "container_width": {
                 "type": "integer",
@@ -105,7 +119,7 @@
                         },
                         "spool_refill": {
                             "type": "boolean",
-                            "description": "(deprecated) Previously indicated a refill per purchase link. Use parent size.spool_refill now.",
+                            "description": "(deprecated) Previously indicated a refill per purchase link. Use parent size.container_material: refill now.",
                             "default": false
                         },
                         "ships_from": {

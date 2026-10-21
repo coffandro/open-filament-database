@@ -410,7 +410,7 @@
 										{#if size.discontinued}
 											<span class="px-2 py-0.5 text-xs bg-destructive/10 text-destructive rounded">Discontinued</span>
 										{/if}
-										{#if size.spool_refill}
+										{#if size.container_material === 'refill'}
 											<span class="px-2 py-0.5 text-xs bg-primary/10 text-primary rounded">Refill</span>
 										{/if}
 									</div>

@@ -205,8 +205,18 @@
                                             },
                                             "spool_refill": {
                                                 "type": "boolean",
-                                                "description": "Indicates if this is a refill for a reusable spool",
+                                                "description": "(deprecated) Indicates if this is a refill for a reusable spool. Use container_material: refill instead.",
+                                                "deprecated": true,
                                                 "default": false
+                                            },
+                                            "container_material": {
+                                                "type": "string",
+                                                "description": "The material the filament container is made of, or refill for a spool-less refill",
+                                                "enum": [
+                                                    "plastic",
+                                                    "cardboard",
+                                                    "refill"
+                                                ]
                                             },
                                             "sku": {
                                                 "type": "string",

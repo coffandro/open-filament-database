@@ -366,7 +366,7 @@ describe('cloudProxy', () => {
 			expect(links[1].store_id).toBe('uuid-unknown');
 		});
 
-		it('migrates legacy purchase_links[].spool_refill=true to size-level spool_refill', async () => {
+		it('migrates legacy purchase_links[].spool_refill=true to size-level container_material=refill', async () => {
 			fetchMock.mockImplementationOnce(() =>
 				Promise.resolve(
 					jsonResponse({
@@ -391,11 +391,12 @@ describe('cloudProxy', () => {
 			);
 			const response = await proxyGetToCloud(variantPath);
 			const data = await response.json();
-			expect(data.sizes[0].spool_refill).toBe(true);
+			expect(data.sizes[0].container_material).toBe('refill');
+			expect(data.sizes[0].spool_refill).toBeUndefined();
 			expect(data.sizes[0].purchase_links[0].spool_refill).toBeUndefined();
 		});
 
-		it('defaults spool_refill to false when no legacy field is present and size lacks it', async () => {
+		it('leaves container_material unset when no legacy refill field is present', async () => {
 			fetchMock.mockImplementationOnce(() =>
 				Promise.resolve(
 					jsonResponse({
@@ -413,7 +414,7 @@ describe('cloudProxy', () => {
 			);
 			const response = await proxyGetToCloud(variantPath);
 			const data = await response.json();
-			expect(data.sizes[0].spool_refill).toBe(false);
+			expect(data.sizes[0].container_material).toBeUndefined();
 		});
 
 		it('defaults discontinued to false when not provided', async () => {

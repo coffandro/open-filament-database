@@ -206,7 +206,7 @@ def generate_size_id(variant_id: str, size_entry: dict, index: int = 0) -> str:
         id_parts.append(f"ean:{ean}")
 
     # Add spool_refill flag if it's a refill (distinguishes from regular spools)
-    if size_entry.get("spool_refill"):
+    if size_entry.get("spool_refill") or size_entry.get("container_material") == "refill":
         id_parts.append("refill")
 
     # Add article_number if available (manufacturer SKU)

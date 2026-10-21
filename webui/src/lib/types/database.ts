@@ -92,7 +92,7 @@ export interface VariantSize {
 	gtin?: string;
 	article_number?: string;
 	discontinued?: boolean;
-	spool_refill?: boolean;
+	container_material?: 'plastic' | 'cardboard' | 'refill';
 	purchase_links?: PurchaseLink[];
 }
 

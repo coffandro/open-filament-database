@@ -379,8 +379,8 @@ describe('saveUtils', () => {
 		it('never hands the same uuid to two spools sharing an identity', () => {
 			const result = preserveCanonicalFields<Record<string, unknown>[]>(
 				[
-					{ filament_weight: 1000, diameter: 1.75, spool_refill: false },
-					{ filament_weight: 1000, diameter: 1.75, spool_refill: true }
+					{ filament_weight: 1000, diameter: 1.75, container_material: 'plastic' },
+					{ filament_weight: 1000, diameter: 1.75, container_material: 'refill' }
 				],
 				[{ uuid: 'uuid-1000', filament_weight: 1000, diameter: 1.75 }]
 			);

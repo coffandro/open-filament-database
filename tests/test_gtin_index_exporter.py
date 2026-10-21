@@ -62,7 +62,7 @@ def test_a_shared_code_returns_every_size():
     # 88 of the 2,595 codes in the real tree cover more than one size (up to five),
     # typically a spool and its refill; a single-object value would drop all but one.
     index = build_gtin_index(
-        make_db([{"gtin": "6938936710103"}, {"gtin": "6938936710103", "spool_refill": True}])
+        make_db([{"gtin": "6938936710103"}, {"gtin": "6938936710103", "container_material": "refill"}])
     )
     assert len(index["06938936710103"]) == 2
 

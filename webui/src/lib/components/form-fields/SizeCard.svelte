@@ -27,7 +27,7 @@
 		gtin?: string;
 		article_number?: string;
 		discontinued?: boolean;
-		spool_refill?: boolean;
+		container_material?: 'plastic' | 'cardboard' | 'refill';
 		purchase_links: PurchaseLinkWithId[];
 	}
 
@@ -151,10 +151,26 @@
 		</div>
 	</FormFieldRow>
 
-	<!-- Checkboxes: Discontinued and Spool Refill -->
+	<!-- Container material (optional) -->
+	<FormFieldRow gap="sm">
+		<div>
+			<label for="size-{id}-container-material" class={LABEL_COMPACT_CLASSES}>Container Material</label>
+			<select
+				id="size-{id}-container-material"
+				bind:value={value.container_material}
+				class={INPUT_COMPACT_CLASSES}
+			>
+				<option value={undefined}>Not specified</option>
+				<option value="plastic">Plastic</option>
+				<option value="cardboard">Cardboard</option>
+				<option value="refill">Refill (no spool)</option>
+			</select>
+		</div>
+	</FormFieldRow>
+
+	<!-- Checkbox: Discontinued -->
 	<div class="flex gap-4 mb-3 mt-2">
 		<CheckboxField bind:checked={value.discontinued as boolean} id="size-{id}-discontinued" label="Discontinued" />
-		<CheckboxField bind:checked={value.spool_refill as boolean} id="size-{id}-spool-refill" label="Spool Refill" />
 	</div>
 
 	<!-- Purchase Links Section -->

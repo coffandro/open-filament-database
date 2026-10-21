@@ -158,7 +158,8 @@ A JSON **array** of one or more size objects. At minimum:
 **Optional per entry:**
 - Spool geometry: `empty_spool_weight`, `spool_core_diameter`, `container_width`, `container_outer_diameter`, `container_hole_diameter`
 - Identifiers: `gtin` (GTIN-12 or GTIN-13 — preferred), `ean` (deprecated alias for `gtin`), `article_number`, `barcode_identifier`, `nfc_identifier`, `qr_identifier`
-- `spool_refill` — boolean; mark the size as a refill for a reusable spool
+- `spool_refill` — (deprecated) boolean; use `container_material: refill` instead
+- `container_material` — one of `plastic`, `cardboard`, `refill`; what the container is made of
 - `discontinued` — boolean
 - `purchase_links` — array of purchase entries:
   - `store_id` — required; must match a folder under `/stores`

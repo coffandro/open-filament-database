@@ -383,11 +383,20 @@ class DataCrawler:
         self.db.sizes.append(size)
 
         # Process purchase links
+        is_refill = bool(
+            size_entry.get("spool_refill") or size_entry.get("container_material") == "refill"
+        )
         for pl_idx, pl_entry in enumerate(purchase_links_data):
-            self._create_purchase_link(pl_entry, size_id, index, pl_idx, sizes_json)
+            self._create_purchase_link(pl_entry, size_id, index, pl_idx, sizes_json, is_refill)
 
     def _create_purchase_link(
-        self, pl_entry: dict, size_id: str, size_index: int, link_index: int, sizes_json: Path
+        self,
+        pl_entry: dict,
+        size_id: str,
+        size_index: int,
+        link_index: int,
+        sizes_json: Path,
+        is_refill: bool = False,
     ):
         """Create a purchase link entity."""
         original_store_id = pl_entry.get("store_id")
@@ -420,7 +429,7 @@ class DataCrawler:
             "size_id": size_id,
             "store_id": store_uuid,
             "url": url,
-            "spool_refill": pl_entry.get("spool_refill", False),
+            "spool_refill": is_refill or pl_entry.get("spool_refill", False),
         }
         # Normalize ships_from/ships_to if present
         if purchase_link.get("ships_from"):
