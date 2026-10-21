@@ -5,7 +5,8 @@
   "diameter_tolerance": 0.02,
   "density": 1.24,
   "min_print_temperature": 190,
-  "max_print_temperature": 230,
-  "min_bed_temperature": 50,
-  "max_bed_temperature": 70
+  "max_print_temperature": 220,
+  "min_bed_temperature": 23,
+  "max_bed_temperature": 60,
+  "data_sheet_url": "https://cdn.shopify.com/s/files/1/0625/4185/6821/files/UN_PLA_ECONOMY_TDS_v1.0.pdf?v=1736526205"
 }
