@@ -3,5 +3,8 @@
   "id": "pcl",
   "name": "PCL",
   "diameter_tolerance": 0.02,
-  "density": 1.2
+  "density": 1.13,
+  "min_print_temperature": 75,
+  "max_print_temperature": 85,
+  "data_sheet_url": "https://media.sunlu.com/prod/20260414/9c709eea-12c7-4a05-b5cd-227c63c700b8.pdf?filename=TDS"
 }
