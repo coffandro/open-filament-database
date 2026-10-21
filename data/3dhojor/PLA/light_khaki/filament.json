@@ -1,5 +1,8 @@
 {
   "uuid": "9714cef0-abe6-4149-94ed-55b74976e279",
+  "moved_from": [
+    "f48bf4ea-59e1-4faf-8d05-35984ea6ea59"
+  ],
   "id": "light_khaki",
   "name": "PLA Matte",
   "diameter_tolerance": 0.02,

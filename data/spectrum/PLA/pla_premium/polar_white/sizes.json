@@ -50,5 +50,12 @@
         "url": "https://shop.spectrumfilaments.com/product-eng-1454-Filament-Spectrum-PLA-Premium-1-75mm-POLAR-WHITE-8kg.html"
       }
     ]
+  },
+  {
+    "uuid": "d5506e6c-5307-4606-b8a4-bc34541c27fc",
+    "filament_weight": 1000,
+    "diameter": 1.75,
+    "spool_refill": true,
+    "gtin": "5905991404538"
   }
 ]

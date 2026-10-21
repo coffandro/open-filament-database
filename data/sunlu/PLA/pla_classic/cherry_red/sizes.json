@@ -12,7 +12,14 @@
   {
     "uuid": "a626f789-f1d9-4082-a7b0-57a7b2e23d56",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "6933582314156",
+    "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/pla-classic-cherry-red"
+      }
+    ]
   },
   {
     "uuid": "dfe10127-a83e-4025-9da5-c2cb34f89a57",

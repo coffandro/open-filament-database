@@ -12,7 +12,14 @@
   {
     "uuid": "df3765bc-8b5b-45c4-9490-b09676b4acb0",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "6933582317850",
+    "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/pvb-transparent-red"
+      }
+    ]
   },
   {
     "uuid": "b9f2d109-1fc9-43b2-84d6-9496a6ca46ea",

@@ -3,6 +3,7 @@
     "uuid": "c1422251-b272-458c-9d48-6e41cd59c1d3",
     "filament_weight": 1000,
     "diameter": 1.75,
+    "spool_refill": true,
     "ean": "5905991404309",
     "article_number": "81363",
     "purchase_links": [

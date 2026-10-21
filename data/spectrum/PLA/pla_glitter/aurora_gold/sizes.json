@@ -24,5 +24,11 @@
         "url": "https://shop.spectrumfilaments.com/product-eng-671-Filament-Spectrum-PLA-Glitter-1-75mm-AURORA-GOLD-0-50kg.html"
       }
     ]
+  },
+  {
+    "uuid": "7a3e2aa8-7268-4117-86d3-b8c463653369",
+    "filament_weight": 1000,
+    "diameter": 2.85,
+    "gtin": "5903175657978"
   }
 ]

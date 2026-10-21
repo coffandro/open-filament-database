@@ -1,9 +1,0 @@
-{
-  "uuid": "a1605fa7-8212-4a02-b9d6-e9dedcea6e2a",
-  "id": "machinery_orange",
-  "name": "Machinery Orange",
-  "color_hex": "#FF5F2E",
-  "traits": {
-    "industrially_compostable": true
-  }
-}

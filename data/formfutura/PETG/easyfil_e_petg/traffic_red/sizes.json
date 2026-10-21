@@ -5,6 +5,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 165,
+    "gtin": "8720847053138",
     "article_number": "PTGE-175TRRD-01000",
     "discontinued": false,
     "purchase_links": [
@@ -20,6 +21,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 625,
+    "gtin": "8720847053473",
     "article_number": "PTGE-175TRRD-02300",
     "discontinued": false,
     "purchase_links": [
@@ -35,6 +37,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 785,
+    "gtin": "8720847053817",
     "article_number": "PTGE-175TRRD-04500",
     "discontinued": false,
     "purchase_links": [
@@ -50,6 +53,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 1040,
+    "gtin": "8720847054159",
     "article_number": "PTGE-175TRRD-08000",
     "discontinued": false,
     "purchase_links": [

@@ -5,6 +5,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 165,
+    "gtin": "8719956550720",
     "article_number": "GPLA-175TSLV-00750",
     "discontinued": false,
     "purchase_links": [
@@ -20,6 +21,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 625,
+    "gtin": "8719956551543",
     "article_number": "GPLA-175TSLV-02300",
     "discontinued": false,
     "purchase_links": [
@@ -28,5 +30,12 @@
         "url": "https://www.formfutura.com/galaxy-pla"
       }
     ]
+  },
+  {
+    "uuid": "3278183e-a1ee-4bc2-9221-40f77388ddf9",
+    "filament_weight": 250,
+    "diameter": 2.85,
+    "gtin": "8720574298451",
+    "article_number": "GPLA-285TSLV-00250"
   }
 ]

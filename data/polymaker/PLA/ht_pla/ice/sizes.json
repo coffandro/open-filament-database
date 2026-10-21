@@ -3,6 +3,7 @@
     "uuid": "5860da62-86d0-45f8-b3b0-feeafa7df26b",
     "filament_weight": 1000,
     "diameter": 1.75,
+    "gtin": "6938936716365",
     "purchase_links": [
       {
         "store_id": "polymaker",

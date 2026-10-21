@@ -5,6 +5,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 165,
+    "gtin": "8720847050953",
     "article_number": "PLAE-175IGRY-01000",
     "discontinued": false,
     "purchase_links": [
@@ -20,6 +21,7 @@
     "diameter": 1.75,
     "spool_refill": true,
     "empty_spool_weight": 20,
+    "gtin": "8720629068374",
     "article_number": "PLAE-175IGRY-B1000",
     "discontinued": false,
     "purchase_links": [
@@ -35,6 +37,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 625,
+    "gtin": "8720847051493",
     "article_number": "PLAE-175IGRY-02300",
     "discontinued": false,
     "purchase_links": [
@@ -50,6 +53,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 785,
+    "gtin": "8720847052032",
     "article_number": "PLAE-175IGRY-04500",
     "discontinued": false,
     "purchase_links": [
@@ -65,6 +69,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 1040,
+    "gtin": "8720847052575",
     "article_number": "PLAE-175IGRY-08000",
     "discontinued": false,
     "purchase_links": [
@@ -80,6 +85,7 @@
     "diameter": 2.85,
     "spool_refill": false,
     "empty_spool_weight": 165,
+    "gtin": "8720847055354",
     "article_number": "PLAE-285IGRY-01000",
     "discontinued": false,
     "purchase_links": [
@@ -95,6 +101,7 @@
     "diameter": 2.85,
     "spool_refill": false,
     "empty_spool_weight": 625,
+    "gtin": "8720847055897",
     "article_number": "PLAE-285IGRY-02300",
     "discontinued": false,
     "purchase_links": [
@@ -110,6 +117,7 @@
     "diameter": 2.85,
     "spool_refill": false,
     "empty_spool_weight": 785,
+    "gtin": "8720847056436",
     "article_number": "PLAE-285IGRY-04500",
     "discontinued": false,
     "purchase_links": [
@@ -125,6 +133,7 @@
     "diameter": 2.85,
     "spool_refill": false,
     "empty_spool_weight": 1040,
+    "gtin": "8720847056979",
     "article_number": "PLAE-285IGRY-08000",
     "discontinued": false,
     "purchase_links": [
@@ -133,5 +142,19 @@
         "url": "https://www.formfutura.com/easyfil-epla"
       }
     ]
+  },
+  {
+    "uuid": "a47a8fc1-a1f6-4549-b399-586121159d8e",
+    "filament_weight": 250,
+    "diameter": 1.75,
+    "gtin": "8720847050410",
+    "article_number": "PLAE-175IGRY-00250"
+  },
+  {
+    "uuid": "6f609c6b-4399-495e-b328-482f2c17d884",
+    "filament_weight": 250,
+    "diameter": 2.85,
+    "gtin": "8720847054814",
+    "article_number": "PLAE-285IGRY-00250"
   }
 ]

@@ -5,6 +5,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 165,
+    "gtin": "8718924472323",
     "article_number": "HDGL-175PGNS-00750",
     "discontinued": false,
     "purchase_links": [
@@ -20,6 +21,7 @@
     "diameter": 2.85,
     "spool_refill": false,
     "empty_spool_weight": 165,
+    "gtin": "8718924472330",
     "article_number": "HDGL-285PGNS-00750",
     "discontinued": false,
     "purchase_links": [
@@ -28,5 +30,12 @@
         "url": "https://www.formfutura.com/hdglass"
       }
     ]
+  },
+  {
+    "uuid": "328a2893-618f-42b3-b9f0-07006067dc28",
+    "filament_weight": 250,
+    "diameter": 1.75,
+    "gtin": "8720574295429",
+    "article_number": "HDGL-175PGNS-00250"
   }
 ]

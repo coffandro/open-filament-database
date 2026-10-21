@@ -12,7 +12,14 @@
   {
     "uuid": "a3619ec0-55fe-480c-8535-cb6053f7a0e2",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "6933582314101",
+    "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/pla-classic-lemon-yellow"
+      }
+    ]
   },
   {
     "uuid": "634022bc-b7d5-4d19-95e2-d354a1900f50",

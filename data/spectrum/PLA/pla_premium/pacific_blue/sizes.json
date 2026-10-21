@@ -11,5 +11,12 @@
         "url": "https://shop.spectrumfilaments.com/product-eng-516-Filament-Spectrum-PLA-Premium-1-75mm-PACIFIC-BLUE-1kg.html"
       }
     ]
+  },
+  {
+    "uuid": "988267cb-7c20-4101-9a56-473717d74029",
+    "filament_weight": 1000,
+    "diameter": 1.75,
+    "spool_refill": true,
+    "gtin": "5905991404514"
   }
 ]

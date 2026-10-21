@@ -5,6 +5,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 165,
+    "gtin": "8718924470503",
     "article_number": "RTIT-175WHTE-01000",
     "discontinued": false,
     "purchase_links": [
@@ -20,6 +21,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 625,
+    "gtin": "8720574290950",
     "article_number": "RTIT-175WHTE-02300",
     "discontinued": false,
     "purchase_links": [
@@ -35,6 +37,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 705,
+    "gtin": "8720574297416",
     "article_number": "RTIT-175WHTE-03500",
     "discontinued": false,
     "purchase_links": [
@@ -50,6 +53,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 785,
+    "gtin": "8720574290967",
     "article_number": "RTIT-175WHTE-04500",
     "discontinued": false,
     "purchase_links": [
@@ -65,6 +69,7 @@
     "diameter": 2.85,
     "spool_refill": false,
     "empty_spool_weight": 165,
+    "gtin": "8718924470510",
     "article_number": "RTIT-285WHTE-01000",
     "discontinued": false,
     "purchase_links": [
@@ -80,6 +85,7 @@
     "diameter": 2.85,
     "spool_refill": false,
     "empty_spool_weight": 705,
+    "gtin": "8720574297591",
     "article_number": "RTIT-285WHTE-03500",
     "discontinued": false,
     "purchase_links": [
@@ -95,6 +101,7 @@
     "diameter": 2.85,
     "spool_refill": false,
     "empty_spool_weight": 785,
+    "gtin": "8720574290998",
     "article_number": "RTIT-285WHTE-04500",
     "discontinued": false,
     "purchase_links": [
@@ -103,5 +110,12 @@
         "url": "https://www.formfutura.com/reform-rtitan"
       }
     ]
+  },
+  {
+    "uuid": "b455853c-4d61-401e-bd0a-9eaafca5082e",
+    "filament_weight": 250,
+    "diameter": 2.85,
+    "gtin": "8720574293913",
+    "article_number": "RTIT-285WHTE-00250"
   }
 ]

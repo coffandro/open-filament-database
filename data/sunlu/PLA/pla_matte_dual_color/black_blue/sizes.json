@@ -13,7 +13,12 @@
     "uuid": "40ed3edb-d0bc-4437-9c41-388df58d0121",
     "filament_weight": 1000,
     "diameter": 1.75,
+    "gtin": "6933582320485",
     "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/pla-matte-dual-color-black-blue"
+      },
       {
         "store_id": "sunlu",
         "url": "https://store.sunlu.com/products/sunlu-matte-pla-dual-color-3d-printer-esthenic-filament-1kg"

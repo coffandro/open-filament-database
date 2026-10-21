@@ -3,22 +3,12 @@
     "uuid": "64bf4482-2f0c-4cec-a08b-e9690ccbd439",
     "filament_weight": 1000,
     "diameter": 1.75,
-    "purchase_links": [
-      {
-        "store_id": "polymaker",
-        "url": "https://us.polymaker.com/products/polymaker-pc-pbt"
-      }
-    ]
+    "gtin": "6938936710912"
   },
   {
     "uuid": "d13aa110-bb85-496d-96e6-0a36fb835da6",
     "filament_weight": 1000,
     "diameter": 2.85,
-    "purchase_links": [
-      {
-        "store_id": "polymaker",
-        "url": "https://us.polymaker.com/products/polymaker-pc-pbt"
-      }
-    ]
+    "gtin": "6938936702610"
   }
 ]

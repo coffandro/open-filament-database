@@ -4,11 +4,17 @@
     "filament_weight": 750,
     "diameter": 1.75,
     "empty_spool_weight": 207,
-    "spool_core_diameter": 53,
+    "spool_core_diameter": 53
+  },
+  {
+    "uuid": "1c3ec9d9-7950-425f-8d61-63bf497e5eec",
+    "filament_weight": 1000,
+    "diameter": 1.75,
+    "gtin": "7340182904257",
     "purchase_links": [
       {
         "store_id": "add_north",
-        "url": "https://addnorth.com/product/Textura%E2%84%A2%20Flare/Textura%E2%84%A2%20Flare%20-%201.75mm%20-%20750g%20-%20Twilight%20Blue"
+        "url": "https://addnorth.com/product/Textura%E2%84%A2%20Flare/Textura%E2%84%A2%20Flare%20-%201.75mm%20-%201000g%20-%20Twilight%20Blue"
       }
     ]
   }

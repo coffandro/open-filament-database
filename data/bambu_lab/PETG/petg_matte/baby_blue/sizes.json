@@ -1,0 +1,17 @@
+[
+  {
+    "uuid": "b43ab0ae-2375-4ba9-944c-191582f2f60d",
+    "filament_weight": 1000,
+    "diameter": 1.75,
+    "spool_refill": false,
+    "empty_spool_weight": 250,
+    "spool_core_diameter": 100,
+    "discontinued": false,
+    "purchase_links": [
+      {
+        "store_id": "bblstore",
+        "url": "https://store.bambulab.com/products/petg-matte"
+      }
+    ]
+  }
+]

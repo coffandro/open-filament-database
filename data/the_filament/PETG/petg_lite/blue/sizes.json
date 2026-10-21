@@ -3,6 +3,7 @@
     "uuid": "1f91047a-49ca-40c8-822d-e3be32347e0b",
     "filament_weight": 1000,
     "diameter": 1.75,
+    "spool_refill": true,
     "ean": "5907138404364",
     "article_number": "TF-24248",
     "purchase_links": [
@@ -14,6 +15,9 @@
   },
   {
     "uuid": "76b1d1fc-6f92-4b05-b0b8-b1e00aad09c8",
+    "moved_from": [
+      "563256e7-ae23-427f-b43c-12f60bf2bdb7"
+    ],
     "filament_weight": 1000,
     "diameter": 1.75,
     "ean": "5907138404289",

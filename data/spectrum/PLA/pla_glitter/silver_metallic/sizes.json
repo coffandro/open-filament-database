@@ -24,5 +24,11 @@
         "url": "https://shop.spectrumfilaments.com/product-eng-711-Filament-Spectrum-PLA-Glitter-1-75mm-SILVER-METALLIC-0-5kg.html"
       }
     ]
+  },
+  {
+    "uuid": "fa818dad-eb0f-408a-8302-6486d28bbd48",
+    "filament_weight": 1000,
+    "diameter": 2.85,
+    "gtin": "5903175658814"
   }
 ]

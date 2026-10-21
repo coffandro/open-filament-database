@@ -1,5 +1,8 @@
 {
   "uuid": "b25456bf-bc1f-461f-85d4-441b1b4db5f2",
+  "moved_from": [
+    "a60349a4-a8bf-48c4-949d-18ee3068179b"
+  ],
   "id": "silk",
   "name": "Silk",
   "diameter_tolerance": 0.02,

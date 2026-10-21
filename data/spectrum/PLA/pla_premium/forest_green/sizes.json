@@ -11,5 +11,12 @@
         "url": "https://shop.spectrumfilaments.com/product-eng-504-Filament-Spectrum-PLA-Premium-1-75mm-FOREST-GREEN-1kg.html"
       }
     ]
+  },
+  {
+    "uuid": "eade71e8-c8f2-4de1-b5ae-8469b8fe8936",
+    "filament_weight": 1000,
+    "diameter": 1.75,
+    "spool_refill": true,
+    "gtin": "5905991404453"
   }
 ]

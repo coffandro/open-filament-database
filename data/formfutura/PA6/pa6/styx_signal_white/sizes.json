@@ -5,6 +5,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 140,
+    "gtin": "8720574294187",
     "article_number": "SX06-175SIWH-00500",
     "discontinued": false,
     "purchase_links": [
@@ -20,6 +21,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 625,
+    "gtin": "8720574294194",
     "article_number": "SX06-175SIWH-02300",
     "discontinued": false,
     "purchase_links": [
@@ -35,6 +37,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 785,
+    "gtin": "8720574294200",
     "article_number": "SX06-175SIWH-04500",
     "discontinued": false,
     "purchase_links": [

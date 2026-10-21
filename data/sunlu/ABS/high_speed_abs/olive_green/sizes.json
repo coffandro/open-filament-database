@@ -12,7 +12,14 @@
   {
     "uuid": "6be53f11-f12c-46f7-b750-65a41c2fd49e",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "6933582316976",
+    "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/high-speed-abs-olive-green"
+      }
+    ]
   },
   {
     "uuid": "595e3947-43ce-48a2-ade3-b3406d9c82b0",

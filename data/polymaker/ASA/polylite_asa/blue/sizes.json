@@ -11,5 +11,17 @@
         "url": "https://us.polymaker.com/products/asa?variant=39574343123001"
       }
     ]
+  },
+  {
+    "uuid": "0e32c53d-6238-4af7-923f-057cd5e0692e",
+    "filament_weight": 3000,
+    "diameter": 1.75,
+    "gtin": "6938936707264"
+  },
+  {
+    "uuid": "757a2338-2fd3-4e5a-ad0f-cf0ee7a96641",
+    "filament_weight": 1000,
+    "diameter": 2.85,
+    "gtin": "6938936711391"
   }
 ]

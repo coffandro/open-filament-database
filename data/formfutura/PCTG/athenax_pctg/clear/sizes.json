@@ -5,6 +5,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 165,
+    "gtin": "8720629067704",
     "article_number": "ATAX-175CLEA-01000",
     "discontinued": false,
     "purchase_links": [
@@ -20,6 +21,7 @@
     "diameter": 1.75,
     "spool_refill": true,
     "empty_spool_weight": 20,
+    "gtin": "8720629067728",
     "article_number": "ATAX-175CLEA-C1000",
     "discontinued": false,
     "purchase_links": [
@@ -35,6 +37,7 @@
     "diameter": 1.75,
     "spool_refill": true,
     "empty_spool_weight": 40,
+    "gtin": "8720629067735",
     "article_number": "ATAX-175CLEA-C2000",
     "discontinued": false,
     "purchase_links": [
@@ -50,6 +53,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 625,
+    "gtin": "8720629067711",
     "article_number": "ATAX-175CLEA-02300",
     "discontinued": false,
     "purchase_links": [
@@ -65,6 +69,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 1040,
+    "gtin": "8720629068480",
     "article_number": "ATAX-175CLEA-08000",
     "discontinued": false,
     "purchase_links": [

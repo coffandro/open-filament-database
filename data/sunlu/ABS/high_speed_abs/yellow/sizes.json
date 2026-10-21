@@ -12,7 +12,14 @@
   {
     "uuid": "60e952a0-ae02-4560-b5ac-91858fe0afe7",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "6933582316938",
+    "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/high-speed-abs-yellow"
+      }
+    ]
   },
   {
     "uuid": "1a0675da-c4db-4c74-be09-48e2057e8b47",

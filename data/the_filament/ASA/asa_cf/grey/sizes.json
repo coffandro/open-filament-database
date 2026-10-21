@@ -3,6 +3,7 @@
     "uuid": "2e04ed49-5778-45ee-adba-9d790e051818",
     "filament_weight": 1000,
     "diameter": 1.75,
+    "spool_refill": true,
     "ean": "5907138402933",
     "article_number": "TF-24177",
     "purchase_links": [

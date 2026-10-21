@@ -3,6 +3,7 @@
     "uuid": "6f838be3-c97e-4824-b38e-0e64af3bf0d5",
     "filament_weight": 1000,
     "diameter": 1.75,
+    "spool_refill": true,
     "ean": "5905991403807",
     "article_number": "81313",
     "purchase_links": [
@@ -29,8 +30,6 @@
     "uuid": "781b54d8-62e3-4c0b-aab9-a76cea423859",
     "filament_weight": 250,
     "diameter": 1.75,
-    "ean": "5903175655462",
-    "article_number": "80750",
     "purchase_links": [
       {
         "store_id": "spectrum",

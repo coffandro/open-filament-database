@@ -5,6 +5,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 165,
+    "gtin": "8720629067629",
     "article_number": "KTPC-175CLEA-00750",
     "discontinued": false,
     "purchase_links": [
@@ -20,6 +21,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 625,
+    "gtin": "8720629067636",
     "article_number": "KTPC-175CLEA-02300",
     "discontinued": false,
     "purchase_links": [

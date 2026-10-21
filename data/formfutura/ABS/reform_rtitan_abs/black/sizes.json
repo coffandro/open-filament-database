@@ -5,6 +5,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 165,
+    "gtin": "8718924478622",
     "article_number": "RTIT-175BLCK-01000",
     "discontinued": false,
     "purchase_links": [
@@ -20,6 +21,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 625,
+    "gtin": "8720574290899",
     "article_number": "RTIT-175BLCK-02300",
     "discontinued": false,
     "purchase_links": [
@@ -35,6 +37,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 705,
+    "gtin": "8720574297409",
     "article_number": "RTIT-175BLCK-03500",
     "discontinued": false,
     "purchase_links": [
@@ -50,6 +53,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 785,
+    "gtin": "8720574290905",
     "article_number": "RTIT-175BLCK-04500",
     "discontinued": false,
     "purchase_links": [
@@ -65,6 +69,7 @@
     "diameter": 2.85,
     "spool_refill": false,
     "empty_spool_weight": 785,
+    "gtin": "8720574290936",
     "article_number": "RTIT-285BLCK-04500",
     "discontinued": false,
     "purchase_links": [

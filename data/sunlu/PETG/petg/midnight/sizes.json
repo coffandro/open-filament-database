@@ -13,7 +13,12 @@
     "uuid": "94bd77e6-2a5e-47c6-bfbf-c4b1e2e2cdd0",
     "filament_weight": 1000,
     "diameter": 1.75,
+    "gtin": "6933582320003",
     "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/petg-midnight"
+      },
       {
         "store_id": "sunlu",
         "url": "https://store.sunlu.com/products/over-6kg-bundle-sale-petg-3d-printer-filament-1-75mm-1kg-roll"

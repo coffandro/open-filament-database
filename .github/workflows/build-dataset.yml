@@ -27,7 +27,7 @@ jobs:
           fi
 
           # Check for commits in the last 24 hours affecting relevant paths
-          CHANGES=$(git log --since="24 hours ago" --oneline -- data/ stores/ builder/ schemas/ | wc -l)
+          CHANGES=$(git log --since="24 hours ago" --oneline -- data/ stores/ ofd/ schemas/ | wc -l)
           if [ "$CHANGES" -gt 0 ]; then
             echo "has_changes=true" >> $GITHUB_OUTPUT
             echo "Found $CHANGES commits in last 24 hours"

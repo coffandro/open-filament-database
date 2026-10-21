@@ -5,6 +5,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 165,
+    "gtin": "8718924472750",
     "article_number": "HDGL-175STBU-00750",
     "discontinued": false,
     "purchase_links": [
@@ -20,6 +21,7 @@
     "diameter": 2.85,
     "spool_refill": false,
     "empty_spool_weight": 165,
+    "gtin": "8718924472767",
     "article_number": "HDGL-285STBU-00750",
     "discontinued": false,
     "purchase_links": [

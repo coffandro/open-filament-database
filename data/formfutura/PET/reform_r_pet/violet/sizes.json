@@ -5,6 +5,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 165,
+    "gtin": "8718924479728",
     "article_number": "RPET-175VIOL-01000",
     "discontinued": false,
     "purchase_links": [
@@ -20,6 +21,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 625,
+    "gtin": "8719956550980",
     "article_number": "RPET-175VIOL-02300",
     "discontinued": false,
     "purchase_links": [
@@ -65,6 +67,7 @@
     "diameter": 2.85,
     "spool_refill": false,
     "empty_spool_weight": 165,
+    "gtin": "8720629060385",
     "article_number": "RPET-285VIOL-00750",
     "discontinued": false,
     "purchase_links": [
@@ -80,6 +83,7 @@
     "diameter": 2.85,
     "spool_refill": false,
     "empty_spool_weight": 165,
+    "gtin": "8718924479988",
     "article_number": "RPET-285VIOL-01000",
     "discontinued": false,
     "purchase_links": [
@@ -95,6 +99,7 @@
     "diameter": 2.85,
     "spool_refill": false,
     "empty_spool_weight": 625,
+    "gtin": "8719956550997",
     "article_number": "RPET-285VIOL-02300",
     "discontinued": false,
     "purchase_links": [
@@ -110,6 +115,7 @@
     "diameter": 2.85,
     "spool_refill": false,
     "empty_spool_weight": 705,
+    "gtin": "8719956553073",
     "article_number": "RPET-285VIOL-03500",
     "discontinued": false,
     "purchase_links": [
@@ -118,5 +124,12 @@
         "url": "https://www.formfutura.com/reform-rpet"
       }
     ]
+  },
+  {
+    "uuid": "3f8f4f0b-4b2b-405c-9d99-4b4763c12267",
+    "filament_weight": 250,
+    "diameter": 2.85,
+    "gtin": "8718924478790",
+    "article_number": "RPET-285VIOL-00250"
   }
 ]

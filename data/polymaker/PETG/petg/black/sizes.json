@@ -68,6 +68,7 @@
     "diameter": 2.85,
     "gtin": "6938936707370",
     "article_number": "PB01045",
+    "discontinued": true,
     "purchase_links": [
       {
         "store_id": "polymaker",

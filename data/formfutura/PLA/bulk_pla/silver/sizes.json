@@ -5,6 +5,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 200,
+    "gtin": "8720847068330",
     "article_number": "BPLA-175SLVR-01000",
     "discontinued": false,
     "purchase_links": [
@@ -20,6 +21,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 625,
+    "gtin": "8720847068347",
     "article_number": "BPLA-175SLVR-02300",
     "discontinued": false,
     "purchase_links": [
@@ -35,6 +37,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 1040,
+    "gtin": "8720847068361",
     "article_number": "BPLA-175SLVR-08000",
     "discontinued": false,
     "purchase_links": [

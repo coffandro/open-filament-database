@@ -6,6 +6,7 @@
     "spool_refill": true,
     "empty_spool_weight": 20,
     "spool_core_diameter": 100,
+    "gtin": "8720847069955",
     "article_number": "AXFO-175BLCK-B0500",
     "discontinued": false,
     "purchase_links": [
@@ -21,6 +22,7 @@
     "diameter": 1.75,
     "spool_refill": true,
     "empty_spool_weight": 20,
+    "gtin": "8720847069948",
     "article_number": "AXFO-175BLCK-B1000",
     "discontinued": false,
     "purchase_links": [
@@ -36,6 +38,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 625,
+    "gtin": "8720847069962",
     "article_number": "AXFO-175BLCK-02300",
     "discontinued": false,
     "purchase_links": [

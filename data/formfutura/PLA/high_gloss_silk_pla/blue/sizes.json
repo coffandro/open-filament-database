@@ -5,6 +5,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 165,
+    "gtin": "8720574292008",
     "article_number": "HPLA-175BLUE-00750",
     "discontinued": false,
     "purchase_links": [
@@ -20,6 +21,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 625,
+    "gtin": "8720574292015",
     "article_number": "HPLA-175BLUE-02300",
     "discontinued": false,
     "purchase_links": [
@@ -35,6 +37,7 @@
     "diameter": 2.85,
     "spool_refill": false,
     "empty_spool_weight": 165,
+    "gtin": "8720574292053",
     "article_number": "HPLA-285BLUE-00750",
     "discontinued": false,
     "purchase_links": [
@@ -43,5 +46,19 @@
         "url": "https://www.formfutura.com/high-gloss-pla"
       }
     ]
+  },
+  {
+    "uuid": "00a18eb0-9ddc-4389-9c2e-3e5903bec853",
+    "filament_weight": 250,
+    "diameter": 1.75,
+    "gtin": "8720574291995",
+    "article_number": "HPLA-175BLUE-00250"
+  },
+  {
+    "uuid": "b25bd920-439c-4257-a7a4-50d4afedca95",
+    "filament_weight": 250,
+    "diameter": 2.85,
+    "gtin": "8720574292046",
+    "article_number": "HPLA-285BLUE-00250"
   }
 ]

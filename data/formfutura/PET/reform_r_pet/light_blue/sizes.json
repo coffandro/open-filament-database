@@ -5,6 +5,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 165,
+    "gtin": "8719956554391",
     "article_number": "RPET-175LBLU-00750",
     "discontinued": false,
     "purchase_links": [
@@ -20,6 +21,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 165,
+    "gtin": "8719956553332",
     "article_number": "RPET-175LBLU-01000",
     "discontinued": false,
     "purchase_links": [
@@ -35,6 +37,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 625,
+    "gtin": "8720574293586",
     "article_number": "RPET-175LBLU-02300",
     "discontinued": false,
     "purchase_links": [
@@ -80,6 +83,7 @@
     "diameter": 2.85,
     "spool_refill": false,
     "empty_spool_weight": 165,
+    "gtin": "8720574291674",
     "article_number": "RPET-285LBLU-00750",
     "discontinued": false,
     "purchase_links": [
@@ -95,6 +99,7 @@
     "diameter": 2.85,
     "spool_refill": false,
     "empty_spool_weight": 165,
+    "gtin": "8719956553349",
     "article_number": "RPET-285LBLU-01000",
     "discontinued": false,
     "purchase_links": [
@@ -110,6 +115,7 @@
     "diameter": 2.85,
     "spool_refill": false,
     "empty_spool_weight": 625,
+    "gtin": "8720574293524",
     "article_number": "RPET-285LBLU-02300",
     "discontinued": false,
     "purchase_links": [
@@ -125,6 +131,7 @@
     "diameter": 2.85,
     "spool_refill": false,
     "empty_spool_weight": 705,
+    "gtin": "8720574297447",
     "article_number": "RPET-285LBLU-03500",
     "discontinued": false,
     "purchase_links": [
@@ -140,6 +147,7 @@
     "diameter": 2.85,
     "spool_refill": false,
     "empty_spool_weight": 785,
+    "gtin": "8720574290783",
     "article_number": "RPET-285LBLU-04500",
     "discontinued": false,
     "purchase_links": [
@@ -148,5 +156,12 @@
         "url": "https://www.formfutura.com/reform-rpet"
       }
     ]
+  },
+  {
+    "uuid": "b710a17d-5b40-4621-b08f-c52ed24a2a16",
+    "filament_weight": 250,
+    "diameter": 2.85,
+    "gtin": "8720574293425",
+    "article_number": "RPET-285LBLU-00250"
   }
 ]

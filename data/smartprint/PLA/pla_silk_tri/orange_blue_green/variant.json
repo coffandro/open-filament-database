@@ -6,5 +6,8 @@
     "#fec700",
     "#0061ff",
     "#77bb41"
-  ]
+  ],
+  "traits": {
+    "coextruded": true
+  }
 }

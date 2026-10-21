@@ -5,6 +5,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 165,
+    "gtin": "8720574292206",
     "article_number": "HPLA-175GREN-00750",
     "discontinued": false,
     "purchase_links": [
@@ -13,5 +14,12 @@
         "url": "https://www.formfutura.com/high-gloss-pla"
       }
     ]
+  },
+  {
+    "uuid": "9da33f21-6861-45ce-beab-c63235640502",
+    "filament_weight": 250,
+    "diameter": 1.75,
+    "gtin": "8720574292190",
+    "article_number": "HPLA-175GREN-00250"
   }
 ]

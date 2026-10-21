@@ -5,6 +5,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 140,
+    "gtin": "8720574297706",
     "article_number": "PHCF-175BLCK-00500",
     "discontinued": false,
     "purchase_links": [
@@ -20,6 +21,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 165,
+    "gtin": "8718924470428",
     "article_number": "PHCF-175BLCK-01000",
     "discontinued": false,
     "purchase_links": [
@@ -35,6 +37,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 625,
+    "gtin": "8718924470442",
     "article_number": "PHCF-175BLCK-02300",
     "discontinued": false,
     "purchase_links": [
@@ -50,6 +53,7 @@
     "diameter": 2.85,
     "spool_refill": false,
     "empty_spool_weight": 100,
+    "gtin": "8720574297690",
     "article_number": "PHCF-285BLCK-00200",
     "discontinued": false,
     "purchase_links": [
@@ -65,6 +69,7 @@
     "diameter": 2.85,
     "spool_refill": false,
     "empty_spool_weight": 140,
+    "gtin": "8720574297713",
     "article_number": "PHCF-285BLCK-00500",
     "discontinued": false,
     "purchase_links": [

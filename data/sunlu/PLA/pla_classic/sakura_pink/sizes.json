@@ -12,7 +12,14 @@
   {
     "uuid": "42a16c27-a470-44ad-abf5-8fc77f2eb1a6",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "6933582314095",
+    "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/pla-classic-sakura-pink"
+      }
+    ]
   },
   {
     "uuid": "fa6a5d6c-a966-449a-b956-82b3c6198a7a",

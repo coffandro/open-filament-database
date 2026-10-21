@@ -24,5 +24,11 @@
         "url": "https://shop.spectrumfilaments.com/product-eng-1482-Filament-Spectrum-PLA-PRO-1-75mm-LIME-GREEN-2kg-RAL-6018.html"
       }
     ]
+  },
+  {
+    "uuid": "de086d5a-13a7-4c07-add4-2fef8ccc665d",
+    "filament_weight": 1000,
+    "diameter": 2.85,
+    "gtin": "5903175658807"
   }
 ]

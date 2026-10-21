@@ -6,8 +6,16 @@
     "spool_refill": false,
     "empty_spool_weight": 140,
     "spool_core_diameter": 100,
+    "container_outer_diameter": 200,
+    "container_hole_diameter": 55,
+    "gtin": "6938936714019",
+    "article_number": "PA13002",
     "discontinued": false,
     "purchase_links": [
+      {
+        "store_id": "polymaker",
+        "url": "https://shop.polymaker.com/products/polymaker-pla-pro?variant=41550910652473"
+      },
       {
         "store_id": "polymaker",
         "url": "https://us.polymaker.com/products/polymaker-pla-pro?variant=41550910652473"

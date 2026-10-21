@@ -2,5 +2,8 @@
   "uuid": "d290b083-b231-4a88-9f7b-ad9d96d57322",
   "id": "blue",
   "name": "Blue",
-  "color_hex": "#02BFC1"
+  "color_hex": "#02BFC1",
+  "traits": {
+    "abrasive": true
+  }
 }

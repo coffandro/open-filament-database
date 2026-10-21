@@ -12,7 +12,14 @@
   {
     "uuid": "9685037e-4bd1-42f7-8ab5-739f62e6bf17",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "6933582317836",
+    "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/pvb-white"
+      }
+    ]
   },
   {
     "uuid": "a9a7ca1d-880d-4abb-8005-a800180ed0ea",

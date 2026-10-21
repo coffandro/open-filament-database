@@ -1,5 +1,8 @@
 {
   "uuid": "9de02c77-5ed9-43f6-a49a-de4b36cbd85f",
+  "moved_from": [
+    "222f2b07-adc5-4c96-9d48-f8d462c41a5c"
+  ],
   "id": "cope",
   "name": "PET CoPE",
   "diameter_tolerance": 0.02,

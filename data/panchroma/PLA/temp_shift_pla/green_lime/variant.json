@@ -1,6 +1,13 @@
 {
   "uuid": "e0871559-4337-40f7-934b-e13726d66be9",
+  "moved_from": [
+    "81a81345-b7d4-488b-a028-725d07e651c1"
+  ],
   "id": "green_lime",
   "name": "Green-Lime",
-  "color_hex": "#8ab35a"
+  "color_hex": "#8ab35a",
+  "traits": {
+    "temperature_color_change": true,
+    "industrially_compostable": true
+  }
 }

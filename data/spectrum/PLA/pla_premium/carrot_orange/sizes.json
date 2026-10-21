@@ -11,5 +11,12 @@
         "url": "https://shop.spectrumfilaments.com/product-eng-621-Filament-Spectrum-PLA-Premium-1-75mm-CARROT-ORANGE-1kg.html"
       }
     ]
+  },
+  {
+    "uuid": "5137e82b-cb61-4002-b85f-46a03fe5658a",
+    "filament_weight": 1000,
+    "diameter": 1.75,
+    "spool_refill": true,
+    "gtin": "5905991404415"
   }
 ]

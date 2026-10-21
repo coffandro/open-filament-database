@@ -12,7 +12,14 @@
   {
     "uuid": "37f4b304-dc69-4a61-8f89-c3b989971e5b",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "6933582314132",
+    "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/pla-classic-mint-green"
+      }
+    ]
   },
   {
     "uuid": "b0056e3f-223b-4726-8f15-0660f6b2093a",

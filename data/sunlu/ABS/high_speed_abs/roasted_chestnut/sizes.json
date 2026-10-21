@@ -12,7 +12,14 @@
   {
     "uuid": "74b63d76-a2b2-4b01-a384-097573adc8b2",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "6933582316969",
+    "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/high-speed-abs-roasted-chestnut"
+      }
+    ]
   },
   {
     "uuid": "ef4aaaea-9404-4664-aa3d-a7eef290cd90",

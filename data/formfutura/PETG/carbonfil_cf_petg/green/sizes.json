@@ -5,6 +5,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 140,
+    "gtin": "8719956556135",
     "article_number": "CRBF-175GREN-00500",
     "discontinued": false,
     "purchase_links": [
@@ -20,6 +21,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 625,
+    "gtin": "8719956556159",
     "article_number": "CRBF-175GREN-02300",
     "discontinued": false,
     "purchase_links": [
@@ -35,6 +37,7 @@
     "diameter": 2.85,
     "spool_refill": false,
     "empty_spool_weight": 140,
+    "gtin": "8719956556142",
     "article_number": "CRBF-285GREN-00500",
     "discontinued": false,
     "purchase_links": [
@@ -50,6 +53,7 @@
     "diameter": 2.85,
     "spool_refill": false,
     "empty_spool_weight": 625,
+    "gtin": "8719956556166",
     "article_number": "CRBF-285GREN-02300",
     "discontinued": false,
     "purchase_links": [
@@ -58,5 +62,19 @@
         "url": "https://www.formfutura.com/carbonfil"
       }
     ]
+  },
+  {
+    "uuid": "6e8a5f38-fb34-434f-8957-54b43ec165f2",
+    "filament_weight": 250,
+    "diameter": 1.75,
+    "gtin": "8720574297973",
+    "article_number": "CRBF-175GREN-00250"
+  },
+  {
+    "uuid": "863a3363-e37e-4465-9776-928efd161264",
+    "filament_weight": 250,
+    "diameter": 2.85,
+    "gtin": "8720574297980",
+    "article_number": "CRBF-285GREN-00250"
   }
 ]

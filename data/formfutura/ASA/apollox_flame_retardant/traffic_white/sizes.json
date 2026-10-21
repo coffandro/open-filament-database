@@ -5,6 +5,7 @@
     "diameter": 1.75,
     "spool_refill": true,
     "empty_spool_weight": 20,
+    "gtin": "8720629068275",
     "article_number": "AXFR-175TWHT-C0500",
     "discontinued": false,
     "purchase_links": [
@@ -20,6 +21,7 @@
     "diameter": 1.75,
     "spool_refill": true,
     "empty_spool_weight": 20,
+    "gtin": "8720629068268",
     "article_number": "AXFR-175TWHT-B1000",
     "discontinued": false,
     "purchase_links": [

@@ -1,0 +1,19 @@
+[
+  {
+    "uuid": "1fc7f890-e858-43a9-b9e1-ef6730d0b32f",
+    "filament_weight": 1000,
+    "diameter": 1.75,
+    "spool_refill": false,
+    "empty_spool_weight": 140,
+    "container_outer_diameter": 200,
+    "container_hole_diameter": 55,
+    "gtin": "6938936714309",
+    "article_number": "PA13006",
+    "purchase_links": [
+      {
+        "store_id": "polymaker",
+        "url": "https://shop.polymaker.com/products/polymaker-pla-pro?variant=42901840429113"
+      }
+    ]
+  }
+]

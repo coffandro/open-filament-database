@@ -4,6 +4,7 @@
   "name": "Foamy Natural",
   "color_hex": "#DFDFD3",
   "traits": {
-    "without_pigments": true
+    "without_pigments": true,
+    "foaming": true
   }
 }

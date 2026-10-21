@@ -12,10 +12,15 @@
         },
         "orcaslicer": {
             "generic_id": "GFL96",
-            "id": "GFSNL05",
+            "id": "OGFSNL05",
             "profile_name": "SUNLU Silk PLA+"
         },
         "elegooslicer": {
+            "generic_id": "GFL96",
+            "id": "OGFSNL05",
+            "profile_name": "SUNLU Silk PLA+"
+        },
+        "crealityprint": {
             "generic_id": "GFL96",
             "id": "GFSNL05",
             "profile_name": "SUNLU Silk PLA+"

@@ -4,12 +4,6 @@
     "filament_weight": 1000,
     "diameter": 1.75,
     "gtin": "6938936713456",
-    "article_number": "PA11004",
-    "purchase_links": [
-      {
-        "store_id": "polymaker",
-        "url": "https://us.polymaker.com/products/polymaker-draft-pla"
-      }
-    ]
+    "article_number": "PA11004"
   }
 ]

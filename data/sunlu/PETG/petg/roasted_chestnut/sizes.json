@@ -13,7 +13,12 @@
     "uuid": "3f614c23-6def-466d-b349-409b9b0e14d8",
     "filament_weight": 1000,
     "diameter": 1.75,
+    "gtin": "6933582320010",
     "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/petg-roasted-chestnut"
+      },
       {
         "store_id": "sunlu",
         "url": "https://store.sunlu.com/products/over-6kg-bundle-sale-petg-3d-printer-filament-1-75mm-1kg-roll"

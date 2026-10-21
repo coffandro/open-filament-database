@@ -12,7 +12,14 @@
   {
     "uuid": "c2421a63-db1f-4416-9da3-3e1e26d1e89a",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "6933582316891",
+    "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/high-speed-abs-black"
+      }
+    ]
   },
   {
     "uuid": "b077463c-1150-4afc-8de7-0eca61dfa684",

@@ -4,13 +4,7 @@
     "filament_weight": 500,
     "diameter": 1.75,
     "empty_spool_weight": 175,
-    "spool_core_diameter": 41,
-    "purchase_links": [
-      {
-        "store_id": "add_north",
-        "url": "https://addnorth.com/product/PC%20Blend%20HT%20LCF/PC%20Blend%20HT%20LCF%20-%201.75mm%20-%20500g%20-%20Black"
-      }
-    ]
+    "spool_core_diameter": 41
   },
   {
     "uuid": "6ee8de1a-55bf-4e42-bb9d-a9c4e874fcf7",
@@ -18,6 +12,7 @@
     "diameter": 1.75,
     "empty_spool_weight": 238,
     "spool_core_diameter": 67,
+    "gtin": "7340182901409",
     "purchase_links": [
       {
         "store_id": "add_north",

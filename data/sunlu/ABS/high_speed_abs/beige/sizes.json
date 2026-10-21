@@ -12,7 +12,14 @@
   {
     "uuid": "bf21f1f6-0895-4c31-b656-2976a1a8cc9a",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "6933582316914",
+    "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/high-speed-abs-beige"
+      }
+    ]
   },
   {
     "uuid": "ffcf7439-4cdd-4a66-86b0-b91a99792b99",

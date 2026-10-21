@@ -11,5 +11,11 @@
         "url": "https://us.polymaker.com/products/polylite-abs?variant=39574342500409"
       }
     ]
+  },
+  {
+    "uuid": "45466e54-316f-4d63-b22e-fe592e6516ce",
+    "filament_weight": 1000,
+    "diameter": 2.85,
+    "gtin": "6938936701729"
   }
 ]

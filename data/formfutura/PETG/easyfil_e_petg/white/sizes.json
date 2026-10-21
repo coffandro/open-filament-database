@@ -5,6 +5,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 165,
+    "gtin": "8720847053305",
     "article_number": "PTGE-175TWHT-01000",
     "discontinued": false,
     "purchase_links": [
@@ -20,6 +21,7 @@
     "diameter": 1.75,
     "spool_refill": true,
     "empty_spool_weight": 20,
+    "gtin": "8720629068435",
     "article_number": "PTGE-175TWHT-B1000",
     "discontinued": false,
     "purchase_links": [
@@ -35,6 +37,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 625,
+    "gtin": "8720847053640",
     "article_number": "PTGE-175TWHT-02300",
     "discontinued": false,
     "purchase_links": [
@@ -50,6 +53,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 785,
+    "gtin": "8720847053985",
     "article_number": "PTGE-175TWHT-04500",
     "discontinued": false,
     "purchase_links": [
@@ -65,6 +69,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 1040,
+    "gtin": "8720847054326",
     "article_number": "PTGE-175TWHT-08000",
     "discontinued": false,
     "purchase_links": [
@@ -80,6 +85,7 @@
     "diameter": 2.85,
     "spool_refill": false,
     "empty_spool_weight": 165,
+    "gtin": "8720847057709",
     "article_number": "PTGE-285TWHT-01000",
     "discontinued": false,
     "purchase_links": [
@@ -95,6 +101,7 @@
     "diameter": 2.85,
     "spool_refill": false,
     "empty_spool_weight": 625,
+    "gtin": "8720847058041",
     "article_number": "PTGE-285TWHT-02300",
     "discontinued": false,
     "purchase_links": [
@@ -110,6 +117,7 @@
     "diameter": 2.85,
     "spool_refill": false,
     "empty_spool_weight": 785,
+    "gtin": "8720847058386",
     "article_number": "PTGE-285TWHT-04500",
     "discontinued": false,
     "purchase_links": [
@@ -125,6 +133,7 @@
     "diameter": 2.85,
     "spool_refill": false,
     "empty_spool_weight": 1040,
+    "gtin": "8720847058720",
     "article_number": "PTGE-285TWHT-08000",
     "discontinued": false,
     "purchase_links": [
@@ -133,5 +142,12 @@
         "url": "https://www.formfutura.com/easyfil-epetg"
       }
     ]
+  },
+  {
+    "uuid": "793be542-6e1c-40ca-b8fc-a079306a2bea",
+    "filament_weight": 250,
+    "diameter": 2.85,
+    "gtin": "8720847057365",
+    "article_number": "PTGE-285TWHT-00250"
   }
 ]

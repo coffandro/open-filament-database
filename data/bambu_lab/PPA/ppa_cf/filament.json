@@ -12,10 +12,14 @@
             "profile_name": "Bambu PPA-CF"
         },
         "orcaslicer": {
-            "id": "GFN06",
+            "id": "OGFN06",
             "profile_name": "Bambu PPA-CF"
         },
         "elegooslicer": {
+            "id": "OGFN06",
+            "profile_name": "Bambu PPA-CF"
+        },
+        "crealityprint": {
             "id": "GFN06",
             "profile_name": "Bambu PPA-CF"
         },

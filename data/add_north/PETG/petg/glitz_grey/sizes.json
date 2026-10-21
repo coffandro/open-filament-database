@@ -4,11 +4,17 @@
     "filament_weight": 750,
     "diameter": 1.75,
     "empty_spool_weight": 207,
-    "spool_core_diameter": 53,
+    "spool_core_diameter": 53
+  },
+  {
+    "uuid": "55ede770-3ca3-43d1-a4a2-6c96e60c7e67",
+    "filament_weight": 1000,
+    "diameter": 1.75,
+    "gtin": "7340182903762",
     "purchase_links": [
       {
         "store_id": "add_north",
-        "url": "https://addnorth.com/product/PETG/PETG%20-%201.75mm%20-%20750g%20-%20Glitz%20Grey"
+        "url": "https://addnorth.com/product/PETG/PETG%20-%201.75mm%20-%201000g%20-%20Glitz%20Grey"
       }
     ]
   }

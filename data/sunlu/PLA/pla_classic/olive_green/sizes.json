@@ -12,7 +12,14 @@
   {
     "uuid": "c42d03d4-28bc-40e3-9b4a-a60401041e39",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "6933582314149",
+    "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/pla-classic-olive-green"
+      }
+    ]
   },
   {
     "uuid": "4a128da2-8251-4bcc-9922-a032f4799a7b",

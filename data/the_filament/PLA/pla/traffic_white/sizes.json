@@ -3,6 +3,7 @@
     "uuid": "68b09f1f-5955-4d12-b599-82ceda31b477",
     "filament_weight": 1000,
     "diameter": 1.75,
+    "spool_refill": true,
     "ean": "5905991405955",
     "article_number": "TF-24042",
     "purchase_links": [
@@ -14,6 +15,9 @@
   },
   {
     "uuid": "bb663a59-f1f6-4ea9-a7a8-74881fc84197",
+    "moved_from": [
+      "0470b27b-7d42-4e5d-aaec-fb96e8a1f9c7"
+    ],
     "filament_weight": 1000,
     "diameter": 1.75,
     "ean": "5905991405085",
@@ -24,5 +28,17 @@
         "url": "https://shop.spectrumfilaments.com/product-eng-2600-The-Filament-PLA-1-75mm-TRAFFIC-WHITE-1kg.html"
       }
     ]
+  },
+  {
+    "uuid": "4dc5e91e-b4e7-4256-8629-24784b5a3ecd",
+    "filament_weight": 3000,
+    "diameter": 1.75,
+    "gtin": "5907138400915"
+  },
+  {
+    "uuid": "713b9cba-67b1-461b-bdb1-515340aa577a",
+    "filament_weight": 5000,
+    "diameter": 1.75,
+    "gtin": "5907138400977"
   }
 ]

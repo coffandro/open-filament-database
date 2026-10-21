@@ -13,7 +13,12 @@
     "uuid": "43fe8c2b-9dec-470e-b3f8-628bbd6ffc35",
     "filament_weight": 1000,
     "diameter": 1.75,
+    "gtin": "6933582310233",
     "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/asa-red-3"
+      },
       {
         "store_id": "sunlu",
         "url": "https://store.sunlu.com/products/sunlu-asa-filament-1-75mm"

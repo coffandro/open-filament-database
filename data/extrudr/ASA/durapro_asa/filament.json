@@ -8,6 +8,8 @@
     "max_print_temperature": 260,
     "min_bed_temperature": 90,
     "max_bed_temperature": 110,
+    "data_sheet_url": "https://s3.extrudr.com/extrudr-media/datasheets/tds/tds-en/durapro-asa-TDS-en.pdf",
+    "safety_sheet_url": "https://s3.extrudr.com/extrudr-media/datasheets/msds/msds-en/durapro-asa-MSDS-en.pdf",
     "slicer_settings": {
         "prusaslicer": {
             "profile_name": "Extrudr DuraPro ASA"

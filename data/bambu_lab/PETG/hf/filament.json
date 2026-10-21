@@ -14,10 +14,15 @@
         },
         "orcaslicer": {
             "generic_id": "GFG99",
-            "id": "GFG02",
+            "id": "OGFG02",
             "profile_name": "Bambu PETG HF"
         },
         "elegooslicer": {
+            "generic_id": "GFG99",
+            "id": "OGFG02",
+            "profile_name": "Bambu PETG HF"
+        },
+        "crealityprint": {
             "generic_id": "GFG99",
             "id": "GFG02",
             "profile_name": "Bambu PETG HF"

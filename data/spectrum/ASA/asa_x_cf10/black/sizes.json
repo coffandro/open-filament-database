@@ -16,6 +16,7 @@
     "uuid": "d4f14b0c-81f8-42b4-aaee-349f3fed3689",
     "filament_weight": 1000,
     "diameter": 1.75,
+    "gtin": "5903175654960",
     "article_number": "80716",
     "purchase_links": [
       {
@@ -28,6 +29,7 @@
     "uuid": "a6d54fb7-f752-4ea4-b901-82eaa8b6d47c",
     "filament_weight": 1000,
     "diameter": 1.75,
+    "spool_refill": true,
     "ean": "5905991404040",
     "article_number": "81337",
     "purchase_links": [

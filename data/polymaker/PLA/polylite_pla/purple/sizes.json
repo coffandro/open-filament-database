@@ -11,5 +11,11 @@
         "url": "https://us.polymaker.com/products/polylite-pla?variant=43818026008633"
       }
     ]
+  },
+  {
+    "uuid": "f01bdc6e-f5c1-4d65-8176-153f37032e8d",
+    "filament_weight": 1000,
+    "diameter": 2.85,
+    "gtin": "6938936711100"
   }
 ]

@@ -12,7 +12,14 @@
   {
     "uuid": "3f23a322-1e8a-453b-a671-914c081abce7",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "6933582316952",
+    "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/high-speed-abs-klein-blue"
+      }
+    ]
   },
   {
     "uuid": "72cb8c5c-ba96-4bdb-ae16-f7ad995f6f4f",

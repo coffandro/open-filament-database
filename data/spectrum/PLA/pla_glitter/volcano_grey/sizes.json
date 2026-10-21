@@ -24,5 +24,11 @@
         "url": "https://shop.spectrumfilaments.com/product-eng-670-Filament-Spectrum-PLA-Glitter-1-75mm-VOLCANO-GREY-0-50kg.html"
       }
     ]
+  },
+  {
+    "uuid": "8306fceb-038c-473c-b484-ac3ee7380799",
+    "filament_weight": 1000,
+    "diameter": 2.85,
+    "gtin": "5903175658821"
   }
 ]

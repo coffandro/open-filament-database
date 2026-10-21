@@ -1,7 +1,14 @@
 {
   "uuid": "39d14109-bb8c-43e8-99c4-6965aaa2b365",
+  "moved_from": [
+    "bff71592-201a-4961-a2a5-2a2875a614e5"
+  ],
   "id": "charcoal_black",
   "name": "Charcoal Black",
   "color_hex": "#2F2E30",
-  "discontinued": false
+  "discontinued": false,
+  "traits": {
+    "matte": true,
+    "industrially_compostable": true
+  }
 }

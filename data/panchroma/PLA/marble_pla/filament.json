@@ -1,5 +1,8 @@
 {
   "uuid": "30d12277-70a5-4ab3-b9c1-f0b379194dc8",
+  "moved_from": [
+    "77d57c03-4df4-4c6e-8e09-c20746347766"
+  ],
   "id": "marble_pla",
   "name": "Marble PLA",
   "diameter_tolerance": 0.02,

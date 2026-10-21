@@ -12,7 +12,14 @@
   {
     "uuid": "5632243e-b4aa-416f-9fc8-05074d0d91d4",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "6933582314163",
+    "purchase_links": [
+      {
+        "store_id": "3djake",
+        "url": "https://www.3djake.com/sunlu/pla-classic-chocolate"
+      }
+    ]
   },
   {
     "uuid": "02a220b2-bfa5-4fe5-9f05-e3917a2d9009",

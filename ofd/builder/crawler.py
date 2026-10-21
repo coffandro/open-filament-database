@@ -297,8 +297,12 @@ class DataCrawler:
         color_hex_raw = variant_data.get("color_hex", "#000000")
         if isinstance(color_hex_raw, list):
             color_hex = normalize_color_hex(color_hex_raw[0]) if color_hex_raw else "#000000"
+            # color_hex stays the first colour for existing consumers; the full
+            # ordered list is kept separately when there really are several.
+            color_hexes = [n for n in map(normalize_color_hex, color_hex_raw) if n]
         else:
             color_hex = normalize_color_hex(color_hex_raw) or "#000000"
+            color_hexes = []
 
         # Normalize hex variants if present
         hex_variants = variant_data.get("hex_variants")
@@ -318,6 +322,8 @@ class DataCrawler:
         }
         if hex_variants:
             variant["hex_variants"] = hex_variants
+        if len(color_hexes) > 1:
+            variant["color_hexes"] = color_hexes
 
         self.db.variants.append(variant)
 

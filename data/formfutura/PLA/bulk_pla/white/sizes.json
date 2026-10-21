@@ -5,6 +5,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 200,
+    "gtin": "8720847069290",
     "article_number": "BPLA-175WHTE-01000",
     "discontinued": false,
     "purchase_links": [
@@ -20,6 +21,7 @@
     "diameter": 1.75,
     "spool_refill": false,
     "empty_spool_weight": 625,
+    "gtin": "8720847069306",
     "article_number": "BPLA-175WHTE-02300",
     "discontinued": false,
     "purchase_links": [

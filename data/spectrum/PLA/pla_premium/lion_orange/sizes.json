@@ -11,5 +11,12 @@
         "url": "https://shop.spectrumfilaments.com/product-eng-508-Filament-Spectrum-PLA-Premium-1-75mm-LION-ORANGE-1kg.html"
       }
     ]
+  },
+  {
+    "uuid": "4c2988ee-9010-49c6-a992-c3c6acfc43c5",
+    "filament_weight": 1000,
+    "diameter": 1.75,
+    "spool_refill": true,
+    "gtin": "5905991404491"
   }
 ]
