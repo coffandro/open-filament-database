@@ -4,6 +4,8 @@
   "name": "PLA Tech 609 HD",
   "diameter_tolerance": 0.03,
   "density": 1.22,
+  "min_print_temperature": 210,
+  "max_print_temperature": 240,
   "data_sheet_url": "https://api.nebulafilaments.com/wp-content/uploads/2025/02/TDS-PLA-609-HD.pdf",
   "safety_sheet_url": "https://api.nebulafilaments.com/wp-content/uploads/2025/02/Karta-charakterystyki-msds-PLA-609-HD-Nebula.pdf"
 }
