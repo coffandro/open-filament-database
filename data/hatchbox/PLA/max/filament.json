@@ -3,5 +3,7 @@
   "id": "max",
   "name": "PLA Max",
   "diameter_tolerance": 0.03,
-  "density": 1.25
+  "density": 1.25,
+  "min_print_temperature": 190,
+  "max_print_temperature": 210
 }
