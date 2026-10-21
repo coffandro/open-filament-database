@@ -2,6 +2,12 @@
   {
     "uuid": "59562ff9-8836-4b84-83ee-feb327bea8e4",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "purchase_links": [
+      {
+        "store_id": "polymaker",
+        "url": "https://us.polymaker.com/products/gradient-satin-pla?variant=43598766014521"
+      }
+    ]
   }
 ]

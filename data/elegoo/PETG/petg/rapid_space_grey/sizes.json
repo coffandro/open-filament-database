@@ -2,6 +2,12 @@
   {
     "uuid": "ba7ab636-75f9-4a92-b59b-e83b1754709d",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "purchase_links": [
+      {
+        "store_id": "elegoo",
+        "url": "https://eu.elegoo.com/products/rapid-petg-filament-1-75mm-colored-1kg"
+      }
+    ]
   }
 ]

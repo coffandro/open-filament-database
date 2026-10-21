@@ -2,7 +2,13 @@
   {
     "uuid": "9b31b295-faa7-46c1-9999-646b1f74133f",
     "filament_weight": 250,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "purchase_links": [
+      {
+        "store_id": "sunlu",
+        "url": "https://store.sunlu.com/products/250g-spool-3d-printing-filaments-0-25kg-per-roll"
+      }
+    ]
   },
   {
     "uuid": "dbefe093-34e9-4b80-9964-4cc0e6b45acf",

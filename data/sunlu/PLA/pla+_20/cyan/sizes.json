@@ -18,7 +18,13 @@
   {
     "uuid": "5411c4e0-2bea-499d-863d-e108734e2601",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "purchase_links": [
+      {
+        "store_id": "sunlu",
+        "url": "https://store.sunlu.com/products/moq-6kg-pla-2-0-upgraded-pla-pla-plus-3d-printer-filament-1kg"
+      }
+    ]
   },
   {
     "uuid": "cfbf6d6b-c9c3-4ac1-b90b-aaa313ea1d07",

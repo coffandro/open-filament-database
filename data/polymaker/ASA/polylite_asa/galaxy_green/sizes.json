@@ -4,6 +4,12 @@
     "filament_weight": 1000,
     "diameter": 1.75,
     "gtin": "6938936707998",
-    "article_number": "PF01036"
+    "article_number": "PF01036",
+    "purchase_links": [
+      {
+        "store_id": "polymaker",
+        "url": "https://us.polymaker.com/products/polymaker-galaxy-asa?variant=41212531146809"
+      }
+    ]
   }
 ]

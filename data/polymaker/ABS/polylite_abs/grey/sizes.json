@@ -4,7 +4,13 @@
     "filament_weight": 1000,
     "diameter": 1.75,
     "gtin": "6938936710172",
-    "article_number": "PE01003"
+    "article_number": "PE01003",
+    "purchase_links": [
+      {
+        "store_id": "polymaker",
+        "url": "https://us.polymaker.com/products/polylite-abs?variant=39574342697017"
+      }
+    ]
   },
   {
     "uuid": "09ae9660-2939-40e0-8792-093e85b98679",

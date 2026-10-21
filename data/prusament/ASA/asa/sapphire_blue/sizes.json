@@ -14,6 +14,12 @@
     "uuid": "696077aa-8646-4f3c-8227-a83167fbaf42",
     "filament_weight": 800,
     "diameter": 1.75,
-    "gtin": "8594173675681"
+    "gtin": "8594173675681",
+    "purchase_links": [
+      {
+        "store_id": "prusa3d",
+        "url": "https://www.prusa3d.com/product/prusament-asa-sapphire-blue-800g-nfc/"
+      }
+    ]
   }
 ]

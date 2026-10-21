@@ -12,7 +12,13 @@
   {
     "uuid": "9ea29066-bd96-4de4-bfca-c9aaf24b1356",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "purchase_links": [
+      {
+        "store_id": "sunlu",
+        "url": "https://store.sunlu.com/products/moq-3kg-tpu-3d-printer-filament-1kg"
+      }
+    ]
   },
   {
     "uuid": "4603c485-23f1-4cfc-8040-38488b2c8a54",

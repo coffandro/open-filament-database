@@ -2,6 +2,12 @@
   {
     "uuid": "1833f28c-81d0-404b-9818-ae64348938c4",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "purchase_links": [
+      {
+        "store_id": "polymaker",
+        "url": "https://us.polymaker.com/products/luminous-pla?variant=43631365587001"
+      }
+    ]
   }
 ]

@@ -2,6 +2,12 @@
   {
     "uuid": "c268531d-a6c8-4da5-aef6-cdcf3cb326d1",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "purchase_links": [
+      {
+        "store_id": "polymaker",
+        "url": "https://us.polymaker.com/products/gradient-luminous-rainbow-pla?variant=45203291603001"
+      }
+    ]
   }
 ]

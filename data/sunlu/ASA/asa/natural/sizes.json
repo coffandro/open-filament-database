@@ -12,7 +12,13 @@
   {
     "uuid": "3ec387db-a9a7-4861-a955-c5b1efbaf01e",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "purchase_links": [
+      {
+        "store_id": "sunlu",
+        "url": "https://store.sunlu.com/products/sunlu-asa-filament-1-75mm"
+      }
+    ]
   },
   {
     "uuid": "71378dd3-65b9-4c46-95e3-12bc51e9d189",

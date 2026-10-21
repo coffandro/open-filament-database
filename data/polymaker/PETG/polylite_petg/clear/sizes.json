@@ -4,7 +4,13 @@
     "filament_weight": 1000,
     "diameter": 1.75,
     "gtin": "6938936710134",
-    "article_number": "PB01011"
+    "article_number": "PB01011",
+    "purchase_links": [
+      {
+        "store_id": "polymaker",
+        "url": "https://us.polymaker.com/products/polylite-translucent-petg?variant=40303029813305"
+      }
+    ]
   },
   {
     "uuid": "5f9ac975-14f8-4e30-8048-bffb8180715a",

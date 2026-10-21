@@ -4,6 +4,12 @@
     "filament_weight": 1000,
     "diameter": 1.75,
     "gtin": "6938936714026",
-    "article_number": "PA02098"
+    "article_number": "PA02098",
+    "purchase_links": [
+      {
+        "store_id": "polymaker",
+        "url": "https://us.polymaker.com/products/polylite-pla?variant=44327067451449"
+      }
+    ]
   }
 ]

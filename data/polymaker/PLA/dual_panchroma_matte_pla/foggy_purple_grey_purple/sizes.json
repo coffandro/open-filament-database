@@ -2,6 +2,12 @@
   {
     "uuid": "180f63d7-4876-4efb-bd8a-c165ef70ad87",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "purchase_links": [
+      {
+        "store_id": "polymaker",
+        "url": "https://us.polymaker.com/products/dual-matte-pla?variant=43613087924281"
+      }
+    ]
   }
 ]

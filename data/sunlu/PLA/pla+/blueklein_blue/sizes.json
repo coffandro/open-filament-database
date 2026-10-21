@@ -28,7 +28,13 @@
   {
     "uuid": "91522c4a-11cb-4b90-811a-522995820596",
     "filament_weight": 3000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "purchase_links": [
+      {
+        "store_id": "sunlu",
+        "url": "https://store.sunlu.com/products/3kg-spool-pla-series-3d-printer-filament-collection"
+      }
+    ]
   },
   {
     "uuid": "a2566ace-1230-4a87-b0eb-128af9536665",

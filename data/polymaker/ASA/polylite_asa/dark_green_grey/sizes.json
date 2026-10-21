@@ -2,6 +2,12 @@
   {
     "uuid": "53553a19-c972-4a8f-b041-77cc553e70d9",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "purchase_links": [
+      {
+        "store_id": "polymaker",
+        "url": "https://us.polymaker.com/products/asa?variant=41590536634425"
+      }
+    ]
   }
 ]

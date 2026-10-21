@@ -4,6 +4,12 @@
     "filament_weight": 1000,
     "diameter": 1.75,
     "gtin": "6938936713463",
-    "article_number": "PF01044"
+    "article_number": "PF01044",
+    "purchase_links": [
+      {
+        "store_id": "polymaker",
+        "url": "https://us.polymaker.com/products/asa?variant=41297658314809"
+      }
+    ]
   }
 ]

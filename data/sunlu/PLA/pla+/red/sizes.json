@@ -44,7 +44,13 @@
   {
     "uuid": "3945669f-08ee-4313-98c7-02a3355dc759",
     "filament_weight": 5000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "purchase_links": [
+      {
+        "store_id": "sunlu",
+        "url": "https://store.sunlu.com/products/5kg-large-spool-pla-abs-petg-and-pla-3d-printer-filament"
+      }
+    ]
   },
   {
     "uuid": "2745e29e-b379-452d-83ce-3062545e2ddf",

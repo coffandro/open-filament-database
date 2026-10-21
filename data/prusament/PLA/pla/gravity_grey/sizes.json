@@ -14,6 +14,12 @@
     "uuid": "98832df2-3892-4937-a0c1-5826597e76c0",
     "filament_weight": 2000,
     "diameter": 1.75,
-    "gtin": "8594173675834"
+    "gtin": "8594173675834",
+    "purchase_links": [
+      {
+        "store_id": "prusa3d",
+        "url": "https://www.prusa3d.com/product/prusament-pla-gravity-grey-2kg-nfc/"
+      }
+    ]
   }
 ]

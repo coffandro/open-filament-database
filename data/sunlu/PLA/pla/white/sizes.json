@@ -39,7 +39,13 @@
   {
     "uuid": "85fc0e4d-d9a8-4b91-a8c3-7a529719b080",
     "filament_weight": 3000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "purchase_links": [
+      {
+        "store_id": "sunlu",
+        "url": "https://store.sunlu.com/products/pla-filament-3kg-large-spool-3d-printer-filament-3kg"
+      }
+    ]
   },
   {
     "uuid": "c131db3f-599e-48bc-a266-3d30057dde2c",

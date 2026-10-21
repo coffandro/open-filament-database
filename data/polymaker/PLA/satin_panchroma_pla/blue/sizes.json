@@ -2,6 +2,12 @@
   {
     "uuid": "6b7a9504-3c26-4930-afd2-1ce6abe16a33",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "purchase_links": [
+      {
+        "store_id": "polymaker",
+        "url": "https://us.polymaker.com/products/satin-pla?variant=43689639673913"
+      }
+    ]
   }
 ]

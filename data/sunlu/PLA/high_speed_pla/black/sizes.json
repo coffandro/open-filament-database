@@ -44,7 +44,13 @@
   {
     "uuid": "42ca8dfa-5624-4831-b55b-3f0c6be4556b",
     "filament_weight": 5000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "purchase_links": [
+      {
+        "store_id": "sunlu",
+        "url": "https://store.sunlu.com/products/high-speed-pla-large-spool-3d-printer-filament-5kg"
+      }
+    ]
   },
   {
     "uuid": "54b96ca1-5a9e-4984-b003-2d42b1d3f8b8",

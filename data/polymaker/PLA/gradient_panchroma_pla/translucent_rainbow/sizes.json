@@ -2,6 +2,12 @@
   {
     "uuid": "fe489d13-5416-4e28-ad88-e0718941f8f1",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "purchase_links": [
+      {
+        "store_id": "polymaker",
+        "url": "https://us.polymaker.com/products/gradient-translucent-pla?variant=43598770667577"
+      }
+    ]
   }
 ]

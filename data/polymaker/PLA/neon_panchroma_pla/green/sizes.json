@@ -2,6 +2,12 @@
   {
     "uuid": "5562a5f4-97be-4197-a415-c6d86b267c31",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "purchase_links": [
+      {
+        "store_id": "polymaker",
+        "url": "https://us.polymaker.com/products/neon-pla?variant=43595095244857"
+      }
+    ]
   }
 ]

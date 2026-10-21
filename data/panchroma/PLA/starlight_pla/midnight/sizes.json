@@ -7,6 +7,12 @@
     "empty_spool_weight": 145,
     "spool_core_diameter": 100,
     "gtin": "6938936716556",
-    "discontinued": false
+    "discontinued": false,
+    "purchase_links": [
+      {
+        "store_id": "polymaker",
+        "url": "https://us.polymaker.com/products/starlight-pla?variant=44835150364729"
+      }
+    ]
   }
 ]
