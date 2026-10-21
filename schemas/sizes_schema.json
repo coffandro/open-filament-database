@@ -62,6 +62,14 @@
                 "type": "number",
                 "description": "The outer diameter of the core of the spool (in mm)"
             },
+            "spool_bore_diameter": {
+                "type": "number",
+                "description": "The diameter of the bore of the spool (in mm)"
+            },
+            "spool_width": {
+                "type": "number",
+                "description": "The height when it lies flat on a table (in mm)"
+            },
             "container_width": {
                 "type": "integer",
                 "description": "Width of the filament spool (in mm)"
