@@ -2,6 +2,12 @@
   {
     "uuid": "a9d5ae64-8a9d-43cd-a12d-e07f203a8bbf",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "purchase_links": [
+      {
+        "store_id": "polymaker",
+        "url": "https://us.polymaker.com/products/metallic-pla?variant=43595097374777"
+      }
+    ]
   }
 ]

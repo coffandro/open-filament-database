@@ -2,6 +2,12 @@
   {
     "uuid": "99632f6a-35d4-4b9e-bbb1-6fe73159141f",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "purchase_links": [
+      {
+        "store_id": "polymaker",
+        "url": "https://us.polymaker.com/products/dual-silk-pla?variant=43613143531577"
+      }
+    ]
   }
 ]

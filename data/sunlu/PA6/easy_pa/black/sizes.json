@@ -12,7 +12,13 @@
   {
     "uuid": "eecb7b6a-a33c-428f-83dd-0f5673e18647",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "purchase_links": [
+      {
+        "store_id": "sunlu",
+        "url": "https://store.sunlu.com/products/moq-6-easy-nylone-pa-3d-printer-filament-1kg"
+      }
+    ]
   },
   {
     "uuid": "f4a74551-cb9c-4d79-8fcd-1457ec21d714",

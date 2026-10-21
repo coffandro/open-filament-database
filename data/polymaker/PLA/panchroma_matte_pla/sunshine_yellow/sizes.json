@@ -6,6 +6,12 @@
     "spool_refill": false,
     "empty_spool_weight": 145,
     "spool_core_diameter": 100,
-    "discontinued": false
+    "discontinued": false,
+    "purchase_links": [
+      {
+        "store_id": "polymaker",
+        "url": "https://us.polymaker.com/products/matte-pla?variant=45410788573241"
+      }
+    ]
   }
 ]

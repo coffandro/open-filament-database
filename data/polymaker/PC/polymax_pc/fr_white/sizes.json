@@ -2,6 +2,12 @@
   {
     "uuid": "fdd44d32-6a37-4abc-bc68-9ecbb4dc88a0",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "purchase_links": [
+      {
+        "store_id": "polymaker",
+        "url": "https://us.polymaker.com/products/polymax-pc-fr?variant=39574348005433"
+      }
+    ]
   }
 ]

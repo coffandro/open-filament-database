@@ -2,6 +2,12 @@
   {
     "uuid": "dc2a2270-88cb-4993-87fc-b03feb8267bb",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "purchase_links": [
+      {
+        "store_id": "polymaker",
+        "url": "https://us.polymaker.com/products/matte-pla?variant=43631458189369"
+      }
+    ]
   }
 ]

@@ -2,6 +2,12 @@
   {
     "uuid": "ddb53689-fe57-4db3-bd33-f2228743119f",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "purchase_links": [
+      {
+        "store_id": "polymaker",
+        "url": "https://us.polymaker.com/products/silk-pla?variant=43637561065529"
+      }
+    ]
   }
 ]

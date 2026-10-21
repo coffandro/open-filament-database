@@ -12,7 +12,13 @@
   {
     "uuid": "d8ee1d33-b892-4023-a15a-21487e50acb3",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "purchase_links": [
+      {
+        "store_id": "sunlu",
+        "url": "https://store.sunlu.com/products/sunlu-peek-polyether-ether-ketone-3d-printer-filament-1kg-engineering-filaments"
+      }
+    ]
   },
   {
     "uuid": "a6812c2d-df61-4b76-a5c8-1e696da4cd59",

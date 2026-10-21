@@ -4,6 +4,12 @@
     "filament_weight": 1000,
     "diameter": 1.75,
     "gtin": "6938936710042",
-    "article_number": "PB01002"
+    "article_number": "PB01002",
+    "purchase_links": [
+      {
+        "store_id": "polymaker",
+        "url": "https://us.polymaker.com/products/petg?variant=45079221141561"
+      }
+    ]
   }
 ]

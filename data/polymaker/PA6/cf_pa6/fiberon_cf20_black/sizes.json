@@ -2,6 +2,12 @@
   {
     "uuid": "cea76425-7973-4d7d-a21b-60413921c3bc",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "purchase_links": [
+      {
+        "store_id": "polymaker",
+        "url": "https://us.polymaker.com/products/fiberon-pa6-cf20?variant=45720014880825"
+      }
+    ]
   }
 ]

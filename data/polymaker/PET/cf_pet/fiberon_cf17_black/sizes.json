@@ -2,6 +2,12 @@
   {
     "uuid": "b4f0ae05-4635-4712-aaa8-5035f47a26a2",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "purchase_links": [
+      {
+        "store_id": "polymaker",
+        "url": "https://us.polymaker.com/products/fiberon-pet-cf17?variant=45679990669369"
+      }
+    ]
   }
 ]

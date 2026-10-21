@@ -12,7 +12,13 @@
   {
     "uuid": "af54e9a4-c388-48d7-a17d-7edd17ab4219",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "purchase_links": [
+      {
+        "store_id": "sunlu",
+        "url": "https://store.sunlu.com/products/over-6kg-bundle-sale-pla-and-pla-plus-pla-meta-macaron-filament1kg-roll"
+      }
+    ]
   },
   {
     "uuid": "1ea61481-f0aa-4002-a036-56c053dd6b20",

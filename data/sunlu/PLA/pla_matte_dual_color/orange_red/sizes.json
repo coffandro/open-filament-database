@@ -12,7 +12,13 @@
   {
     "uuid": "b533914b-d652-461a-a967-1784233af8e1",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "purchase_links": [
+      {
+        "store_id": "sunlu",
+        "url": "https://store.sunlu.com/products/sunlu-matte-pla-dual-color-3d-printer-esthenic-filament-1kg"
+      }
+    ]
   },
   {
     "uuid": "586eea20-9169-4ce7-830e-0da8e776f8fe",

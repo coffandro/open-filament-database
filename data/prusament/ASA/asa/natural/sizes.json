@@ -14,6 +14,12 @@
     "uuid": "0394d562-b7fd-4840-be00-9be1ca26dd77",
     "filament_weight": 800,
     "diameter": 1.75,
-    "gtin": "8594173675247"
+    "gtin": "8594173675247",
+    "purchase_links": [
+      {
+        "store_id": "prusa3d",
+        "url": "https://www.prusa3d.com/product/prusament-asa-natural-800g-nfc/"
+      }
+    ]
   }
 ]

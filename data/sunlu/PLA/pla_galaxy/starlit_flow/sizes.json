@@ -12,7 +12,13 @@
   {
     "uuid": "23b96b45-d640-4819-a242-99a45eba97ae",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "purchase_links": [
+      {
+        "store_id": "sunlu",
+        "url": "https://store.sunlu.com/products/sunlu-pla-galaxy-filament-1kg-color-shifting-pla-filament"
+      }
+    ]
   },
   {
     "uuid": "7ce2e3f1-4eac-4ba5-b3f0-0f71648b6a99",

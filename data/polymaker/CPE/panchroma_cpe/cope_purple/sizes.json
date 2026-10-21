@@ -2,6 +2,12 @@
   {
     "uuid": "5c4329c8-a014-40d2-835e-67356e2068ca",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "purchase_links": [
+      {
+        "store_id": "polymaker",
+        "url": "https://us.polymaker.com/products/cope-filament?variant=43631571501113"
+      }
+    ]
   }
 ]

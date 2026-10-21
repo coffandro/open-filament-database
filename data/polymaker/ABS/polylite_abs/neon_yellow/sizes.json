@@ -4,6 +4,12 @@
     "filament_weight": 1000,
     "diameter": 1.75,
     "gtin": "6938936713555",
-    "article_number": "PE01050"
+    "article_number": "PE01050",
+    "purchase_links": [
+      {
+        "store_id": "polymaker",
+        "url": "https://us.polymaker.com/products/polylite-neon-abs?variant=41404997238841"
+      }
+    ]
   }
 ]

@@ -4,6 +4,12 @@
     "filament_weight": 1000,
     "diameter": 1.75,
     "gtin": "6938936713968",
-    "article_number": "PA12002"
+    "article_number": "PA12002",
+    "purchase_links": [
+      {
+        "store_id": "polymaker",
+        "url": "https://us.polymaker.com/products/polysonic-pla?variant=41550073331769"
+      }
+    ]
   }
 ]

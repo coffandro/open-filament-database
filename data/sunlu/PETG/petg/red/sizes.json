@@ -28,7 +28,13 @@
   {
     "uuid": "38a03b54-870e-417d-a16b-427a36cf9b59",
     "filament_weight": 3000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "purchase_links": [
+      {
+        "store_id": "sunlu",
+        "url": "https://store.sunlu.com/products/petg-filament-3kg-large-spool-3d-printer-filament-3kg"
+      }
+    ]
   },
   {
     "uuid": "92242441-bde2-4481-a7bd-29a4db481370",

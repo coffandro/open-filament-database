@@ -12,7 +12,13 @@
   {
     "uuid": "48e91330-0e28-4c6f-a354-9b62ac4abbf4",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "purchase_links": [
+      {
+        "store_id": "sunlu",
+        "url": "https://store.sunlu.com/products/sunlu-abs-flame-retardant-abs-fr-3d-printer-filament-1kg-engineering-filaments"
+      }
+    ]
   },
   {
     "uuid": "d6d214e5-a5a7-4c37-a18d-1881c39de08c",

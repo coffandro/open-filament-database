@@ -2,6 +2,12 @@
   {
     "uuid": "a30249eb-4c6e-4611-93fd-767c3ec88af7",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "purchase_links": [
+      {
+        "store_id": "polymaker",
+        "url": "https://us.polymaker.com/products/starlight-pla?variant=43631529164857"
+      }
+    ]
   }
 ]

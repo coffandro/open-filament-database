@@ -2,6 +2,12 @@
   {
     "uuid": "14e0078a-ce82-4915-8eb3-b4d143ff53a5",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "purchase_links": [
+      {
+        "store_id": "elegoo",
+        "url": "https://eu.elegoo.com/products/elegoo-rapid-pla-plus-filament-1-75mm-colored-1kg"
+      }
+    ]
   }
 ]

@@ -12,7 +12,13 @@
   {
     "uuid": "64b6b0fe-fd75-42f1-bb11-2cd0279a7e7e",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "purchase_links": [
+      {
+        "store_id": "sunlu",
+        "url": "https://store.sunlu.com/products/over-6kg-bundle-sale-petg-3d-printer-filament-1-75mm-1kg-roll"
+      }
+    ]
   },
   {
     "uuid": "8eec3573-06e5-48e9-bd59-5d673f77c836",

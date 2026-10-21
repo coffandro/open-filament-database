@@ -12,7 +12,13 @@
   {
     "uuid": "d388fdc2-e3e6-41cf-8304-62f6909c2488",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "purchase_links": [
+      {
+        "store_id": "sunlu",
+        "url": "https://store.sunlu.com/products/over-6kg-bundle-sale-abs-filament-1kg-roll"
+      }
+    ]
   },
   {
     "uuid": "880d95a9-d85b-4c77-af9f-9b883c3fdb7a",

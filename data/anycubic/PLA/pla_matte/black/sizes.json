@@ -5,6 +5,12 @@
     "diameter": 1.75,
     "spool_refill": false,
     "spool_core_diameter": 100,
-    "discontinued": false
+    "discontinued": false,
+    "purchase_links": [
+      {
+        "store_id": "anycubic",
+        "url": "https://store.anycubic.com/products/matte-pla-filament?variant=42943040290978"
+      }
+    ]
   }
 ]

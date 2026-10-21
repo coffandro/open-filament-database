@@ -2,6 +2,12 @@
   {
     "uuid": "c4c249de-9638-4e3c-9d42-2fd25ef77f5c",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "purchase_links": [
+      {
+        "store_id": "polymaker",
+        "url": "https://us.polymaker.com/products/marble-pla?variant=43631398944825"
+      }
+    ]
   }
 ]

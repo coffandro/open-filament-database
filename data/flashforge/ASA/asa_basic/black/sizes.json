@@ -7,6 +7,10 @@
       {
         "store_id": "amazon",
         "url": "https://a.co/d/fBNhUNa"
+      },
+      {
+        "store_id": "flashforge",
+        "url": "https://www.flashforge.com/products/asa?variant=41340405874766"
       }
     ]
   }
