@@ -33,12 +33,6 @@
     "diameter": 1.75,
     "spool_refill": true,
     "container_material": "refill",
-    "ean": "6975337038580",
-    "purchase_links": [
-      {
-        "store_id": "3deksperten",
-        "url": "https://3deksperten.dk/products/bambu-lab-petg-hf-black-1-75mm-1kg-refill"
-      }
-    ]
+    "ean": "6975337038580"
   }
 ]

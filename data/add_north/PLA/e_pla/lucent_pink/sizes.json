@@ -4,18 +4,18 @@
     "filament_weight": 750,
     "diameter": 1.75,
     "empty_spool_weight": 207,
-    "spool_core_diameter": 53,
-    "purchase_links": [
-      {
-        "store_id": "add_north",
-        "url": "https://addnorth.com/product/E-PLA/E-PLA%20-%201.75mm%20-%20750g%20-%20Lucent%20Pink"
-      }
-    ]
+    "spool_core_diameter": 53
   },
   {
     "uuid": "5f699919-ccdc-4d2c-b97e-a55628adaf52",
     "filament_weight": 1000,
     "diameter": 1.75,
-    "gtin": "7340182902345"
+    "gtin": "7340182902345",
+    "purchase_links": [
+      {
+        "store_id": "add_north",
+        "url": "https://addnorth.com/product/E-PLA/E-PLA%20-%201.75mm%20-%201000g%20-%20Lucent%20Pink"
+      }
+    ]
   }
 ]

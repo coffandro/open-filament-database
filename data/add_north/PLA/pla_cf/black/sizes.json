@@ -17,12 +17,6 @@
     "uuid": "27c7374e-5a46-4956-8899-8d8425f037c7",
     "filament_weight": 1000,
     "diameter": 2.85,
-    "discontinued": true,
-    "purchase_links": [
-      {
-        "store_id": "add_north",
-        "url": "https://addnorth.com/product/PLA%20CF%202.85/PLA%20CF%20-%202.85mm%20-%201000g%20-%20Black"
-      }
-    ]
+    "discontinued": true
   }
 ]

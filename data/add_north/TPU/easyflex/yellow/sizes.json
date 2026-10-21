@@ -4,18 +4,18 @@
     "filament_weight": 500,
     "diameter": 1.75,
     "empty_spool_weight": 175,
-    "spool_core_diameter": 41,
-    "purchase_links": [
-      {
-        "store_id": "add_north",
-        "url": "https://addnorth.com/product/EasyFlex/EasyFlex%20-%201.75mm%20-%20500g%20-%20Yellow"
-      }
-    ]
+    "spool_core_diameter": 41
   },
   {
     "uuid": "57334bdd-5ff3-4583-a754-2130ed3d7f1f",
     "filament_weight": 1000,
     "diameter": 1.75,
-    "gtin": "7340182903540"
+    "gtin": "7340182903540",
+    "purchase_links": [
+      {
+        "store_id": "add_north",
+        "url": "https://addnorth.com/product/EasyFlex/EasyFlex%20-%201.75mm%20-%201000g%20-%20Yellow"
+      }
+    ]
   }
 ]

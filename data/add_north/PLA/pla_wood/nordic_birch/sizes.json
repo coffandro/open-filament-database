@@ -4,13 +4,7 @@
     "filament_weight": 500,
     "diameter": 1.75,
     "empty_spool_weight": 175,
-    "spool_core_diameter": 41,
-    "purchase_links": [
-      {
-        "store_id": "add_north",
-        "url": "https://addnorth.com/product/PLA%20Wood/PLA%20Wood%20-%201.75mm%20-%20500g%20-%20Nordic%20Birch"
-      }
-    ]
+    "spool_core_diameter": 41
   },
   {
     "uuid": "a814d455-fe5b-43df-b987-f03e847b41bb",

@@ -4,13 +4,7 @@
     "filament_weight": 500,
     "diameter": 1.75,
     "empty_spool_weight": 175,
-    "spool_core_diameter": 41,
-    "purchase_links": [
-      {
-        "store_id": "add_north",
-        "url": "https://addnorth.com/product/Rigid%20X/Rigid%20X%20-%201.75mm%20-%20500g%20-%20Charcoal%20Blue"
-      }
-    ]
+    "spool_core_diameter": 41
   },
   {
     "uuid": "0f088106-befa-4181-aa38-3a5bb3595fbd",
@@ -19,6 +13,12 @@
     ],
     "filament_weight": 1000,
     "diameter": 1.75,
-    "gtin": "7340182904141"
+    "gtin": "7340182904141",
+    "purchase_links": [
+      {
+        "store_id": "add_north",
+        "url": "https://addnorth.com/product/Rigid%20X/Rigid%20X%20-%201.75mm%20-%201000g%20-%20Charcoal%20Blue"
+      }
+    ]
   }
 ]

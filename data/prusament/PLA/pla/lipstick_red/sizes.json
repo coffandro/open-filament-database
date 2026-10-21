@@ -13,12 +13,6 @@
   {
     "uuid": "9a1e679f-c4b9-4c71-bec8-d2e63ad0b5c3",
     "filament_weight": 2000,
-    "diameter": 1.75,
-    "purchase_links": [
-      {
-        "store_id": "prusa3d",
-        "url": "https://www.prusa3d.com/product/prusament-pla-lipstick-red-2kg/"
-      }
-    ]
+    "diameter": 1.75
   }
 ]

@@ -34,6 +34,7 @@
 	import type { SchemaFormConfig } from './schemaFormTypes';
 	import { formDrafts } from '$lib/stores/formDrafts';
 	import { generateSlug } from '$lib/services/entityService';
+	import { useSettledField } from '$lib/utils/settledField.svelte';
 
 	interface Props {
 		variant?: any;
@@ -392,9 +393,13 @@
 
 	// ==================== DATA-QUALITY GUARDS ====================
 
+	// The name hints below read this rather than formData.name, so they wait until the
+	// contributor pauses or leaves the field instead of flashing up mid-word.
+	const settledName = useSettledField(() => String(formData?.name ?? ''), 'name');
+
 	// Material type embedded in the colour name (redundant with the material folder).
 	let nameMaterialToken = $derived.by(() => {
-		const name = formData?.name;
+		const name = settledName.value;
 		if (!name || materialTypes.size === 0) return null;
 		const tokens = new Set([
 			...String(name).split(/[^a-zA-Z0-9]+/),
@@ -408,7 +413,10 @@
 
 	// Stray whitespace in a name is invisible in review and survives into every
 	// downstream consumer — #460 shipped a filament literally named "Silk ".
-	let nameWhitespace = $derived(checkNameWhitespace(String(formData?.name ?? '')));
+	let nameWhitespace = $derived(
+		// A trailing space is normal mid-typing ("Test " on the way to "Test Blue").
+		checkNameWhitespace(settledName.editing ? settledName.value.trimEnd() : settledName.value)
+	);
 
 	function fixNameWhitespace() {
 		if (nameWhitespace) formData.name = nameWhitespace.suggestion;
@@ -416,7 +424,7 @@
 
 	// A lowercase colour name beside Title Case siblings (#451, #452).
 	let nameCasing = $derived(
-		checkNameCasing(String(formData?.name ?? ''), siblingNames)
+		checkNameCasing(settledName.value, siblingNames)
 	);
 
 	function fixNameCasing() {
@@ -427,7 +435,7 @@
 	// siblings to compare against, so it also covers the first colour of a filament.
 	// Suppressed while the sibling nudge is showing, to avoid two hints on one field.
 	let nameLeadingCase = $derived(
-		nameCasing ? null : checkNameLeadingCase(String(formData?.name ?? ''))
+		nameCasing ? null : checkNameLeadingCase(settledName.value)
 	);
 
 	function fixNameLeadingCase() {

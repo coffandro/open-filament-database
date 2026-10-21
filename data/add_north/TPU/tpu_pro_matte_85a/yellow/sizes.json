@@ -4,18 +4,18 @@
     "filament_weight": 500,
     "diameter": 1.75,
     "empty_spool_weight": 175,
-    "spool_core_diameter": 41,
-    "purchase_links": [
-      {
-        "store_id": "add_north",
-        "url": "https://addnorth.com/product/TPU%20Pro%20Matte%2085A/TPU%20Pro%20Matte%2085A%20-%201.75mm%20-%20500g%20-%20Yellow"
-      }
-    ]
+    "spool_core_diameter": 41
   },
   {
     "uuid": "741f3d51-6bf9-4bec-9f10-4959b8f86421",
     "filament_weight": 1000,
     "diameter": 1.75,
-    "gtin": "7340182901539"
+    "gtin": "7340182901539",
+    "purchase_links": [
+      {
+        "store_id": "add_north",
+        "url": "https://addnorth.com/product/TPU%20Pro%20Matte%2085A/TPU%20Pro%20Matte%2085A%20-%201.75mm%20-%201000g%20-%20Yellow"
+      }
+    ]
   }
 ]

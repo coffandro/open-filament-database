@@ -35,12 +35,6 @@
     "spool_refill": true,
     "container_material": "refill",
     "ean": "6975337038634",
-    "discontinued": true,
-    "purchase_links": [
-      {
-        "store_id": "3deksperten",
-        "url": "https://3deksperten.dk/products/bambu-lab-petg-hf-white-1-75mm-1kg-refill"
-      }
-    ]
+    "discontinued": true
   }
 ]
