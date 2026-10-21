@@ -3,7 +3,7 @@
   "id": "the_filament",
   "name": "The Filament",
   "website": "https://spectrumfilaments.com/en/brand/the-filament-en/",
+  "parent_brand": "spectrum",
   "logo": "logo.png",
-  "origin": "PL",
-  "parent_brand": "spectrum"
+  "origin": "PL"
 }

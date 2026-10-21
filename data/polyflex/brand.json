@@ -3,7 +3,7 @@
   "id": "polyflex",
   "name": "PolyFlex",
   "website": "https://polymaker.com/",
+  "parent_brand": "polymaker",
   "logo": "logo.svg",
-  "origin": "CN",
-  "parent_brand": "polymaker"
+  "origin": "CN"
 }

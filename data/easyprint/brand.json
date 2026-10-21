@@ -3,7 +3,7 @@
   "id": "easyprint",
   "name": "EasyPrint",
   "website": "https://primacreator.com/",
+  "parent_brand": "primacreator",
   "logo": "logo.png",
-  "origin": "SE",
-  "parent_brand": "primacreator"
+  "origin": "SE"
 }

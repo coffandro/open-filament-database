@@ -3,7 +3,7 @@
   "id": "jessie",
   "name": "Jessie",
   "website": "https://www.printedsolid.com/",
+  "parent_brand": "printedsolid",
   "logo": "logo.png",
-  "origin": "US",
-  "parent_brand": "printedsolid"
+  "origin": "US"
 }

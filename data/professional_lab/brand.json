@@ -3,7 +3,7 @@
   "id": "professional_lab",
   "name": "Professional LAB",
   "website": "https://print-imagine.com/",
+  "parent_brand": "smartprint",
   "logo": "logo.png",
-  "origin": "PL",
-  "parent_brand": "smartprint"
+  "origin": "PL"
 }

@@ -3,7 +3,7 @@
   "id": "panchroma",
   "name": "Panchroma",
   "website": "https://polymaker.com/panchroma/",
+  "parent_brand": "polymaker",
   "logo": "logo.png",
-  "origin": "CN",
-  "parent_brand": "polymaker"
+  "origin": "CN"
 }
