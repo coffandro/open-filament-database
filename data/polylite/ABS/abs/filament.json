@@ -3,7 +3,12 @@
     "id": "abs",
     "name": "ABS",
     "diameter_tolerance": 0.02,
-    "density": 1.12,
+    "density": 1.04,
+    "min_print_temperature": 245,
+    "max_print_temperature": 265,
+    "min_bed_temperature": 90,
+    "max_bed_temperature": 100,
+    "data_sheet_url": "https://polymaker.com/wp-content/uploads/lana-downloads/TDS_Polymaker_PolyLite-ABS_V5.6_2025-12-30_EN.pdf",
     "slicer_settings": {
         "bambustudio": {
             "generic_id": "GFB99",
