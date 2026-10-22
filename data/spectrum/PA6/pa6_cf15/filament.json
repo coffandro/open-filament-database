@@ -3,7 +3,7 @@
   "id": "pa6_cf15",
   "name": "PA6 CF15",
   "diameter_tolerance": 0.02,
-  "density": 1.21,
+  "density": 1.25,
   "max_dry_temperature": 55,
   "min_print_temperature": 260,
   "max_print_temperature": 290,
