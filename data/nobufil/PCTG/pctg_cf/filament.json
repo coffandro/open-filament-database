@@ -3,9 +3,10 @@
   "id": "pctg_cf",
   "name": "PCTG CF",
   "diameter_tolerance": 0.02,
-  "density": 1.23,
-  "min_print_temperature": 230,
-  "max_print_temperature": 260,
-  "min_bed_temperature": 70,
-  "max_bed_temperature": 90
+  "density": 1.28,
+  "min_print_temperature": 255,
+  "max_print_temperature": 275,
+  "min_bed_temperature": 75,
+  "max_bed_temperature": 95,
+  "data_sheet_url": "https://www.nobufil.com/_files/ugd/c9047f_ae59d177a296497591e3a5f29d851ad2.pdf"
 }
