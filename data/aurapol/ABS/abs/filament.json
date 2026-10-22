@@ -5,8 +5,8 @@
   "diameter_tolerance": 0.02,
   "density": 1.04,
   "min_print_temperature": 230,
-  "max_print_temperature": 260,
-  "min_bed_temperature": 90,
+  "max_print_temperature": 250,
+  "min_bed_temperature": 100,
   "max_bed_temperature": 110,
   "data_sheet_url": "https://drive.google.com/file/d/1W7lHUyrL3-Mhov9DDaWcH1krceg3fZ9K/view"
 }
