@@ -1,0 +1,9 @@
+{
+  "id": "mocha",
+  "name": "Mocha",
+  "color_hex": "#4B3621",
+  "discontinued": false,
+  "traits": {
+    "matte": true
+  }
+}

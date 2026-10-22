@@ -1,0 +1,9 @@
+{
+  "id": "green",
+  "name": "Green",
+  "color_hex": "#008C63",
+  "discontinued": false,
+  "traits": {
+    "silk": true
+  }
+}

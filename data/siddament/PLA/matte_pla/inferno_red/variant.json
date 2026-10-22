@@ -1,0 +1,9 @@
+{
+  "id": "inferno_red",
+  "name": "Inferno Red",
+  "color_hex": "#FF0006",
+  "discontinued": false,
+  "traits": {
+    "matte": true
+  }
+}

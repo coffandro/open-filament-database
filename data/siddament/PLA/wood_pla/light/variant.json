@@ -1,0 +1,9 @@
+{
+  "id": "light",
+  "name": "Light",
+  "color_hex": "#A69B69",
+  "discontinued": false,
+  "traits": {
+    "abrasive": true
+  }
+}

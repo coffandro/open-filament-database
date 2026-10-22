@@ -1,0 +1,9 @@
+{
+  "id": "disc_grey",
+  "name": "Disc Grey",
+  "color_hex": "#CFC9B8",
+  "discontinued": false,
+  "traits": {
+    "matte": true
+  }
+}

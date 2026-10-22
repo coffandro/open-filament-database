@@ -1,0 +1,9 @@
+{
+  "id": "rose_gold",
+  "name": "Rose Gold",
+  "color_hex": "#A56F6B",
+  "discontinued": false,
+  "traits": {
+    "silk": true
+  }
+}

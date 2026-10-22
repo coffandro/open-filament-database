@@ -1,0 +1,9 @@
+{
+  "id": "ash_grey",
+  "name": "Ash Grey",
+  "color_hex": "#454343",
+  "discontinued": false,
+  "traits": {
+    "silk": true
+  }
+}

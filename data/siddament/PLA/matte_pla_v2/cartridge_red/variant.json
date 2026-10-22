@@ -1,0 +1,9 @@
+{
+  "id": "cartridge_red",
+  "name": "Cartridge Red",
+  "color_hex": "#C7382E",
+  "discontinued": false,
+  "traits": {
+    "matte": true
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "id": "pink",
+  "name": "Pink",
+  "color_hex": "#DC857A",
+  "discontinued": false,
+  "traits": {
+    "silk": true
+  }
+}

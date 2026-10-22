@@ -1,0 +1,9 @@
+{
+  "id": "magenta",
+  "name": "Magenta",
+  "color_hex": "#990050",
+  "discontinued": false,
+  "traits": {
+    "silk": true
+  }
+}

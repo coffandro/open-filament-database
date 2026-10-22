@@ -1,0 +1,9 @@
+{
+  "id": "chrome",
+  "name": "Chrome",
+  "color_hex": "#384657",
+  "discontinued": false,
+  "traits": {
+    "silk": true
+  }
+}

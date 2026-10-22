@@ -1,0 +1,9 @@
+{
+  "id": "emerald",
+  "name": "Emerald",
+  "color_hex": "#1F8A70",
+  "discontinued": false,
+  "traits": {
+    "matte": true
+  }
+}

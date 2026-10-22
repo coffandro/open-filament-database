@@ -1,0 +1,9 @@
+{
+  "id": "magenta",
+  "name": "Magenta",
+  "color_hex": "#EC008C",
+  "discontinued": false,
+  "traits": {
+    "matte": true
+  }
+}

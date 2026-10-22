@@ -1,0 +1,9 @@
+{
+  "id": "pastel_orange",
+  "name": "Pastel Orange",
+  "color_hex": "#FFDFBA",
+  "discontinued": false,
+  "traits": {
+    "matte": true
+  }
+}

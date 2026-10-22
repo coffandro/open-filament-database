@@ -1,0 +1,9 @@
+{
+  "id": "frost_cyan",
+  "name": "Frost Cyan",
+  "color_hex": "#9FD8E8",
+  "discontinued": false,
+  "traits": {
+    "matte": true
+  }
+}

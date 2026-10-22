@@ -1,0 +1,9 @@
+{
+  "id": "hyper_lime_green",
+  "name": "Hyper Lime Green",
+  "color_hex": "#9AFF00",
+  "discontinued": false,
+  "traits": {
+    "matte": true
+  }
+}

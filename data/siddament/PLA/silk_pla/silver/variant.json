@@ -1,0 +1,9 @@
+{
+  "id": "silver",
+  "name": "Silver",
+  "color_hex": "#818C9F",
+  "discontinued": false,
+  "traits": {
+    "silk": true
+  }
+}

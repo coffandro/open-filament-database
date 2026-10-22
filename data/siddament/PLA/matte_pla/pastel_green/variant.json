@@ -1,0 +1,9 @@
+{
+  "id": "pastel_green",
+  "name": "Pastel Green",
+  "color_hex": "#BAFFC9",
+  "discontinued": false,
+  "traits": {
+    "matte": true
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "id": "vivid_magenta",
+  "name": "Vivid Magenta",
+  "color_hex": "#FE0194",
+  "discontinued": false,
+  "traits": {
+    "matte": true
+  }
+}

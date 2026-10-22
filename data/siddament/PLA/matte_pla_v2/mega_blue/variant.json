@@ -1,0 +1,9 @@
+{
+  "id": "mega_blue",
+  "name": "Mega Blue",
+  "color_hex": "#1E63C8",
+  "discontinued": false,
+  "traits": {
+    "matte": true
+  }
+}

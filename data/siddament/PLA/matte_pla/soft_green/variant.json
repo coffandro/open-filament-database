@@ -1,0 +1,9 @@
+{
+  "id": "soft_green",
+  "name": "Soft Green",
+  "color_hex": "#01FEB2",
+  "discontinued": false,
+  "traits": {
+    "matte": true
+  }
+}

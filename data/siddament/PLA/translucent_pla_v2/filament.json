@@ -1,0 +1,12 @@
+{
+  "id": "translucent_pla_v2",
+  "name": "Translucent PLA V2",
+  "diameter_tolerance": 0.03,
+  "density": 1.24,
+  "max_dry_temperature": 45,
+  "min_print_temperature": 190,
+  "max_print_temperature": 220,
+  "min_bed_temperature": 60,
+  "max_bed_temperature": 60,
+  "discontinued": false
+}

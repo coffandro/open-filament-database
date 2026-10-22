@@ -1,0 +1,9 @@
+{
+  "id": "royal_blue",
+  "name": "Royal Blue",
+  "color_hex": "#004CFF",
+  "discontinued": false,
+  "traits": {
+    "matte": true
+  }
+}

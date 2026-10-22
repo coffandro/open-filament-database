@@ -1,0 +1,13 @@
+{
+  "id": "pla_cf",
+  "name": "PLA CF",
+  "diameter_tolerance": 0.02,
+  "density": 1.22,
+  "max_dry_temperature": 70,
+  "min_print_temperature": 190,
+  "max_print_temperature": 220,
+  "min_bed_temperature": 60,
+  "max_bed_temperature": 60,
+  "data_sheet_url": "https://cdn.shopify.com/s/files/1/0685/9168/1815/files/SIDDAMENT_PLA_Carbon_Fiber_Datasheet_849917f7-6227-4b99-8c51-5e98212c774d.pdf?v=1777571314",
+  "discontinued": false
+}

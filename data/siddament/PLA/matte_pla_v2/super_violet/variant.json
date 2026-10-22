@@ -1,0 +1,9 @@
+{
+  "id": "super_violet",
+  "name": "Super Violet",
+  "color_hex": "#5B4B9E",
+  "discontinued": false,
+  "traits": {
+    "matte": true
+  }
+}

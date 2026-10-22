@@ -1,0 +1,9 @@
+{
+  "id": "cream",
+  "name": "Cream",
+  "color_hex": "#FBF3C4",
+  "discontinued": false,
+  "traits": {
+    "matte": true
+  }
+}

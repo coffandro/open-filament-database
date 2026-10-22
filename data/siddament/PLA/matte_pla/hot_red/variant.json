@@ -1,0 +1,9 @@
+{
+  "id": "hot_red",
+  "name": "Hot Red",
+  "color_hex": "#FE2B02",
+  "discontinued": false,
+  "traits": {
+    "matte": true
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "id": "cool_green",
+  "name": "Cool Green",
+  "color_hex": "#00FE74",
+  "discontinued": true,
+  "traits": {
+    "matte": true
+  }
+}

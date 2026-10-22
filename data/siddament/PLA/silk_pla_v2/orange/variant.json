@@ -1,0 +1,9 @@
+{
+  "id": "orange",
+  "name": "Orange",
+  "color_hex": "#F14700",
+  "discontinued": false,
+  "traits": {
+    "silk": true
+  }
+}

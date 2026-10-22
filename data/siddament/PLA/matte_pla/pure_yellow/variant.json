@@ -1,0 +1,9 @@
+{
+  "id": "pure_yellow",
+  "name": "Pure Yellow",
+  "color_hex": "#FFFF00",
+  "discontinued": false,
+  "traits": {
+    "matte": true
+  }
+}

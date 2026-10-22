@@ -1,0 +1,9 @@
+{
+  "id": "dark",
+  "name": "Dark",
+  "color_hex": "#8B7155",
+  "discontinued": false,
+  "traits": {
+    "abrasive": true
+  }
+}
