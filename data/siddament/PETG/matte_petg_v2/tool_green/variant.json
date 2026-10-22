@@ -1,0 +1,10 @@
+{
+  "id": "tool_green",
+  "name": "Tool Green",
+  "color_hex": "#CCDA46",
+  "discontinued": false,
+  "traits": {
+    "matte": true,
+    "abrasive": true
+  }
+}

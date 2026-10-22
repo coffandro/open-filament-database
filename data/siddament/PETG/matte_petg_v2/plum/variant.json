@@ -1,0 +1,10 @@
+{
+  "id": "plum",
+  "name": "Plum",
+  "color_hex": "#3C1F3A",
+  "discontinued": false,
+  "traits": {
+    "matte": true,
+    "abrasive": true
+  }
+}

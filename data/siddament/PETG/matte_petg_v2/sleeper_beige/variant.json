@@ -1,0 +1,10 @@
+{
+  "id": "sleeper_beige",
+  "name": "Sleeper Beige",
+  "color_hex": "#DDD3B8",
+  "discontinued": false,
+  "traits": {
+    "matte": true,
+    "abrasive": true
+  }
+}

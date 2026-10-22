@@ -1,0 +1,10 @@
+{
+  "id": "boot_green",
+  "name": "Boot Green",
+  "color_hex": "#0E7A3A",
+  "discontinued": false,
+  "traits": {
+    "matte": true,
+    "abrasive": true
+  }
+}

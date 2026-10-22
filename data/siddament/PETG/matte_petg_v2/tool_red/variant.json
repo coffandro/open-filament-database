@@ -1,0 +1,10 @@
+{
+  "id": "tool_red",
+  "name": "Tool Red",
+  "color_hex": "#C8102E",
+  "discontinued": false,
+  "traits": {
+    "matte": true,
+    "abrasive": true
+  }
+}

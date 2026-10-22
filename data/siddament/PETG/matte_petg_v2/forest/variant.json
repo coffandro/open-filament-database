@@ -1,0 +1,10 @@
+{
+  "id": "forest",
+  "name": "Forest",
+  "color_hex": "#1B4332",
+  "discontinued": false,
+  "traits": {
+    "matte": true,
+    "abrasive": true
+  }
+}

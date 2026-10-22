@@ -1,0 +1,10 @@
+{
+  "id": "dewhat_yellow",
+  "name": "DeWhat Yellow",
+  "color_hex": "#F2A900",
+  "discontinued": false,
+  "traits": {
+    "matte": true,
+    "abrasive": true
+  }
+}

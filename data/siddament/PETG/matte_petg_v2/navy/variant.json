@@ -1,0 +1,10 @@
+{
+  "id": "navy",
+  "name": "Navy",
+  "color_hex": "#14213D",
+  "discontinued": false,
+  "traits": {
+    "matte": true,
+    "abrasive": true
+  }
+}

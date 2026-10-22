@@ -1,0 +1,10 @@
+{
+  "id": "pink",
+  "name": "Pink",
+  "color_hex": "#D99CA4",
+  "discontinued": false,
+  "traits": {
+    "matte": true,
+    "abrasive": true
+  }
+}

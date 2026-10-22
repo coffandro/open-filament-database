@@ -1,0 +1,10 @@
+{
+  "id": "blush",
+  "name": "Blush",
+  "color_hex": "#F3C4CE",
+  "discontinued": false,
+  "traits": {
+    "matte": true,
+    "abrasive": true
+  }
+}

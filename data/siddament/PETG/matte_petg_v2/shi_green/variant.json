@@ -1,0 +1,10 @@
+{
+  "id": "shi_green",
+  "name": "Shi Green",
+  "color_hex": "#6CBB3C",
+  "discontinued": false,
+  "traits": {
+    "matte": true,
+    "abrasive": true
+  }
+}

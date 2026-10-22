@@ -1,0 +1,10 @@
+{
+  "id": "tan",
+  "name": "Tan",
+  "color_hex": "#A9763F",
+  "discontinued": false,
+  "traits": {
+    "matte": true,
+    "abrasive": true
+  }
+}

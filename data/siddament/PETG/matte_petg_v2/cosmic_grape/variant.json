@@ -1,0 +1,10 @@
+{
+  "id": "cosmic_grape",
+  "name": "Cosmic Grape",
+  "color_hex": "#6B3FA0",
+  "discontinued": false,
+  "traits": {
+    "matte": true,
+    "abrasive": true
+  }
+}

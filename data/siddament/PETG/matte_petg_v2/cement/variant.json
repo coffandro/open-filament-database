@@ -1,0 +1,10 @@
+{
+  "id": "cement",
+  "name": "Cement",
+  "color_hex": "#8A8780",
+  "discontinued": false,
+  "traits": {
+    "matte": true,
+    "abrasive": true
+  }
+}

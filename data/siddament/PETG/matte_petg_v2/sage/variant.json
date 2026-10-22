@@ -1,0 +1,10 @@
+{
+  "id": "sage",
+  "name": "Sage",
+  "color_hex": "#9CA487",
+  "discontinued": false,
+  "traits": {
+    "matte": true,
+    "abrasive": true
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "id": "dark_grey",
+  "name": "Dark Grey",
+  "color_hex": "#808080",
+  "discontinued": false,
+  "traits": {
+    "matte": true,
+    "abrasive": true
+  }
+}

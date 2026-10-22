@@ -1,0 +1,10 @@
+{
+  "id": "burgundy",
+  "name": "Burgundy",
+  "color_hex": "#5A1A2C",
+  "discontinued": false,
+  "traits": {
+    "matte": true,
+    "abrasive": true
+  }
+}

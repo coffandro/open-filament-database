@@ -1,0 +1,10 @@
+{
+  "id": "tool_blue",
+  "name": "Tool Blue",
+  "color_hex": "#007577",
+  "discontinued": false,
+  "traits": {
+    "matte": true,
+    "abrasive": true
+  }
+}

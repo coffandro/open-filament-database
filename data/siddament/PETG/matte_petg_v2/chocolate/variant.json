@@ -1,0 +1,10 @@
+{
+  "id": "chocolate",
+  "name": "Chocolate",
+  "color_hex": "#3A2618",
+  "discontinued": false,
+  "traits": {
+    "matte": true,
+    "abrasive": true
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "id": "terracotta",
+  "name": "Terracotta",
+  "color_hex": "#A8442A",
+  "discontinued": false,
+  "traits": {
+    "matte": true,
+    "abrasive": true
+  }
+}
