@@ -3,6 +3,8 @@
     "uuid": "8b2a2953-ca38-43ec-8112-f61fd2b3d3b8",
     "filament_weight": 1000,
     "diameter": 1.75,
+    "gtin": "6932704922712",
+    "article_number": "50.203.0053",
     "purchase_links": [
       {
         "store_id": "elegoo",

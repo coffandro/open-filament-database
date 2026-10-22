@@ -6,6 +6,7 @@
     "spool_refill": false,
     "empty_spool_weight": 250,
     "spool_core_diameter": 100,
+    "article_number": "50.203.0775",
     "discontinued": false,
     "purchase_links": [
       {
