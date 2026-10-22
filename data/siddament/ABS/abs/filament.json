@@ -1,0 +1,13 @@
+{
+  "id": "abs",
+  "name": "ABS",
+  "diameter_tolerance": 0.02,
+  "density": 1.08,
+  "max_dry_temperature": 65,
+  "min_print_temperature": 240,
+  "max_print_temperature": 260,
+  "min_bed_temperature": 90,
+  "max_bed_temperature": 110,
+  "data_sheet_url": "https://cdn.shopify.com/s/files/1/0685/9168/1815/files/SIDDAMENT_ABS_Datasheet_a8510213-d60b-4d0e-8ae1-48c76183c473.pdf?v=1777571390",
+  "discontinued": true
+}
