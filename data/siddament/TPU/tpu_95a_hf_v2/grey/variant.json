@@ -1,0 +1,9 @@
+{
+  "id": "grey",
+  "name": "Grey",
+  "color_hex": "#808080",
+  "discontinued": false,
+  "traits": {
+    "high_flow": true
+  }
+}

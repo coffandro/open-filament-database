@@ -1,0 +1,9 @@
+{
+  "id": "purple",
+  "name": "Purple",
+  "color_hex": "#9500FF",
+  "discontinued": false,
+  "traits": {
+    "high_flow": true
+  }
+}
