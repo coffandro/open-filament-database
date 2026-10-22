@@ -5,6 +5,10 @@
     "diameter_tolerance": 0.02,
     "density": 1.03,
     "max_dry_temperature": 65,
+    "min_print_temperature": 230,
+    "max_print_temperature": 260,
+    "min_bed_temperature": 100,
+    "max_bed_temperature": 110,
     "slicer_settings": {
         "bambustudio": {
             "generic_id": "GFB99",
