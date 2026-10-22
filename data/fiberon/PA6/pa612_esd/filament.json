@@ -3,7 +3,12 @@
     "id": "pa612_esd",
     "name": "PA612-ESD",
     "diameter_tolerance": 0.02,
-    "density": 1.03,
+    "density": 1.1,
+    "min_print_temperature": 280,
+    "max_print_temperature": 300,
+    "min_bed_temperature": 40,
+    "max_bed_temperature": 50,
+    "data_sheet_url": "https://fiberon.polymaker.com/wp-content/uploads/TDS_FIBERON-PA612-ESD_V1.0_EN.pdf",
     "slicer_settings": {
         "orcaslicer": {
             "id": "GFL72",

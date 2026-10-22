@@ -4,6 +4,11 @@
     "name": "PA12-CF10",
     "diameter_tolerance": 0.02,
     "density": 1.06,
+    "min_print_temperature": 280,
+    "max_print_temperature": 300,
+    "min_bed_temperature": 40,
+    "max_bed_temperature": 50,
+    "data_sheet_url": "https://fiberon.polymaker.com/wp-content/uploads/TDS_FIBERON-PA12-CF10_V1.1_EN.pdf",
     "slicer_settings": {
         "orcaslicer": {
             "id": "GFL56",
