@@ -3,6 +3,7 @@
   "name": "TPU 90A V2",
   "diameter_tolerance": 0.03,
   "density": 1.09,
+  "shore_hardness_a": 90,
   "max_dry_temperature": 55,
   "min_print_temperature": 210,
   "max_print_temperature": 230,
