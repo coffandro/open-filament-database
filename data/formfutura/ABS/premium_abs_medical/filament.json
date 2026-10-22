@@ -12,7 +12,7 @@
   "min_print_temperature": 235,
   "max_print_temperature": 260,
   "min_bed_temperature": 90,
-  "max_bed_temperature": 110,
+  "max_bed_temperature": 100,
   "data_sheet_url": "https://www.formfutura.com/web/content/306558?download=true",
   "safety_sheet_url": "https://www.formfutura.com/web/content/306588?download=true",
   "discontinued": false
