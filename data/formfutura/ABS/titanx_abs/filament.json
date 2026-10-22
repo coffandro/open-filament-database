@@ -3,7 +3,7 @@
   "id": "titanx_abs",
   "name": "TitanX",
   "diameter_tolerance": 0.02,
-  "density": 1.05,
+  "density": 1.1,
   "min_print_temperature": 245,
   "max_print_temperature": 270,
   "min_bed_temperature": 100,
