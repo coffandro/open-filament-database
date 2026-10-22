@@ -4,5 +4,6 @@
   "name": "TPU PS Imports",
   "diameter_tolerance": 0.02,
   "density": 1.19,
+  "shore_hardness_a": 95,
   "max_dry_temperature": 55
 }
