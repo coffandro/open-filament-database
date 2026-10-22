@@ -10,5 +10,21 @@
   "min_bed_temperature": 50,
   "max_bed_temperature": 60,
   "data_sheet_url": "https://cdn.shopify.com/s/files/1/0685/9168/1815/files/SIDDAMENT_V2_TPU95A_TDS.pdf?v=1779204094",
-  "discontinued": false
+  "discontinued": false,
+  "slicer_settings": {
+    "bambustudio": {
+      "profile_name": "Siddament TPU 95A (non-HF)"
+    },
+    "orcaslicer": {
+      "overrides": {
+        "filament_flow_ratio": 1,
+        "filament_max_volumetric_speed": 3.6
+      },
+      "profile_name": "Siddament TPU 95A (non-HF)"
+    },
+    "generic": {
+      "first_layer_nozzle_temp": 230,
+      "nozzle_temp": 230
+    }
+  }
 }

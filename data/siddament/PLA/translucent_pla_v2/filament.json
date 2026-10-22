@@ -8,5 +8,21 @@
   "max_print_temperature": 220,
   "min_bed_temperature": 60,
   "max_bed_temperature": 60,
-  "discontinued": false
+  "discontinued": false,
+  "slicer_settings": {
+    "bambustudio": {
+      "profile_name": "Siddament PLA Normal - Translucent"
+    },
+    "orcaslicer": {
+      "overrides": {
+        "filament_flow_ratio": 0.98,
+        "filament_max_volumetric_speed": 22
+      },
+      "profile_name": "Siddament PLA Normal - Translucent"
+    },
+    "generic": {
+      "bed_temp": 60,
+      "first_layer_bed_temp": 60
+    }
+  }
 }
