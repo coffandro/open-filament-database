@@ -22,5 +22,10 @@
     "filament_weight": 2500,
     "diameter": 2.85,
     "empty_spool_weight": 590
+  },
+  {
+    "filament_weight": 1000,
+    "diameter": 1.75,
+    "gtin": "8595632800545"
   }
 ]
