@@ -5,6 +5,7 @@
     "diameter": 1.75,
     "empty_spool_weight": 220,
     "spool_core_diameter": 55,
+    "article_number": "16200",
     "purchase_links": [
       {
         "store_id": "beehive",
