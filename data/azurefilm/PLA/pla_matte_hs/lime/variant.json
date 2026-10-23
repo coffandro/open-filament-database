@@ -4,6 +4,7 @@
   "name": "Lime",
   "color_hex": "#8CB712",
   "traits": {
-    "matte": true
+    "matte": true,
+    "high_flow": true
   }
 }

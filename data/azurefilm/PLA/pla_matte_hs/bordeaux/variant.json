@@ -6,6 +6,7 @@
     "#844C54"
   ],
   "traits": {
-    "matte": true
+    "matte": true,
+    "high_flow": true
   }
 }

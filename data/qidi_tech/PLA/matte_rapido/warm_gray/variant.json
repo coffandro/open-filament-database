@@ -4,6 +4,7 @@
   "name": "Warm Gray",
   "color_hex": "#B7ADA5",
   "traits": {
-    "matte": true
+    "matte": true,
+    "high_flow": true
   }
 }

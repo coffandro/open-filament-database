@@ -4,6 +4,7 @@
   "name": "Metallic Bright Gold",
   "color_hex": "#E3B145",
   "traits": {
-    "imitates_metal": true
+    "imitates_metal": true,
+    "high_flow": true
   }
 }

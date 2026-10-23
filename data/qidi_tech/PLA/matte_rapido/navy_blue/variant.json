@@ -4,6 +4,7 @@
   "name": "Navy Blue",
   "color_hex": "#353E47",
   "traits": {
-    "matte": true
+    "matte": true,
+    "high_flow": true
   }
 }

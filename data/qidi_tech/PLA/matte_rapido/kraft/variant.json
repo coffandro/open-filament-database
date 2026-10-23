@@ -4,6 +4,7 @@
   "name": "Kraft",
   "color_hex": "#C6AA76",
   "traits": {
-    "matte": true
+    "matte": true,
+    "high_flow": true
   }
 }

@@ -4,6 +4,7 @@
   "name": "Ash Gray",
   "color_hex": "#313335",
   "traits": {
-    "matte": true
+    "matte": true,
+    "high_flow": true
   }
 }

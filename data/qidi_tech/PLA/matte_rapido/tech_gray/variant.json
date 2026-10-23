@@ -4,6 +4,7 @@
   "name": "Tech Gray",
   "color_hex": "#C1C1C1",
   "traits": {
-    "matte": true
+    "matte": true,
+    "high_flow": true
   }
 }

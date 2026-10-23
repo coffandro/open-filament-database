@@ -4,6 +4,7 @@
   "name": "Olive Green",
   "color_hex": "#555B43",
   "traits": {
-    "matte": true
+    "matte": true,
+    "high_flow": true
   }
 }

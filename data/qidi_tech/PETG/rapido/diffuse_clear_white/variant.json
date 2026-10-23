@@ -4,6 +4,7 @@
   "name": "Diffuse Clear White",
   "color_hex": "#FFFFFF",
   "traits": {
-    "translucent": true
+    "translucent": true,
+    "high_flow": true
   }
 }

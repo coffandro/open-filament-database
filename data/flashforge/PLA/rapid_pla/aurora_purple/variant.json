@@ -4,6 +4,7 @@
   "name": "Aurora Purple",
   "color_hex": "#8846AE",
   "traits": {
-    "industrially_compostable": true
+    "industrially_compostable": true,
+    "high_flow": true
   }
 }

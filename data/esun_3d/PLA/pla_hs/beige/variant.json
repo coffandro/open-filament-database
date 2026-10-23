@@ -2,5 +2,8 @@
   "uuid": "93bd6997-620f-4588-88ad-ab807aaae3aa",
   "id": "beige",
   "name": "Beige",
-  "color_hex": "#E8B99F"
+  "color_hex": "#E8B99F",
+  "traits": {
+    "high_flow": true
+  }
 }
