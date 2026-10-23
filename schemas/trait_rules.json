@@ -47,6 +47,17 @@
             "note": "Often marketed as high-speed. 719/720 matching variants already carry it."
         },
         {
+            "id": "high_speed_brand_names",
+            "pattern": "(?:^|[^a-z])(?:rapido?|hyper|turbo|hs)(?![a-z])",
+            "traits": [
+                "high_flow"
+            ],
+            "applies_to": [
+                "suggest"
+            ],
+            "note": "Brand words for high-speed lines (Elegoo/Flashforge RAPID, QIDI Rapido, Creality Hyper, Overture Turbo, eSUN/AzureFilm HS). 286/462 matching variants carry high_flow. Not true by definition: Creality Hyper Luminous PLA is rated 50-100 mm/s and QIDI's Metal/Silk Rapido 40-200 mm/s, so suggest only. Bare 'fast' is deliberately not matched (CookieCad 'Fast Change' is a colour change)."
+        },
+        {
             "id": "foaming",
             "code": "LW",
             "pattern": "(?:^|[^a-z])aero(?![a-z])|(?:^|[^a-z])lw(?![a-z])|light[\\s_+-]?weight|(?:^|[^a-z])(?:ultra)?foam(?:ing|y)?(?![a-z])",

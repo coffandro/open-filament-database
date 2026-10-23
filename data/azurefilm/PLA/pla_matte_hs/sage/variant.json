@@ -6,6 +6,7 @@
     "#A1A397"
   ],
   "traits": {
-    "matte": true
+    "matte": true,
+    "high_flow": true
   }
 }

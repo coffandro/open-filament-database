@@ -13,6 +13,7 @@
     "glow": true,
     "gradual_color_change": true,
     "industrially_compostable": true,
-    "abrasive": true
+    "abrasive": true,
+    "high_flow": true
   }
 }

@@ -74,6 +74,19 @@ describe('detectSuggestedTraits', () => {
 		expect(detect('PLA', 'pla_premium_highspeed', 'Blue')).toEqual(['high_flow']);
 	});
 
+	it('suggests high flow from high-speed brand words', () => {
+		expect(detect('PETG', 'rapid_petg', 'Black')).toEqual(['high_flow']);
+		expect(detect('PLA', 'rapido', 'Blue')).toEqual(['high_flow']);
+		expect(detect('PLA', 'hyper_pla', 'White')).toEqual(['high_flow']);
+		expect(detect('PLA', 'turbo_rapid', 'Grey')).toEqual(['high_flow']);
+		expect(detect('PETG', 'petg+hs', 'Red')).toEqual(['high_flow']);
+	});
+
+	it('does not suggest high flow for unrelated words', () => {
+		expect(detect('PLA', 'mermaid_fast_change_purple', 'Purple')).toEqual([]);
+		expect(detect('PLA', 'pla', 'Hyacinth')).toEqual([]);
+	});
+
 	it('detects foaming from aero / lw / light weight / foam names', () => {
 		expect(detect('PLA', 'aero', 'White')).toEqual(['foaming']);
 		expect(detect('PLA', 'lw_pla', 'Black')).toEqual(['foaming']);

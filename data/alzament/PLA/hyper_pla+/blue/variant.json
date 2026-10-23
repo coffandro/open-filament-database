@@ -4,5 +4,8 @@
   "name": "Blue",
   "color_hex": [
     "#2c55a9"
-  ]
+  ],
+  "traits": {
+    "high_flow": true
+  }
 }

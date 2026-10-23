@@ -4,5 +4,8 @@
   "name": "White",
   "color_hex": [
     "#ffffff"
-  ]
+  ],
+  "traits": {
+    "high_flow": true
+  }
 }

@@ -2,5 +2,8 @@
   "uuid": "d05cc308-d15f-492d-b6b4-683abaf833d2",
   "id": "matcha_green",
   "name": "Matcha Green",
-  "color_hex": "#656E1D"
+  "color_hex": "#656E1D",
+  "traits": {
+    "high_flow": true
+  }
 }

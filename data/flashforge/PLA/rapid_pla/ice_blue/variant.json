@@ -4,6 +4,7 @@
   "name": "Ice Blue",
   "color_hex": "#5FBCDD",
   "traits": {
-    "industrially_compostable": true
+    "industrially_compostable": true,
+    "high_flow": true
   }
 }

@@ -4,6 +4,7 @@
   "name": "Purple",
   "color_hex": "#835476",
   "traits": {
-    "silk": true
+    "silk": true,
+    "high_flow": true
   }
 }

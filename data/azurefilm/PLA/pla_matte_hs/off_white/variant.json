@@ -6,6 +6,7 @@
     "#CFC6BB"
   ],
   "traits": {
-    "matte": true
+    "matte": true,
+    "high_flow": true
   }
 }

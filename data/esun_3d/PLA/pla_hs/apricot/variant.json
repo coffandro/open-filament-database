@@ -2,5 +2,8 @@
   "uuid": "7c4639e0-4377-450f-860c-0dde720596d8",
   "id": "apricot",
   "name": "Apricot",
-  "color_hex": "#E7923F"
+  "color_hex": "#E7923F",
+  "traits": {
+    "high_flow": true
+  }
 }

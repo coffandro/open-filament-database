@@ -4,5 +4,8 @@
   "name": "Black",
   "color_hex": [
     "#000000"
-  ]
+  ],
+  "traits": {
+    "high_flow": true
+  }
 }
