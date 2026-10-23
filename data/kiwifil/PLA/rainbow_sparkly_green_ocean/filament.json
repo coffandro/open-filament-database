@@ -2,10 +2,10 @@
   "uuid": "78129676-fd7a-4be5-9332-0588d245adcc",
   "id": "rainbow_sparkly_green_ocean",
   "name": "PLA Rainbow \"Sparkly Green Ocean\"",
-  "diameter_tolerance": 0.02,
+  "diameter_tolerance": 0.05,
   "density": 1.24,
-  "min_print_temperature": 190,
-  "max_print_temperature": 230,
+  "min_print_temperature": 210,
+  "max_print_temperature": 225,
   "min_bed_temperature": 50,
-  "max_bed_temperature": 70
+  "max_bed_temperature": 65
 }
