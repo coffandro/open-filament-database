@@ -2,6 +2,14 @@
   {
     "uuid": "e3ea4ddc-f1c8-448b-af0b-a40ce8024934",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "5060665813259",
+    "article_number": "E45MS"
+  },
+  {
+    "filament_weight": 4000,
+    "diameter": 1.75,
+    "gtin": "5060665813372",
+    "article_number": "E47MS"
   }
 ]

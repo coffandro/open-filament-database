@@ -2,6 +2,26 @@
   {
     "uuid": "516f2feb-84c8-4aca-bebe-43ee33877f1c",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "639302732533",
+    "article_number": "A1501"
+  },
+  {
+    "filament_weight": 1000,
+    "diameter": 2.85,
+    "gtin": "639302732649",
+    "article_number": "A1601"
+  },
+  {
+    "filament_weight": 4000,
+    "diameter": 1.75,
+    "gtin": "639302733776",
+    "article_number": "A1701"
+  },
+  {
+    "filament_weight": 4000,
+    "diameter": 2.85,
+    "gtin": "639302733790",
+    "article_number": "A1801"
   }
 ]

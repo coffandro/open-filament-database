@@ -6,6 +6,8 @@
     "spool_refill": false,
     "empty_spool_weight": 250,
     "spool_core_diameter": 100,
-    "discontinued": false
+    "discontinued": false,
+    "gtin": "793897608083",
+    "article_number": "E4535"
   }
 ]

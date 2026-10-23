@@ -2,6 +2,26 @@
   {
     "uuid": "13c424cc-2e56-4632-9a57-9319eb6f56a6",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "639302732069",
+    "article_number": "A35MG"
+  },
+  {
+    "filament_weight": 1000,
+    "diameter": 2.85,
+    "gtin": "639302732076",
+    "article_number": "A36MG"
+  },
+  {
+    "filament_weight": 4000,
+    "diameter": 1.75,
+    "gtin": "793897788518",
+    "article_number": "A37MG"
+  },
+  {
+    "filament_weight": 4000,
+    "diameter": 2.85,
+    "gtin": "639302731178",
+    "article_number": "A38MG"
   }
 ]
