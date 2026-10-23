@@ -3,9 +3,10 @@
   "id": "cf_pla",
   "name": "PLA CF",
   "diameter_tolerance": 0.02,
-  "density": 1.24,
-  "min_print_temperature": 190,
-  "max_print_temperature": 230,
-  "min_bed_temperature": 50,
-  "max_bed_temperature": 70
+  "density": 1.19,
+  "min_print_temperature": 215,
+  "max_print_temperature": 235,
+  "min_bed_temperature": 55,
+  "max_bed_temperature": 75,
+  "data_sheet_url": "https://www.nobufil.com/_files/ugd/c9047f_d34d4053951f4387a0326eaeebc11702.pdf"
 }

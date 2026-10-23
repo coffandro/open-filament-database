@@ -3,9 +3,10 @@
   "id": "x_astro_abs",
   "name": "X Astro ABS",
   "diameter_tolerance": 0.02,
-  "density": 1.04,
-  "min_print_temperature": 230,
-  "max_print_temperature": 260,
+  "density": 1.08,
+  "min_print_temperature": 250,
+  "max_print_temperature": 270,
   "min_bed_temperature": 90,
-  "max_bed_temperature": 110
+  "max_bed_temperature": 110,
+  "data_sheet_url": "https://www.nobufil.com/_files/ugd/c9047f_2108dd4236f84f0c867d0881177428ec.pdf"
 }

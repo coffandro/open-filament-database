@@ -4,8 +4,9 @@
   "name": "PCTG",
   "diameter_tolerance": 0.02,
   "density": 1.23,
-  "min_print_temperature": 230,
-  "max_print_temperature": 260,
-  "min_bed_temperature": 70,
-  "max_bed_temperature": 90
+  "min_print_temperature": 245,
+  "max_print_temperature": 265,
+  "min_bed_temperature": 75,
+  "max_bed_temperature": 95,
+  "data_sheet_url": "https://www.nobufil.com/_files/ugd/c9047f_d0737c72bdc84c68a799e3d5ef6948ad.pdf"
 }

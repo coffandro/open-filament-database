@@ -4,8 +4,9 @@
   "name": "X CF CF ASA",
   "diameter_tolerance": 0.02,
   "density": 1.07,
-  "min_print_temperature": 235,
-  "max_print_temperature": 260,
-  "min_bed_temperature": 90,
-  "max_bed_temperature": 110
+  "min_print_temperature": 270,
+  "max_print_temperature": 290,
+  "min_bed_temperature": 100,
+  "max_bed_temperature": 120,
+  "data_sheet_url": "https://www.nobufil.com/_files/ugd/c9047f_22a5c59ac7074e9aabf43961b15a4566.pdf"
 }
