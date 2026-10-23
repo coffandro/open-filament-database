@@ -23,7 +23,9 @@
     },
     "generic": {
       "bed_temp": 70,
-      "first_layer_bed_temp": 70
+      "first_layer_bed_temp": 70,
+      "first_layer_nozzle_temp": 255,
+      "nozzle_temp": 255
     }
   }
 }

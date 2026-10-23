@@ -22,6 +22,8 @@
       "profile_name": "Siddament PLA-CF High Speed (35mm3)"
     },
     "generic": {
+      "bed_temp": 55,
+      "first_layer_bed_temp": 55,
       "first_layer_nozzle_temp": 220,
       "nozzle_temp": 220
     }
