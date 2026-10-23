@@ -8,8 +8,8 @@
     "empty_spool_weight": 250,
     "spool_core_diameter": 100,
     "ean": "6937285509888",
-    "discontinued": false,
-    "article_number": "30105"
+    "article_number": "30105",
+    "discontinued": false
   },
   {
     "uuid": "f8fd5912-cb98-4a6b-9391-8f3546217f0b",
@@ -18,7 +18,7 @@
     "spool_refill": false,
     "empty_spool_weight": 250,
     "spool_core_diameter": 100,
-    "discontinued": false,
-    "article_number": "30105"
+    "article_number": "30105",
+    "discontinued": false
   }
 ]

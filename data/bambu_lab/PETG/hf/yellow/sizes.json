@@ -6,8 +6,8 @@
     "spool_refill": true,
     "container_material": "refill",
     "ean": "6975337038238",
-    "discontinued": true,
     "article_number": "33400",
+    "discontinued": true,
     "purchase_links": [
       {
         "store_id": "bblstore",
@@ -22,7 +22,7 @@
     "spool_refill": true,
     "container_material": "refill",
     "gtin": "921191885732",
-    "discontinued": true,
-    "article_number": "33400"
+    "article_number": "33400",
+    "discontinued": true
   }
 ]

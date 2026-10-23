@@ -5,8 +5,8 @@
     "diameter": 1.75,
     "spool_refill": true,
     "container_material": "refill",
-    "discontinued": false,
     "article_number": "33502",
+    "discontinued": false,
     "purchase_links": [
       {
         "store_id": "bblstore",
