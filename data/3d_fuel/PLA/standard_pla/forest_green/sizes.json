@@ -2,6 +2,14 @@
   {
     "uuid": "23970c83-3c54-49dc-9c81-00491babd906",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "793897770285",
+    "article_number": "A15A7"
+  },
+  {
+    "filament_weight": 4000,
+    "diameter": 1.75,
+    "gtin": "793897629620",
+    "article_number": "A17A7"
   }
 ]

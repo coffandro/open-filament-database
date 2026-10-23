@@ -2,6 +2,32 @@
   {
     "uuid": "b19b8c17-40ac-4301-92c7-6f20878a0c2a",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "639302733455",
+    "article_number": "A3500"
+  },
+  {
+    "filament_weight": 1000,
+    "diameter": 2.85,
+    "gtin": "793897612233",
+    "article_number": "A36R0"
+  },
+  {
+    "filament_weight": 4000,
+    "diameter": 1.75,
+    "gtin": "639302730591",
+    "article_number": "A3700"
+  },
+  {
+    "filament_weight": 4000,
+    "diameter": 2.85,
+    "gtin": "793897791143",
+    "article_number": "A38R0"
+  },
+  {
+    "filament_weight": 11000,
+    "diameter": 1.75,
+    "gtin": "793897722802",
+    "article_number": "A3900"
   }
 ]

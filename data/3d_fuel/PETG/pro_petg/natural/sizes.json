@@ -3,5 +3,23 @@
     "uuid": "deda35ed-92fe-404d-a6bb-588b36602024",
     "filament_weight": 1000,
     "diameter": 1.75
+  },
+  {
+    "filament_weight": 1000,
+    "diameter": 2.85,
+    "gtin": "639302731017",
+    "article_number": "E1600"
+  },
+  {
+    "filament_weight": 4000,
+    "diameter": 1.75,
+    "gtin": "639302731031",
+    "article_number": "E1700"
+  },
+  {
+    "filament_weight": 4000,
+    "diameter": 2.85,
+    "gtin": "639302731116",
+    "article_number": "E1800"
   }
 ]

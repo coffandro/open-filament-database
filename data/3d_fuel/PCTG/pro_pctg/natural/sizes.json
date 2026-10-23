@@ -2,6 +2,20 @@
   {
     "uuid": "77d0b478-1faa-4a5f-8b95-113299cd810b",
     "filament_weight": 1000,
-    "diameter": 1.75
+    "diameter": 1.75,
+    "gtin": "5060665812993",
+    "article_number": "E4500"
+  },
+  {
+    "filament_weight": 1000,
+    "diameter": 2.85,
+    "gtin": "793897782547",
+    "article_number": "E4600"
+  },
+  {
+    "filament_weight": 4000,
+    "diameter": 1.75,
+    "gtin": "5060665813242",
+    "article_number": "E4700"
   }
 ]
