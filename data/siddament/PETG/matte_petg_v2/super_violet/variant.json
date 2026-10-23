@@ -3,6 +3,9 @@
   "name": "Super Violet",
   "color_hex": "#5B4B9E",
   "discontinued": false,
+  "color_standards": {
+    "pantone": "7679 C"
+  },
   "traits": {
     "matte": true,
     "abrasive": true

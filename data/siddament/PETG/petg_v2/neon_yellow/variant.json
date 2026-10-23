@@ -3,6 +3,9 @@
   "name": "Neon Yellow",
   "color_hex": "#DFFF00",
   "discontinued": false,
+  "color_standards": {
+    "pantone": "396 C"
+  },
   "traits": {
     "neon": true
   }

@@ -3,6 +3,9 @@
   "name": "Pocket Green",
   "color_hex": "#8BAC0F",
   "discontinued": false,
+  "color_standards": {
+    "pantone": "377 C"
+  },
   "traits": {
     "matte": true,
     "abrasive": true

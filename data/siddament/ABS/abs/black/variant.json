@@ -2,5 +2,8 @@
   "id": "black",
   "name": "Black",
   "color_hex": "#0E0E10",
-  "discontinued": true
+  "discontinued": true,
+  "color_standards": {
+    "pantone": "Neutral Black C"
+  }
 }

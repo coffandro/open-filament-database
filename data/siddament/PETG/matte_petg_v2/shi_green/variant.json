@@ -3,6 +3,9 @@
   "name": "Shi Green",
   "color_hex": "#6CBB3C",
   "discontinued": false,
+  "color_standards": {
+    "pantone": "7488 C"
+  },
   "traits": {
     "matte": true,
     "abrasive": true

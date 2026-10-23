@@ -3,6 +3,9 @@
   "name": "Frost Cyan",
   "color_hex": "#9FD8E8",
   "discontinued": false,
+  "color_standards": {
+    "pantone": "629 C"
+  },
   "traits": {
     "matte": true,
     "abrasive": true

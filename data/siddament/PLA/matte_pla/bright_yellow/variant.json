@@ -3,6 +3,9 @@
   "name": "Bright Yellow",
   "color_hex": "#EDFE00",
   "discontinued": false,
+  "color_standards": {
+    "pantone": "Yellow C"
+  },
   "traits": {
     "matte": true
   }

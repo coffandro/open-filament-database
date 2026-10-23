@@ -2,5 +2,8 @@
   "id": "white",
   "name": "White",
   "color_hex": "#D0D0C8",
-  "discontinued": false
+  "discontinued": false,
+  "color_standards": {
+    "pantone": "Cool Gray 2 C"
+  }
 }

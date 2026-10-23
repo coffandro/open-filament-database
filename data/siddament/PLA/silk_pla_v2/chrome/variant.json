@@ -3,6 +3,9 @@
   "name": "Chrome",
   "color_hex": "#384657",
   "discontinued": false,
+  "color_standards": {
+    "pantone": "Cool Gray 11 C"
+  },
   "traits": {
     "silk": true
   }

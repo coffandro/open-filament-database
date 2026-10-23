@@ -6,6 +6,9 @@
   "name": "Pastel Green",
   "color_hex": "#BAFFC9",
   "discontinued": false,
+  "color_standards": {
+    "pantone": "351 C"
+  },
   "traits": {
     "matte": true
   }

@@ -3,6 +3,9 @@
   "name": "Purple",
   "color_hex": "#694482",
   "discontinued": false,
+  "color_standards": {
+    "pantone": "268 C"
+  },
   "traits": {
     "matte": true,
     "abrasive": true

@@ -3,6 +3,9 @@
   "name": "Mega Blue",
   "color_hex": "#1E63C8",
   "discontinued": false,
+  "color_standards": {
+    "pantone": "2132 C"
+  },
   "traits": {
     "matte": true,
     "abrasive": true

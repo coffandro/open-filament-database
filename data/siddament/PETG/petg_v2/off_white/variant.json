@@ -2,5 +2,8 @@
   "id": "off_white",
   "name": "Off White",
   "color_hex": "#F5F5F5",
-  "discontinued": false
+  "discontinued": false,
+  "color_standards": {
+    "pantone": "663 C"
+  }
 }

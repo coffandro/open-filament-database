@@ -2,5 +2,8 @@
   "id": "light_green",
   "name": "Light Green",
   "color_hex": "#A1FF99",
-  "discontinued": false
+  "discontinued": false,
+  "color_standards": {
+    "pantone": "358 C"
+  }
 }

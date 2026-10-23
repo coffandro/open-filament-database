@@ -3,6 +3,9 @@
   "name": "Green",
   "color_hex": "#008C63",
   "discontinued": false,
+  "color_standards": {
+    "pantone": "347 C"
+  },
   "traits": {
     "silk": true
   }

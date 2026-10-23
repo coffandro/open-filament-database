@@ -3,6 +3,9 @@
   "name": "Purple",
   "color_hex": "#9500FF",
   "discontinued": false,
+  "color_standards": {
+    "pantone": "2592 C"
+  },
   "traits": {
     "high_flow": true
   }

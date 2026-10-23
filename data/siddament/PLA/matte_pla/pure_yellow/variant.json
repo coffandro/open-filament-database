@@ -3,6 +3,9 @@
   "name": "Pure Yellow",
   "color_hex": "#FFFF00",
   "discontinued": false,
+  "color_standards": {
+    "pantone": "Yellow C"
+  },
   "traits": {
     "matte": true
   }

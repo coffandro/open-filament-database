@@ -3,6 +3,9 @@
   "name": "Cyan",
   "color_hex": "#0086D6",
   "discontinued": false,
+  "color_standards": {
+    "pantone": "Process Blue C"
+  },
   "traits": {
     "matte": true
   }

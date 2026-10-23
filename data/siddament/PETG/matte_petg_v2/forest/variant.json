@@ -3,6 +3,9 @@
   "name": "Forest",
   "color_hex": "#1B4332",
   "discontinued": false,
+  "color_standards": {
+    "pantone": "3435 C"
+  },
   "traits": {
     "matte": true,
     "abrasive": true

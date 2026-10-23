@@ -3,6 +3,9 @@
   "name": "Cream",
   "color_hex": "#FBF3C4",
   "discontinued": false,
+  "color_standards": {
+    "pantone": "7401 C"
+  },
   "traits": {
     "matte": true,
     "abrasive": true

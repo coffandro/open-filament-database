@@ -3,6 +3,9 @@
   "name": "Rose Gold",
   "color_hex": "#A56F6B",
   "discontinued": false,
+  "color_standards": {
+    "pantone": "Warm Gray 8 C"
+  },
   "traits": {
     "silk": true
   }

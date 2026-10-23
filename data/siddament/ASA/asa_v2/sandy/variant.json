@@ -2,5 +2,8 @@
   "id": "sandy",
   "name": "Sandy",
   "color_hex": "#BF9474",
-  "discontinued": false
+  "discontinued": false,
+  "color_standards": {
+    "pantone": "4655 C"
+  }
 }

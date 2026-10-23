@@ -2,5 +2,8 @@
   "id": "grey",
   "name": "Grey",
   "color_hex": "#808080",
-  "discontinued": false
+  "discontinued": false,
+  "color_standards": {
+    "pantone": "416 C"
+  }
 }

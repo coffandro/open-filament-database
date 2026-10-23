@@ -3,6 +3,9 @@
   "name": "Navy",
   "color_hex": "#14213D",
   "discontinued": false,
+  "color_standards": {
+    "pantone": "539 C"
+  },
   "traits": {
     "matte": true,
     "abrasive": true

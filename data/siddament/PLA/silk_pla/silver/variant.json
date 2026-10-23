@@ -3,6 +3,9 @@
   "name": "Silver",
   "color_hex": "#818C9F",
   "discontinued": false,
+  "color_standards": {
+    "pantone": "877 C"
+  },
   "traits": {
     "silk": true
   }

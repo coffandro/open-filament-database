@@ -3,6 +3,9 @@
   "name": "Cosmic Grape",
   "color_hex": "#6B3FA0",
   "discontinued": false,
+  "color_standards": {
+    "pantone": "526 C"
+  },
   "traits": {
     "matte": true,
     "abrasive": true

@@ -2,5 +2,8 @@
   "id": "fire_orange",
   "name": "Fire Orange",
   "color_hex": "#FE8401",
-  "discontinued": false
+  "discontinued": false,
+  "color_standards": {
+    "pantone": "151 C"
+  }
 }

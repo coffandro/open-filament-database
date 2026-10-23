@@ -2,5 +2,8 @@
   "id": "pastel_red",
   "name": "Pastel Red",
   "color_hex": "#FFECEC",
-  "discontinued": false
+  "discontinued": false,
+  "color_standards": {
+    "pantone": "705 C"
+  }
 }

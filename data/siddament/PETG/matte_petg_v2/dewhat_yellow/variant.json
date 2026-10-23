@@ -3,6 +3,9 @@
   "name": "DeWhat Yellow",
   "color_hex": "#F2A900",
   "discontinued": false,
+  "color_standards": {
+    "pantone": "130 C"
+  },
   "traits": {
     "matte": true,
     "abrasive": true

@@ -3,6 +3,9 @@
   "name": "Black",
   "color_hex": "#000203",
   "discontinued": false,
+  "color_standards": {
+    "pantone": "Black 6 C"
+  },
   "traits": {
     "silk": true
   }

@@ -2,5 +2,8 @@
   "id": "brown",
   "name": "Brown",
   "color_hex": "#674230",
-  "discontinued": false
+  "discontinued": false,
+  "color_standards": {
+    "pantone": "7603 C"
+  }
 }

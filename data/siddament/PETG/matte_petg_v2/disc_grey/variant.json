@@ -3,6 +3,9 @@
   "name": "Disc Grey",
   "color_hex": "#CFC9B8",
   "discontinued": false,
+  "color_standards": {
+    "pantone": "7534 C"
+  },
   "traits": {
     "matte": true,
     "abrasive": true

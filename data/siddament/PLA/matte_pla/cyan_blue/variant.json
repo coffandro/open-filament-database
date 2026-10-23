@@ -3,6 +3,9 @@
   "name": "Cyan Blue",
   "color_hex": "#01C7FF",
   "discontinued": false,
+  "color_standards": {
+    "pantone": "312 C"
+  },
   "traits": {
     "matte": true
   }

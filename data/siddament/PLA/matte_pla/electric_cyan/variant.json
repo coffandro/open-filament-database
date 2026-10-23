@@ -3,6 +3,9 @@
   "name": "Electric Cyan",
   "color_hex": "#01E5FE",
   "discontinued": false,
+  "color_standards": {
+    "pantone": "312 C"
+  },
   "traits": {
     "matte": true
   }

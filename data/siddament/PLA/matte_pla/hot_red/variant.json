@@ -3,6 +3,9 @@
   "name": "Hot Red",
   "color_hex": "#FE2B02",
   "discontinued": false,
+  "color_standards": {
+    "pantone": "172 C"
+  },
   "traits": {
     "matte": true
   }

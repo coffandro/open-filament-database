@@ -2,5 +2,8 @@
   "id": "pastel_blue",
   "name": "Pastel Blue",
   "color_hex": "#D6EAFF",
-  "discontinued": false
+  "discontinued": false,
+  "color_standards": {
+    "pantone": "656 C"
+  }
 }

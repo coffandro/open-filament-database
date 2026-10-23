@@ -3,6 +3,9 @@
   "name": "White",
   "color_hex": "#F1F0EA",
   "discontinued": false,
+  "color_standards": {
+    "pantone": "11-0601 Bright White"
+  },
   "traits": {
     "matte": true
   }

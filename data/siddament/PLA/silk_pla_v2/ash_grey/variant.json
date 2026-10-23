@@ -3,6 +3,9 @@
   "name": "Ash Grey",
   "color_hex": "#454343",
   "discontinued": false,
+  "color_standards": {
+    "pantone": "Black 7 C"
+  },
   "traits": {
     "silk": true
   }

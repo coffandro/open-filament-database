@@ -3,6 +3,9 @@
   "name": "Dark Grey",
   "color_hex": "#808080",
   "discontinued": false,
+  "color_standards": {
+    "pantone": "416 C"
+  },
   "traits": {
     "matte": true,
     "abrasive": true

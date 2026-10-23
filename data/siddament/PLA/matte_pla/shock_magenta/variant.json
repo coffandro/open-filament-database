@@ -3,6 +3,9 @@
   "name": "Shock Magenta",
   "color_hex": "#FE00AF",
   "discontinued": false,
+  "color_standards": {
+    "pantone": "Rhodamine Red C"
+  },
   "traits": {
     "matte": true
   }

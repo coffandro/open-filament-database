@@ -3,6 +3,9 @@
   "name": "Light Grey",
   "color_hex": "#C5C7C4",
   "discontinued": false,
+  "color_standards": {
+    "pantone": "Cool Gray 4 C"
+  },
   "traits": {
     "matte": true
   }

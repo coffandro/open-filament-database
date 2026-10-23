@@ -3,6 +3,9 @@
   "name": "Golden Yellow",
   "color_hex": "#FFDD00",
   "discontinued": false,
+  "color_standards": {
+    "pantone": "Yellow C"
+  },
   "traits": {
     "matte": true
   }

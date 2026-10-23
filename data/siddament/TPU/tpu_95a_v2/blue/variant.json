@@ -2,5 +2,8 @@
   "id": "blue",
   "name": "Blue",
   "color_hex": "#0037FF",
-  "discontinued": false
+  "discontinued": false,
+  "color_standards": {
+    "pantone": "2728 C"
+  }
 }

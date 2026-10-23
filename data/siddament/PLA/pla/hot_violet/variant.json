@@ -2,5 +2,8 @@
   "id": "hot_violet",
   "name": "Hot Violet",
   "color_hex": "#FF01FE",
-  "discontinued": false
+  "discontinued": false,
+  "color_standards": {
+    "pantone": "Rhodamine Red C"
+  }
 }

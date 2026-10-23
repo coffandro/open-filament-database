@@ -3,6 +3,9 @@
   "name": "Radiant Violet",
   "color_hex": "#7C00FF",
   "discontinued": false,
+  "color_standards": {
+    "pantone": "2587 C"
+  },
   "traits": {
     "matte": true
   }

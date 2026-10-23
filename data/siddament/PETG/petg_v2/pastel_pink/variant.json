@@ -2,5 +2,8 @@
   "id": "pastel_pink",
   "name": "Pastel Pink",
   "color_hex": "#FCE3F3",
-  "discontinued": false
+  "discontinued": false,
+  "color_standards": {
+    "pantone": "7436 C"
+  }
 }

@@ -3,6 +3,9 @@
   "name": "Magenta",
   "color_hex": "#990050",
   "discontinued": false,
+  "color_standards": {
+    "pantone": "201 C"
+  },
   "traits": {
     "silk": true
   }

@@ -3,6 +3,9 @@
   "name": "Pastel Purple",
   "color_hex": "#E0BAFF",
   "discontinued": false,
+  "color_standards": {
+    "pantone": "251 C"
+  },
   "traits": {
     "matte": true
   }

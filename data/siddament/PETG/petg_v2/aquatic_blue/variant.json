@@ -2,5 +2,8 @@
   "id": "aquatic_blue",
   "name": "Aquatic Blue",
   "color_hex": "#00CFFF",
-  "discontinued": false
+  "discontinued": false,
+  "color_standards": {
+    "pantone": "311 C"
+  }
 }

@@ -3,6 +3,9 @@
   "name": "Gold",
   "color_hex": "#B56600",
   "discontinued": false,
+  "color_standards": {
+    "pantone": "7588 C"
+  },
   "traits": {
     "silk": true
   }

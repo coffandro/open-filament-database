@@ -3,6 +3,9 @@
   "name": "Grey",
   "color_hex": "#A1A1A0",
   "discontinued": false,
+  "color_standards": {
+    "pantone": "Cool Gray 6 C"
+  },
   "traits": {
     "matte": true,
     "abrasive": true

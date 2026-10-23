@@ -3,6 +3,9 @@
   "name": "Cobalt Blue",
   "color_hex": "#0179FF",
   "discontinued": false,
+  "color_standards": {
+    "pantone": "Process Cyan C"
+  },
   "traits": {
     "matte": true
   }

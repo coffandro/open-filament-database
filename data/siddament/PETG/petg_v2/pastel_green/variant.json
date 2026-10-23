@@ -2,5 +2,8 @@
   "id": "pastel_green",
   "name": "Pastel Green",
   "color_hex": "#ECFFEB",
-  "discontinued": false
+  "discontinued": false,
+  "color_standards": {
+    "pantone": "11-0601 Bright White"
+  }
 }

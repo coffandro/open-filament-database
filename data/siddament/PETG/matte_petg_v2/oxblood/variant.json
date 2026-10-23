@@ -3,6 +3,9 @@
   "name": "Oxblood",
   "color_hex": "#6E1414",
   "discontinued": false,
+  "color_standards": {
+    "pantone": "1815 C"
+  },
   "traits": {
     "matte": true,
     "abrasive": true

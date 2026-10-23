@@ -2,5 +2,8 @@
   "id": "yellow",
   "name": "Yellow",
   "color_hex": "#FFFF00",
-  "discontinued": true
+  "discontinued": true,
+  "color_standards": {
+    "pantone": "Yellow C"
+  }
 }

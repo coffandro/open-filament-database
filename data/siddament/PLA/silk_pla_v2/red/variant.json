@@ -3,6 +3,9 @@
   "name": "Red",
   "color_hex": "#CB0100",
   "discontinued": false,
+  "color_standards": {
+    "pantone": "186 C"
+  },
   "traits": {
     "silk": true
   }

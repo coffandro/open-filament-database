@@ -3,6 +3,9 @@
   "name": "Lime",
   "color_hex": "#91C500",
   "discontinued": false,
+  "color_standards": {
+    "pantone": "376 C"
+  },
   "traits": {
     "silk": true
   }

@@ -3,6 +3,9 @@
   "name": "Hyper Lime Green",
   "color_hex": "#9AFF00",
   "discontinued": false,
+  "color_standards": {
+    "pantone": "382 C"
+  },
   "traits": {
     "matte": true
   }
