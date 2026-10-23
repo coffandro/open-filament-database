@@ -3,6 +3,7 @@
   "id": "dark_silver",
   "name": "Dark Silver",
   "color_hex": "#C9D0D4",
+  "discontinued": true,
   "color_standards": {
     "ral": "7047"
   }
