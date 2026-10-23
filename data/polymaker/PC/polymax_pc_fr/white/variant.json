@@ -3,8 +3,8 @@
   "moved_from": [
     "6105ec86-4345-410b-a620-50b2d437e18c"
   ],
-  "id": "fr_white",
-  "name": "Fr White",
+  "id": "white",
+  "name": "White",
   "color_hex": "#FFFFFF",
   "traits": {
     "self_extinguishing": true
