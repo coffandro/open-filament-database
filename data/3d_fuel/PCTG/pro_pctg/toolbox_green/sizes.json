@@ -6,8 +6,8 @@
     "spool_refill": false,
     "empty_spool_weight": 250,
     "spool_core_diameter": 100,
-    "discontinued": false,
     "gtin": "793897734799",
-    "article_number": "E4527"
+    "article_number": "E4527",
+    "discontinued": false
   }
 ]
