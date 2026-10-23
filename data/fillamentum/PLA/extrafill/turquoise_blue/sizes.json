@@ -24,11 +24,13 @@
     "empty_spool_weight": 590
   },
   {
+    "uuid": "5bcd363a-4a91-4b4d-8084-ec0ad61734d7",
     "filament_weight": 1000,
     "diameter": 1.75,
     "gtin": "8595632800583"
   },
   {
+    "uuid": "fa4409c5-3556-4eb4-b898-ccb2051451f8",
     "filament_weight": 1000,
     "diameter": 2.85,
     "gtin": "8595632836797"
