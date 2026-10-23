@@ -17,17 +17,17 @@
         },
         "orcaslicer": {
             "generic_id": "GFL99",
-            "id": "GFL03",
+            "id": "OGFL03",
             "profile_name": "eSUN PLA+"
         },
         "elegooslicer": {
             "generic_id": "GFL99",
-            "id": "GFL03",
+            "id": "OGFL03",
             "profile_name": "eSUN PLA+"
         },
         "crealityprint": {
             "generic_id": "GFL99",
-            "id": "GFL03",
+            "id": "E1001",
             "profile_name": "eSUN PLA+"
         },
         "anycubicslicer": {

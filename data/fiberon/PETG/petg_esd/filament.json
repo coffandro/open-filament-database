@@ -17,17 +17,17 @@
         },
         "orcaslicer": {
             "generic_id": "GFG99",
-            "id": "GFL06",
+            "id": "OGFL06",
             "profile_name": "Fiberon PETG-ESD"
         },
         "elegooslicer": {
             "generic_id": "GFG99",
-            "id": "GFL06",
+            "id": "OGFL06",
             "profile_name": "Fiberon PETG-ESD"
         },
         "crealityprint": {
             "generic_id": "GFG99",
-            "id": "GFL06",
+            "id": "P2001",
             "profile_name": "Fiberon PETG-ESD"
         },
         "anycubicslicer": {
