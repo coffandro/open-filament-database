@@ -6,6 +6,7 @@
     "spool_refill": true,
     "container_material": "refill",
     "discontinued": false,
+    "article_number": "33502",
     "purchase_links": [
       {
         "store_id": "bblstore",

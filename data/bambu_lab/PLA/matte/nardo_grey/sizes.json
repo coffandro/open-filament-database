@@ -5,6 +5,7 @@
     "diameter": 1.75,
     "spool_refill": true,
     "container_material": "refill",
+    "article_number": "11104",
     "purchase_links": [
       {
         "store_id": "3deksperten",

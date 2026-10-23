@@ -3,6 +3,7 @@
     "uuid": "da3f419f-fa34-4dbe-a640-b16b455d2310",
     "filament_weight": 1000.0,
     "diameter": 1.75,
+    "article_number": "11803",
     "purchase_links": [
       {
         "store_id": "bblstore",
@@ -16,6 +17,7 @@
     "diameter": 1.75,
     "spool_refill": true,
     "container_material": "refill",
+    "article_number": "11803",
     "purchase_links": [
       {
         "store_id": "bblstore",
