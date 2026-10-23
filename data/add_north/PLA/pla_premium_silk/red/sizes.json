@@ -11,6 +11,7 @@
     "filament_weight": 1000,
     "diameter": 1.75,
     "gtin": "7340182904110",
+    "article_number": "ANPS14RED",
     "purchase_links": [
       {
         "store_id": "add_north",

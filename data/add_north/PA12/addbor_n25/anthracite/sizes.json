@@ -13,6 +13,7 @@
     "empty_spool_weight": 207,
     "spool_core_diameter": 53,
     "gtin": "7340182903090",
+    "article_number": "ANBO27ANT",
     "purchase_links": [
       {
         "store_id": "add_north",
@@ -25,6 +26,7 @@
     "filament_weight": 1000,
     "diameter": 1.75,
     "gtin": "7340182901706",
+    "article_number": "ANBO14ANT",
     "purchase_links": [
       {
         "store_id": "add_north",
