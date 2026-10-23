@@ -25,6 +25,7 @@
     "filament_weight": 1000,
     "diameter": 1.75,
     "gtin": "7340182903731",
+    "article_number": "ANPE14BLA",
     "purchase_links": [
       {
         "store_id": "add_north",

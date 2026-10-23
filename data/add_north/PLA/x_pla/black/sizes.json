@@ -32,6 +32,7 @@
     "filament_weight": 1000,
     "diameter": 1.75,
     "gtin": "7340182904271",
+    "article_number": "ANXP14BLA",
     "purchase_links": [
       {
         "store_id": "add_north",
