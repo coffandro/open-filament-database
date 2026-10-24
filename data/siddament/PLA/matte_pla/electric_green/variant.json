@@ -1,0 +1,12 @@
+{
+  "id": "electric_green",
+  "name": "Electric Green",
+  "color_hex": "#01FF01",
+  "discontinued": false,
+  "color_standards": {
+    "pantone": "802 C"
+  },
+  "traits": {
+    "matte": true
+  }
+}

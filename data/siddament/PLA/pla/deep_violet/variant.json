@@ -1,0 +1,9 @@
+{
+  "id": "deep_violet",
+  "name": "Deep Violet",
+  "color_hex": "#9901FA",
+  "discontinued": false,
+  "color_standards": {
+    "pantone": "2587 C"
+  }
+}

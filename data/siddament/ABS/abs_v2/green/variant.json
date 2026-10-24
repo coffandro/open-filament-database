@@ -1,0 +1,9 @@
+{
+  "id": "green",
+  "name": "Green",
+  "color_hex": "#28A038",
+  "discontinued": false,
+  "color_standards": {
+    "pantone": "361 C"
+  }
+}

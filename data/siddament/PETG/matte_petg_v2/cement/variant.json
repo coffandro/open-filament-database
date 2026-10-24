@@ -1,0 +1,13 @@
+{
+  "id": "cement",
+  "name": "Cement",
+  "color_hex": "#8A8780",
+  "discontinued": false,
+  "color_standards": {
+    "pantone": "Warm Gray 8 C"
+  },
+  "traits": {
+    "matte": true,
+    "abrasive": true
+  }
+}

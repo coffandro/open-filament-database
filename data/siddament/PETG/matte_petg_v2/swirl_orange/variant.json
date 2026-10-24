@@ -1,0 +1,13 @@
+{
+  "id": "swirl_orange",
+  "name": "Swirl Orange",
+  "color_hex": "#F26B21",
+  "discontinued": false,
+  "color_standards": {
+    "pantone": "165 C"
+  },
+  "traits": {
+    "matte": true,
+    "abrasive": true
+  }
+}

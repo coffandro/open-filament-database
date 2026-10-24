@@ -1,0 +1,12 @@
+{
+  "id": "bright_teal",
+  "name": "Bright Teal",
+  "color_hex": "#00FEDE",
+  "discontinued": false,
+  "color_standards": {
+    "pantone": "319 C"
+  },
+  "traits": {
+    "matte": true
+  }
+}

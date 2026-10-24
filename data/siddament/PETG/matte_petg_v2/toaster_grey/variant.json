@@ -1,0 +1,13 @@
+{
+  "id": "toaster_grey",
+  "name": "Toaster Grey",
+  "color_hex": "#BDB7A8",
+  "discontinued": false,
+  "color_standards": {
+    "pantone": "Warm Gray 4 C"
+  },
+  "traits": {
+    "matte": true,
+    "abrasive": true
+  }
+}

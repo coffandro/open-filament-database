@@ -1,0 +1,9 @@
+{
+  "id": "vivid_cyan",
+  "name": "Vivid Cyan",
+  "color_hex": "#00FFFF",
+  "discontinued": false,
+  "color_standards": {
+    "pantone": "312 C"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "id": "slate",
+  "name": "Slate",
+  "color_hex": "#51606E",
+  "discontinued": false,
+  "color_standards": {
+    "pantone": "5405 C"
+  },
+  "traits": {
+    "matte": true,
+    "abrasive": true
+  }
+}

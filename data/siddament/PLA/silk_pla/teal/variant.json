@@ -1,0 +1,12 @@
+{
+  "id": "teal",
+  "name": "Teal",
+  "color_hex": "#009FA8",
+  "discontinued": false,
+  "color_standards": {
+    "pantone": "320 C"
+  },
+  "traits": {
+    "silk": true
+  }
+}

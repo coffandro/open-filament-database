@@ -1,0 +1,9 @@
+{
+  "id": "natural",
+  "name": "Natural",
+  "color_hex": "#B8B0A8",
+  "discontinued": false,
+  "color_standards": {
+    "pantone": "Warm Gray 4 C"
+  }
+}

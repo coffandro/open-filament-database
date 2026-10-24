@@ -1,0 +1,12 @@
+{
+  "id": "deep_blue",
+  "name": "Deep Blue",
+  "color_hex": "#0000FF",
+  "discontinued": false,
+  "color_standards": {
+    "pantone": "Blue 072 C"
+  },
+  "traits": {
+    "matte": true
+  }
+}

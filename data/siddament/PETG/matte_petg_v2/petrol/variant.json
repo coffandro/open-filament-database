@@ -1,0 +1,13 @@
+{
+  "id": "petrol",
+  "name": "Petrol",
+  "color_hex": "#0C3B3C",
+  "discontinued": false,
+  "color_standards": {
+    "pantone": "5467 C"
+  },
+  "traits": {
+    "matte": true,
+    "abrasive": true
+  }
+}

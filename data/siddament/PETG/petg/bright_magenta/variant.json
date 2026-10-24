@@ -1,0 +1,9 @@
+{
+  "id": "bright_magenta",
+  "name": "Bright Magenta",
+  "color_hex": "#FF00CC",
+  "discontinued": false,
+  "color_standards": {
+    "pantone": "Rhodamine Red C"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "id": "oxblood",
+  "name": "Oxblood",
+  "color_hex": "#6E1414",
+  "discontinued": false,
+  "traits": {
+    "matte": true
+  }
+}

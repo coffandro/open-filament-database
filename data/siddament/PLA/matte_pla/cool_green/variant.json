@@ -1,0 +1,12 @@
+{
+  "id": "cool_green",
+  "name": "Cool Green",
+  "color_hex": "#00FE74",
+  "discontinued": true,
+  "color_standards": {
+    "pantone": "339 C"
+  },
+  "traits": {
+    "matte": true
+  }
+}

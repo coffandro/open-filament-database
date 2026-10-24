@@ -1,0 +1,12 @@
+{
+  "id": "cotton_white",
+  "name": "Cotton White",
+  "color_hex": "#E6DDDB",
+  "discontinued": false,
+  "color_standards": {
+    "pantone": "Cool Gray 2 C"
+  },
+  "traits": {
+    "matte": true
+  }
+}

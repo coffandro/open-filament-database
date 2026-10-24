@@ -1,0 +1,9 @@
+{
+  "id": "pocket_green",
+  "name": "Pocket Green",
+  "color_hex": "#8BAC0F",
+  "discontinued": false,
+  "traits": {
+    "matte": true
+  }
+}

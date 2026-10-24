@@ -1,0 +1,9 @@
+{
+  "id": "peanut",
+  "name": "Peanut",
+  "color_hex": "#BF9474",
+  "discontinued": false,
+  "color_standards": {
+    "pantone": "4655 C"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "id": "solar_orange",
+  "name": "Solar Orange",
+  "color_hex": "#FFB100",
+  "discontinued": false,
+  "color_standards": {
+    "pantone": "130 C"
+  },
+  "traits": {
+    "matte": true
+  }
+}

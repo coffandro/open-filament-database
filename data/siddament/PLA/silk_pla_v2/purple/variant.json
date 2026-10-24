@@ -1,0 +1,12 @@
+{
+  "id": "purple",
+  "name": "Purple",
+  "color_hex": "#150074",
+  "discontinued": false,
+  "color_standards": {
+    "pantone": "Reflex Blue C"
+  },
+  "traits": {
+    "silk": true
+  }
+}

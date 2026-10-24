@@ -1,0 +1,13 @@
+{
+  "id": "plum",
+  "name": "Plum",
+  "color_hex": "#3C1F3A",
+  "discontinued": false,
+  "color_standards": {
+    "pantone": "5185 C"
+  },
+  "traits": {
+    "matte": true,
+    "abrasive": true
+  }
+}

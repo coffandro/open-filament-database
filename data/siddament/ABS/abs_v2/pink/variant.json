@@ -1,0 +1,9 @@
+{
+  "id": "pink",
+  "name": "Pink",
+  "color_hex": "#D08890",
+  "discontinued": false,
+  "color_standards": {
+    "pantone": "480 C"
+  }
+}

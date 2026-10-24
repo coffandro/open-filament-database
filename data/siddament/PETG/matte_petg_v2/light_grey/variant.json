@@ -1,0 +1,13 @@
+{
+  "id": "light_grey",
+  "name": "Light Grey",
+  "color_hex": "#CCCCCC",
+  "discontinued": false,
+  "color_standards": {
+    "pantone": "2 C"
+  },
+  "traits": {
+    "matte": true,
+    "abrasive": true
+  }
+}

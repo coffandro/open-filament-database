@@ -1,0 +1,9 @@
+{
+  "id": "makeeya_blue",
+  "name": "Makeeya Blue",
+  "color_hex": "#007577",
+  "discontinued": false,
+  "color_standards": {
+    "pantone": "322 C"
+  }
+}

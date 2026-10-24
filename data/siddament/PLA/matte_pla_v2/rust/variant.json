@@ -1,0 +1,9 @@
+{
+  "id": "rust",
+  "name": "Rust",
+  "color_hex": "#8B3A1B",
+  "discontinued": false,
+  "traits": {
+    "matte": true
+  }
+}

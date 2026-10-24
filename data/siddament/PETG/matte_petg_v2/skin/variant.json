@@ -1,0 +1,13 @@
+{
+  "id": "skin",
+  "name": "Skin",
+  "color_hex": "#E7B89A",
+  "discontinued": false,
+  "color_standards": {
+    "pantone": "4685 C"
+  },
+  "traits": {
+    "matte": true,
+    "abrasive": true
+  }
+}

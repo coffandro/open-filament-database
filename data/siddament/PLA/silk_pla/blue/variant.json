@@ -1,0 +1,12 @@
+{
+  "id": "blue",
+  "name": "Blue",
+  "color_hex": "#0151BA",
+  "discontinued": false,
+  "color_standards": {
+    "pantone": "2935 C"
+  },
+  "traits": {
+    "silk": true
+  }
+}

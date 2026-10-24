@@ -1,0 +1,13 @@
+{
+  "id": "cartridge_red",
+  "name": "Cartridge Red",
+  "color_hex": "#C7382E",
+  "discontinued": false,
+  "color_standards": {
+    "pantone": "180 C"
+  },
+  "traits": {
+    "matte": true,
+    "abrasive": true
+  }
+}

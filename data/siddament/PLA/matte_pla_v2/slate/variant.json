@@ -1,0 +1,9 @@
+{
+  "id": "slate",
+  "name": "Slate",
+  "color_hex": "#51606E",
+  "discontinued": false,
+  "traits": {
+    "matte": true
+  }
+}

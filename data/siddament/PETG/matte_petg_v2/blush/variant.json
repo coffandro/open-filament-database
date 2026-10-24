@@ -1,0 +1,13 @@
+{
+  "id": "blush",
+  "name": "Blush",
+  "color_hex": "#F3C4CE",
+  "discontinued": false,
+  "color_standards": {
+    "pantone": "1767 C"
+  },
+  "traits": {
+    "matte": true,
+    "abrasive": true
+  }
+}

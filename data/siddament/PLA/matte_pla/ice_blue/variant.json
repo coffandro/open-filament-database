@@ -1,0 +1,12 @@
+{
+  "id": "ice_blue",
+  "name": "Ice Blue",
+  "color_hex": "#00F3F6",
+  "discontinued": false,
+  "color_standards": {
+    "pantone": "311 C"
+  },
+  "traits": {
+    "matte": true
+  }
+}

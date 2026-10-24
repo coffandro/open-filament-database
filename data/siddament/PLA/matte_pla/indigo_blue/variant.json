@@ -1,0 +1,12 @@
+{
+  "id": "indigo_blue",
+  "name": "Indigo Blue",
+  "color_hex": "#6001FE",
+  "discontinued": false,
+  "color_standards": {
+    "pantone": "267 C"
+  },
+  "traits": {
+    "matte": true
+  }
+}

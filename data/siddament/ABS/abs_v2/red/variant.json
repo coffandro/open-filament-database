@@ -1,0 +1,9 @@
+{
+  "id": "red",
+  "name": "Red",
+  "color_hex": "#B82840",
+  "discontinued": false,
+  "color_standards": {
+    "pantone": "1797 C"
+  }
+}

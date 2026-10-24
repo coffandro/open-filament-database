@@ -1,0 +1,13 @@
+{
+  "id": "sleeper_beige",
+  "name": "Sleeper Beige",
+  "color_hex": "#DDD3B8",
+  "discontinued": false,
+  "color_standards": {
+    "pantone": "468 C"
+  },
+  "traits": {
+    "matte": true,
+    "abrasive": true
+  }
+}

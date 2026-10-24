@@ -1,0 +1,12 @@
+{
+  "id": "white",
+  "name": "White",
+  "color_hex": "#DBD1C7",
+  "discontinued": false,
+  "color_standards": {
+    "pantone": "Cool Gray 2 C"
+  },
+  "traits": {
+    "silk": true
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "id": "inferno_red",
+  "name": "Inferno Red",
+  "color_hex": "#FF0006",
+  "discontinued": false,
+  "color_standards": {
+    "pantone": "185 C"
+  },
+  "traits": {
+    "matte": true
+  }
+}

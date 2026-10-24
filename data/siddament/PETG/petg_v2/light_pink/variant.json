@@ -1,0 +1,9 @@
+{
+  "id": "light_pink",
+  "name": "Light Pink",
+  "color_hex": "#F6A2D6",
+  "discontinued": false,
+  "color_standards": {
+    "pantone": "230 C"
+  }
+}

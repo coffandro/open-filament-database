@@ -1,0 +1,9 @@
+{
+  "id": "azure_blue",
+  "name": "Azure Blue",
+  "color_hex": "#0037FF",
+  "discontinued": false,
+  "color_standards": {
+    "pantone": "2728 C"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "id": "pastel_blue",
+  "name": "Pastel Blue",
+  "color_hex": "#BAE1FF",
+  "discontinued": false,
+  "color_standards": {
+    "pantone": "3105 C"
+  },
+  "traits": {
+    "matte": true
+  }
+}

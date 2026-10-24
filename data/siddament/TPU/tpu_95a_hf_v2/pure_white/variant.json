@@ -1,0 +1,9 @@
+{
+  "id": "pure_white",
+  "name": "Pure White",
+  "color_hex": "#FFFFFF",
+  "discontinued": false,
+  "traits": {
+    "high_flow": true
+  }
+}

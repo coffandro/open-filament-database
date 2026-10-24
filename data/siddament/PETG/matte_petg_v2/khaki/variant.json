@@ -1,0 +1,13 @@
+{
+  "id": "khaki",
+  "name": "Khaki",
+  "color_hex": "#5E5B3A",
+  "discontinued": false,
+  "color_standards": {
+    "pantone": "5757 C"
+  },
+  "traits": {
+    "matte": true,
+    "abrasive": true
+  }
+}

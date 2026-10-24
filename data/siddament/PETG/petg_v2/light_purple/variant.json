@@ -1,0 +1,9 @@
+{
+  "id": "light_purple",
+  "name": "Light Purple",
+  "color_hex": "#CA80FF",
+  "discontinued": false,
+  "color_standards": {
+    "pantone": "2572 C"
+  }
+}
