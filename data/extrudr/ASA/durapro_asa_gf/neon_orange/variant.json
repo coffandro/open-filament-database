@@ -7,9 +7,9 @@
     "ral": "2005"
   },
   "traits": {
-    "abrasive": true,
-    "contains_glass_fiber": true,
     "matte": true,
-    "neon": true
+    "neon": true,
+    "abrasive": true,
+    "contains_glass_fiber": true
   }
 }
