@@ -1,10 +1,6 @@
 {
-  "uuid": "1002e9e1-7454-4799-b092-29318dadc7fc",
+  "uuid": "676c6143-0467-4f96-9d35-e5ead454b66a",
   "id": "white",
   "name": "White",
-  "color_hex": "#FFFFFF",
-  "traits": {
-    "silk": true,
-    "industrially_compostable": true
-  }
+  "color_hex": "#FFFFFF"
 }

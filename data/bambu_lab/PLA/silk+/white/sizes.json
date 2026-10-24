@@ -1,6 +1,9 @@
 [
   {
     "uuid": "cd47a4e0-4f28-454d-b1f8-ef5ac1fbc905",
+    "moved_from": [
+      "877aca7a-14e3-45c0-8254-281bc7bccad4"
+    ],
     "filament_weight": 1000.0,
     "diameter": 1.75,
     "article_number": "13110",

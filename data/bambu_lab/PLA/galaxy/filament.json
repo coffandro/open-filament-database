@@ -1,5 +1,8 @@
 {
     "uuid": "0cfd67db-fe36-4a97-9dbd-7a633ad15fb9",
+    "moved_from": [
+        "460606fa-6daf-4421-96d3-f218cce36818"
+    ],
     "id": "galaxy",
     "name": "PLA Galaxy",
     "diameter_tolerance": 0.03,
