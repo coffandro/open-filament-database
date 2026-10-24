@@ -1,6 +1,9 @@
 [
   {
     "uuid": "f1a27c6a-fc00-4801-9dd9-b8bdae6b342f",
+    "moved_from": [
+      "f2df787a-be6e-4f93-996c-009cb4ecbd1c"
+    ],
     "filament_weight": 1000,
     "diameter": 1.75,
     "gtin": "6932704911815",
