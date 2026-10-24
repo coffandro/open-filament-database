@@ -1,10 +1,6 @@
 {
-  "uuid": "aab2a550-a282-43d0-88c0-4d18c91bba62",
+  "uuid": "7674cf18-ba05-44a2-b98d-76087827b395",
   "id": "purple",
   "name": "Purple",
-  "color_hex": "#8D65C7",
-  "traits": {
-    "silk": true,
-    "industrially_compostable": true
-  }
+  "color_hex": "#854CE4"
 }
