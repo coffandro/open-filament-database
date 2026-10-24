@@ -16,6 +16,15 @@
     "uuid": "5f9ac975-14f8-4e30-8048-bffb8180715a",
     "filament_weight": 3000,
     "diameter": 1.75,
-    "gtin": "6938936707288"
+    "gtin": "6938936707288",
+    "article_number": "PB01044"
+  },
+  {
+    "uuid": "1d33e45c-543d-4f14-b518-c2670faadd05",
+    "filament_weight": 3000,
+    "diameter": 1.75,
+    "gtin": "6938936712947",
+    "article_number": "PM70987",
+    "discontinued": true
   }
 ]
