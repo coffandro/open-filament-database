@@ -7,7 +7,7 @@
   "name": "Clear",
   "color_hex": "#DBD5D6",
   "traits": {
-    "high_flow": true,
-    "transparent": true
+    "transparent": true,
+    "high_flow": true
   }
 }

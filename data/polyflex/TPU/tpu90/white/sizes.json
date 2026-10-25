@@ -21,12 +21,12 @@
     "diameter": 2.85,
     "gtin": "6938936711865",
     "article_number": "PD02007",
+    "discontinued": true,
     "purchase_links": [
       {
         "store_id": "polymaker",
         "url": "https://us.polymaker.com/products/polyflex-tpu90?variant=39574341582905"
       }
-    ],
-    "discontinued": true
+    ]
   }
 ]
