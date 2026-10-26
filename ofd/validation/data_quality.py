@@ -33,6 +33,7 @@ import json
 import re
 from collections import Counter, defaultdict
 from pathlib import Path
+from urllib.parse import parse_qsl, urlsplit
 
 from ofd_validator import ValidationError, ValidationLevel
 
@@ -55,6 +56,11 @@ _DOUBLED_SPACE = re.compile(r"\s\s")
 
 # Words that legitimately stay lowercase inside a title-cased display name.
 _MINOR_WORDS = {"and", "of", "the", "with", "de", "w/", "in", "on", "for", "a", "an"}
+
+# Strings contributors type when they have no value. ``certifications: ["NA"]`` (#502)
+# reads downstream as a certification called "NA". None of these occur as real data.
+# Mirrors ``PLACEHOLDER_WORDS`` in ``webui/src/lib/utils/dataQuality.ts``.
+_PLACEHOLDER_WORDS = {"na", "n/a", "none", "null", "tbd", "-"}
 
 
 def _load_json(path: Path):
@@ -87,7 +93,8 @@ def _placeholder_paths(value, prefix: str = "") -> list[str]:
     downstream as "this filament has a certification" whose name is blank; an empty
     array (or an absent field) says the true thing. Whitespace-only counts as blank —
     ``" "`` is no more a certification name than ``""`` is, and the webui's
-    ``checkPlaceholderEntries`` flags it as one too.
+    ``checkPlaceholderEntries`` flags it as one too. So do the stand-ins in
+    ``_PLACEHOLDER_WORDS`` ("NA", "N/A", "TBD"...).
     """
     found: list[str] = []
     if isinstance(value, dict):
@@ -96,21 +103,32 @@ def _placeholder_paths(value, prefix: str = "") -> list[str]:
     elif isinstance(value, list):
         for index, sub in enumerate(value):
             found.extend(_placeholder_paths(sub, f"{prefix}[{index}]"))
-    elif isinstance(value, str) and value.strip() == "" and prefix:
+    elif isinstance(value, str) and prefix and value.strip().lower() in _PLACEHOLDER_WORDS | {""}:
         found.append(prefix)
     return found
 
 
 def _check_placeholders(data, file_path: Path, base: Path) -> list[ValidationError]:
-    return [
-        _err(
-            ValidationLevel.Error,
-            f"'{dotted}' is blank. Remove the field, or drop the empty entry "
-            f"from the array — a blank value is not the same as no value.",
-            _rel(file_path, base),
+    errors: list[ValidationError] = []
+    for dotted in _placeholder_paths(data):
+        value = _dig(data, dotted)
+        what = "is blank" if value.strip() == "" else f"is a placeholder ({value!r})"
+        errors.append(
+            _err(
+                ValidationLevel.Error,
+                f"'{dotted}' {what}. Remove the field, or drop the entry from the "
+                f"array — a placeholder is not the same as no value.",
+                _rel(file_path, base),
+            )
         )
-        for dotted in _placeholder_paths(data)
-    ]
+    return errors
+
+
+def _dig(data, dotted: str):
+    """The value at a dotted path as produced by ``_placeholder_paths``."""
+    for part in re.findall(r"[^.\[\]]+|\[\d+\]", dotted):
+        data = data[int(part[1:-1])] if part.startswith("[") else data[part]
+    return data
 
 
 # --- Rule: name whitespace ----------------------------------------------------
@@ -227,6 +245,64 @@ def _check_duplicate_sizes(sizes, file_path: Path, base: Path) -> list[Validatio
                     )
                 )
                 break
+    return errors
+
+
+# --- Rule: purchase link to a storefront root ---------------------------------
+
+
+# A lone path segment that is still the shop's landing page, not a product.
+_LANDING_SEGMENTS = {"shop", "store", "home", "index.html", "index.php"}
+
+
+def is_storefront_root(url: str) -> bool:
+    """True when a purchase link points at a shop's front door rather than a product.
+
+    A bare origin, or one whose only path segment is a landing area. A query naming
+    anything other than tracking (``/index.php?route=product/product&product_id=1``)
+    identifies a product, so it is not a root.
+
+    Mirrors ``isStorefrontRoot`` in ``webui/src/lib/utils/urlSanitizer.ts``, minus the
+    store/brand front-page comparison the webui can make with its loaded stores.
+    """
+    # Imported here: style_data imports ofd.validation, which imports this module.
+    from ofd.scripts.style_data import _is_tracking_key
+
+    parts = urlsplit(url.strip() if "://" in url else f"https://{url.strip()}")
+    if not parts.hostname:
+        return False
+    if any(not _is_tracking_key(key) for key, _ in parse_qsl(parts.query, keep_blank_values=True)):
+        return False
+    segments = [s for s in parts.path.lower().split("/") if s]
+    return not segments or (len(segments) == 1 and segments[0] in _LANDING_SEGMENTS)
+
+
+def _check_storefront_root_links(sizes, file_path: Path, base: Path) -> list[ValidationError]:
+    """A purchase link that is just a shop's home page.
+
+    #454 linked ``https://store.bambulab.com/`` as the place to buy a specific
+    colour. A homepage identifies neither the filament nor the colour, so a buyer
+    following it lands on the front page and has to search for the spool themselves.
+    """
+    if not isinstance(sizes, list):
+        return []
+
+    errors: list[ValidationError] = []
+    for index, size in enumerate(sizes):
+        if not isinstance(size, dict):
+            continue
+        for link in size.get("purchase_links") or []:
+            url = link.get("url") if isinstance(link, dict) else None
+            if not isinstance(url, str) or not url.strip() or not is_storefront_root(url):
+                continue
+            errors.append(
+                _err(
+                    ValidationLevel.Error,
+                    f"Size #{index + 1} links to the storefront root {url!r}. Link the "
+                    f"product page for this colour and size instead.",
+                    _rel(file_path, base),
+                )
+            )
     return errors
 
 
@@ -559,6 +635,7 @@ def check_data_quality(data_dir) -> list[ValidationError]:
                         sizes = _load_json(sizes_file)
                         errors.extend(_check_placeholders(sizes, sizes_file, base))
                         errors.extend(_check_duplicate_sizes(sizes, sizes_file, base))
+                        errors.extend(_check_storefront_root_links(sizes, sizes_file, base))
 
                 errors.extend(_check_sibling_casing(variant_names, base))
                 errors.extend(_check_sibling_duplicates(variant_ids, base))

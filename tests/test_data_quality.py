@@ -138,6 +138,70 @@ def test_empty_string_nested_in_a_purchase_link_is_found(tmp_path):
     assert "purchase_links[0].url" in found[0].message
 
 
+def test_na_stand_in_is_a_placeholder(tmp_path):
+    """#502 shipped ``certifications: ["NA"]`` — a certification called "NA"."""
+    data = build(
+        tmp_path / "data",
+        filament_extra={"certifications": ["NA", "CE"]},
+        variants=[{"id": "black", "name": "Black"}],
+    )
+    found = messages(check_data_quality(data), "is a placeholder")
+    assert len(found) == 1
+    assert "certifications[0]" in found[0].message
+    assert "'NA'" in found[0].message
+    assert found[0].level.value == "ERROR"
+
+
+def test_words_merely_containing_na_are_not_placeholders(tmp_path):
+    data = build(
+        tmp_path / "data",
+        filament_extra={"certifications": ["NANO", "UL 94"]},
+        variants=[{"id": "black", "name": "Black"}],
+    )
+    assert messages(check_data_quality(data), "placeholder") == []
+
+
+# --- purchase_link_storefront_root (#454) -------------------------------------
+
+
+def _sizes_with_link(url):
+    return [
+        {
+            "filament_weight": 1000,
+            "diameter": 1.75,
+            "purchase_links": [{"store_id": "shop", "url": url}],
+        }
+    ]
+
+
+def test_storefront_root_link_is_an_error(tmp_path):
+    data = build(
+        tmp_path / "data",
+        variants=[
+            {
+                "id": "black",
+                "name": "Black",
+                "sizes": _sizes_with_link("https://store.bambulab.com/"),
+            }
+        ],
+    )
+    found = messages(check_data_quality(data), "storefront root")
+    assert len(found) == 1
+    assert found[0].level.value == "ERROR"
+
+
+def test_product_page_link_is_fine(tmp_path):
+    for url in (
+        "https://store.bambulab.com/products/pla-basic",
+        "https://shop.example.com/?product=123",
+    ):
+        data = build(
+            tmp_path / "data",
+            variants=[{"id": "black", "name": "Black", "sizes": _sizes_with_link(url)}],
+        )
+        assert messages(check_data_quality(data), "storefront root") == [], url
+
+
 # --- name_whitespace (#460: a filament literally named "Silk ") ---------------
 
 

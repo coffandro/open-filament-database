@@ -3,9 +3,11 @@ import type { RequestHandler } from './$types';
 import { env } from '$env/dynamic/public';
 import { env as privateEnv } from '$env/dynamic/private';
 import { dev } from '$app/environment';
+import { safeReturnPath } from '$lib/server/auth';
 import crypto from 'crypto';
 
 const STATE_COOKIE = 'ofd_gh_oauth_state';
+const RETURN_COOKIE = 'ofd_gh_oauth_return';
 
 export const GET: RequestHandler = async ({ url, cookies }) => {
 	if (!env.PUBLIC_GITHUB_CLIENT_ID) {
@@ -21,6 +23,18 @@ export const GET: RequestHandler = async ({ url, cookies }) => {
 		sameSite: 'lax',
 		maxAge: 600
 	});
+
+	// e.g. the PR review merge page, which sends maintainers here first.
+	const returnTo = safeReturnPath(url.searchParams.get('returnTo'));
+	if (returnTo) {
+		cookies.set(RETURN_COOKIE, returnTo, {
+			path: '/',
+			httpOnly: true,
+			secure: !dev,
+			sameSite: 'lax',
+			maxAge: 600
+		});
+	}
 
 	const redirectUri = privateEnv.GITHUB_REDIRECT_URI || (url.origin + '/api/auth/github/callback');
 	const params = new URLSearchParams({

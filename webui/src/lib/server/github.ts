@@ -425,3 +425,127 @@ export async function getCommitTreeSha(
 	const commit = await response.json();
 	return commit.tree.sha;
 }
+
+// --- Maintainer review & merge (src/routes/review/merge/[pr]) ---
+
+/**
+ * A user's permission on a repository: `admin`, `maintain`, `write`, `triage`, `read`
+ * or `none`. Only the first three may merge.
+ */
+export async function getRepoPermission(
+	token: string,
+	owner: string,
+	repo: string,
+	username: string
+): Promise<string> {
+	const response = await ghFetch(
+		token,
+		`/repos/${owner}/${repo}/collaborators/${encodeURIComponent(username)}/permission`
+	);
+	// 404/403: not a collaborator, or the token can't see collaborators at all.
+	if (response.status === 404 || response.status === 403) return 'none';
+	if (!response.ok) throw await ghError(response, 'Failed to get repository permission');
+	const body = await response.json();
+	return body.role_name ?? body.permission ?? 'none';
+}
+
+export const MERGE_PERMISSIONS = new Set(['admin', 'maintain', 'write']);
+
+export interface PullRequestForReview {
+	number: number;
+	title: string;
+	html_url: string;
+	state: 'open' | 'closed';
+	merged: boolean;
+	draft: boolean;
+	author: string;
+	head_sha: string;
+	/** null while GitHub is still computing it. */
+	mergeable: boolean | null;
+	mergeable_state: string;
+	changed_files: number;
+	additions: number;
+	deletions: number;
+}
+
+/** Everything the merge page shows about a PR. Returns null if it does not exist. */
+export async function getPullRequestForReview(
+	token: string,
+	owner: string,
+	repo: string,
+	prNumber: number
+): Promise<PullRequestForReview | null> {
+	const response = await ghFetch(token, `/repos/${owner}/${repo}/pulls/${prNumber}`);
+	if (response.status === 404) return null;
+	if (!response.ok) throw await ghError(response, 'Failed to get PR');
+	const pr = await response.json();
+	return {
+		number: pr.number,
+		title: pr.title,
+		html_url: pr.html_url,
+		state: pr.state,
+		merged: pr.merged === true,
+		draft: pr.draft === true,
+		author: pr.user?.login ?? 'unknown',
+		head_sha: pr.head.sha,
+		mergeable: pr.mergeable ?? null,
+		mergeable_state: pr.mergeable_state ?? 'unknown',
+		changed_files: pr.changed_files ?? 0,
+		additions: pr.additions ?? 0,
+		deletions: pr.deletions ?? 0
+	};
+}
+
+/** Check runs on a commit, bucketed so the page can warn before merging on red. */
+export async function getCheckSummary(
+	token: string,
+	owner: string,
+	repo: string,
+	sha: string
+): Promise<{ passed: number; failed: string[]; pending: string[] }> {
+	const response = await ghFetch(token, `/repos/${owner}/${repo}/commits/${sha}/check-runs?per_page=100`);
+	if (!response.ok) throw await ghError(response, 'Failed to get checks');
+	const body = await response.json();
+	const summary = { passed: 0, failed: [] as string[], pending: [] as string[] };
+	for (const run of body.check_runs ?? []) {
+		if (run.status !== 'completed') summary.pending.push(run.name);
+		else if (['success', 'neutral', 'skipped'].includes(run.conclusion)) summary.passed++;
+		else summary.failed.push(run.name);
+	}
+	return summary;
+}
+
+/** Post a comment on an issue or PR, as whoever owns `token`. */
+export async function createIssueComment(
+	token: string,
+	owner: string,
+	repo: string,
+	issueNumber: number,
+	body: string
+): Promise<void> {
+	const response = await ghFetch(token, `/repos/${owner}/${repo}/issues/${issueNumber}/comments`, {
+		method: 'POST',
+		body: JSON.stringify({ body })
+	});
+	if (!response.ok) throw await ghError(response, 'Failed to comment');
+}
+
+/**
+ * Merge a PR with a merge commit, the repo's convention.
+ *
+ * `sha` pins the merge to the head the maintainer looked at: if anything was pushed
+ * since, GitHub refuses with 409 instead of merging unreviewed commits.
+ */
+export async function mergePullRequest(
+	token: string,
+	owner: string,
+	repo: string,
+	prNumber: number,
+	sha: string
+): Promise<void> {
+	const response = await ghFetch(token, `/repos/${owner}/${repo}/pulls/${prNumber}/merge`, {
+		method: 'PUT',
+		body: JSON.stringify({ sha, merge_method: 'merge' })
+	});
+	if (!response.ok) throw await ghError(response, 'Failed to merge');
+}

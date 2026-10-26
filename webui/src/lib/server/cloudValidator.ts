@@ -393,7 +393,7 @@ function validateEntityQuality(
 			errors.push({
 				category: 'Data quality',
 				level: 'ERROR',
-				message: `'${key}' contains ${blanks.length} blank ${blanks.length === 1 ? 'entry' : 'entries'}. Remove ${blanks.length === 1 ? 'it' : 'them'}, or use an empty list.`,
+				message: `'${key}' contains ${blanks.length} blank or placeholder ${blanks.length === 1 ? 'entry' : 'entries'}. Remove ${blanks.length === 1 ? 'it' : 'them'}, or use an empty list.`,
 				path: entityPath
 			});
 		}

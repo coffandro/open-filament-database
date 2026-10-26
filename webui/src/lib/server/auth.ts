@@ -32,6 +32,19 @@ export function clearGitHubToken(cookies: Cookies): void {
 	cookies.delete(GH_COOKIE, { path: '/' });
 }
 
+/**
+ * Where to send the user after GitHub login, or null when `path` is not safe.
+ *
+ * Only same-origin paths are accepted: `//evil.example` and `/\evil.example` are
+ * protocol-relative to a browser, so they would turn the login into an open redirect.
+ */
+export function safeReturnPath(path: string | null | undefined): string | null {
+	if (!path || !path.startsWith('/') || path.startsWith('//') || path.startsWith('/\\')) {
+		return null;
+	}
+	return path;
+}
+
 export async function exchangeCodeForToken(
 	code: string,
 	clientId: string,

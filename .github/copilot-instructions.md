@@ -40,6 +40,10 @@ data/
 
 ## Reviewer Myths — READ BEFORE FILING A REVIEW COMMENT
 
+(The automated PR reviewer, `.github/workflows/ai_review.yaml`, is told to read this
+section too; its own checklist of common contributor mistakes is
+`ofd/review/guidelines.md`.)
+
 Each of the beliefs below has been asserted in a real review on this repository, and each
 is wrong. They are collected here because a confidently-worded false claim costs a
 volunteer contributor a round trip — and in the worst case talks them into deleting good

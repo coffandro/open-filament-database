@@ -147,16 +147,24 @@ export function checkNameWhitespace(name: string): { suggestion: string; reason:
 }
 
 /**
- * Empty strings inside an array value.
+ * Strings contributors type when they have no value (`certifications: ["NA"]`, #502).
+ * Mirrors `_PLACEHOLDER_WORDS` in `ofd/validation/data_quality.py`.
+ */
+export const PLACEHOLDER_WORDS = new Set(['na', 'n/a', 'none', 'null', 'tbd', '-']);
+
+/**
+ * Empty or stand-in strings inside an array value.
  *
  * `certifications: [""]` (#453) reads downstream as "this filament has a
- * certification" whose name is blank; an empty array says the true thing. Returns the
- * indices to drop.
+ * certification" whose name is blank, and `["NA"]` (#502) as one called "NA"; an
+ * empty array says the true thing. Returns the indices to drop.
  */
 export function checkPlaceholderEntries(values: unknown): number[] {
 	if (!Array.isArray(values)) return [];
 	return values.reduce<number[]>((indices, value, index) => {
-		if (typeof value === 'string' && value.trim() === '') indices.push(index);
+		if (typeof value !== 'string') return indices;
+		const normalised = value.trim().toLowerCase();
+		if (normalised === '' || PLACEHOLDER_WORDS.has(normalised)) indices.push(index);
 		return indices;
 	}, []);
 }

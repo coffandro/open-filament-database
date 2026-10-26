@@ -1,0 +1,101 @@
+"""
+Review command - Automated review of a data pull request.
+
+Sub-actions:
+    ofd review run --pr N [--no-ai] [--output FILE] [--post]
+                            Run the checks (and, unless --no-ai, one Claude pass) on
+                            PR N and print the summary comment it would post
+    ofd review post --input FILE
+                            Post a result written by ``run --output``
+
+See ofd/review/__init__.py for what each tier does, and
+.github/workflows/ai_review.yaml for how CI runs it.
+"""
+
+import argparse
+import json
+import os
+import sys
+from pathlib import Path
+
+from ofd.review import github
+from ofd.review.model import DEFAULT_BUDGET_USD, DEFAULT_MODEL
+from ofd.review.run import post, render, review
+
+# Project root for resolving relative paths (ofd/commands/review.py -> repo root).
+project_root = Path(__file__).parent.parent.parent
+
+
+def register_subcommand(subparsers: argparse._SubParsersAction) -> None:
+    """Register the review subcommand and its actions."""
+    parser = subparsers.add_parser(
+        "review",
+        help="Automated review of a data pull request",
+        description="Check a pull request for common data mistakes and research missing data.",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  ofd review run --pr 699 --no-ai      Deterministic checks only, print the summary
+  ofd review run --pr 699              Checks plus one Claude pass (needs the claude CLI)
+  ofd review run --pr 699 --post       ...and post the summary and suggestions
+        """,
+    )
+    actions = parser.add_subparsers(dest="action", required=True, metavar="<action>")
+
+    repo_default = os.environ.get("GITHUB_REPOSITORY", github.DEFAULT_REPO)
+
+    p_run = actions.add_parser("run", help="Review a pull request")
+    p_run.add_argument("--pr", type=int, required=True, help="Pull request number")
+    p_run.add_argument("--repo", default=repo_default, help="owner/name (default: %(default)s)")
+    p_run.add_argument("--no-ai", action="store_true", help="Skip the model pass")
+    p_run.add_argument("--model", default=DEFAULT_MODEL, help="Model id (default: %(default)s)")
+    p_run.add_argument(
+        "--budget", type=float, default=DEFAULT_BUDGET_USD, help="USD cap (default: %(default)s)"
+    )
+    p_run.add_argument(
+        "--head-dir", type=Path, help="Existing checkout of the PR head for the model to read"
+    )
+    p_run.add_argument("--output", type=Path, help="Write the result JSON here")
+    p_run.add_argument("--post", action="store_true", help="Post to the pull request")
+    p_run.set_defaults(func=run_review)
+
+    p_post = actions.add_parser("post", help="Post a result written by `run --output`")
+    p_post.add_argument("--input", type=Path, required=True, help="Result JSON")
+    p_post.add_argument("--repo", default=repo_default, help="owner/name (default: %(default)s)")
+    p_post.set_defaults(func=run_post)
+
+
+def run_review(args: argparse.Namespace) -> int:
+    try:
+        result = review(
+            project_root,
+            args.repo,
+            args.pr,
+            use_model=not args.no_ai,
+            model=args.model,
+            budget_usd=args.budget,
+            head_dir=args.head_dir,
+        )
+    except github.GitHubError as exc:
+        print(f"Error: {exc}", file=sys.stderr)
+        return 1
+
+    if args.output:
+        args.output.write_text(json.dumps(result, indent=2, ensure_ascii=False), encoding="utf-8")
+    if args.post:
+        post(args.repo, result)
+    else:
+        print(render(result))
+        for comment in result.get("comments", []):
+            print(f"--- inline: {comment['path']}:{comment['line']}\n{comment['body']}\n")
+    return 0
+
+
+def run_post(args: argparse.Namespace) -> int:
+    result = json.loads(args.input.read_text(encoding="utf-8"))
+    try:
+        post(args.repo, result)
+    except github.GitHubError as exc:
+        print(f"Error: {exc}", file=sys.stderr)
+        return 1
+    return 0

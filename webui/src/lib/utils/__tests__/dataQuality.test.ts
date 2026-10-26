@@ -114,6 +114,11 @@ describe('checkPlaceholderEntries', () => {
 		expect(checkPlaceholderEntries(['  '])).toEqual([0]);
 	});
 
+	it('finds the "NA" stand-in from #502, but not words containing it', () => {
+		expect(checkPlaceholderEntries(['NA', 'CE', 'n/a'])).toEqual([0, 2]);
+		expect(checkPlaceholderEntries(['NANO', 'UL 94'])).toEqual([]);
+	});
+
 	it('says nothing about a populated or empty array', () => {
 		expect(checkPlaceholderEntries(['CE'])).toEqual([]);
 		expect(checkPlaceholderEntries([])).toEqual([]);
