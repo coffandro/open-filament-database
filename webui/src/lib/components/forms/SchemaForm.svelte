@@ -23,6 +23,7 @@
 		fetchEnumValues,
 		getFieldLabel,
 		getFieldPlaceholder,
+		getEnumOptionLabel,
 		transforms
 	} from './schemaFormUtils';
 
@@ -285,7 +286,7 @@
 					<option value="">Select...</option>
 				{/if}
 				{#each options as option}
-					<option value={option}>{option}</option>
+					<option value={option}>{getEnumOptionLabel(field.schema, option)}</option>
 				{/each}
 			{/if}
 		</SelectField>

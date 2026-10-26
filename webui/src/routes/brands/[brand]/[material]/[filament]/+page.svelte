@@ -56,6 +56,12 @@
 	import { findSharedPurchaseLinks } from '$lib/utils/dataQuality';
 	import { orcaProfileUrl } from '$lib/utils/orcaLinks';
 
+	const ENCLOSURE_LABELS: Record<string, string> = {
+		required: 'Required',
+		recommended: 'Recommended',
+		not_needed: 'Not needed'
+	};
+
 	let brandId: string = $derived($page.params.brand!);
 	let materialType: string = $derived($page.params.material!);
 	let filamentId: string = $derived($page.params.filament!);
@@ -467,6 +473,31 @@
 							key: 'max_dry_temperature',
 							label: 'Max Dry Temperature',
 							format: (v) => `${v}°C`,
+							hide: (v) => !v
+						},
+						{
+							key: 'dry_temperature',
+							label: 'Drying',
+							format: (v) =>
+								filamentData.dry_time ? `${v}°C for ${filamentData.dry_time} h` : `${v}°C`,
+							hide: (v) => !v
+						},
+						{
+							key: 'min_fan_speed',
+							label: 'Fan Speed Range',
+							format: (v) => `${v}% - ${filamentData.max_fan_speed ?? v}%`,
+							hide: (v) => v === undefined || v === null
+						},
+						{
+							key: 'max_volumetric_speed',
+							label: 'Max Volumetric Speed',
+							format: (v) => `${v} mm³/s`,
+							hide: (v) => !v
+						},
+						{
+							key: 'enclosure',
+							label: 'Enclosure',
+							format: (v) => ENCLOSURE_LABELS[v] ?? v,
 							hide: (v) => !v
 						},
 						{ key: 'shore_hardness_a', label: 'Shore Hardness A', hide: (v) => !v },

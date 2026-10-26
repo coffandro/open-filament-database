@@ -6,6 +6,7 @@
   "id": "arctic_teal",
   "name": "Arctic Teal",
   "color_hex": "#5AABB1",
+  "transmission_distance": 0.6,
   "traits": {
     "matte": true,
     "industrially_compostable": true

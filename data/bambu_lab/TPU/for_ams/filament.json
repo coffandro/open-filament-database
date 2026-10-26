@@ -9,6 +9,11 @@
     "max_print_temperature": 240,
     "min_bed_temperature": 30,
     "max_bed_temperature": 35,
+    "max_volumetric_speed": 18,
+    "min_fan_speed": 20,
+    "max_fan_speed": 40,
+    "dry_temperature": 70,
+    "dry_time": 8,
     "data_sheet_url": "https://cdn.shopify.com/s/files/1/0584/7236/6216/files/Bambu_TPU_for_AMS_Technical_Data_Sheet.pdf?v=1730944629",
     "safety_sheet_url": "https://cdn.shopify.com/s/files/1/0584/7236/6216/files/Bambu_TPU_for_AMS_MSDS.pdf?v=1730944633",
     "slicer_settings": {

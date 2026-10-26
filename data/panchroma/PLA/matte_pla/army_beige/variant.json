@@ -6,6 +6,7 @@
   "id": "army_beige",
   "name": "Army Beige",
   "color_hex": "#CCA897",
+  "transmission_distance": 0.7,
   "traits": {
     "matte": true,
     "industrially_compostable": true

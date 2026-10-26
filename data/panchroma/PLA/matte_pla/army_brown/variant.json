@@ -6,6 +6,7 @@
   "id": "army_brown",
   "name": "Army Brown",
   "color_hex": "#724E3D",
+  "transmission_distance": 0.1,
   "traits": {
     "matte": true,
     "industrially_compostable": true

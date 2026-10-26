@@ -157,9 +157,12 @@
 	const config: SchemaFormConfig = {
 		// `uuid` is the canonical id assigned by CI on merge — never shown or edited here.
 		hiddenFields: ['id', 'uuid', 'moved_from', 'traits', 'sizes', 'hex_variants', 'color_standards'],
-		fieldOrder: ['name', 'color_hex', 'discontinued'],
+		fieldOrder: ['name', 'color_hex', 'transmission_distance', 'discontinued'],
 		typeOverrides: {
 			color_hex: 'color'
+		},
+		steps: {
+			transmission_distance: 0.1
 		}
 	};
 
