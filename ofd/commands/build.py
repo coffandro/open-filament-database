@@ -139,6 +139,7 @@ def run_build(args: argparse.Namespace) -> int:
     data_dir = project_root / args.data_dir
     stores_dir = project_root / args.stores_dir
     schemas_dir = project_root / "schemas"
+    reference_dir = project_root / "reference"
     builder_schemas_dir = Path(__file__).parent.parent / "builder" / "schemas"
     output_dir = project_root / args.output_dir
 
@@ -219,6 +220,7 @@ def run_build(args: argparse.Namespace) -> int:
             data_dir=str(data_dir),
             stores_dir=str(stores_dir),
             commit=commit,
+            reference_dir=str(reference_dir),
         )
     else:
         print("\n[6/11] Skipping Static API export")

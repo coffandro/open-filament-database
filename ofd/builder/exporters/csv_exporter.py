@@ -48,6 +48,7 @@ _KEY_ORDER = {
         "min_print_speed",
         "max_print_speed",
         "discontinued",
+        "sustainability",
     ],
     "variant": [
         "id",
@@ -60,6 +61,7 @@ _KEY_ORDER = {
         "color_standards",
         "traits",
         "discontinued",
+        "sustainability",
         # moved_from is a conditional key that would otherwise sort after color_hexes
         "moved_from",
         "color_hexes",
@@ -73,6 +75,7 @@ _KEY_ORDER = {
         "empty_spool_weight",
         "spool_core_diameter",
         "container_material",
+        "container_details",
         "gtin",
         "article_number",
         "discontinued",

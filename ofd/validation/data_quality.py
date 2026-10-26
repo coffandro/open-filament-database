@@ -24,6 +24,14 @@ Levels are chosen so a rule only blocks a merge when the data is genuinely wrong
 (``name_casing``, ``name_leading_case``, ``fiber_trait_missing``,
 ``orphan_filament``, ``sibling_near_duplicate``) are WARNINGs.
 
+Sustainability data (``sustainability`` on filaments and variants,
+``container_details`` on sizes) must follow "copy, never compute". These are
+ERRORs: a missing source field, a percentage outside 0-100, a ``retrieved`` /
+``published`` / ``reference_year`` in the future, a number absent from its
+``source_quote``, and ``recycled_content.pct > 0`` without ``traits.recycled``.
+``traits.recycled`` with no recycled content only WARNs, and only once the filament
+or variant has a sustainability block.
+
 A WARNING here is advice, not a failure: ``ofd validate`` still exits 0 and reports
 "All validations passed (N warnings)". Reviewers should not describe a warning as
 something that breaks the build or makes data unreachable.
@@ -32,6 +40,7 @@ something that breaks the build or makes data unreachable.
 import json
 import re
 from collections import Counter, defaultdict
+from datetime import date
 from pathlib import Path
 
 from ofd_validator import ValidationError, ValidationLevel
@@ -474,6 +483,198 @@ def _check_parent_brands(data_dir: Path, base: Path) -> list[ValidationError]:
     return errors
 
 
+# --- Rules: sustainability data ----------------------------------------------
+#
+# Sustainability figures follow "copy, never compute": every number is copied from a
+# cited source, and the quote must show it. See docs/manual.md#-sustainability-data.
+
+_SOURCE_FIELDS = ("source_url", "source_quote", "retrieved")
+
+# Value fields per sourced section; arrays hold one sourced entry per item.
+_SUSTAINABILITY_SECTIONS = {
+    "recycled_content": ("pct",),
+    "bio_based_content": ("pct",),
+    "carbon_footprints": ("value_kg_co2e",),
+    "relative_claims": ("reduction_pct",),
+}
+
+_PCT_FIELDS = {"pct", "recycled_pct", "reduction_pct"}
+
+
+def _sourced_entries(sustainability) -> list[tuple[str, dict, tuple[str, ...]]]:
+    """(json path, entry, value fields) for every sourced entry in a sustainability block."""
+    if not isinstance(sustainability, dict):
+        return []
+    entries = []
+    for section, fields in _SUSTAINABILITY_SECTIONS.items():
+        value = sustainability.get(section)
+        if isinstance(value, dict):
+            entries.append((f"sustainability.{section}", value, fields))
+        elif isinstance(value, list):
+            entries.extend(
+                (f"sustainability.{section}[{i}]", item, fields)
+                for i, item in enumerate(value)
+                if isinstance(item, dict)
+            )
+    return entries
+
+
+def _number_pattern(value) -> re.Pattern:
+    """Match ``value`` as written in prose: ``5.85`` or ``5,85``, trailing zeros allowed.
+
+    The digit boundaries stop ``5.85`` from matching inside ``15.85`` or ``5.851``.
+    """
+    text = repr(float(value)).rstrip("0").rstrip(".")
+    int_part, _, frac = text.partition(".")
+    number = re.escape(int_part) + (f"[.,]{frac}0*" if frac else r"(?:[.,]0+)?")
+    return re.compile(rf"(?<![\d.,]){number}(?!\d)")
+
+
+def _parse_date(value):
+    try:
+        return date.fromisoformat(value) if isinstance(value, str) else None
+    except ValueError:
+        return None
+
+
+def _check_sourced_entry(
+    path: str, entry: dict, value_fields: tuple[str, ...], file_path: Path, base: Path
+) -> list[ValidationError]:
+    """One sourced entry: sources present, percentages in range, dates not in the
+    future, and every number present verbatim in ``source_quote``."""
+    from datetime import date
+
+    rel = _rel(file_path, base)
+    errors: list[ValidationError] = []
+
+    missing = [f for f in _SOURCE_FIELDS if not str(entry.get(f) or "").strip()]
+    if missing:
+        errors.append(
+            _err(
+                ValidationLevel.Error,
+                f"{path} is missing {', '.join(missing)}. Every sustainability figure "
+                "needs a source URL, a verbatim quote and the date it was retrieved.",
+                rel,
+            )
+        )
+
+    for field in value_fields:
+        value = entry.get(field)
+        if not isinstance(value, (int, float)) or isinstance(value, bool):
+            continue
+        if field in _PCT_FIELDS and not 0 <= value <= 100:
+            errors.append(
+                _err(
+                    ValidationLevel.Error,
+                    f"{path}.{field} is {value}; a percentage must be between 0 and 100.",
+                    rel,
+                )
+            )
+        quote = entry.get("source_quote")
+        if isinstance(quote, str) and quote.strip() and not _number_pattern(value).search(quote):
+            errors.append(
+                _err(
+                    ValidationLevel.Error,
+                    f"{path}.{field} is {value}, but source_quote does not contain that "
+                    "number. Copy the figure exactly as the source writes it; never "
+                    "derive or convert it.",
+                    rel,
+                )
+            )
+
+    today = date.today()
+    for field in ("retrieved", "published"):
+        raw = entry.get(field)
+        if raw is None:
+            continue
+        parsed = _parse_date(raw)
+        if parsed is None:
+            errors.append(
+                _err(
+                    ValidationLevel.Error,
+                    f"{path}.{field} is {raw!r}; expected a date as YYYY-MM-DD.",
+                    rel,
+                )
+            )
+        elif parsed > today:
+            errors.append(
+                _err(ValidationLevel.Error, f"{path}.{field} {raw} is in the future.", rel)
+            )
+
+    year = entry.get("reference_year")
+    if isinstance(year, int) and not isinstance(year, bool) and year > today.year:
+        errors.append(
+            _err(ValidationLevel.Error, f"{path}.reference_year {year} is in the future.", rel)
+        )
+
+    return errors
+
+
+def _check_sustainability(data: dict, file_path: Path, base: Path) -> list[ValidationError]:
+    """Every sourced entry in a filament's or variant's ``sustainability`` block."""
+    errors: list[ValidationError] = []
+    for path, entry, fields in _sourced_entries(data.get("sustainability")):
+        errors.extend(_check_sourced_entry(path, entry, fields, file_path, base))
+    return errors
+
+
+def _check_container_details(sizes, file_path: Path, base: Path) -> list[ValidationError]:
+    """``container_details`` on each size is a sourced entry like the ones above."""
+    if not isinstance(sizes, list):
+        return []
+    errors: list[ValidationError] = []
+    for i, size in enumerate(sizes):
+        details = size.get("container_details") if isinstance(size, dict) else None
+        if isinstance(details, dict):
+            errors.extend(
+                _check_sourced_entry(
+                    f"[{i}].container_details", details, ("recycled_pct",), file_path, base
+                )
+            )
+    return errors
+
+
+def _check_recycled_trait(
+    filament_data: dict, variant_data: dict, file_path: Path, base: Path
+) -> list[ValidationError]:
+    """``recycled_content`` and ``traits.recycled`` must agree on each variant.
+
+    A variant's ``sustainability`` overrides the filament's per field, so the effective
+    ``recycled_content`` is the variant's if it sets one, otherwise the filament's.
+    A positive percentage without the trait is an ERROR. The trait without any recycled
+    content only WARNs, and only once a sustainability block exists on the filament or
+    variant: until a brand has been researched, the trait alone is expected.
+    """
+    filament_sus = filament_data.get("sustainability")
+    variant_sus = variant_data.get("sustainability")
+    filament_sus = filament_sus if isinstance(filament_sus, dict) else {}
+    variant_sus = variant_sus if isinstance(variant_sus, dict) else {}
+
+    content = variant_sus.get("recycled_content", filament_sus.get("recycled_content"))
+    pct = content.get("pct") if isinstance(content, dict) else None
+    traits = variant_data.get("traits")
+    has_trait = isinstance(traits, dict) and traits.get("recycled") is True
+
+    if isinstance(pct, (int, float)) and pct > 0 and not has_trait:
+        return [
+            _err(
+                ValidationLevel.Error,
+                f"recycled_content.pct is {pct} but traits.recycled is not set on this variant.",
+                _rel(file_path, base),
+            )
+        ]
+    if has_trait and (filament_sus or variant_sus) and (content is None or pct == 0):
+        return [
+            _err(
+                ValidationLevel.Warning,
+                "traits.recycled is set and sustainability data exists, but there is no "
+                "recycled_content for this variant.",
+                _rel(file_path, base),
+            )
+        ]
+    return []
+
+
 # --- Entry point --------------------------------------------------------------
 
 
@@ -515,6 +716,7 @@ def check_data_quality(data_dir) -> list[ValidationError]:
                 errors.extend(_check_name_whitespace(filament_data, filament_file, base))
                 errors.extend(_check_name_leading_case(filament_data, filament_file, base))
                 errors.extend(_check_orphan_filament(filament_dir, base))
+                errors.extend(_check_sustainability(filament_data, filament_file, base))
 
                 name = filament_data.get("name")
                 if isinstance(name, str) and name:
@@ -548,6 +750,10 @@ def check_data_quality(data_dir) -> list[ValidationError]:
                         if part
                     )
                     errors.extend(_check_fiber_traits(variant_data, fiber_text, variant_file, base))
+                    errors.extend(_check_sustainability(variant_data, variant_file, base))
+                    errors.extend(
+                        _check_recycled_trait(filament_data, variant_data, variant_file, base)
+                    )
 
                     variant_name = variant_data.get("name")
                     if isinstance(variant_name, str) and variant_name:
@@ -559,6 +765,7 @@ def check_data_quality(data_dir) -> list[ValidationError]:
                         sizes = _load_json(sizes_file)
                         errors.extend(_check_placeholders(sizes, sizes_file, base))
                         errors.extend(_check_duplicate_sizes(sizes, sizes_file, base))
+                        errors.extend(_check_container_details(sizes, sizes_file, base))
 
                 errors.extend(_check_sibling_casing(variant_names, base))
                 errors.extend(_check_sibling_duplicates(variant_ids, base))

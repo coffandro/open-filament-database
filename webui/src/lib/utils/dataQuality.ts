@@ -16,7 +16,7 @@
  * shared `schemas/trait_rules.json` table (via `/api/trait-rules`) and is wired into `VariantForm`.
  */
 
-import type { ContainerMaterial } from '$lib/types/database';
+import type { ContainerMaterial, Sustainability } from '$lib/types/database';
 
 /** Words that legitimately stay lowercase inside a title-cased display name. */
 const MINOR_WORDS = new Set([
@@ -171,7 +171,13 @@ export function containerMaterialOf(size: {
 	spool_refill?: unknown;
 }): ContainerMaterial | undefined {
 	const material = size.container_material;
-	if (material === 'plastic' || material === 'cardboard' || material === 'refill') return material;
+	if (
+		material === 'plastic' ||
+		material === 'cardboard' ||
+		material === 'mixed' ||
+		material === 'refill'
+	)
+		return material;
 	return size.spool_refill === true ? 'refill' : undefined;
 }
 
@@ -388,4 +394,117 @@ export function findDuplicateName<T extends NamedEntry>(
 		if (!wordOrder && wordMultiset(otherSlug) === words) wordOrder = entry;
 	}
 	return wordOrder ? { match: wordOrder, kind: 'word-order' } : null;
+}
+
+// --- Sustainability data ------------------------------------------------------
+//
+// "Copy, never compute": every figure is copied from a cited source and the quote must
+// show it. Mirrors the sustainability rules in `ofd/validation/data_quality.py`.
+
+const SOURCE_FIELDS = ['source_url', 'source_quote', 'retrieved'] as const;
+
+/**
+ * Matches `value` as written in prose: `5.85` or `5,85`, trailing zeros allowed.
+ * The digit boundaries stop `5.85` from matching inside `15.85` or `5.851`.
+ */
+export function numberPattern(value: number): RegExp {
+	const text = String(value);
+	const [intPart, frac] = text.split('.');
+	const number = frac ? `${intPart}[.,]${frac}0*` : `${intPart}(?:[.,]0+)?`;
+	return new RegExp(`(?<![\\d.,])${number}(?!\\d)`);
+}
+
+function todayIso(): string {
+	return new Date().toISOString().slice(0, 10);
+}
+
+/**
+ * Problems with one sourced entry (a recycled/bio-based content object, a carbon
+ * footprint, a relative claim, or a size's container_details): missing sources, a
+ * percentage outside 0-100, a date in the future, or a number absent from the quote.
+ */
+export function checkSourcedEntry(
+	entry: Record<string, unknown> | null | undefined,
+	valueFields: string[],
+	today: string = todayIso()
+): string[] {
+	if (!entry || typeof entry !== 'object') return [];
+	const problems: string[] = [];
+
+	const missing = SOURCE_FIELDS.filter((f) => !String(entry[f] ?? '').trim());
+	if (missing.length) {
+		problems.push(
+			`Missing ${missing.join(', ')}. Every figure needs a source URL, a verbatim quote and the date it was retrieved.`
+		);
+	}
+
+	const quote = typeof entry.source_quote === 'string' ? entry.source_quote : '';
+	for (const field of valueFields) {
+		const value = entry[field];
+		if (typeof value !== 'number' || Number.isNaN(value)) continue;
+		if (field !== 'value_kg_co2e' && (value < 0 || value > 100)) {
+			problems.push(`${field} is ${value}; a percentage must be between 0 and 100.`);
+		}
+		if (quote.trim() && !numberPattern(value).test(quote)) {
+			problems.push(
+				`${field} is ${value}, but the quote does not contain that number. Copy the figure exactly as the source writes it.`
+			);
+		}
+	}
+
+	for (const field of ['retrieved', 'published']) {
+		const raw = entry[field];
+		if (typeof raw !== 'string' || !raw) continue;
+		if (!/^\d{4}-\d{2}-\d{2}$/.test(raw)) {
+			problems.push(`${field} must be a date as YYYY-MM-DD.`);
+		} else if (raw > today) {
+			problems.push(`${field} ${raw} is in the future.`);
+		}
+	}
+	const year = entry.reference_year;
+	if (typeof year === 'number' && year > Number(today.slice(0, 4))) {
+		problems.push(`reference_year ${year} is in the future.`);
+	}
+
+	return problems;
+}
+
+/**
+ * The effective sustainability block of a variant: each field the variant sets replaces
+ * the filament's field of the same name.
+ */
+export function effectiveSustainability(
+	filament: Sustainability | undefined,
+	variant: Sustainability | undefined
+): Sustainability {
+	return { ...(filament ?? {}), ...(variant ?? {}) };
+}
+
+/**
+ * `recycled_content` and `traits.recycled` must agree on a variant. A positive
+ * percentage without the trait is an error; the trait with no recycled content is
+ * only a warning, and only once a sustainability block exists.
+ */
+export function checkRecycledTrait(
+	filament: Sustainability | undefined,
+	variant: Sustainability | undefined,
+	hasRecycledTrait: boolean
+): { level: 'error' | 'warning'; message: string } | null {
+	const content = effectiveSustainability(filament, variant).recycled_content;
+	const pct = content?.pct;
+	if (typeof pct === 'number' && pct > 0 && !hasRecycledTrait) {
+		return {
+			level: 'error',
+			message: `Recycled content is ${pct}% but the Recycled trait is not set.`
+		};
+	}
+	const hasBlock =
+		Object.keys(filament ?? {}).length > 0 || Object.keys(variant ?? {}).length > 0;
+	if (hasRecycledTrait && hasBlock && (!content || pct === 0)) {
+		return {
+			level: 'warning',
+			message: 'The Recycled trait is set and sustainability data exists, but there is no recycled content.'
+		};
+	}
+	return null;
 }

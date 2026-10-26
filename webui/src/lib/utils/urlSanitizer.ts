@@ -169,7 +169,14 @@ export function hasTrackingParams(url: string): boolean {
 }
 
 /** Entity fields that hold a URL (kept in sync with style_data.py's URL_FIELDS). */
-const URL_FIELDS = new Set(['url', 'storefront_url', 'website', 'data_sheet_url', 'safety_sheet_url']);
+const URL_FIELDS = new Set([
+	'url',
+	'storefront_url',
+	'website',
+	'data_sheet_url',
+	'safety_sheet_url',
+	'source_url'
+]);
 
 /**
  * Return a deep copy of an entity with tracking params stripped from every known URL field

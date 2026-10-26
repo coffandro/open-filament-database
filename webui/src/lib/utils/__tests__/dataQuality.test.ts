@@ -14,8 +14,14 @@ import {
 	findSharedPurchaseLinks,
 	suggestTraitsFromSiblings,
 	findRedundantSizes,
-	findDuplicateName
+	findDuplicateName,
+	containerMaterialOf,
+	numberPattern,
+	checkSourcedEntry,
+	checkRecycledTrait,
+	effectiveSustainability
 } from '../dataQuality';
+import type { RecycledContent } from '$lib/types/database';
 
 describe('isTitleCased', () => {
 	it('accepts a title-cased name', () => {
@@ -437,5 +443,90 @@ describe('findDuplicateName', () => {
 		expect(findDuplicateName('', existing)).toBeNull();
 		expect(findDuplicateName('  ', existing)).toBeNull();
 		expect(findDuplicateName('Silk', [{ name: '' }, { name: '---' }])).toBeNull();
+	});
+});
+
+// --- Sustainability data (mirrors the sustainability tests in test_data_quality.py) --
+
+const SOURCE = {
+	source_type: 'primary' as const,
+	source_url: 'https://blog.prusa3d.com/introducing-prusament-petg-recycled/',
+	retrieved: '2026-10-21'
+};
+
+function recycled(pct: number | null): RecycledContent {
+	return {
+		pct,
+		type: 'post_industrial',
+		evidence: 'supplier_declaration',
+		...SOURCE,
+		source_quote: 'made from 100% recycled material'
+	};
+}
+
+describe('containerMaterialOf', () => {
+	it('keeps mixed (cardboard core, plastic sides)', () => {
+		expect(containerMaterialOf({ container_material: 'mixed' })).toBe('mixed');
+	});
+});
+
+describe('numberPattern', () => {
+	it.each([
+		[5.85, 'The results show 5.85 kg of CO2', true],
+		[5.85, '5,85 kg', true],
+		[5.85, '15.85 kg', false],
+		[5.85, '5.851 kg', false],
+		[100, '100% recycled', true],
+		[100, '1000 spools', false],
+		[2.5, '2.50 kg', true]
+	])('%s in %j -> %s', (value, quote, expected) => {
+		expect(numberPattern(value).test(quote)).toBe(expected);
+	});
+});
+
+describe('checkSourcedEntry', () => {
+	const today = '2026-10-26';
+
+	it('accepts a sourced footprint', () => {
+		const entry = { value_kg_co2e: 5.85, ...SOURCE, source_quote: 'show 5.85 kg of CO2' };
+		expect(checkSourcedEntry(entry, ['value_kg_co2e'], today)).toEqual([]);
+	});
+
+	it('flags a number missing from the quote', () => {
+		const entry = { value_kg_co2e: 5.85, ...SOURCE, source_quote: 'about six kilograms' };
+		const problems = checkSourcedEntry(entry, ['value_kg_co2e'], today);
+		expect(problems).toHaveLength(1);
+		expect(problems[0]).toContain('does not contain that number');
+	});
+
+	it('flags missing sources, out-of-range pct and future dates', () => {
+		const entry = { pct: 120, source_quote: '120%', retrieved: '2999-01-01', reference_year: 2999 };
+		const problems = checkSourcedEntry(entry, ['pct'], today);
+		expect(problems.some((p) => p.startsWith('Missing source_url'))).toBe(true);
+		expect(problems.some((p) => p.includes('between 0 and 100'))).toBe(true);
+		expect(problems.filter((p) => p.includes('in the future'))).toHaveLength(2);
+	});
+});
+
+describe('checkRecycledTrait', () => {
+	it('errors when recycled pct > 0 but the trait is missing', () => {
+		expect(checkRecycledTrait({ recycled_content: recycled(100) }, undefined, false)?.level).toBe(
+			'error'
+		);
+	});
+
+	it('lets a variant override replace the filament value', () => {
+		expect(
+			checkRecycledTrait({ recycled_content: recycled(100) }, { recycled_content: recycled(0) }, false)
+		).toBeNull();
+		expect(
+			effectiveSustainability({ recycled_content: recycled(100) }, { recycled_content: recycled(0) })
+				.recycled_content?.pct
+		).toBe(0);
+	});
+
+	it('is silent for the trait alone until a sustainability block exists', () => {
+		expect(checkRecycledTrait(undefined, undefined, true)).toBeNull();
+		expect(checkRecycledTrait({ relative_claims: [] }, undefined, true)?.level).toBe('warning');
 	});
 });

@@ -1,9 +1,23 @@
 <script lang="ts">
 	import { onMount, untrack, tick } from 'svelte';
 	import { db } from '$lib/services/database';
-	import type { Store, VariantSize, PurchaseLink } from '$lib/types/database';
+	import type {
+		Store,
+		VariantSize,
+		PurchaseLink,
+		Sustainability,
+		ContainerDetails,
+		ContainerMaterial
+	} from '$lib/types/database';
 	import { SchemaForm } from '$lib/components/forms';
-	import { Tooltip, SizeCard, TextField, FormFieldRow } from '$lib/components/form-fields';
+	import {
+		Tooltip,
+		SizeCard,
+		TextField,
+		FormFieldRow,
+		SustainabilityEditor
+	} from '$lib/components/form-fields';
+	import { pruneEntry, pruneSustainability } from '$lib/utils/sustainability';
 	import { fetchEntitySchema } from '$lib/services/schemaService';
 	import { TRAIT_CATEGORIES, findTraitByKey } from '$lib/config/traitConfig';
 	import { PlusIcon, CloseIcon, CubeIcon, ChevronDownIcon } from '$lib/components/icons';
@@ -17,6 +31,7 @@
 		checkNameCasing,
 		checkNameLeadingCase,
 		checkNameWhitespace,
+		checkRecycledTrait,
 		containerMaterialOf,
 		findRedundantSizes,
 		suggestTraitsFromSiblings
@@ -71,10 +86,15 @@
 		 * `findSharedPurchaseLinks`, so the in-form hint and the filament page's banner
 		 * always agree on what counts as shared.
 		 */
+		/**
+		 * The parent filament's sustainability block. A variant's block overrides it per
+		 * field, so the recycled-trait check reads the effective value.
+		 */
+		filamentSustainability?: Sustainability;
 		sharedLinkOwners?: Record<string, string[]>;
 	}
 
-	let { variant = null, schema: externalSchema, onSubmit, saving = false, draftKey, filamentName, materialType, siblingFibers = [], siblingNames = [], siblingTraits = [], sharedLinkOwners = {} }: Props = $props();
+	let { variant = null, schema: externalSchema, onSubmit, saving = false, draftKey, filamentName, materialType, siblingFibers = [], siblingNames = [], siblingTraits = [], sharedLinkOwners = {}, filamentSustainability }: Props = $props();
 
 	type ColorStandards = {
 		ral: string;
@@ -91,6 +111,7 @@
 		nextLinkId: number;
 		selectedTraits: string[];
 		colorStandards: ColorStandards;
+		sustainability?: Sustainability;
 	};
 
 	const COLOR_STANDARD_FIELDS: Array<{ key: keyof ColorStandards; label: string; placeholder: string }> = [
@@ -156,7 +177,16 @@
 	// Config for variant form - labels, tooltips, and placeholders come from schema
 	const config: SchemaFormConfig = {
 		// `uuid` is the canonical id assigned by CI on merge — never shown or edited here.
-		hiddenFields: ['id', 'uuid', 'moved_from', 'traits', 'sizes', 'hex_variants', 'color_standards'],
+		hiddenFields: [
+			'id',
+			'uuid',
+			'moved_from',
+			'traits',
+			'sizes',
+			'hex_variants',
+			'color_standards',
+			'sustainability'
+		],
 		fieldOrder: ['name', 'color_hex', 'discontinued'],
 		typeOverrides: {
 			color_hex: 'color'
@@ -208,6 +238,7 @@
 					: []
 			);
 			colorStandards = initializeColorStandards(variant?.color_standards);
+			sustainability = cloneSustainability(variant?.sustainability);
 		}
 	});
 
@@ -231,6 +262,42 @@
 	let colorStandards = $state<ColorStandards>(
 		initialDraft?.colorStandards ?? initializeColorStandards(variant?.color_standards)
 	);
+
+	// ==================== SUSTAINABILITY ====================
+
+	// `sustainability` is a cross-file $ref, edited by SustainabilityEditor rather than
+	// SchemaForm. Each field set here overrides the filament's field of the same name.
+	let sustainabilitySchema: any = $state(null);
+	onMount(async () => {
+		sustainabilitySchema = await fetchEntitySchema('sustainability');
+	});
+
+	function cloneSustainability(value: Sustainability | undefined): Sustainability {
+		return value ? JSON.parse(JSON.stringify(value)) : {};
+	}
+
+	let sustainability = $state<Sustainability>(
+		initialDraft?.sustainability ?? cloneSustainability(variant?.sustainability)
+	);
+
+	let recycledTraitIssue = $derived(
+		checkRecycledTrait(filamentSustainability, sustainability, selectedTraits.has('recycled'))
+	);
+
+	function containerDetailsSchema(): any {
+		return sizesSchema?.items?.properties?.container_details;
+	}
+
+	// sizes_schema.json, for the container_details sub-form and its pruning.
+	let sizesSchema: any = $state(null);
+	onMount(async () => {
+		try {
+			const res = await fetch('/api/schemas/sizes');
+			if (res.ok) sizesSchema = await res.json();
+		} catch {
+			// Non-fatal: container details are then left as entered.
+		}
+	});
 
 	// Trait search/filter
 	let traitSearch = $state('');
@@ -381,7 +448,8 @@
 			gtin?: string;
 			article_number?: string;
 			discontinued?: boolean;
-			container_material?: 'plastic' | 'cardboard' | 'refill';
+			container_material?: ContainerMaterial;
+			container_details?: ContainerDetails;
 			purchase_links: Array<{ id: number; value: { store_id: string; url: string } }>;
 		};
 	}
@@ -483,6 +551,9 @@
 					article_number: s.article_number || '',
 					discontinued: s.discontinued || false,
 					container_material: containerMaterialOf(s),
+					container_details: s.container_details
+						? JSON.parse(JSON.stringify(s.container_details))
+						: undefined,
 					purchase_links: (s.purchase_links || []).map((pl: PurchaseLink, plIndex: number) => ({
 						id: plIndex + 1,
 						value: { store_id: pl.store_id || '', url: pl.url || '' }
@@ -635,6 +706,12 @@
 			if (s.value.article_number) sizeValue.article_number = s.value.article_number;
 			sizeValue.discontinued = s.value.discontinued ?? false;
 			if (s.value.container_material) sizeValue.container_material = s.value.container_material;
+			if (s.value.container_details) {
+				const details = containerDetailsSchema()
+					? pruneEntry(s.value.container_details, containerDetailsSchema())
+					: s.value.container_details;
+				if (Object.keys(details).length > 0) sizeValue.container_details = details;
+			}
 
 			const validLinks = s.value.purchase_links
 				.filter((pl) => pl.value.store_id && pl.value.url)
@@ -672,6 +749,12 @@
 		submitData.color_standards =
 			Object.keys(colorStandardsData).length > 0 ? colorStandardsData : undefined;
 
+		// Undefined when empty so the spread in the parent page wipes a removed block.
+		// Without the schema the editor is hidden, so keep the stored value untouched.
+		submitData.sustainability = sustainabilitySchema
+			? pruneSustainability($state.snapshot(sustainability), sustainabilitySchema)
+			: variant?.sustainability;
+
 		// Preserve the variant's canonical UUID on edit; left empty on create for CI to assign.
 		if (variant?.uuid) submitData.uuid = variant.uuid;
 		// Preserve former UUIDs so old references still resolve after a move/merge.
@@ -695,7 +778,8 @@
 			nextSizeId,
 			nextLinkId,
 			selectedTraits: [...selectedTraits],
-			colorStandards
+			colorStandards,
+			sustainability: $state.snapshot(sustainability)
 		});
 	});
 </script>
@@ -921,6 +1005,30 @@
 				</div>
 			{/if}
 		</div>
+
+		<!-- Sustainability Section -->
+		{#if sustainabilitySchema}
+			<div class="border-t pt-4 mt-4">
+				<h3 class="text-sm font-medium text-foreground flex items-center mb-3">
+					Sustainability
+					<Tooltip text={sustainabilitySchema.description} />
+				</h3>
+				{#if recycledTraitIssue}
+					<FixHint
+						level={recycledTraitIssue.level === 'error' ? 'error' : 'warn'}
+						message={recycledTraitIssue.message}
+						compact
+						class="mb-3"
+					/>
+				{/if}
+				<SustainabilityEditor
+					bind:value={sustainability}
+					schema={sustainabilitySchema}
+					idPrefix="variant-sustainability"
+					note="Anything set here replaces the filament's value for that field; leave a section empty to use the filament's."
+				/>
+			</div>
+		{/if}
 	{/snippet}
 
 	{#snippet rightColumnContent()}
@@ -970,6 +1078,7 @@
 						onAddLink={() => addPurchaseLink(sizeIndex)}
 						onRemoveLink={(linkIndex) => removePurchaseLink(sizeIndex, linkIndex)}
 						{sharedWith}
+						containerDetailsSchema={containerDetailsSchema()}
 					/>
 				{/each}
 			{:else}

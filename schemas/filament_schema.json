@@ -269,6 +269,11 @@
             "title": "Discontinued",
             "description": "Mark if this filament has been discontinued by the manufacturer"
         },
+        "sustainability": {
+            "$ref": "./sustainability_schema.json",
+            "title": "Sustainability",
+            "description": "Sourced sustainability data (recycled and bio-based content, carbon footprints, relative claims). Every number must be copied verbatim from a cited source."
+        },
         "slicer_ids": {
             "type": "object",
             "title": "Slicer IDs",

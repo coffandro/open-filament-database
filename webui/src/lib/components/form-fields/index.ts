@@ -18,3 +18,5 @@ export { default as StoreSelect } from './StoreSelect.svelte';
 export { default as PurchaseLinkCard } from './PurchaseLinkCard.svelte';
 export { default as PurchaseLinksSection } from './PurchaseLinksSection.svelte';
 export { default as SizeCard } from './SizeCard.svelte';
+export { default as SourcedEntryFields } from './SourcedEntryFields.svelte';
+export { default as SustainabilityEditor } from './SustainabilityEditor.svelte';

@@ -162,7 +162,8 @@ export const SCHEMA_NAMES = {
 	filament: 'filament_schema.json',
 	variant: 'variant_schema.json',
 	store: 'store_schema.json',
-	materialTypes: 'material_types_schema.json'
+	materialTypes: 'material_types_schema.json',
+	sustainability: 'sustainability_schema.json'
 } as const;
 
 /**
@@ -175,7 +176,8 @@ export const ENTITY_ROUTES = {
 	filament: 'filament',
 	variant: 'variant',
 	store: 'store',
-	materialTypes: 'material_types'
+	materialTypes: 'material_types',
+	sustainability: 'sustainability'
 } as const;
 
 export type SchemaName = keyof typeof SCHEMA_NAMES;
@@ -194,6 +196,10 @@ export async function fetchEntitySchema(entityType: SchemaName): Promise<any | n
 		return fetchSchemaFromUrl(`/api/schemas/${route}`);
 	}
 
-	// In cloud mode, use the external API with full schema file names
-	return fetchSchema(SCHEMA_NAMES[entityType]);
+	// In cloud mode, use the external API with full schema file names. A schema newer
+	// than the deployed API (e.g. right after a schema PR) falls back to this server.
+	return (
+		(await fetchSchema(SCHEMA_NAMES[entityType])) ??
+		fetchSchemaFromUrl(`/api/schemas/${ENTITY_ROUTES[entityType]}`)
+	);
 }

@@ -70,9 +70,90 @@ export interface Filament {
 	discontinued?: boolean;
 	slicer_ids?: any;
 	slicer_settings?: any;
+	sustainability?: Sustainability;
 	brandId?: string;
 	materialType?: string;
 	filamentDir?: string;
+}
+
+// --- Sustainability (schemas/sustainability_schema.json) ---------------------
+// Every figure is copied verbatim from a cited source; see docs/manual.md.
+
+export type SourceType = 'primary' | 'secondary';
+export type PctQualifier = 'exact' | 'up_to' | 'at_least';
+
+/** Fields every sourced sustainability entry carries. */
+export interface SourcedEntry {
+	source_type: SourceType;
+	source_url: string;
+	/** Verbatim text from the source; must contain the number as written. */
+	source_quote: string;
+	/** YYYY-MM-DD */
+	retrieved: string;
+	notes?: string | null;
+}
+
+export interface RecycledContent extends SourcedEntry {
+	/** 0-100; null when the source gives no number. */
+	pct: number | null;
+	pct_qualifier?: PctQualifier;
+	type: 'post_industrial' | 'post_consumer' | 'mixed' | 'unknown';
+	evidence: 'iso_14021' | 'third_party_certified' | 'supplier_declaration' | 'marketing';
+}
+
+export interface BioBasedContent extends SourcedEntry {
+	pct: number | null;
+	pct_qualifier?: PctQualifier;
+	method: 'astm_d6866' | 'en_16785' | 'declared';
+}
+
+export interface CarbonFootprint extends SourcedEntry {
+	value_kg_co2e: number;
+	declared_unit: 'per_kg_filament' | 'per_spool_as_sold' | 'unknown';
+	boundary:
+		| 'resin_cradle_to_gate'
+		| 'filament_cradle_to_gate'
+		| 'cradle_to_customer'
+		| 'cradle_to_grave'
+		| 'unknown';
+	packaging_included: 'yes' | 'no' | 'unknown';
+	biogenic_carbon: 'included' | 'excluded' | 'reported_separately' | 'unknown';
+	recycled_allocation: 'cut_off' | 'burden_free_scrap' | 'other' | 'unknown' | 'not_applicable';
+	method: 'epd' | 'iso_14067' | 'lca' | 'declaration';
+	standard?: string | null;
+	tool?: string | null;
+	practitioner?: string | null;
+	verification: 'none' | 'peer_review' | 'third_party' | 'epd_registered';
+	verifier?: string | null;
+	epd_registration_number?: string | null;
+	/** false when the study is only available on request. */
+	publicly_available: boolean;
+	reference_year?: number | null;
+	published?: string | null;
+}
+
+export interface RelativeClaim extends SourcedEntry {
+	reduction_pct: number;
+	metric: 'gwp' | 'other';
+	/** Verbatim from the source. */
+	baseline: string;
+}
+
+/**
+ * On a variant, each field set here replaces the filament's field of the same name;
+ * carbon_footprints and relative_claims replace the whole array.
+ */
+export interface Sustainability {
+	recycled_content?: RecycledContent;
+	bio_based_content?: BioBasedContent;
+	carbon_footprints?: CarbonFootprint[];
+	relative_claims?: RelativeClaim[];
+}
+
+export interface ContainerDetails extends SourcedEntry {
+	recycled_pct?: number | null;
+	pct_qualifier?: PctQualifier;
+	certifications?: string[];
 }
 
 export interface PurchaseLink {
@@ -97,10 +178,11 @@ export interface VariantSize {
 	/** @deprecated Use `container_material: 'refill'`; read through `containerMaterialOf`. */
 	spool_refill?: boolean;
 	container_material?: ContainerMaterial;
+	container_details?: ContainerDetails;
 	purchase_links?: PurchaseLink[];
 }
 
-export type ContainerMaterial = 'plastic' | 'cardboard' | 'refill';
+export type ContainerMaterial = 'plastic' | 'cardboard' | 'mixed' | 'refill';
 
 export interface VariantTraits {
 	translucent?: boolean;
@@ -191,6 +273,8 @@ export interface Variant {
 	color_hex: string | string[];
 	discontinued: boolean;
 	traits?: VariantTraits;
+	/** Per-field override of the filament's sustainability data. */
+	sustainability?: Sustainability;
 	sizes?: VariantSize[];
 	brandId?: string;
 	materialType?: string;

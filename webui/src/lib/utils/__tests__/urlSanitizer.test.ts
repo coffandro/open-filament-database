@@ -167,6 +167,18 @@ describe('stripTrackersDeep', () => {
 		expect(out.data_sheet_url).toBe('https://x.com/ds.pdf');
 		expect(out.name).toBe('Brand');
 	});
+	it('strips source_url nested in sustainability entries', () => {
+		const out = stripTrackersDeep({
+			sustainability: {
+				carbon_footprints: [
+					{ source_url: 'https://blog.prusa3d.com/x_65806/?utm_source=nl', source_quote: '5.85 kg' }
+				]
+			}
+		});
+		expect(out.sustainability.carbon_footprints[0].source_url).toBe(
+			'https://blog.prusa3d.com/x_65806/'
+		);
+	});
 });
 
 describe('SimplyPrint recommender params', () => {
