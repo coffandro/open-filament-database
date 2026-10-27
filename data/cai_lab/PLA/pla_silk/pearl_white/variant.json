@@ -1,0 +1,9 @@
+{
+  "id": "pearl_white",
+  "name": "Pearl White",
+  "color_hex": "#D3CFC3",
+  "discontinued": false,
+  "traits": {
+    "silk": true
+  }
+}

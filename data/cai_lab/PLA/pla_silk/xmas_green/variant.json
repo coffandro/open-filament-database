@@ -1,0 +1,9 @@
+{
+  "id": "xmas_green",
+  "name": "Xmas Green",
+  "color_hex": "#00940A",
+  "discontinued": false,
+  "traits": {
+    "silk": true
+  }
+}
