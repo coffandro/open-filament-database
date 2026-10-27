@@ -1,0 +1,14 @@
+{
+  "id": "amazon_de",
+  "name": "Amazon.de",
+  "storefront_url": "https://amazon.de",
+  "logo": "logo.png",
+  "ships_from": [
+    "DE"
+  ],
+  "ships_to": [
+    "DE",
+    "AT",
+    "CH"
+  ]
+}
