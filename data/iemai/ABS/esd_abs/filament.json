@@ -3,7 +3,7 @@
   "id": "esd_abs",
   "name": "ESD-ABS",
   "diameter_tolerance": 0.05,
-  "density": 1.08,
+  "density": 1.05,
   "min_print_temperature": 230,
   "max_print_temperature": 260,
   "min_bed_temperature": 90,
