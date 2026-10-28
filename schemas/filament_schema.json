@@ -263,6 +263,7 @@
         },
         "dry_temperature": {
             "type": "integer",
+            "minimum": 0,
             "title": "Dry Temp (°C)",
             "description": "Recommended drying temperature (°C), as opposed to the maximum in max_dry_temperature",
             "x-placeholder": "e.g., 55"

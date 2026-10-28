@@ -138,6 +138,38 @@ def test_empty_string_nested_in_a_purchase_link_is_found(tmp_path):
     assert "purchase_links[0].url" in found[0].message
 
 
+# --- inverted_range (#767: min/max fan speed and drying temperature) ----------
+
+
+def test_min_above_max_is_an_error(tmp_path):
+    data = build(
+        tmp_path / "data",
+        filament_extra={"min_fan_speed": 80, "max_fan_speed": 20},
+        variants=[{"id": "black", "name": "Black"}],
+    )
+    found = messages(check_data_quality(data), "'min_fan_speed' (80) is greater than")
+    assert len(found) == 1
+    assert found[0].level.value == "ERROR"
+
+
+def test_dry_temperature_above_its_maximum_is_an_error(tmp_path):
+    data = build(
+        tmp_path / "data",
+        filament_extra={"dry_temperature": 90, "max_dry_temperature": 60},
+        variants=[{"id": "black", "name": "Black"}],
+    )
+    assert len(messages(check_data_quality(data), "'dry_temperature' (90)")) == 1
+
+
+def test_equal_or_one_sided_ranges_are_fine(tmp_path):
+    data = build(
+        tmp_path / "data",
+        filament_extra={"min_fan_speed": 50, "max_fan_speed": 50, "dry_temperature": 55},
+        variants=[{"id": "black", "name": "Black"}],
+    )
+    assert messages(check_data_quality(data), "is greater than") == []
+
+
 # --- name_whitespace (#460: a filament literally named "Silk ") ---------------
 
 

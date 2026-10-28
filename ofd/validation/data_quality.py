@@ -5,7 +5,8 @@ Rules for the small, repetitive defects that reviewers kept fixing by hand on we
 submissions after PR #405: placeholder values, duplicated spool rows, casing that
 diverges from a filament's own siblings, fiber traits missing from variants whose
 names announce the fiber, display names that start lowercase, filaments left with no
-variants, and near-duplicate sibling names that differ only by word order.
+variants, near-duplicate sibling names that differ only by word order, and
+min/max filament settings recorded the wrong way round.
 
 This is the authoritative, server-side enforcement; the webui mirrors the rules in
 ``webui/src/lib/utils/dataQuality.ts`` and surfaces each as an inline "Fix" hint at
@@ -19,8 +20,8 @@ restating it:
 * word-swap normalization -> ``ofd/scripts/deduplicate_data.py``
 
 Levels are chosen so a rule only blocks a merge when the data is genuinely wrong:
-``placeholder_value``, ``duplicate_size_entry``, ``name_whitespace`` and
-``purchase_link_storefront_root`` are ERRORs; the judgement calls
+``placeholder_value``, ``duplicate_size_entry``, ``name_whitespace``,
+``inverted_range`` and ``purchase_link_storefront_root`` are ERRORs; the judgement calls
 (``name_casing``, ``name_leading_case``, ``fiber_trait_missing``,
 ``orphan_filament``, ``sibling_near_duplicate``) are WARNINGs.
 
@@ -147,6 +148,39 @@ def _check_name_whitespace(data, file_path: Path, base: Path) -> list[Validation
             )
         ]
     return []
+
+
+# --- Rule: inverted ranges ----------------------------------------------------
+
+# (lower, upper) filament fields where the lower value must not exceed the upper.
+# JSON Schema can't compare two fields, so this is the only place the pairing is
+# enforced; the exporters copy both values straight into slicer presets.
+_RANGE_PAIRS = (
+    ("min_print_temperature", "max_print_temperature"),
+    ("min_bed_temperature", "max_bed_temperature"),
+    ("min_fan_speed", "max_fan_speed"),
+    ("dry_temperature", "max_dry_temperature"),
+)
+
+
+def _is_number(value) -> bool:
+    return isinstance(value, (int, float)) and not isinstance(value, bool)
+
+
+def _check_inverted_ranges(data, file_path: Path, base: Path) -> list[ValidationError]:
+    """A lower bound above its upper bound, e.g. ``min_fan_speed`` 80 / ``max_fan_speed`` 20."""
+    if not isinstance(data, dict):
+        return []
+    return [
+        _err(
+            ValidationLevel.Error,
+            f"'{low}' ({data[low]}) is greater than '{high}' ({data[high]}). "
+            f"The values are probably swapped.",
+            _rel(file_path, base),
+        )
+        for low, high in _RANGE_PAIRS
+        if _is_number(data.get(low)) and _is_number(data.get(high)) and data[low] > data[high]
+    ]
 
 
 # --- Rule: duplicate size entries ---------------------------------------------
@@ -514,6 +548,7 @@ def check_data_quality(data_dir) -> list[ValidationError]:
                 errors.extend(_check_placeholders(filament_data, filament_file, base))
                 errors.extend(_check_name_whitespace(filament_data, filament_file, base))
                 errors.extend(_check_name_leading_case(filament_data, filament_file, base))
+                errors.extend(_check_inverted_ranges(filament_data, filament_file, base))
                 errors.extend(_check_orphan_filament(filament_dir, base))
 
                 name = filament_data.get("name")
