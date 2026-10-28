@@ -1,0 +1,37 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["enrichments", "not_found"],
+  "properties": {
+    "enrichments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "pointer", "value", "source_url", "source_type"],
+        "properties": {
+          "path": { "type": "string" },
+          "pointer": { "type": "string" },
+          "value": {},
+          "source_url": { "type": "string" },
+          "source_quote": { "type": "string" },
+          "source_type": { "enum": ["primary", "secondary"] },
+          "note": { "type": "string" }
+        }
+      }
+    },
+    "not_found": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "fields", "note"],
+        "properties": {
+          "path": { "type": "string" },
+          "fields": { "type": "array", "items": { "type": "string" } },
+          "note": { "type": "string" }
+        }
+      }
+    }
+  }
+}

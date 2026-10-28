@@ -47,8 +47,11 @@ def run_model(
     cwd: Path,
     model: str = DEFAULT_MODEL,
     budget_usd: float = DEFAULT_BUDGET_USD,
+    guidelines: Path = GUIDELINES,
+    schema_file: Path = SCHEMA,
 ) -> ModelResult:
-    schema = json.loads(SCHEMA.read_text())
+    """One print-mode run; ``guidelines``/``schema_file`` let ``ofd enrich`` reuse it."""
+    schema = json.loads(schema_file.read_text())
     cmd = [
         "claude",
         "-p",
@@ -59,7 +62,7 @@ def run_model(
         "--allowedTools",
         TOOLS,
         "--system-prompt-file",
-        str(GUIDELINES),
+        str(guidelines),
         "--json-schema",
         json.dumps(schema),
         "--max-budget-usd",
@@ -96,5 +99,5 @@ def run_model(
     try:
         jsonschema.validate(review, schema)
     except jsonschema.ValidationError as exc:
-        raise ModelError(f"model output does not match schema.json: {exc.message}") from exc
+        raise ModelError(f"model output does not match {schema_file.name}: {exc.message}") from exc
     return ModelResult(review=review, cost_usd=cost, model=model)

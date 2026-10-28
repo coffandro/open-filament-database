@@ -47,7 +47,7 @@ class Outcome:
     rejected: list[tuple[dict, str]] = field(default_factory=list)
 
 
-def _schema_errors(doc, kind: str) -> set[str]:
+def schema_errors(doc, kind: str) -> set[str]:
     schema_file = SCHEMAS_DIR / f"{kind}_schema.json"
     if not schema_file.exists():
         return set()
@@ -58,7 +58,7 @@ def _schema_errors(doc, kind: str) -> set[str]:
     }
 
 
-def _indent_of(text: str) -> int:
+def indent_of(text: str) -> int:
     for line in text.splitlines()[1:]:
         stripped = line.lstrip(" ")
         if stripped and len(stripped) != len(line):
@@ -66,14 +66,14 @@ def _indent_of(text: str) -> int:
     return 2
 
 
-def _render(doc, indent: int, trailing_newline: bool) -> str:
+def render_json(doc, indent: int, trailing_newline: bool) -> str:
     return json.dumps(doc, indent=indent, ensure_ascii=False) + ("\n" if trailing_newline else "")
 
 
 def _apply(change: ChangedFile, enrichments: list[dict], outcome: Outcome):
     """Apply each valid enrichment in turn; returns the new doc and those applied."""
     doc = copy.deepcopy(change.after)
-    baseline_errors = _schema_errors(doc, change.kind)
+    baseline_errors = schema_errors(doc, change.kind)
     applied: list[dict] = []
     for enrichment in enrichments:
         if not str(enrichment.get("source_url", "")).startswith("https://"):
@@ -92,7 +92,7 @@ def _apply(change: ChangedFile, enrichments: list[dict], outcome: Outcome):
         except (KeyError, IndexError, TypeError, ValueError) as exc:
             outcome.rejected.append((enrichment, f"pointer does not resolve ({exc})"))
             continue
-        new_errors = _schema_errors(candidate, change.kind) - baseline_errors
+        new_errors = schema_errors(candidate, change.kind) - baseline_errors
         if new_errors:
             outcome.rejected.append((enrichment, f"fails the schema: {sorted(new_errors)[0]}"))
             continue
@@ -119,9 +119,9 @@ def build_suggestions(enrichments: list[dict], changes: list[ChangedFile]) -> Ou
             continue
 
         head_text = change.head_text or ""
-        indent = _indent_of(head_text)
+        indent = indent_of(head_text)
         trailing = head_text.endswith("\n")
-        if _render(change.after, indent, trailing) != head_text:
+        if render_json(change.after, indent, trailing) != head_text:
             outcome.manual += [(e, "the file isn't in canonical JSON form") for e in applied]
             continue
 
@@ -134,7 +134,7 @@ def build_suggestions(enrichments: list[dict], changes: list[ChangedFile]) -> Ou
             ):
                 new_doc = sort_json_keys(new_doc, info, set())
 
-        new_text = _render(new_doc, indent, trailing)
+        new_text = render_json(new_doc, indent, trailing)
         old_lines, new_lines = head_text.splitlines(), new_text.splitlines()
         new_pointer_lines = pointer_lines(new_text)
 
