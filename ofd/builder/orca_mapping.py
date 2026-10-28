@@ -4,9 +4,10 @@ Mapping from Open Filament Database entities to OrcaSlicer filament presets.
 OrcaSlicer reads filament presets as JSON files. A user preset is a thin
 override layer on top of a system profile named by ``inherits`` — so the only
 fields we emit are the ones OFD actually knows: vendor, material type, density,
-diameter and temperatures. Everything governing print behaviour (flow ratio,
-retraction, max volumetric speed, fan, pressure advance) has no equivalent in
-the OFD schema and is deliberately left to the inherited base profile.
+diameter, temperatures and, where recorded, max volumetric speed and fan speeds.
+Everything else governing print behaviour (flow ratio, retraction, pressure
+advance) has no equivalent in the OFD schema and is deliberately left to the
+inherited base profile.
 
 Every OrcaSlicer filament value is a list of strings, one entry per extruder.
 
@@ -234,6 +235,14 @@ def resolve_base_profile(material: str, filament_name: str) -> str | None:
     return ORCA_BASE_BY_MATERIAL.get(material)
 
 
+# Optional OFD filament fields that map one-to-one onto an OrcaSlicer key.
+SLICER_HINT_KEYS = {
+    "max_volumetric_speed": "filament_max_volumetric_speed",
+    "min_fan_speed": "fan_min_speed",
+    "max_fan_speed": "fan_max_speed",
+}
+
+
 def _num_str(value: Any) -> str | None:
     """Render a number the way OrcaSlicer writes them: no trailing zeros."""
     if value is None or isinstance(value, bool):
@@ -431,6 +440,11 @@ def build_profile(
         if diameter:
             profile["filament_diameter"] = [diameter]
 
+    for ofd_key, orca_key in SLICER_HINT_KEYS.items():
+        value = _num_str(filament.get(ofd_key))
+        if value:
+            profile[orca_key] = [value]
+
     # Contributor-pinned raw OrcaSlicer keys are applied before the resolved
     # temperatures, matching the precedence the filament schema documents:
     # "Slicer specific settings are applied first, then these are applied on top."
@@ -486,9 +500,10 @@ def _build_notes(
     lines = [
         "Generated from the Open Filament Database.",
         "",
-        "Temperatures, density and diameter come from OFD. Everything else -",
-        "flow, retraction, volumetric speed, fan and pressure advance - is",
-        f"inherited from '{base}' and is not tuned for this filament.",
+        "Temperatures, density, diameter and any recorded volumetric speed and",
+        "fan speeds come from OFD. Everything else - flow, retraction and",
+        f"pressure advance - is inherited from '{base}' and is not tuned for",
+        "this filament.",
         "",
         f"Source: {source_url}",
     ]

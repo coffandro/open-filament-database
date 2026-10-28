@@ -6,6 +6,7 @@
   "id": "charcoal_black",
   "name": "Charcoal Black",
   "color_hex": "#2F2E30",
+  "transmission_distance": 0.1,
   "discontinued": false,
   "traits": {
     "matte": true,

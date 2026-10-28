@@ -3,5 +3,6 @@
   "id": "white",
   "name": "White",
   "color_hex": "#EBF7FF",
+  "transmission_distance": 3.2,
   "discontinued": false
 }

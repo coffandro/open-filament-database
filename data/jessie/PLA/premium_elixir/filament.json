@@ -4,5 +4,9 @@
   "name": "PLA Premium Elixir",
   "diameter_tolerance": 0.02,
   "density": 1.19,
-  "max_dry_temperature": 55
+  "max_dry_temperature": 55,
+  "min_print_temperature": 215,
+  "max_print_temperature": 240,
+  "min_bed_temperature": 55,
+  "max_bed_temperature": 65
 }

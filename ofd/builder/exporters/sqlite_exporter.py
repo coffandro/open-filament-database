@@ -82,11 +82,18 @@ CREATE TABLE IF NOT EXISTS filament (
     chamber_temperature INTEGER,
     min_print_speed REAL,
     max_print_speed REAL,
+    max_volumetric_speed REAL,
+    min_fan_speed INTEGER,
+    max_fan_speed INTEGER,
+    dry_temperature INTEGER,
+    dry_time REAL,
+    enclosure TEXT,  -- required | recommended | not_needed
     min_nozzle_diameter REAL,
     data_sheet_url TEXT,
     safety_sheet_url TEXT,
     discontinued INTEGER NOT NULL DEFAULT 0,
-    slicer_settings TEXT  -- JSON
+    slicer_settings TEXT,  -- JSON
+    sustainability TEXT  -- JSON (see schemas/sustainability_schema.json)
 );
 CREATE INDEX IF NOT EXISTS ix_filament_brand ON filament(brand_id);
 CREATE INDEX IF NOT EXISTS ix_filament_material ON filament(material_id);
@@ -102,9 +109,11 @@ CREATE TABLE IF NOT EXISTS variant (
     name TEXT NOT NULL,
     color_hex TEXT NOT NULL,
     hex_variants TEXT,  -- JSON array
+    transmission_distance REAL,  -- mm
     color_standards TEXT,  -- JSON
     traits TEXT,  -- JSON
-    discontinued INTEGER NOT NULL DEFAULT 0
+    discontinued INTEGER NOT NULL DEFAULT 0,
+    sustainability TEXT  -- JSON; per-field override of the filament's
 );
 CREATE INDEX IF NOT EXISTS ix_variant_filament ON variant(filament_id);
 CREATE INDEX IF NOT EXISTS ix_variant_slug ON variant(slug);
@@ -120,7 +129,8 @@ CREATE TABLE IF NOT EXISTS size (
     diameter REAL NOT NULL,
     empty_spool_weight INTEGER,
     spool_core_diameter REAL,
-    container_material TEXT,  -- plastic | cardboard | refill
+    container_material TEXT,  -- plastic | cardboard | mixed | refill
+    container_details TEXT,  -- JSON
     gtin TEXT,
     article_number TEXT,
     barcode_identifier TEXT,

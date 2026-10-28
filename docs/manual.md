@@ -112,10 +112,15 @@ A filament represents a **product line** (e.g. "Silk PLA", "Glow PLA"), **not a 
    **Optional** (see [`schemas/filament_schema.json`](../schemas/filament_schema.json) for the full list):
    - Mechanical: `shore_hardness_a`, `shore_hardness_d`, `certifications` (array of strings)
    - Drying / printing temperatures: `max_dry_temperature`, `min_print_temperature`, `max_print_temperature`, `preheat_temperature`, `min_bed_temperature`, `max_bed_temperature`, `min_chamber_temperature`, `max_chamber_temperature`, `chamber_temperature`
+   - Print speed: `min_print_speed`, `max_print_speed` (mm/s), `max_volumetric_speed` (mm³/s)
+   - Cooling: `min_fan_speed`, `max_fan_speed` — part cooling fan, integer percent 0–100
+   - Drying: `dry_temperature` (°C, the recommended value) and `dry_time` (hours)
+   - `enclosure` — one of `required`, `recommended`, `not_needed`
    - Hardware: `min_nozzle_diameter`
    - Documents: `data_sheet_url`, `safety_sheet_url`
    - Lifecycle: `discontinued` (boolean)
    - Slicer integration: `slicer_ids` (PrusaSlicer / BambuStudio / OrcaSlicer / Cura native IDs) and `slicer_settings` (per-slicer profile names, IDs, and temperature overrides)
+   - Sustainability: `sustainability` — sourced recycled / bio-based content, carbon footprints and relative claims. See [🌱 Sustainability data](#-sustainability-data); every figure needs a source.
 
 ## 🎨 Adding a Variant
 A variant represents a single colour or finish of a filament.
@@ -142,7 +147,9 @@ Inside the filament folder, create a folder named with the variant `id` (e.g. `l
 **Optional** (full list in [`schemas/variant_schema.json`](../schemas/variant_schema.json)):
 - `discontinued` — boolean
 - `hex_variants` — array of alternative `#RRGGBB` codes the filament is known to report (e.g. via NFC)
+- `transmission_distance` — number, mm; the transmission distance (TD) used for HueForge prints and lithophanes. Use the manufacturer's published value where available
 - `color_standards` — object with any of `ral`, `ncs`, `pantone`, `bs`, `munsell`
+- `sustainability` — overrides the filament's `sustainability` **per field** (see [🌱 Sustainability data](#-sustainability-data))
 - `traits` — **an object** mapping trait names to booleans, **not** an array of strings. Available traits include `silk`, `matte`, `glow`, `translucent`, `transparent`, `recycled`, `biodegradable`, `abrasive`, `glitter`, `iridescent`, `temperature_color_change`, `gradual_color_change`, `coextruded`, the `contains_*` family (carbon, glass, wood, metal, …), the `imitates_*` family, `esd_safe`, `self_extinguishing`, and many more. See the schema for the complete enumeration.
 
 ### sizes.json
@@ -161,7 +168,8 @@ A JSON **array** of one or more size objects. At minimum:
 - Spool geometry: `empty_spool_weight`, `spool_core_diameter`, `container_width`, `container_outer_diameter`, `container_hole_diameter`
 - Identifiers: `gtin` (GTIN-12 or GTIN-13 — preferred), `ean` (deprecated alias for `gtin`), `article_number`, `barcode_identifier`, `nfc_identifier`, `qr_identifier`
 - `spool_refill` — (deprecated) boolean; use `container_material: refill` instead
-- `container_material` — one of `plastic`, `cardboard`, `refill`; what the container is made of
+- `container_material` — one of `plastic`, `cardboard`, `mixed` (e.g. a cardboard core with plastic sides), `refill`; what the container is made of
+- `container_details` — sourced details about this size's spool or packaging: `recycled_pct`, `pct_qualifier`, `certifications` (e.g. `["FSC"]`), `notes`, plus the source fields described in [🌱 Sustainability data](#-sustainability-data). Per size, because some brands use cardboard spools on certain sizes only.
 - `discontinued` — boolean
 - `purchase_links` — array of purchase entries:
   - `store_id` — required; must match a folder under `/stores`
@@ -169,6 +177,81 @@ A JSON **array** of one or more size objects. At minimum:
   - `ships_from` / `ships_to` — optional per-link override (string or array of country codes)
 
 > **Note:** there is no `is_affiliate` field on purchase links. Affiliate handling is implicit in the store entry and the URL itself.
+
+## 🌱 Sustainability data
+Sustainability figures are used to calculate the CO₂ footprint of prints, and they get copied into consumer-facing material. So they follow stricter rules than the rest of the database.
+
+### The rules
+1. **Copy, never compute.** Every number must appear in the source exactly as entered. Never derive, average, convert units or estimate. If the unit or scope is unclear, use `unknown`; never guess.
+2. **Every entry needs a source**: `source_url`, `source_quote` (verbatim text that contains the number; `5.85` and `5,85` both match) and `retrieved` (the date you read it, `YYYY-MM-DD`). No source, no entry.
+3. **Primary sources first**: the brand's own site, PDF, blog or declaration. A retailer or press copy of the brand's text is allowed only when the original can't be reached; mark it `source_type: "secondary"`.
+4. **Never store** offsets or tree planting, "carbon neutral" / "climate neutral" / "CO₂ neutral", "eco-friendly", "most sustainable", or biodegradability marketing. The EU Empowering Consumers Directive bans offset-based and generic green claims, and these fields end up in consumer marketing. The schema has nowhere to put them on purpose.
+5. **No estimates in `data/`.** Generic per-material defaults are a different kind of data and live in [`reference/`](../reference), never in a brand's filament.
+6. **Recycled content needs the trait.** `recycled_content.pct > 0` requires `traits.recycled: true` on the affected variants (an error otherwise). The reverse only warns, and only once the filament or variant has a `sustainability` block.
+
+`ofd validate` enforces rules 2, 6 and the number-in-quote part of rule 1, and rejects percentages outside 0–100 and dates in the future.
+
+### Where it goes
+`sustainability` can sit on `filament.json` and on `variant.json`. A variant overrides the filament **per field**: if a variant sets `recycled_content`, that replaces the filament's `recycled_content`; if it sets `carbon_footprints`, that array replaces the filament's array as a whole. Fields the variant doesn't set are inherited. Spool and packaging details go on each size in `sizes.json` as `container_details`.
+
+```json
+"sustainability": {
+  "recycled_content": {
+    "pct": 100, "pct_qualifier": "exact",
+    "type": "post_industrial", "evidence": "supplier_declaration",
+    "source_type": "primary",
+    "source_url": "https://blog.prusa3d.com/introducing-prusament-pla-recycled_59116/",
+    "source_quote": "…100 % of recycled Prusament PLA materials…",
+    "retrieved": "2026-10-21"
+  },
+  "carbon_footprints": [{
+    "value_kg_co2e": 5.85, "declared_unit": "per_kg_filament",
+    "boundary": "filament_cradle_to_gate", "packaging_included": "unknown",
+    "biogenic_carbon": "unknown", "recycled_allocation": "not_applicable",
+    "method": "lca", "tool": "SimaPro 9.3.0.2", "verification": "none",
+    "publicly_available": true, "published": "2022-03-17",
+    "source_type": "primary", "source_url": "https://blog.prusa3d.com/…",
+    "source_quote": "The results show 5.85 kg of CO2 with 1kg of pure Prusament PETG",
+    "retrieved": "2026-10-21"
+  }]
+}
+```
+
+### Field guide
+| Field | Values | Meaning |
+|---|---|---|
+| `recycled_content.pct` | 0–100 or `null` | `null` when the source says "recycled" but gives no number |
+| `pct_qualifier` | `exact`, `up_to`, `at_least` | "up to 89%" is `up_to`, "90–100%" is `at_least` 90 |
+| `recycled_content.type` | `post_industrial`, `post_consumer`, `mixed`, `unknown` | Manufacturing scrap vs. used products. Use `unknown` when sources conflict, and quote both in `notes` |
+| `evidence` | `iso_14021`, `third_party_certified`, `supplier_declaration`, `marketing` | `iso_14021` only when the source cites ISO 14021; GRS/RCS/SCS certificates are `third_party_certified` |
+| `bio_based_content.method` | `astm_d6866`, `en_16785`, `declared` | Bio-based **pigments or additives are not bio-based content** |
+| `declared_unit` | `per_kg_filament`, `per_spool_as_sold`, `unknown` | What the number refers to. Use `unknown` if the source doesn't say "per kg" |
+| `boundary` | see below | Which life-cycle stages the number covers |
+| `packaging_included` | `yes`, `no`, `unknown` | Whether spool, box and bag are inside the number |
+| `biogenic_carbon` | `included`, `excluded`, `reported_separately`, `unknown` | How carbon absorbed by plants is counted |
+| `recycled_allocation` | `cut_off`, `burden_free_scrap`, `other`, `unknown`, `not_applicable` | How recycled input is credited; `not_applicable` for virgin material |
+| `method` | `epd`, `iso_14067`, `lca`, `declaration` | `declaration` is a figure with no published study behind it |
+| `standard` | free text or `null` | **Only** when the source names one, e.g. "ISO 14067" |
+| `verification` | `none`, `peer_review`, `third_party`, `epd_registered` | Independent review of the study |
+| `publicly_available` | boolean | `false` when the study is "available on request" |
+| `relative_claims[].baseline` | free text | Verbatim, e.g. "generic PET filament" |
+
+**Boundaries:**
+- `resin_cradle_to_gate`: making the raw plastic only, before it becomes filament.
+- `filament_cradle_to_gate`: from raw materials up to filament leaving the factory.
+- `cradle_to_customer`: also includes delivery to the buyer.
+- `cradle_to_grave`: the full life cycle, including end of life.
+
+**Relative claims** (`relative_claims`) are for brands that only publish "X% lower than …". Store the percentage and the baseline exactly as written, and never turn them into an absolute number.
+
+### Valid sources
+- ✅ The brand's product page, datasheet, sustainability page, blog post, LCA report or EPD
+- ✅ A retailer or press copy of the brand's own text, **only** when the original is gone (`source_type: "secondary"`)
+- ❌ A company-wide footprint (e.g. an ISO 14064-1 corporate report) as a product figure
+- ❌ Figures you calculated, averaged or converted
+- ❌ Anything from the "never store" list above
+
+Checked a brand and found nothing? Record that in [`docs/sustainability-sources.md`](sustainability-sources.md). A negative result is useful too.
 
 ## 🏪 Adding a Store
 Stores are referenced by `purchase_links[].store_id` and live under `/stores`.

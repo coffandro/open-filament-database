@@ -6,6 +6,7 @@
   "id": "sakura_pink",
   "name": "Sakura Pink",
   "color_hex": "#E0A8BB",
+  "transmission_distance": 2.3,
   "traits": {
     "matte": true,
     "industrially_compostable": true

@@ -25,7 +25,7 @@ def build(
 ):
     """Lay out data/<brand>/<material>/<filament>/<variant>/{variant,sizes}.json.
 
-    `variants` items are dicts: {id, name?, traits?, sizes?}.
+    `variants` items are dicts: {id, name?, traits?, sustainability?, sizes?}.
     """
     fil_dir = data_dir / brand / material / filament
     write(data_dir / brand / "brand.json", {"id": brand, "name": brand.title()})
@@ -44,6 +44,8 @@ def build(
         }
         if "traits" in v:
             variant_obj["traits"] = v["traits"]
+        if "sustainability" in v:
+            variant_obj["sustainability"] = v["sustainability"]
         write(vdir / "variant.json", variant_obj)
         write(
             vdir / "sizes.json",
@@ -190,6 +192,20 @@ def test_storefront_root_link_is_an_error(tmp_path):
     assert found[0].level.value == "ERROR"
 
 
+# --- inverted_range (#767: min/max fan speed and drying temperature) ----------
+
+
+def test_min_above_max_is_an_error(tmp_path):
+    data = build(
+        tmp_path / "data",
+        filament_extra={"min_fan_speed": 80, "max_fan_speed": 20},
+        variants=[{"id": "black", "name": "Black"}],
+    )
+    found = messages(check_data_quality(data), "'min_fan_speed' (80) is greater than")
+    assert len(found) == 1
+    assert found[0].level.value == "ERROR"
+
+
 def test_product_page_link_is_fine(tmp_path):
     for url in (
         "https://store.bambulab.com/products/pla-basic",
@@ -200,6 +216,24 @@ def test_product_page_link_is_fine(tmp_path):
             variants=[{"id": "black", "name": "Black", "sizes": _sizes_with_link(url)}],
         )
         assert messages(check_data_quality(data), "storefront root") == [], url
+
+
+def test_dry_temperature_above_its_maximum_is_an_error(tmp_path):
+    data = build(
+        tmp_path / "data",
+        filament_extra={"dry_temperature": 90, "max_dry_temperature": 60},
+        variants=[{"id": "black", "name": "Black"}],
+    )
+    assert len(messages(check_data_quality(data), "'dry_temperature' (90)")) == 1
+
+
+def test_equal_or_one_sided_ranges_are_fine(tmp_path):
+    data = build(
+        tmp_path / "data",
+        filament_extra={"min_fan_speed": 50, "max_fan_speed": 50, "dry_temperature": 55},
+        variants=[{"id": "black", "name": "Black"}],
+    )
+    assert messages(check_data_quality(data), "is greater than") == []
 
 
 # --- name_whitespace (#460: a filament literally named "Silk ") ---------------
@@ -639,3 +673,180 @@ def test_parent_brand_cannot_be_itself_or_a_cycle(tmp_path):
         "parent_brand forms a cycle through 'b'",
         "parent_brand names the brand itself",
     ]
+
+
+# --- Sustainability data --------------------------------------------------------
+#
+# The sourcing rules from the sustainability brief: copy, never compute.
+
+SOURCE = {
+    "source_type": "primary",
+    "source_url": "https://blog.prusa3d.com/introducing-prusament-petg-recycled/",
+    "retrieved": "2026-10-21",
+}
+
+
+def footprint(value, quote, **extra):
+    return {
+        "value_kg_co2e": value,
+        "declared_unit": "per_kg_filament",
+        "boundary": "filament_cradle_to_gate",
+        "packaging_included": "unknown",
+        "biogenic_carbon": "unknown",
+        "recycled_allocation": "not_applicable",
+        "method": "lca",
+        "verification": "none",
+        "publicly_available": True,
+        **SOURCE,
+        "source_quote": quote,
+        **extra,
+    }
+
+
+def recycled(pct, quote="made from 100% recycled material", **extra):
+    return {
+        "pct": pct,
+        "type": "post_industrial",
+        "evidence": "supplier_declaration",
+        **SOURCE,
+        "source_quote": quote,
+        **extra,
+    }
+
+
+def sustainability_errors(tmp_path, *, filament=None, variant=None, traits=None, sizes=None):
+    v = {"id": "black", "name": "Black"}
+    if variant is not None:
+        v["sustainability"] = variant
+    if traits is not None:
+        v["traits"] = traits
+    if sizes is not None:
+        v["sizes"] = sizes
+    extra = {"sustainability": filament} if filament is not None else None
+    data = build(tmp_path / "data", filament_extra=extra, variants=[v])
+    return check_data_quality(data)
+
+
+def test_sourced_footprint_passes(tmp_path):
+    quote = "The results show 5.85 kg of CO2 with 1kg of pure Prusament PETG"
+    errors = sustainability_errors(
+        tmp_path, filament={"carbon_footprints": [footprint(5.85, quote)]}
+    )
+    assert errors == []
+
+
+def test_quote_with_decimal_comma_passes(tmp_path):
+    errors = sustainability_errors(
+        tmp_path, filament={"carbon_footprints": [footprint(5.85, "5,85 kg CO2e")]}
+    )
+    assert messages(errors, "does not contain that number") == []
+
+
+def test_quote_missing_the_number_is_an_error(tmp_path):
+    errors = sustainability_errors(
+        tmp_path, filament={"carbon_footprints": [footprint(5.85, "about six kilograms")]}
+    )
+    found = messages(errors, "does not contain that number")
+    assert len(found) == 1
+    assert found[0].level.value == "ERROR"
+
+
+def test_number_inside_a_longer_number_does_not_count(tmp_path):
+    errors = sustainability_errors(
+        tmp_path, filament={"carbon_footprints": [footprint(5.85, "15.85 kg of CO2")]}
+    )
+    assert len(messages(errors, "does not contain that number")) == 1
+
+
+def test_missing_source_fields_are_an_error(tmp_path):
+    entry = footprint(5.85, "5.85 kg")
+    del entry["source_url"]
+    entry["retrieved"] = ""
+    errors = sustainability_errors(tmp_path, filament={"carbon_footprints": [entry]})
+    found = messages(errors, "is missing source_url, retrieved")
+    assert len(found) == 1
+    assert found[0].level.value == "ERROR"
+
+
+def test_future_dates_are_an_error(tmp_path):
+    entry = footprint(5.85, "5.85 kg", published="2999-01-01", reference_year=2999)
+    entry["retrieved"] = "2999-01-02"
+    errors = sustainability_errors(tmp_path, filament={"carbon_footprints": [entry]})
+    assert len(messages(errors, "is in the future")) == 3
+
+
+def test_pct_out_of_range_is_an_error(tmp_path):
+    errors = sustainability_errors(
+        tmp_path,
+        filament={"recycled_content": recycled(120, "120% recycled")},
+        traits={"recycled": True},
+    )
+    assert len(messages(errors, "between 0 and 100")) == 1
+
+
+def test_recycled_pct_without_trait_is_an_error(tmp_path):
+    errors = sustainability_errors(tmp_path, filament={"recycled_content": recycled(100)})
+    found = messages(errors, "traits.recycled is not set")
+    assert len(found) == 1
+    assert found[0].level.value == "ERROR"
+
+
+def test_recycled_pct_with_trait_passes(tmp_path):
+    errors = sustainability_errors(
+        tmp_path, filament={"recycled_content": recycled(100)}, traits={"recycled": True}
+    )
+    assert errors == []
+
+
+def test_unknown_recycled_pct_does_not_require_trait(tmp_path):
+    errors = sustainability_errors(
+        tmp_path, filament={"recycled_content": recycled(None, "made from recycled scrap")}
+    )
+    assert messages(errors, "traits.recycled") == []
+
+
+def test_variant_override_replaces_filament_recycled_content(tmp_path):
+    # The filament says 100% recycled, but this variant overrides it with 0%,
+    # so the variant needs no trait for the forward rule.
+    errors = sustainability_errors(
+        tmp_path,
+        filament={"recycled_content": recycled(100)},
+        variant={"recycled_content": recycled(0, "contains 0% recycled material")},
+    )
+    assert messages(errors, "traits.recycled is not set") == []
+
+
+def test_trait_without_any_sustainability_block_is_silent(tmp_path):
+    # 265 variants carry the trait before any brand has been researched.
+    errors = sustainability_errors(tmp_path, traits={"recycled": True})
+    assert messages(errors, "no recycled_content") == []
+
+
+def test_trait_without_recycled_content_warns_once_block_exists(tmp_path):
+    errors = sustainability_errors(
+        tmp_path,
+        filament={"carbon_footprints": [footprint(2.55, "only 2.55 kg CO2 emissions")]},
+        traits={"recycled": True},
+    )
+    found = messages(errors, "no recycled_content")
+    assert len(found) == 1
+    assert found[0].level.value == "WARNING"
+
+
+def test_container_details_are_checked(tmp_path):
+    sizes = [
+        {
+            "filament_weight": 1000,
+            "diameter": 1.75,
+            "container_material": "mixed",
+            "container_details": {
+                "recycled_pct": 90,
+                "pct_qualifier": "at_least",
+                **SOURCE,
+                "source_quote": "spools are based on 80 - 100% recycled raw material",
+            },
+        }
+    ]
+    errors = sustainability_errors(tmp_path, sizes=sizes)
+    found = messages(errors, "container_details.recycled_pct is 90")
+    assert len(found) == 1

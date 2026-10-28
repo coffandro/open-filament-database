@@ -6,6 +6,7 @@
   "id": "pastel_candy",
   "name": "Pastel Candy",
   "color_hex": "#DABCC8",
+  "transmission_distance": 2.9,
   "traits": {
     "matte": true,
     "industrially_compostable": true

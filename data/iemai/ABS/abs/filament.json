@@ -3,7 +3,7 @@
   "id": "abs",
   "name": "ABS",
   "diameter_tolerance": 0.05,
-  "density": 1.04,
+  "density": 1.06,
   "min_print_temperature": 220,
   "max_print_temperature": 260,
   "min_bed_temperature": 90,

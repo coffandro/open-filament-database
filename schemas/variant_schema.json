@@ -74,10 +74,22 @@
             },
             "description": "Alternative hex color codes that this filament is known to report or be identified as (e.g., via NFC)"
         },
+        "transmission_distance": {
+            "type": "number",
+            "minimum": 0,
+            "title": "Transmission Distance (mm)",
+            "description": "Transmission distance (TD): the layer thickness in mm at which light no longer passes through this color. Used for HueForge prints and lithophanes. Use the manufacturer's published value where available.",
+            "x-placeholder": "e.g., 8.0"
+        },
         "discontinued": {
             "type": "boolean",
             "title": "Discontinued",
             "description": "Mark if this color variant has been discontinued"
+        },
+        "sustainability": {
+            "$ref": "./sustainability_schema.json",
+            "title": "Sustainability",
+            "description": "Overrides the filament's sustainability data per field: each field set here replaces the filament's field of the same name (carbon_footprints and relative_claims replace the whole array)."
         },
         "color_standards": {
             "type": "object",

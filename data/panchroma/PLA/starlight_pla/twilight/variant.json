@@ -6,6 +6,7 @@
   "id": "twilight",
   "name": "Twilight",
   "color_hex": "#1E3445",
+  "transmission_distance": 3.1,
   "discontinued": false,
   "traits": {
     "iridescent": true,

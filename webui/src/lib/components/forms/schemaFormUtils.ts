@@ -315,6 +315,14 @@ export function getFieldPlaceholder(schema: any, configPlaceholder?: string): st
 }
 
 /**
+ * Get the display label for an enum option from the schema's `x-enum-labels`,
+ * falling back to the raw value
+ */
+export function getEnumOptionLabel(schema: any, option: string): string {
+	return schema?.['x-enum-labels']?.[option] ?? option;
+}
+
+/**
  * Normalize schema type to handle union types like ["array", "string"]
  * Returns the primary type to use for form field rendering
  */

@@ -263,6 +263,30 @@ def test_overrides_pass_through_and_generic_temps_win_over_them():
     assert profile["nozzle_temperature"] == ["215"]
 
 
+def test_volumetric_and_fan_speeds_map_to_orca_keys():
+    fil = filament(max_volumetric_speed=21.5, min_fan_speed=80, max_fan_speed=100)
+    profile = build_profile(BRAND, MATERIAL, fil, [1.75])
+    assert profile["filament_max_volumetric_speed"] == ["21.5"]
+    assert profile["fan_min_speed"] == ["80"]
+    assert profile["fan_max_speed"] == ["100"]
+
+
+def test_unrecorded_slicer_hints_stay_inherited():
+    profile = build_profile(BRAND, MATERIAL, filament(), [1.75])
+    assert "filament_max_volumetric_speed" not in profile
+    assert "fan_min_speed" not in profile
+    assert "fan_max_speed" not in profile
+
+
+def test_slicer_overrides_win_over_slicer_hints():
+    fil = filament(
+        max_volumetric_speed=21,
+        slicer_settings={"orcaslicer": {"overrides": {"filament_max_volumetric_speed": 12}}},
+    )
+    profile = build_profile(BRAND, MATERIAL, fil, [1.75])
+    assert profile["filament_max_volumetric_speed"] == ["12"]
+
+
 def test_notes_name_the_inherited_base_and_the_source():
     profile = build_profile(BRAND, MATERIAL, filament(), [1.75], version="2026.09.05")
     notes = profile["filament_notes"][0]

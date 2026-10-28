@@ -23,6 +23,7 @@
 		fetchEnumValues,
 		getFieldLabel,
 		getFieldPlaceholder,
+		getEnumOptionLabel,
 		transforms
 	} from './schemaFormUtils';
 
@@ -103,6 +104,8 @@
 		if (schema?.properties) {
 			for (const [key, propSchema] of Object.entries(schema.properties) as [string, any][]) {
 				if (config.enumSources?.[key]) continue; // Skip if already in config
+				// Hidden fields render elsewhere; a whole-schema $ref (e.g. sustainability) is not an enum.
+				if (config.hiddenFields?.includes(key)) continue;
 
 				const externalRef = resolveExternalRef(propSchema);
 				if (externalRef) {
@@ -285,7 +288,7 @@
 					<option value="">Select...</option>
 				{/if}
 				{#each options as option}
-					<option value={option}>{option}</option>
+					<option value={option}>{getEnumOptionLabel(field.schema, option)}</option>
 				{/each}
 			{/if}
 		</SelectField>

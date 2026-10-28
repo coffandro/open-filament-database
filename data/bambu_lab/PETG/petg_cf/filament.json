@@ -8,6 +8,11 @@
     "max_print_temperature": 270,
     "min_bed_temperature": 65,
     "max_bed_temperature": 75,
+    "max_volumetric_speed": 11.5,
+    "min_fan_speed": 5,
+    "max_fan_speed": 40,
+    "dry_temperature": 65,
+    "dry_time": 8,
     "data_sheet_url": "https://cdn.shopify.com/s/files/1/0584/7236/6216/files/Bambu_PETG-CF_Technical_Data_Sheet_V2.pdf",
     "safety_sheet_url": "https://cdn.shopify.com/s/files/1/0584/7236/6216/files/Bambu_PETG-CF_MSDS.pdf",
     "slicer_settings": {

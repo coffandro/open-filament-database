@@ -3,5 +3,6 @@
   "id": "raspberry_blue",
   "name": "Raspberry Blue",
   "color_hex": "#5472D0",
+  "transmission_distance": 0.5,
   "discontinued": false
 }

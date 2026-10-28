@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
-	import type { Filament, Variant } from '$lib/types/database';
+	import type { Filament, Variant, Sustainability } from '$lib/types/database';
 	import {
 		Modal,
 		MessageBanner,
@@ -19,6 +19,7 @@
 		EntityCard,
 		SlicerSettingsDisplay,
 		CertificationsDisplay,
+		SustainabilityDisplay,
 		ChildListPanel,
 		SubmittedBanner,
 		InFlightHint,
@@ -55,6 +56,13 @@
 	import { trueTraitKeys } from '$lib/utils/traitSuggestions';
 	import { findSharedPurchaseLinks } from '$lib/utils/dataQuality';
 	import { orcaProfileUrl } from '$lib/utils/orcaLinks';
+	import { fetchEntitySchema } from '$lib/services/schemaService';
+	import { getEnumOptionLabel } from '$lib/components/forms/schemaFormUtils';
+
+	let filamentSchema: any = $state(null);
+	fetchEntitySchema('filament').then((schema) => (filamentSchema = schema));
+
+	const isSet = (v: unknown) => v !== undefined && v !== null;
 
 	let brandId: string = $derived($page.params.brand!);
 	let materialType: string = $derived($page.params.material!);
@@ -393,6 +401,9 @@
 	}
 </script>
 
+{#snippet sustainabilityRender(sustainability: Sustainability)}
+	<SustainabilityDisplay {sustainability} />
+{/snippet}
 {#snippet certificationsRender(certifications: string[])}
 	<CertificationsDisplay {certifications} />
 {/snippet}
@@ -469,6 +480,39 @@
 							format: (v) => `${v}°C`,
 							hide: (v) => !v
 						},
+						{
+							key: 'dry_temperature',
+							label: 'Drying',
+							format: (v) => {
+								const time = filamentData.dry_time;
+								if (!v) return `${time} h`;
+								return time ? `${v}°C for ${time} h` : `${v}°C`;
+							},
+							hide: (v) => !v && !filamentData.dry_time
+						},
+						{
+							key: 'min_fan_speed',
+							label: 'Fan Speed Range',
+							format: (v) => {
+								const max = filamentData.max_fan_speed;
+								if (!isSet(max)) return `At least ${v}%`;
+								if (!isSet(v)) return `Up to ${max}%`;
+								return `${v}% - ${max}%`;
+							},
+							hide: (v) => !isSet(v) && !isSet(filamentData.max_fan_speed)
+						},
+						{
+							key: 'max_volumetric_speed',
+							label: 'Max Volumetric Speed',
+							format: (v) => `${v} mm³/s`,
+							hide: (v) => !v
+						},
+						{
+							key: 'enclosure',
+							label: 'Enclosure',
+							format: (v) => getEnumOptionLabel(filamentSchema?.properties?.enclosure, v),
+							hide: (v) => !v
+						},
 						{ key: 'shore_hardness_a', label: 'Shore Hardness A', hide: (v) => !v },
 						{ key: 'shore_hardness_d', label: 'Shore Hardness D', hide: (v) => !v },
 						{
@@ -482,6 +526,13 @@
 							label: 'Certifications',
 							hide: (v) => !v || v.length === 0,
 							customRender: certificationsRender,
+							fullWidth: true
+						},
+						{
+							key: 'sustainability',
+							label: 'Sustainability',
+							hide: (v) => !v || Object.keys(v).length === 0,
+							customRender: sustainabilityRender,
 							fullWidth: true
 						},
 						{
@@ -728,6 +779,7 @@
 		siblingNames={variants.map((v) => v.name)}
 		siblingTraits={variantTraits}
 		{sharedLinkOwners}
+		filamentSustainability={filament?.sustainability}
 		onSubmit={handleCreateVariant}
 		saving={entityState.creating}
 	/>

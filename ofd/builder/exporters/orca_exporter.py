@@ -59,10 +59,10 @@ rather than the .json files inside it.
 WHAT THESE ARE
 --------------
 Each preset sets the vendor, material type, density, diameter and temperatures
-recorded in the Open Filament Database. Everything that governs print behaviour
-- flow ratio, retraction, max volumetric speed, fan, pressure advance - is
-inherited from OrcaSlicer's matching generic profile, because the database does
-not hold that data. Treat these as a correct starting point, not a tuned profile.
+recorded in the Open Filament Database, plus max volumetric speed and fan speeds
+where the database has them. The rest of what governs print behaviour - flow
+ratio, retraction, pressure advance - is inherited from OrcaSlicer's matching
+generic profile, because the database does not hold that data. Treat these as a correct starting point, not a tuned profile.
 
 Presets are named "<Brand> <Filament>{NAME_SUFFIX}" so they never shadow OrcaSlicer's
 own presets, and so you can find and remove them again easily.

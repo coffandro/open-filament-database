@@ -10,6 +10,10 @@ import shutil
 import uuid
 from pathlib import Path
 
+from jsonschema import Draft7Validator
+from referencing import Registry, Resource
+from referencing.jsonschema import DRAFT7
+
 from ..models import Database
 from ..serialization import entity_to_dict
 
@@ -296,6 +300,41 @@ def export_store_logos(
     return copied_count, logo_id_mapping
 
 
+def export_material_defaults(api_path: Path, reference_dir: Path, schemas_dir: Path) -> bool:
+    """
+    Publish reference/material_defaults.json as api/v1/material-defaults.json.
+
+    These are generic per-material estimates, not manufacturer data, so they live outside
+    data/ and are published as their own artifact. The file is validated against
+    material_defaults_schema.json first; an invalid file fails the build.
+    """
+    src = reference_dir / "material_defaults.json"
+    if not src.exists():
+        return False
+
+    with open(src, encoding="utf-8") as f:
+        defaults = json.load(f)
+
+    schema_path = schemas_dir / "material_defaults_schema.json"
+    if schema_path.exists():
+        with open(schema_path, encoding="utf-8") as f:
+            schema = json.load(f)
+        # Register every schema by its "./name" so cross-file $refs resolve.
+        registry = Registry().with_resources(
+            (
+                f"./{p.name}",
+                Resource.from_contents(
+                    json.loads(p.read_text(encoding="utf-8")), default_specification=DRAFT7
+                ),
+            )
+            for p in schemas_dir.glob("*_schema.json")
+        )
+        Draft7Validator(schema, registry=registry).validate(defaults)
+
+    shutil.copy2(src, api_path / "material-defaults.json")
+    return True
+
+
 def export_api(
     db: Database,
     output_dir: str,
@@ -307,6 +346,7 @@ def export_api(
     data_dir: str = "data",
     stores_dir: str = "stores",
     commit: str | None = None,
+    reference_dir: str | None = None,
     **kwargs,
 ):
     """Export static API structure following native directory hierarchy."""
@@ -332,6 +372,14 @@ def export_api(
             shutil.copy2(trait_rules_src, api_path / "trait-rules.json")
             trait_rules_written = True
             print(f"  Written: {api_path / 'trait-rules.json'}")
+
+    material_defaults_written = False
+    if reference_dir and schemas_dir:
+        material_defaults_written = export_material_defaults(
+            api_path, Path(reference_dir), Path(schemas_dir)
+        )
+        if material_defaults_written:
+            print(f"  Written: {api_path / 'material-defaults.json'}")
 
     # Export brand and store logos (get logo ID mappings)
     data_path = Path(data_dir)
@@ -378,6 +426,8 @@ def export_api(
     # Only advertised when actually written, so the index can never point at a 404.
     if trait_rules_written:
         endpoints["trait_rules"] = "trait-rules.json"
+    if material_defaults_written:
+        endpoints["material_defaults"] = "material-defaults.json"
 
     index = {
         "version": version,

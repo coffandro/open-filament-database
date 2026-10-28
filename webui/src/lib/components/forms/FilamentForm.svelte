@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount, untrack } from 'svelte';
 	import { SchemaForm, SlicerConfigPanel } from '$lib/components/forms';
-	import { FormSection } from '$lib/components/form-fields';
+	import { FormSection, SustainabilityEditor } from '$lib/components/form-fields';
 	import {
 		SLICER_KEYS,
 		initializeSlicerForm,
@@ -18,12 +18,15 @@
 	import { formDrafts } from '$lib/stores/formDrafts';
 	import { generateSlug } from '$lib/services/entityService';
 	import { useSettledField } from '$lib/utils/settledField.svelte';
-	import { looksLikeProductPage } from '$lib/utils/urlSanitizer';
+	import { looksLikeProductPage, stripTrackersDeep } from '$lib/utils/urlSanitizer';
+	import { pruneSustainability } from '$lib/utils/sustainability';
+	import type { Sustainability } from '$lib/types/database';
 	import {
 		checkNameLeadingCase,
 		checkNameWhitespace,
 		checkPlaceholderEntries,
-		findDuplicateName
+		findDuplicateName,
+		findInvertedRanges
 	} from '$lib/utils/dataQuality';
 	import { loadSearchIndex, layerChanges } from '$lib/services/searchIndex';
 	import type { SearchRecord } from '$lib/types/search';
@@ -68,6 +71,7 @@
 		formData: Record<string, any>;
 		slicerEnabled: Record<SlicerKey, boolean>;
 		slicerData: Record<string, any>;
+		sustainability?: Sustainability;
 	};
 
 	// Internal schema state (loaded if not provided externally)
@@ -81,13 +85,20 @@
 		}
 	});
 
+	// `sustainability` is a cross-file $ref, edited by SustainabilityEditor rather than
+	// SchemaForm, which renders flat fields only.
+	let sustainabilitySchema: any = $state(null);
+	onMount(async () => {
+		sustainabilitySchema = await fetchEntitySchema('sustainability');
+	});
+
 	// Config for filament form - labels, tooltips, and placeholders come from schema
 	const config: SchemaFormConfig = {
 		splitAfterKey: 'discontinued',
 		leftWidth: '2/3',
 		leftSpacing: 'sm',
 		// `uuid` is the canonical id assigned by CI on merge — never shown or edited here.
-		hiddenFields: ['id', 'uuid', 'moved_from', 'slicer_settings', 'slicer_ids'],
+		hiddenFields: ['id', 'uuid', 'moved_from', 'slicer_settings', 'slicer_ids', 'sustainability'],
 		fieldOrder: [
 			'name',
 			'density',
@@ -103,6 +114,12 @@
 			'chamber_temperature',
 			'min_print_speed',
 			'max_print_speed',
+			'max_volumetric_speed',
+			'enclosure',
+			'min_fan_speed',
+			'max_fan_speed',
+			'dry_temperature',
+			'dry_time',
 			'shore_hardness_a',
 			'shore_hardness_d',
 			'min_nozzle_diameter',
@@ -118,6 +135,9 @@
 			['preheat_temperature', 'max_dry_temperature'],
 			['min_chamber_temperature', 'max_chamber_temperature'],
 			['min_print_speed', 'max_print_speed'],
+			['max_volumetric_speed', 'enclosure'],
+			['min_fan_speed', 'max_fan_speed'],
+			['dry_temperature', 'dry_time'],
 			['shore_hardness_a', 'shore_hardness_d'],
 			['data_sheet_url', 'safety_sheet_url']
 		],
@@ -127,7 +147,9 @@
 		steps: {
 			density: 0.01,
 			diameter_tolerance: 0.001,
-			min_nozzle_diameter: 0.1
+			min_nozzle_diameter: 0.1,
+			max_volumetric_speed: 0.5,
+			dry_time: 0.5
 		}
 	};
 
@@ -142,6 +164,14 @@
 
 	// Form data state - initialized when schema is available
 	let formData = $state<Record<string, any>>(initialDraft?.formData ?? {});
+
+	function cloneSustainability(value: Sustainability | undefined): Sustainability {
+		return value ? JSON.parse(JSON.stringify(value)) : {};
+	}
+
+	let sustainability = $state<Sustainability>(
+		initialDraft?.sustainability ?? cloneSustainability(filament?.sustainability)
+	);
 
 	// Folder-id drift guard: an existing filament whose folder id carries extra trailing
 	// tokens beyond its name (e.g. name "Fluorescence PLA" but folder `fluorescence_pla_orange`
@@ -246,6 +276,17 @@
 		);
 	}
 
+	// A min above its max (e.g. fan speed 80% - 20%) would be copied as-is into slicer
+	// presets. Almost always the two values entered the wrong way round.
+	let invertedRanges = $derived(findInvertedRanges(formData));
+
+	function fixInvertedRanges() {
+		for (const { low, high, lowValue, highValue } of invertedRanges) {
+			formData[low] = highValue;
+			formData[high] = lowValue;
+		}
+	}
+
 	/**
 	 * `data_sheet_url` and `safety_sheet_url` are meant to reach a TDS and an SDS — two
 	 * different documents. 3dhojor's merged filament (#461) has both pointing at the same
@@ -313,6 +354,7 @@
 				return;
 			}
 			formData = initializeFormData(preparedSchema, filament, config.hiddenFields);
+			sustainability = cloneSustainability(filament?.sustainability);
 			slicerEnabled = initializeSlicerEnabled(filament?.slicer_settings);
 			slicerForms = initializeSlicerForms();
 			// Pre-create forms for already-enabled slicers
@@ -331,7 +373,8 @@
 		formDrafts.set(draftKey, {
 			formData,
 			slicerEnabled,
-			slicerData: buildSlicerSettings(slicerEnabled, slicerForms)
+			slicerData: buildSlicerSettings(slicerEnabled, slicerForms),
+			sustainability: $state.snapshot(sustainability)
 		});
 	});
 
@@ -353,6 +396,20 @@
 		const slicer_settings = buildSlicerSettings(slicerEnabled, slicerForms);
 		if (Object.keys(slicer_settings).length > 0) {
 			submitData.slicer_settings = slicer_settings;
+		}
+
+		// Undefined when empty so the spread in the parent page wipes a removed block.
+		// Without the schema the editor is hidden, so keep the stored value untouched.
+		if (sustainabilitySchema) {
+			const sustainabilityData = pruneSustainability(
+				$state.snapshot(sustainability),
+				sustainabilitySchema
+			);
+			submitData.sustainability = sustainabilityData
+				? stripTrackersDeep(sustainabilityData)
+				: undefined;
+		} else if (filament?.sustainability) {
+			submitData.sustainability = filament.sustainability;
 		}
 
 		// Preserve the canonical UUID on edit; left empty on create for CI to assign.
@@ -439,6 +496,21 @@
 		{blankCertifications.length === 1 ? 'it' : 'them'} in.
 	</FixHint>
 {/if}
+{#if invertedRanges.length > 0}
+	<FixHint
+		level="error"
+		fixLabel="Swap"
+		onFix={fixInvertedRanges}
+		fixTitle="Swap each pair so the lower value comes first"
+		class="mb-4"
+	>
+		{#each invertedRanges as range, i (range.low)}
+			{i > 0 ? ' ' : ''}<code>{range.low}</code> ({range.lowValue}) is greater than
+			<code>{range.high}</code> ({range.highValue}).
+		{/each}
+		The values are probably swapped.
+	</FixHint>
+{/if}
 {#if sheetIssue}
 	<FixHint message={sheetIssue} class="mb-4" />
 {/if}
@@ -466,6 +538,15 @@
 		>
 			<SlicerConfigPanel {slicerEnabled} {slicerForms} onToggle={toggleSlicer} togglesOnly />
 		</FormSection>
+		{#if sustainabilitySchema}
+			<FormSection title="Sustainability" tooltip={sustainabilitySchema.description}>
+				<SustainabilityEditor
+					bind:value={sustainability}
+					schema={sustainabilitySchema}
+					idPrefix="filament-sustainability"
+				/>
+			</FormSection>
+		{/if}
 	{/snippet}
 
 	{#snippet rightColumnContent()}
