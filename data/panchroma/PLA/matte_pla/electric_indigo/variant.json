@@ -6,6 +6,7 @@
   "id": "electric_indigo",
   "name": "Electric Indigo",
   "color_hex": "#764C99",
+  "transmission_distance": 0.3,
   "traits": {
     "matte": true,
     "industrially_compostable": true

@@ -3,5 +3,6 @@
   "id": "blue",
   "name": "Blue",
   "color_hex": "#0277C5",
+  "transmission_distance": 22.5,
   "discontinued": false
 }

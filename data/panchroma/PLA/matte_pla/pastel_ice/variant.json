@@ -6,6 +6,7 @@
   "id": "pastel_ice",
   "name": "Pastel Ice",
   "color_hex": "#95C5D3",
+  "transmission_distance": 1.8,
   "traits": {
     "matte": true,
     "industrially_compostable": true

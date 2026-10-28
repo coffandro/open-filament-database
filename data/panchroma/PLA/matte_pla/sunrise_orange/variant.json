@@ -6,6 +6,7 @@
   "id": "sunrise_orange",
   "name": "Sunrise Orange",
   "color_hex": "#F78E0E",
+  "transmission_distance": 2.9,
   "traits": {
     "matte": true,
     "industrially_compostable": true

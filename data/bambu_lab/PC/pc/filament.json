@@ -8,6 +8,11 @@
     "max_print_temperature": 280,
     "min_bed_temperature": 90,
     "max_bed_temperature": 110,
+    "max_volumetric_speed": 18,
+    "min_fan_speed": 10,
+    "max_fan_speed": 40,
+    "dry_temperature": 80,
+    "dry_time": 8,
     "data_sheet_url": "https://cdn.shopify.com/s/files/1/0645/5876/0155/files/Bambu_PC_Technical_Data_Sheet.pdf",
     "safety_sheet_url": "https://cdn.shopify.com/s/files/1/0584/7236/6216/files/Bambu_PC_MSDS.pdf",
     "slicer_settings": {

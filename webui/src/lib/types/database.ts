@@ -64,6 +64,12 @@ export interface Filament {
 	chamber_temperature?: number;
 	min_print_speed?: number;
 	max_print_speed?: number;
+	max_volumetric_speed?: number;
+	min_fan_speed?: number;
+	max_fan_speed?: number;
+	dry_temperature?: number;
+	dry_time?: number;
+	enclosure?: 'required' | 'recommended' | 'not_needed';
 	min_nozzle_diameter?: number;
 	data_sheet_url?: string;
 	safety_sheet_url?: string;
@@ -189,6 +195,8 @@ export interface Variant {
 	name: string;
 	/** A single hex colour, or several for multi-colour variants (co-extruded, gradient…). */
 	color_hex: string | string[];
+	/** Transmission distance (TD) in mm, for HueForge/lithophanes. */
+	transmission_distance?: number;
 	discontinued: boolean;
 	traits?: VariantTraits;
 	sizes?: VariantSize[];

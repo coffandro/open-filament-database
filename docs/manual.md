@@ -112,6 +112,10 @@ A filament represents a **product line** (e.g. "Silk PLA", "Glow PLA"), **not a 
    **Optional** (see [`schemas/filament_schema.json`](../schemas/filament_schema.json) for the full list):
    - Mechanical: `shore_hardness_a`, `shore_hardness_d`, `certifications` (array of strings)
    - Drying / printing temperatures: `max_dry_temperature`, `min_print_temperature`, `max_print_temperature`, `preheat_temperature`, `min_bed_temperature`, `max_bed_temperature`, `min_chamber_temperature`, `max_chamber_temperature`, `chamber_temperature`
+   - Print speed: `min_print_speed`, `max_print_speed` (mm/s), `max_volumetric_speed` (mm³/s)
+   - Cooling: `min_fan_speed`, `max_fan_speed` — part cooling fan, integer percent 0–100
+   - Drying: `dry_temperature` (°C, the recommended value) and `dry_time` (hours)
+   - `enclosure` — one of `required`, `recommended`, `not_needed`
    - Hardware: `min_nozzle_diameter`
    - Documents: `data_sheet_url`, `safety_sheet_url`
    - Lifecycle: `discontinued` (boolean)
@@ -142,6 +146,7 @@ Inside the filament folder, create a folder named with the variant `id` (e.g. `l
 **Optional** (full list in [`schemas/variant_schema.json`](../schemas/variant_schema.json)):
 - `discontinued` — boolean
 - `hex_variants` — array of alternative `#RRGGBB` codes the filament is known to report (e.g. via NFC)
+- `transmission_distance` — number, mm; the transmission distance (TD) used for HueForge prints and lithophanes. Use the manufacturer's published value where available
 - `color_standards` — object with any of `ral`, `ncs`, `pantone`, `bs`, `munsell`
 - `traits` — **an object** mapping trait names to booleans, **not** an array of strings. Available traits include `silk`, `matte`, `glow`, `translucent`, `transparent`, `recycled`, `biodegradable`, `abrasive`, `glitter`, `iridescent`, `temperature_color_change`, `gradual_color_change`, `coextruded`, the `contains_*` family (carbon, glass, wood, metal, …), the `imitates_*` family, `esd_safe`, `self_extinguishing`, and many more. See the schema for the complete enumeration.
 
