@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
-	import type { Filament, Variant } from '$lib/types/database';
+	import type { Filament, Variant, Sustainability } from '$lib/types/database';
 	import {
 		Modal,
 		MessageBanner,
@@ -19,6 +19,7 @@
 		EntityCard,
 		SlicerSettingsDisplay,
 		CertificationsDisplay,
+		SustainabilityDisplay,
 		ChildListPanel,
 		SubmittedBanner,
 		InFlightHint,
@@ -400,6 +401,9 @@
 	}
 </script>
 
+{#snippet sustainabilityRender(sustainability: Sustainability)}
+	<SustainabilityDisplay {sustainability} />
+{/snippet}
 {#snippet certificationsRender(certifications: string[])}
 	<CertificationsDisplay {certifications} />
 {/snippet}
@@ -522,6 +526,13 @@
 							label: 'Certifications',
 							hide: (v) => !v || v.length === 0,
 							customRender: certificationsRender,
+							fullWidth: true
+						},
+						{
+							key: 'sustainability',
+							label: 'Sustainability',
+							hide: (v) => !v || Object.keys(v).length === 0,
+							customRender: sustainabilityRender,
 							fullWidth: true
 						},
 						{
@@ -768,6 +779,7 @@
 		siblingNames={variants.map((v) => v.name)}
 		siblingTraits={variantTraits}
 		{sharedLinkOwners}
+		filamentSustainability={filament?.sustainability}
 		onSubmit={handleCreateVariant}
 		saving={entityState.creating}
 	/>

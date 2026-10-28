@@ -104,6 +104,8 @@
 		if (schema?.properties) {
 			for (const [key, propSchema] of Object.entries(schema.properties) as [string, any][]) {
 				if (config.enumSources?.[key]) continue; // Skip if already in config
+				// Hidden fields render elsewhere; a whole-schema $ref (e.g. sustainability) is not an enum.
+				if (config.hiddenFields?.includes(key)) continue;
 
 				const externalRef = resolveExternalRef(propSchema);
 				if (externalRef) {

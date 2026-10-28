@@ -5,8 +5,11 @@
 
 import { SCHEMA_NAMES } from '$lib/services/schemaService';
 
-/** Entity types derived from the schema service's SCHEMA_NAMES registry. */
-export type EntityType = Exclude<keyof typeof SCHEMA_NAMES, 'materialTypes'>;
+/**
+ * Entity types derived from the schema service's SCHEMA_NAMES registry.
+ * materialTypes and sustainability are sub-schemas pulled in by `$ref`, not entities.
+ */
+export type EntityType = Exclude<keyof typeof SCHEMA_NAMES, 'materialTypes' | 'sustainability'>;
 
 export type ChangeOperation = 'create' | 'update' | 'delete';
 

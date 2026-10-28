@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount, untrack } from 'svelte';
 	import { SchemaForm, SlicerConfigPanel } from '$lib/components/forms';
-	import { FormSection } from '$lib/components/form-fields';
+	import { FormSection, SustainabilityEditor } from '$lib/components/form-fields';
 	import {
 		SLICER_KEYS,
 		initializeSlicerForm,
@@ -18,7 +18,9 @@
 	import { formDrafts } from '$lib/stores/formDrafts';
 	import { generateSlug } from '$lib/services/entityService';
 	import { useSettledField } from '$lib/utils/settledField.svelte';
-	import { looksLikeProductPage } from '$lib/utils/urlSanitizer';
+	import { looksLikeProductPage, stripTrackersDeep } from '$lib/utils/urlSanitizer';
+	import { pruneSustainability } from '$lib/utils/sustainability';
+	import type { Sustainability } from '$lib/types/database';
 	import {
 		checkNameLeadingCase,
 		checkNameWhitespace,
@@ -69,6 +71,7 @@
 		formData: Record<string, any>;
 		slicerEnabled: Record<SlicerKey, boolean>;
 		slicerData: Record<string, any>;
+		sustainability?: Sustainability;
 	};
 
 	// Internal schema state (loaded if not provided externally)
@@ -82,13 +85,20 @@
 		}
 	});
 
+	// `sustainability` is a cross-file $ref, edited by SustainabilityEditor rather than
+	// SchemaForm, which renders flat fields only.
+	let sustainabilitySchema: any = $state(null);
+	onMount(async () => {
+		sustainabilitySchema = await fetchEntitySchema('sustainability');
+	});
+
 	// Config for filament form - labels, tooltips, and placeholders come from schema
 	const config: SchemaFormConfig = {
 		splitAfterKey: 'discontinued',
 		leftWidth: '2/3',
 		leftSpacing: 'sm',
 		// `uuid` is the canonical id assigned by CI on merge — never shown or edited here.
-		hiddenFields: ['id', 'uuid', 'moved_from', 'slicer_settings', 'slicer_ids'],
+		hiddenFields: ['id', 'uuid', 'moved_from', 'slicer_settings', 'slicer_ids', 'sustainability'],
 		fieldOrder: [
 			'name',
 			'density',
@@ -154,6 +164,14 @@
 
 	// Form data state - initialized when schema is available
 	let formData = $state<Record<string, any>>(initialDraft?.formData ?? {});
+
+	function cloneSustainability(value: Sustainability | undefined): Sustainability {
+		return value ? JSON.parse(JSON.stringify(value)) : {};
+	}
+
+	let sustainability = $state<Sustainability>(
+		initialDraft?.sustainability ?? cloneSustainability(filament?.sustainability)
+	);
 
 	// Folder-id drift guard: an existing filament whose folder id carries extra trailing
 	// tokens beyond its name (e.g. name "Fluorescence PLA" but folder `fluorescence_pla_orange`
@@ -336,6 +354,7 @@
 				return;
 			}
 			formData = initializeFormData(preparedSchema, filament, config.hiddenFields);
+			sustainability = cloneSustainability(filament?.sustainability);
 			slicerEnabled = initializeSlicerEnabled(filament?.slicer_settings);
 			slicerForms = initializeSlicerForms();
 			// Pre-create forms for already-enabled slicers
@@ -354,7 +373,8 @@
 		formDrafts.set(draftKey, {
 			formData,
 			slicerEnabled,
-			slicerData: buildSlicerSettings(slicerEnabled, slicerForms)
+			slicerData: buildSlicerSettings(slicerEnabled, slicerForms),
+			sustainability: $state.snapshot(sustainability)
 		});
 	});
 
@@ -376,6 +396,20 @@
 		const slicer_settings = buildSlicerSettings(slicerEnabled, slicerForms);
 		if (Object.keys(slicer_settings).length > 0) {
 			submitData.slicer_settings = slicer_settings;
+		}
+
+		// Undefined when empty so the spread in the parent page wipes a removed block.
+		// Without the schema the editor is hidden, so keep the stored value untouched.
+		if (sustainabilitySchema) {
+			const sustainabilityData = pruneSustainability(
+				$state.snapshot(sustainability),
+				sustainabilitySchema
+			);
+			submitData.sustainability = sustainabilityData
+				? stripTrackersDeep(sustainabilityData)
+				: undefined;
+		} else if (filament?.sustainability) {
+			submitData.sustainability = filament.sustainability;
 		}
 
 		// Preserve the canonical UUID on edit; left empty on create for CI to assign.
@@ -504,6 +538,15 @@
 		>
 			<SlicerConfigPanel {slicerEnabled} {slicerForms} onToggle={toggleSlicer} togglesOnly />
 		</FormSection>
+		{#if sustainabilitySchema}
+			<FormSection title="Sustainability" tooltip={sustainabilitySchema.description}>
+				<SustainabilityEditor
+					bind:value={sustainability}
+					schema={sustainabilitySchema}
+					idPrefix="filament-sustainability"
+				/>
+			</FormSection>
+		{/if}
 	{/snippet}
 
 	{#snippet rightColumnContent()}

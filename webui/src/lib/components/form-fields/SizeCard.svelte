@@ -1,7 +1,9 @@
 <script lang="ts">
-	import type { Store } from '$lib/types/database';
+	import type { Store, ContainerDetails, ContainerMaterial } from '$lib/types/database';
 	import { TrashIcon } from '$lib/components/icons';
 	import { FormFieldRow, PurchaseLinksSection, CheckboxField } from '$lib/components/form-fields';
+	import SourcedEntryFields from './SourcedEntryFields.svelte';
+	import { newEntry, VALUE_FIELDS } from '$lib/utils/sustainability';
 	import { Button } from '$lib/components/ui';
 	import {
 		CARD_CLASSES,
@@ -27,7 +29,8 @@
 		gtin?: string;
 		article_number?: string;
 		discontinued?: boolean;
-		container_material?: 'plastic' | 'cardboard' | 'refill';
+		container_material?: ContainerMaterial;
+		container_details?: ContainerDetails;
 		purchase_links: PurchaseLinkWithId[];
 	}
 
@@ -42,6 +45,8 @@
 		onRemoveLink: (linkIndex: number) => void;
 		/** Other colours of this filament already using a given URL. */
 		sharedWith?: (url: string) => string[];
+		/** sizes_schema.json's container_details schema; the sub-form is hidden without it. */
+		containerDetailsSchema?: any;
 	}
 
 	let {
@@ -53,8 +58,13 @@
 		onRemove,
 		onAddLink,
 		onRemoveLink,
-		sharedWith
+		sharedWith,
+		containerDetailsSchema
 	}: Props = $props();
+
+	function addContainerDetails() {
+		value.container_details = newEntry(containerDetailsSchema) as ContainerDetails;
+	}
 </script>
 
 <div class={CARD_CLASSES}>
@@ -163,10 +173,41 @@
 				<option value={undefined}>Not specified</option>
 				<option value="plastic">Plastic</option>
 				<option value="cardboard">Cardboard</option>
+				<option value="mixed">Mixed (e.g. cardboard core, plastic sides)</option>
 				<option value="refill">Refill (no spool)</option>
 			</select>
 		</div>
 	</FormFieldRow>
+
+	<!-- Sourced container details (optional) -->
+	{#if containerDetailsSchema}
+		{#if value.container_details}
+			<div class="rounded-md border border-dashed p-3 mb-3">
+				<div class="flex justify-between items-center mb-2">
+					<span class={LABEL_COMPACT_CLASSES}>Container details (sourced)</span>
+					<Button
+						type="button"
+						variant="ghost"
+						size="sm"
+						class="text-destructive hover:text-destructive/80"
+						onclick={() => (value.container_details = undefined)}
+					>
+						Remove
+					</Button>
+				</div>
+				<SourcedEntryFields
+					bind:entry={value.container_details as Record<string, any>}
+					schema={containerDetailsSchema}
+					idPrefix="size-{id}-container"
+					valueFields={VALUE_FIELDS.container_details}
+				/>
+			</div>
+		{:else}
+			<Button type="button" variant="outline" size="sm" class="mb-3" onclick={addContainerDetails}>
+				+ Container details (recycled %, FSC…)
+			</Button>
+		{/if}
+	{/if}
 
 	<!-- Checkbox: Discontinued -->
 	<div class="flex gap-4 mb-3 mt-2">

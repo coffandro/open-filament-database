@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
-	import type { Variant, Store } from '$lib/types/database';
+	import type { Variant, Store, Filament } from '$lib/types/database';
 	import { Modal, MessageBanner, DeleteEntityModal, Button, EntityActionDropdown, CloudCompareModal } from '$lib/components/ui';
-	import { SubmittedBanner } from '$lib/components/entity';
+	import { SubmittedBanner, SustainabilityDisplay } from '$lib/components/entity';
 	import { VariantForm } from '$lib/components/forms';
 	import { BackButton } from '$lib/components/actions';
 	import { DataDisplay } from '$lib/components/layout';
@@ -33,6 +33,8 @@
 	let variant: Variant | null = $state(null);
 	let originalVariant: Variant | null = $state(null);
 	let siblingVariants: Variant[] = $state([]);
+	/** Parent filament, for the sustainability data a variant inherits or overrides. */
+	let parentFilament: Filament | null = $state(null);
 	let stores: Store[] = $state([]);
 	let loading: boolean = $state(true);
 	let error: string | null = $state(null);
@@ -154,6 +156,13 @@
 				variant = variantData;
 				originalVariant = structuredClone(variantData);
 				stores = storesData;
+
+				// Non-fatal: without it the page shows only the variant's own data.
+				db.getFilament(params.brandId, params.materialType, params.filamentId)
+					.then((f) => {
+						if (gen === loadGeneration) parentFilament = f;
+					})
+					.catch(() => {});
 			} catch (e) {
 				if (gen !== loadGeneration) return;
 				error = e instanceof Error ? e.message : 'Failed to load variant';
@@ -403,6 +412,17 @@
 							</dd>
 						</div>
 					{/if}
+					{#if Object.keys(variantData.sustainability ?? {}).length > 0 || Object.keys(parentFilament?.sustainability ?? {}).length > 0}
+						<div>
+							<dt class="text-sm font-medium text-muted-foreground mb-2">Sustainability</dt>
+							<dd>
+								<SustainabilityDisplay
+									sustainability={variantData.sustainability}
+									filament={parentFilament?.sustainability}
+								/>
+							</dd>
+						</div>
+					{/if}
 				</dl>
 
 				{#if variantData.sizes && variantData.sizes.length > 0}
@@ -433,6 +453,24 @@
 										{#if size.article_number}
 											<div>Article #: {size.article_number}</div>
 										{/if}
+										{#if size.container_material && size.container_material !== 'refill'}
+											<div>Container: {size.container_material}</div>
+										{/if}
+										{#if size.container_details}
+											{@const cd = size.container_details}
+											<div>
+												Container details:
+												{[
+													cd.recycled_pct != null
+														? `${cd.pct_qualifier === 'at_least' ? 'at least ' : cd.pct_qualifier === 'up_to' ? 'up to ' : ''}${cd.recycled_pct}% recycled`
+														: null,
+													...(cd.certifications ?? [])
+												]
+													.filter(Boolean)
+													.join(' · ')}
+												<a href={cd.source_url} target="_blank" rel="noopener noreferrer" class="text-primary hover:underline" title={cd.source_quote}>source</a>
+											</div>
+										{/if}
 										{#if size.purchase_links && size.purchase_links.length > 0}
 											<div class="mt-2">
 												<span class="text-foreground">Purchase links:</span>
@@ -461,7 +499,7 @@
 <Modal show={entityState.showEditModal} title="Edit Variant" onClose={entityState.closeEdit} maxWidth="5xl">
 	{#if variant}
 		<div class="h-[70vh]">
-			<VariantForm {variant} draftKey={variantEditDraftKey} filamentName={filamentId} {materialType} siblingFibers={[...editSiblingFibers]} siblingNames={editSiblingNames} siblingTraits={editSiblingTraits} sharedLinkOwners={editSharedLinkOwners} onSubmit={handleSubmit} saving={entityState.saving} />
+			<VariantForm {variant} draftKey={variantEditDraftKey} filamentName={filamentId} {materialType} siblingFibers={[...editSiblingFibers]} siblingNames={editSiblingNames} siblingTraits={editSiblingTraits} sharedLinkOwners={editSharedLinkOwners} filamentSustainability={parentFilament?.sustainability} onSubmit={handleSubmit} saving={entityState.saving} />
 		</div>
 	{/if}
 </Modal>
@@ -485,7 +523,7 @@
 	{/if}
 	{#if entityState.duplicateData}
 		<div class="h-[70vh]">
-			<VariantForm variant={entityState.duplicateData} draftKey={variantCreateDraftKey} filamentName={filamentId} {materialType} siblingFibers={[...newVariantSiblingFibers]} siblingNames={newVariantSiblingNames} siblingTraits={newVariantSiblingTraits} sharedLinkOwners={newVariantSharedLinkOwners} onSubmit={handleDuplicateVariantSubmit} saving={entityState.creating} />
+			<VariantForm variant={entityState.duplicateData} draftKey={variantCreateDraftKey} filamentName={filamentId} {materialType} siblingFibers={[...newVariantSiblingFibers]} siblingNames={newVariantSiblingNames} siblingTraits={newVariantSiblingTraits} sharedLinkOwners={newVariantSharedLinkOwners} filamentSustainability={parentFilament?.sustainability} onSubmit={handleDuplicateVariantSubmit} saving={entityState.creating} />
 		</div>
 	{/if}
 </Modal>
@@ -497,7 +535,7 @@
 	{/if}
 	{#if entityState.pasteData}
 		<div class="h-[70vh]">
-			<VariantForm variant={entityState.pasteData} draftKey={variantCreateDraftKey} filamentName={filamentId} {materialType} siblingFibers={[...newVariantSiblingFibers]} siblingNames={newVariantSiblingNames} siblingTraits={newVariantSiblingTraits} sharedLinkOwners={newVariantSharedLinkOwners} onSubmit={handleDuplicateVariantSubmit} saving={entityState.creating} />
+			<VariantForm variant={entityState.pasteData} draftKey={variantCreateDraftKey} filamentName={filamentId} {materialType} siblingFibers={[...newVariantSiblingFibers]} siblingNames={newVariantSiblingNames} siblingTraits={newVariantSiblingTraits} sharedLinkOwners={newVariantSharedLinkOwners} filamentSustainability={parentFilament?.sustainability} onSubmit={handleDuplicateVariantSubmit} saving={entityState.creating} />
 		</div>
 	{/if}
 </Modal>

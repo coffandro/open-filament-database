@@ -86,6 +86,11 @@
             "title": "Discontinued",
             "description": "Mark if this color variant has been discontinued"
         },
+        "sustainability": {
+            "$ref": "./sustainability_schema.json",
+            "title": "Sustainability",
+            "description": "Overrides the filament's sustainability data per field: each field set here replaces the filament's field of the same name (carbon_footprints and relative_claims replace the whole array)."
+        },
         "color_standards": {
             "type": "object",
             "properties": {

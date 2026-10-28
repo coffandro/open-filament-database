@@ -51,7 +51,14 @@ OPTIONAL_STRING_FIELDS = {
 }
 
 # URL fields whose tracking/affiliate query params should be stripped.
-URL_FIELDS = {"url", "data_sheet_url", "safety_sheet_url", "storefront_url", "website"}
+URL_FIELDS = {
+    "url",
+    "data_sheet_url",
+    "safety_sheet_url",
+    "storefront_url",
+    "website",
+    "source_url",
+}
 
 # Known tracking query-parameter keys (lowercased). Keep in sync with the ofd-validator Rust
 # rule (crates/ofd-validator-core/src/validators/url_tracker.rs) and the webui urlSanitizer.ts.
@@ -246,7 +253,8 @@ def sanitize_data(data: Any, schema_name: str) -> tuple[Any, list[str]]:
       defined in OPTIONAL_STRING_FIELDS); fix 'id' fields containing
       hyphens by replacing with underscores.
     - sizes: default sizes[].diameter from 0 to 1.75; sanitize nested
-      purchase_links dicts.
+      purchase_links and container_details dicts.
+    - filament/variant: sanitize the sourced entries inside ``sustainability``.
     """
     changes: list[str] = []
 
@@ -262,6 +270,8 @@ def sanitize_data(data: Any, schema_name: str) -> tuple[Any, list[str]]:
             for j, link in enumerate(size.get("purchase_links", [])):
                 if isinstance(link, dict):
                     _sanitize_dict(link, changes, f"sizes[{i}].purchase_links[{j}]")
+            if isinstance(size.get("container_details"), dict):
+                _sanitize_dict(size["container_details"], changes, f"sizes[{i}].container_details")
         return data, changes
 
     if isinstance(data, dict):
@@ -274,9 +284,23 @@ def sanitize_data(data: Any, schema_name: str) -> tuple[Any, list[str]]:
                 changes.append(f"id: '{raw_id}' -> '{fixed}'")
 
         _sanitize_dict(data, changes)
+        _sanitize_sustainability(data.get("sustainability"), changes)
         return data, changes
 
     return data, changes
+
+
+def _sanitize_sustainability(sustainability: Any, changes: list[str]) -> None:
+    """Sanitize each sourced entry (object or array item) in a sustainability block."""
+    if not isinstance(sustainability, dict):
+        return
+    for section, value in sustainability.items():
+        if isinstance(value, dict):
+            _sanitize_dict(value, changes, f"sustainability.{section}")
+        elif isinstance(value, list):
+            for i, item in enumerate(value):
+                if isinstance(item, dict):
+                    _sanitize_dict(item, changes, f"sustainability.{section}[{i}]")
 
 
 def _sanitize_dict(data: dict[str, Any], changes: list[str], prefix: str = "") -> None:
@@ -387,25 +411,46 @@ def get_property_order(schema: dict[str, Any]) -> list[str]:
     return []
 
 
-def extract_nested_schemas(schema: dict[str, Any]) -> dict[str, list[str]]:
-    """Recursively extract nested object schemas and their key orderings."""
-    nested = {}
+def resolve_file_ref(prop_schema: dict[str, Any], schemas: dict[str, dict[str, Any]]) -> dict:
+    """Resolve a whole-file ``$ref`` such as ``./sustainability_schema.json``."""
+    ref = prop_schema.get("$ref", "")
+    if ref.startswith("./") and ref.endswith(".json") and "#" not in ref:
+        return schemas.get(Path(ref).stem, prop_schema)
+    return prop_schema
+
+
+def extract_nested_schemas(
+    schema: dict[str, Any], schemas: dict[str, dict[str, Any]] | None = None
+) -> dict[str, list[str]]:
+    """Recursively extract nested object schemas and their key orderings.
+
+    Whole-file ``$ref``s are followed when ``schemas`` is given. The result is a flat
+    map keyed by property name; the first definition of a name wins.
+    """
+    nested: dict[str, list[str]] = {}
+    schemas = schemas or {}
+
+    def visit(props: dict[str, Any]) -> None:
+        for prop_name, prop_schema in props.items():
+            if not isinstance(prop_schema, dict):
+                continue
+            prop_schema = resolve_file_ref(prop_schema, schemas)
+            if prop_schema.get("type") == "array" and "items" in prop_schema:
+                prop_schema = prop_schema["items"]
+                if not isinstance(prop_schema, dict):
+                    continue
+            if prop_schema.get("type") == "object" and "properties" in prop_schema:
+                if prop_name not in nested:
+                    nested[prop_name] = get_property_order(prop_schema)
+                    visit(prop_schema["properties"])
 
     if "properties" in schema:
-        for prop_name, prop_schema in schema["properties"].items():
-            if isinstance(prop_schema, dict):
-                if prop_schema.get("type") == "object" and "properties" in prop_schema:
-                    nested[prop_name] = get_property_order(prop_schema)
-                elif prop_schema.get("type") == "array" and "items" in prop_schema:
-                    items_schema = prop_schema["items"]
-                    if isinstance(items_schema, dict) and items_schema.get("type") == "object":
-                        if "properties" in items_schema:
-                            nested[prop_name] = get_property_order(items_schema)
+        visit(schema["properties"])
 
     if "definitions" in schema:
         for def_name, def_schema in schema["definitions"].items():
             if isinstance(def_schema, dict) and def_schema.get("type") == "object":
-                if "properties" in def_schema:
+                if "properties" in def_schema and def_name not in nested:
                     nested[def_name] = get_property_order(def_schema)
 
     return nested
@@ -422,10 +467,10 @@ def build_key_order_map(schemas_dir: Path) -> dict[str, SchemaInfo]:
         if schema_content.get("type") == "array" and "items" in schema_content:
             items_schema = schema_content["items"]
             keys = get_property_order(items_schema)
-            nested = extract_nested_schemas(items_schema)
+            nested = extract_nested_schemas(items_schema, schemas)
         else:
             keys = get_property_order(schema_content)
-            nested = extract_nested_schemas(schema_content)
+            nested = extract_nested_schemas(schema_content, schemas)
 
         key_order_map[clean_name] = SchemaInfo(keys=keys, nested=nested)
 
