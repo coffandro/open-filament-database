@@ -12,13 +12,13 @@ name: Enrich data
 # Manual only: start it from the Actions tab with the brand ids to research.
 #
 # TOKEN: a PR opened with the default GITHUB_TOKEN does not trigger other workflows,
-# so validation and the AI review would not run on it. The PRs are opened as a
-# dedicated GitHub App instead (repo variable ENRICH_APP_ID, secret
-# ENRICH_APP_PRIVATE_KEY; Contents and Pull requests read & write, installed on this
-# repo only). It is deliberately not the webui's ofd-anon-pr-bot: that key stays on
-# the webui server, and this one can be revoked on its own. Without it the PRs are
-# still opened with the default token, with a note; close and reopen one to run the
-# checks.
+# so validation and the AI review would not run on it. The PRs are opened as the
+# repo bot instead, a GitHub App shared by the repo's workflows (repo variable
+# OFD_REPO_BOT_APP_ID, secret OFD_REPO_BOT_PRIVATE_KEY; Contents and Pull requests
+# read & write, installed on this repo only). It is deliberately not the webui's
+# ofd-anon-pr-bot: that key stays on the webui server, and this one can be revoked on
+# its own. Without it the PRs are still opened with the default token, with a note;
+# close and reopen one to run the checks.
 #
 # CREDENTIALS: ANTHROPIC_API_KEY or CLAUDE_CODE_OAUTH_TOKEN, as for ai_review.yaml.
 
@@ -62,11 +62,11 @@ jobs:
 
       - name: App token
         id: app
-        if: vars.ENRICH_APP_ID != ''
+        if: vars.OFD_REPO_BOT_APP_ID != ''
         uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
         with:
-          app-id: ${{ vars.ENRICH_APP_ID }}
-          private-key: ${{ secrets.ENRICH_APP_PRIVATE_KEY }}
+          app-id: ${{ vars.OFD_REPO_BOT_APP_ID }}
+          private-key: ${{ secrets.OFD_REPO_BOT_PRIVATE_KEY }}
 
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
