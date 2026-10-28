@@ -7,6 +7,7 @@ from ofd.brand_claims import (
     CLAIMS_FILE,
     brands_touched,
     evaluate,
+    load_claims,
     pending_brands,
     validate_claims,
 )
@@ -126,3 +127,28 @@ def test_comment_says_merge_is_blocked_until_signed_off():
     done = evaluate(["data/acme/x"], CLAIMS, "s", [review("AcmeRep", "APPROVED")], HEAD)
     assert "sign-off complete" in _render_comment(done, HEAD, "signed_off", [])
     assert "waived by a maintainer" in _render_comment(pending, HEAD, "waived", [])
+
+
+def test_malformed_registry_is_reported_not_crashed_on(tmp_path):
+    import pytest
+
+    f = tmp_path / "claims.json"
+    f.write_text(json.dumps([]))
+    assert validate_claims(f, tmp_path) == [f"{f}: top-level 'claims' must be an object"]
+    with pytest.raises(ValueError, match="'claims' must be an object"):
+        load_claims(f)
+
+    f.write_text(json.dumps({"claims": {"acme": {}}}))
+    with pytest.raises(ValueError, match="acme: 'representatives'"):
+        load_claims(f)
+
+
+def test_comment_for_cleared_and_too_large_prs():
+    from ofd.commands.claims import _render_comment
+
+    cleared = _render_comment({}, HEAD, "cleared", [])
+    assert "not needed" in cleared and "Merging is blocked" not in cleared
+
+    too_large = _render_comment({}, HEAD, "truncated", [])
+    assert "too large to check" in too_large and "| Brand |" not in too_large
+    assert "too large to check" in _render_comment({}, HEAD, "waived", [])

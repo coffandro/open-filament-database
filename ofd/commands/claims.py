@@ -101,6 +101,7 @@ def _gh(
     if check and proc.returncode != 0:
         raise RuntimeError(f"gh api {args[0]} failed: {proc.stderr.strip()}")
     if proc.returncode != 0:
+        print(f"::warning::gh api {args[0]} failed: {proc.stderr.strip()}")
         return None
     out = json.loads(proc.stdout) if proc.stdout.strip() else None
     # --slurp wraps each page in an outer list
@@ -125,9 +126,28 @@ def _render_comment(
     outcome: str,
     review_request_failed: list[str],
 ) -> str:
-    """The sticky PR comment; ``outcome`` is "blocked", "signed_off" or "waived"."""
+    """The sticky PR comment; ``outcome`` is "blocked", "signed_off", "waived",
+    "truncated" (too many files to check) or "cleared" (no claimed brand touched)."""
     brands = ", ".join(f"`{b}`" for b in state)
-    if outcome == "blocked":
+    if outcome == "cleared":
+        lines = [
+            "### ✅ Brand sign-off not needed",
+            "",
+            "This PR no longer changes data of a claimed brand.",
+            "",
+            f"<sub>Evaluated at {head_sha[:7]}.</sub>",
+        ]
+        return COMMENT_MARKER + "\n" + "\n".join(lines)
+    if outcome == "truncated":
+        lines = [
+            "### 🚫 Merging is blocked: this PR is too large to check",
+            "",
+            "GitHub lists at most 3000 changed files per PR, so the "
+            f"**{STATUS_CONTEXT}** check cannot tell whether this PR changes data of a "
+            "claimed brand and fails. Split the PR, or a maintainer reviews it and adds "
+            f"the `{WAIVER_LABEL}` label.",
+        ]
+    elif outcome == "blocked":
         lines = [
             "### 🚫 Merging is blocked until a brand representative signs off",
             "",
@@ -145,8 +165,12 @@ def _render_comment(
         lines = [
             "### ⚠️ Brand sign-off waived by a maintainer",
             "",
-            f"This PR changes data of {brands}, which is claimed by its manufacturer. "
-            f"The `{WAIVER_LABEL}` label overrides the representative approval. "
+            (
+                f"This PR changes data of {brands}, which is claimed by its manufacturer. "
+                if state
+                else "This PR is too large to check for changes to claimed brands. "
+            )
+            + f"The `{WAIVER_LABEL}` label overrides the representative approval. "
             "Remove the label to require it again.",
         ]
     else:
@@ -155,7 +179,8 @@ def _render_comment(
             "",
             f"A representative of {brands} approved the latest commit.",
         ]
-    lines += ["", "| Brand | Representatives | Status |", "|---|---|---|"]
+    if state:
+        lines += ["", "| Brand | Representatives | Status |", "|---|---|---|"]
     for brand, s in state.items():
         reps = ", ".join(f"@{r}" for r in s["representatives"])
         if s["changes_requested_by"]:
@@ -172,16 +197,21 @@ def _render_comment(
     if review_request_failed:
         lines += [
             "",
-            "<sub>GitHub could not add "
+            "<sub>GitHub could not request a review from "
             + ", ".join(review_request_failed)
-            + " as reviewer (not a repository collaborator), so they are mentioned here instead.</sub>",
+            + " (usually because they are not a repository collaborator; see the workflow "
+            "log), so they are mentioned here instead.</sub>",
         ]
     return COMMENT_MARKER + "\n" + "\n".join(lines)
 
 
 def run_check(args: argparse.Namespace) -> int:
     repo = args.repo or _default_repo()
-    claims = load_claims(Path(args.claims_file))
+    try:
+        claims = load_claims(Path(args.claims_file))
+    except (OSError, ValueError) as e:
+        print(f"ERROR: cannot load the claims registry: {e}")
+        return 1
 
     pr = _gh(f"repos/{repo}/pulls/{args.pr}")
     head_sha = pr["head"]["sha"]
@@ -241,41 +271,59 @@ def run_check(args: argparse.Namespace) -> int:
         },
     )
 
-    if not state:
-        return 0
+    if waived and (state or truncated):
+        outcome = "waived"
+    elif truncated:
+        outcome = "truncated"
+    elif not state:
+        outcome = "cleared"
+    else:
+        outcome = "blocked" if pending else "signed_off"
 
     # Comments and review requests go out as the repo bot when its token is set
     # (OFD_BOT_TOKEN); the status stays on the workflow token, which can write statuses.
     bot = os.environ.get("OFD_BOT_TOKEN") or None
 
     # Ask the representatives of still-pending brands for a review. GitHub only allows
-    # requests to collaborators; anyone else is reached through the comment mention.
+    # requests to collaborators and rejects the whole request if one isn't, so ask each
+    # separately; anyone it refuses is reached through the comment mention.
     want = sorted(
         {r for b in pending for r in state[b]["representatives"] if r.lower() != author.lower()}
     )
     failed = []
     if want and not waived:
-        if (
-            _gh(
-                f"repos/{repo}/pulls/{args.pr}/requested_reviewers",
-                "-X",
-                "POST",
-                input={"reviewers": want},
-                check=False,
-                token=bot,
-            )
-            is None
-        ):
-            failed = want
+        for rep in want:
+            if (
+                _gh(
+                    f"repos/{repo}/pulls/{args.pr}/requested_reviewers",
+                    "-X",
+                    "POST",
+                    input={"reviewers": [rep]},
+                    check=False,
+                    token=bot,
+                )
+                is None
+            ):
+                failed.append(rep)
 
-    outcome = "waived" if waived else "blocked" if pending else "signed_off"
     body = _render_comment(state, head_sha, outcome, failed)
     comments = _gh(f"repos/{repo}/issues/{args.pr}/comments?per_page=100", paginate=True)
-    mine = next((c for c in comments if COMMENT_MARKER in c["body"]), None)
+    # Our comment is the newest marked one posted by a bot: people can't hijack it by
+    # quoting the marker, and when an edit fails below the fresh comment becomes it.
+    mine = next(
+        (
+            c
+            for c in reversed(comments)
+            if COMMENT_MARKER in c["body"] and (c.get("user") or {}).get("type") == "Bot"
+        ),
+        None,
+    )
+    if mine is None and outcome == "cleared":
+        return 0
     if mine is not None and mine["body"] == body:
         return 0
-    # Editing fails when the marked comment isn't ours (posted under another token, or
-    # someone copied the marker); post a fresh one then.
+    # Editing fails when the marked comment isn't ours (posted under another token);
+    # post a fresh one then.
     if mine is None or (
         _gh(
             f"repos/{repo}/issues/comments/{mine['id']}",

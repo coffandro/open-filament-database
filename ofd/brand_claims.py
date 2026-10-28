@@ -19,10 +19,32 @@ CLAIMS_FILE = Path("ofd") / "brand_claims.json"
 LOGIN_RE = re.compile(r"^[A-Za-z0-9](?:[A-Za-z0-9]|-(?=[A-Za-z0-9])){0,38}$")
 
 
+def _claims_object(raw) -> dict | None:
+    claims = raw.get("claims") if isinstance(raw, dict) else None
+    return claims if isinstance(claims, dict) else None
+
+
+def _representatives(entry) -> list | None:
+    reps = entry.get("representatives") if isinstance(entry, dict) else None
+    return reps if isinstance(reps, list) and reps else None
+
+
 def load_claims(path: Path) -> dict[str, list[str]]:
-    """Read the claims registry as ``{brand_id: [github_login, ...]}``."""
+    """Read the claims registry as ``{brand_id: [github_login, ...]}``.
+
+    Raises ``ValueError`` when the registry is malformed (see ``validate_claims``).
+    """
     raw = json.loads(path.read_text(encoding="utf-8"))
-    return {brand: list(entry["representatives"]) for brand, entry in raw.get("claims", {}).items()}
+    claims = _claims_object(raw)
+    if claims is None:
+        raise ValueError(f"{path}: top-level 'claims' must be an object")
+    result = {}
+    for brand, entry in claims.items():
+        reps = _representatives(entry)
+        if reps is None:
+            raise ValueError(f"{path}: {brand}: 'representatives' must be a non-empty list")
+        result[brand] = list(reps)
+    return result
 
 
 def validate_claims(path: Path, data_dir: Path) -> list[str]:
@@ -32,16 +54,16 @@ def validate_claims(path: Path, data_dir: Path) -> list[str]:
     except (OSError, json.JSONDecodeError) as e:
         return [f"{path}: cannot read: {e}"]
 
-    claims = raw.get("claims")
-    if not isinstance(claims, dict):
+    claims = _claims_object(raw)
+    if claims is None:
         return [f"{path}: top-level 'claims' must be an object"]
 
     errors = []
     for brand, entry in claims.items():
         if not (data_dir / brand / "brand.json").is_file():
             errors.append(f"{brand}: no such brand (data/{brand}/brand.json missing)")
-        reps = entry.get("representatives") if isinstance(entry, dict) else None
-        if not isinstance(reps, list) or not reps:
+        reps = _representatives(entry)
+        if reps is None:
             errors.append(f"{brand}: 'representatives' must be a non-empty list of GitHub logins")
             continue
         for login in reps:
