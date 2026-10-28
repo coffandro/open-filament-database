@@ -14,6 +14,7 @@ Commands:
     serve       - Start development server with CORS
     script      - Run utility scripts (style_data, etc.)
     uuid        - Manage canonical UUIDs (new, assign, find, check, list)
+    claims      - Brand claims: representative sign-off (validate, check)
 
 Examples:
     uv run -m ofd validate                    # Run all validations
@@ -35,7 +36,7 @@ import argcomplete
 project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
 
-from ofd.commands import build, script, serve, uuid, validate, webui  # noqa: E402
+from ofd.commands import build, claims, script, serve, uuid, validate, webui  # noqa: E402
 
 
 class CommandHelpFormatter(argparse.RawDescriptionHelpFormatter):
@@ -72,6 +73,7 @@ Command Details:
   script     [--list] <script_name> [script_args...]
   webui      [-p PORT] [--host HOST] [--open] [--install]
   uuid       <new|assign|find|check|list> [options]
+  claims     <validate|check> [options]
 
 Examples:
   ofd validate                     Run all data validations
@@ -103,6 +105,7 @@ Examples:
     script.register_subcommand(subparsers)
     webui.register_subcommand(subparsers)
     uuid.register_subcommand(subparsers)
+    claims.register_subcommand(subparsers)
 
     return parser
 
