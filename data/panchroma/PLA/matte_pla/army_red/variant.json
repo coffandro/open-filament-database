@@ -6,6 +6,7 @@
   "id": "army_red",
   "name": "Army Red",
   "color_hex": "#AC1A17",
+  "transmission_distance": 0.3,
   "traits": {
     "matte": true,
     "industrially_compostable": true

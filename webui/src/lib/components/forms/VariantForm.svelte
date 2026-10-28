@@ -187,9 +187,12 @@
 			'color_standards',
 			'sustainability'
 		],
-		fieldOrder: ['name', 'color_hex', 'discontinued'],
+		fieldOrder: ['name', 'color_hex', 'transmission_distance', 'discontinued'],
 		typeOverrides: {
 			color_hex: 'color'
+		},
+		steps: {
+			transmission_distance: 0.1
 		}
 	};
 

@@ -6,6 +6,7 @@
   "id": "cotton_white",
   "name": "Cotton White",
   "color_hex": "#E6DDDB",
+  "transmission_distance": 4.1,
   "discontinued": false,
   "traits": {
     "matte": true,

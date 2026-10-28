@@ -162,6 +162,41 @@ export function checkPlaceholderEntries(values: unknown): number[] {
 }
 
 /**
+ * `[lower, upper]` filament fields where the lower value must not exceed the upper.
+ * Mirrors `_RANGE_PAIRS` in `ofd/validation/data_quality.py`.
+ */
+export const RANGE_PAIRS = [
+	['min_print_temperature', 'max_print_temperature'],
+	['min_bed_temperature', 'max_bed_temperature'],
+	['min_fan_speed', 'max_fan_speed'],
+	['dry_temperature', 'max_dry_temperature']
+] as const;
+
+export interface InvertedRange {
+	low: string;
+	high: string;
+	lowValue: number;
+	highValue: number;
+}
+
+/**
+ * Lower bounds recorded above their upper bound, e.g. `min_fan_speed` 80 /
+ * `max_fan_speed` 20. JSON Schema can't compare two fields, and the exporters copy
+ * both values straight into slicer presets. Mirrors `_check_inverted_ranges`.
+ */
+export function findInvertedRanges(
+	data: Record<string, unknown> | null | undefined
+): InvertedRange[] {
+	if (!data) return [];
+	return RANGE_PAIRS.flatMap(([low, high]) => {
+		const lowValue = data[low];
+		const highValue = data[high];
+		if (typeof lowValue !== 'number' || typeof highValue !== 'number') return [];
+		return lowValue > highValue ? [{ low, high, lowValue, highValue }] : [];
+	});
+}
+
+/**
  * A size's container material, reading the deprecated `spool_refill: true` as
  * `'refill'` so data that predates `container_material` keeps its refill flag.
  * Mirrors `_container_material` in `ofd/validation/data_quality.py`.

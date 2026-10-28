@@ -373,6 +373,12 @@
 							{/each}
 						</dd>
 					</div>
+					{#if variantData.transmission_distance !== undefined && variantData.transmission_distance !== null}
+						<div>
+							<dt class="text-sm font-medium text-muted-foreground">Transmission Distance</dt>
+							<dd class="mt-1">{variantData.transmission_distance} mm</dd>
+						</div>
+					{/if}
 					<div>
 						<dt class="text-sm font-medium text-muted-foreground">Status</dt>
 						<dd class="mt-1">

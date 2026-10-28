@@ -6,6 +6,7 @@
   "id": "army_purple",
   "name": "Army Purple",
   "color_hex": "#292036",
+  "transmission_distance": 0.2,
   "traits": {
     "matte": true,
     "industrially_compostable": true

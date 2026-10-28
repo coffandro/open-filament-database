@@ -56,6 +56,13 @@
 	import { trueTraitKeys } from '$lib/utils/traitSuggestions';
 	import { findSharedPurchaseLinks } from '$lib/utils/dataQuality';
 	import { orcaProfileUrl } from '$lib/utils/orcaLinks';
+	import { fetchEntitySchema } from '$lib/services/schemaService';
+	import { getEnumOptionLabel } from '$lib/components/forms/schemaFormUtils';
+
+	let filamentSchema: any = $state(null);
+	fetchEntitySchema('filament').then((schema) => (filamentSchema = schema));
+
+	const isSet = (v: unknown) => v !== undefined && v !== null;
 
 	let brandId: string = $derived($page.params.brand!);
 	let materialType: string = $derived($page.params.material!);
@@ -471,6 +478,39 @@
 							key: 'max_dry_temperature',
 							label: 'Max Dry Temperature',
 							format: (v) => `${v}°C`,
+							hide: (v) => !v
+						},
+						{
+							key: 'dry_temperature',
+							label: 'Drying',
+							format: (v) => {
+								const time = filamentData.dry_time;
+								if (!v) return `${time} h`;
+								return time ? `${v}°C for ${time} h` : `${v}°C`;
+							},
+							hide: (v) => !v && !filamentData.dry_time
+						},
+						{
+							key: 'min_fan_speed',
+							label: 'Fan Speed Range',
+							format: (v) => {
+								const max = filamentData.max_fan_speed;
+								if (!isSet(max)) return `At least ${v}%`;
+								if (!isSet(v)) return `Up to ${max}%`;
+								return `${v}% - ${max}%`;
+							},
+							hide: (v) => !isSet(v) && !isSet(filamentData.max_fan_speed)
+						},
+						{
+							key: 'max_volumetric_speed',
+							label: 'Max Volumetric Speed',
+							format: (v) => `${v} mm³/s`,
+							hide: (v) => !v
+						},
+						{
+							key: 'enclosure',
+							label: 'Enclosure',
+							format: (v) => getEnumOptionLabel(filamentSchema?.properties?.enclosure, v),
 							hide: (v) => !v
 						},
 						{ key: 'shore_hardness_a', label: 'Shore Hardness A', hide: (v) => !v },

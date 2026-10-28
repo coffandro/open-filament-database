@@ -9,6 +9,11 @@
     "max_print_temperature": 230,
     "min_bed_temperature": 35,
     "max_bed_temperature": 45,
+    "max_volumetric_speed": 12,
+    "min_fan_speed": 100,
+    "max_fan_speed": 100,
+    "dry_temperature": 55,
+    "dry_time": 8,
     "data_sheet_url": "https://store.bblcdn.com/s2/default/200ef29f5cd04b20ba6c2c86f0cc3ec0/Bambus_Support_for_PLA_Technical_Data_Sheet.pdf",
     "safety_sheet_url": "https://store.bblcdn.com/s7/default/b7f580064c0142be919de0225299a008/SDS20250928S02_Bambu_Support_for_PLA.pdf",
     "slicer_settings": {

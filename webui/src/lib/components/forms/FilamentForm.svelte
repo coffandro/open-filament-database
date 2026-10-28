@@ -25,7 +25,8 @@
 		checkNameLeadingCase,
 		checkNameWhitespace,
 		checkPlaceholderEntries,
-		findDuplicateName
+		findDuplicateName,
+		findInvertedRanges
 	} from '$lib/utils/dataQuality';
 	import { loadSearchIndex, layerChanges } from '$lib/services/searchIndex';
 	import type { SearchRecord } from '$lib/types/search';
@@ -113,6 +114,12 @@
 			'chamber_temperature',
 			'min_print_speed',
 			'max_print_speed',
+			'max_volumetric_speed',
+			'enclosure',
+			'min_fan_speed',
+			'max_fan_speed',
+			'dry_temperature',
+			'dry_time',
 			'shore_hardness_a',
 			'shore_hardness_d',
 			'min_nozzle_diameter',
@@ -128,6 +135,9 @@
 			['preheat_temperature', 'max_dry_temperature'],
 			['min_chamber_temperature', 'max_chamber_temperature'],
 			['min_print_speed', 'max_print_speed'],
+			['max_volumetric_speed', 'enclosure'],
+			['min_fan_speed', 'max_fan_speed'],
+			['dry_temperature', 'dry_time'],
 			['shore_hardness_a', 'shore_hardness_d'],
 			['data_sheet_url', 'safety_sheet_url']
 		],
@@ -137,7 +147,9 @@
 		steps: {
 			density: 0.01,
 			diameter_tolerance: 0.001,
-			min_nozzle_diameter: 0.1
+			min_nozzle_diameter: 0.1,
+			max_volumetric_speed: 0.5,
+			dry_time: 0.5
 		}
 	};
 
@@ -262,6 +274,17 @@
 		formData.certifications = (formData.certifications as string[]).filter(
 			(_, index) => !drop.has(index)
 		);
+	}
+
+	// A min above its max (e.g. fan speed 80% - 20%) would be copied as-is into slicer
+	// presets. Almost always the two values entered the wrong way round.
+	let invertedRanges = $derived(findInvertedRanges(formData));
+
+	function fixInvertedRanges() {
+		for (const { low, high, lowValue, highValue } of invertedRanges) {
+			formData[low] = highValue;
+			formData[high] = lowValue;
+		}
 	}
 
 	/**
@@ -471,6 +494,21 @@
 		blank. A blank entry reads downstream as a certification with no name — remove
 		{blankCertifications.length === 1 ? 'it' : 'them'}, or fill
 		{blankCertifications.length === 1 ? 'it' : 'them'} in.
+	</FixHint>
+{/if}
+{#if invertedRanges.length > 0}
+	<FixHint
+		level="error"
+		fixLabel="Swap"
+		onFix={fixInvertedRanges}
+		fixTitle="Swap each pair so the lower value comes first"
+		class="mb-4"
+	>
+		{#each invertedRanges as range, i (range.low)}
+			{i > 0 ? ' ' : ''}<code>{range.low}</code> ({range.lowValue}) is greater than
+			<code>{range.high}</code> ({range.highValue}).
+		{/each}
+		The values are probably swapped.
 	</FixHint>
 {/if}
 {#if sheetIssue}

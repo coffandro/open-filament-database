@@ -2,7 +2,7 @@
   "uuid": "4866f865-e216-47ff-b381-def8e0395d59",
   "id": "petg",
   "name": "PETG",
-  "diameter_tolerance": 0.02,
+  "diameter_tolerance": 0.03,
   "density": 1.24,
   "certifications": [
     "REACH",

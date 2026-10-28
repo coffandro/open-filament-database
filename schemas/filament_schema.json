@@ -238,6 +238,58 @@
             "description": "Maximum recommended print speed (mm/s)",
             "x-placeholder": "e.g., 60"
         },
+        "max_volumetric_speed": {
+            "type": "number",
+            "minimum": 0,
+            "title": "Max Volumetric Speed (mm³/s)",
+            "description": "Maximum recommended volumetric flow rate (mm³/s)",
+            "x-placeholder": "e.g., 21"
+        },
+        "min_fan_speed": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 100,
+            "title": "Min Fan Speed (%)",
+            "description": "Minimum recommended part cooling fan speed (%)",
+            "x-placeholder": "e.g., 80"
+        },
+        "max_fan_speed": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 100,
+            "title": "Max Fan Speed (%)",
+            "description": "Maximum recommended part cooling fan speed (%)",
+            "x-placeholder": "e.g., 100"
+        },
+        "dry_temperature": {
+            "type": "integer",
+            "minimum": 0,
+            "title": "Dry Temp (°C)",
+            "description": "Recommended drying temperature (°C), as opposed to the maximum in max_dry_temperature",
+            "x-placeholder": "e.g., 55"
+        },
+        "dry_time": {
+            "type": "number",
+            "minimum": 0,
+            "title": "Dry Time (h)",
+            "description": "Recommended drying time at the drying temperature (hours)",
+            "x-placeholder": "e.g., 8"
+        },
+        "enclosure": {
+            "type": "string",
+            "enum": [
+                "required",
+                "recommended",
+                "not_needed"
+            ],
+            "x-enum-labels": {
+                "required": "Required",
+                "recommended": "Recommended",
+                "not_needed": "Not needed"
+            },
+            "title": "Enclosure",
+            "description": "Whether printing this filament requires an enclosed printer"
+        },
         "chamber_temperature": {
             "type": "integer",
             "title": "Chamber Temp (°C)",

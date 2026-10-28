@@ -3,7 +3,7 @@
   "id": "cf_pa12",
   "name": "CF-PA12",
   "diameter_tolerance": 0.05,
-  "density": 1.15,
+  "density": 1.06,
   "min_print_temperature": 260,
   "max_print_temperature": 300,
   "min_bed_temperature": 80,

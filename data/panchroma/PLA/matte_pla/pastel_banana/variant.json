@@ -6,6 +6,7 @@
   "id": "pastel_banana",
   "name": "Pastel Banana",
   "color_hex": "#F5CF6F",
+  "transmission_distance": 3.6,
   "traits": {
     "matte": true,
     "industrially_compostable": true

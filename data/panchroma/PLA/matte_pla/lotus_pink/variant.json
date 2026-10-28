@@ -6,6 +6,7 @@
   "id": "lotus_pink",
   "name": "Lotus Pink",
   "color_hex": "#DD76C0",
+  "transmission_distance": 2,
   "traits": {
     "matte": true,
     "industrially_compostable": true

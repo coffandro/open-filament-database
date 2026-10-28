@@ -18,7 +18,12 @@ import type { Material, Filament, Variant } from '$lib/types/database';
  * Uses prepareEntityData as the single source of truth, then removes
  * any internal metadata fields (prefixed with _).
  */
-function prepareChildData(entityType: 'material' | 'filament' | 'variant', data: Record<string, any>): Record<string, any> {
+type ChildEntities = { material: Material; filament: Filament; variant: Variant };
+
+function prepareChildData<T extends keyof ChildEntities>(
+	entityType: T,
+	data: Record<string, any>
+): ChildEntities[T] {
 	const prepared = prepareEntityData(entityType, data);
 	// Remove internal metadata fields used for clipboard nesting
 	for (const key of Object.keys(prepared)) {
@@ -26,7 +31,8 @@ function prepareChildData(entityType: 'material' | 'filament' | 'variant', data:
 			delete prepared[key];
 		}
 	}
-	return prepared;
+	// Identity fields are stripped; the db.create* calls assign fresh ones.
+	return prepared as ChildEntities[T];
 }
 
 // ============================================

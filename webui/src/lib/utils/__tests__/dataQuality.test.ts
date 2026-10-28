@@ -19,7 +19,8 @@ import {
 	numberPattern,
 	checkSourcedEntry,
 	checkRecycledTrait,
-	effectiveSustainability
+	effectiveSustainability,
+	findInvertedRanges
 } from '../dataQuality';
 import type { RecycledContent } from '$lib/types/database';
 
@@ -128,6 +129,26 @@ describe('checkPlaceholderEntries', () => {
 	it('is safe on a non-array', () => {
 		expect(checkPlaceholderEntries(undefined)).toEqual([]);
 		expect(checkPlaceholderEntries('CE')).toEqual([]);
+	});
+});
+
+describe('findInvertedRanges', () => {
+	// #767: min/max fan speed and drying temperature
+	it('flags a min above its max', () => {
+		expect(findInvertedRanges({ min_fan_speed: 80, max_fan_speed: 20 })).toEqual([
+			{ low: 'min_fan_speed', high: 'max_fan_speed', lowValue: 80, highValue: 20 }
+		]);
+	});
+
+	it('flags dry_temperature above max_dry_temperature', () => {
+		expect(findInvertedRanges({ dry_temperature: 90, max_dry_temperature: 60 })).toHaveLength(1);
+	});
+
+	it('accepts equal or one-sided ranges', () => {
+		expect(
+			findInvertedRanges({ min_fan_speed: 50, max_fan_speed: 50, dry_temperature: 55 })
+		).toEqual([]);
+		expect(findInvertedRanges(null)).toEqual([]);
 	});
 });
 

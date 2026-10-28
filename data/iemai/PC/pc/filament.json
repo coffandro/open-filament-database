@@ -3,7 +3,7 @@
   "id": "pc",
   "name": "PC",
   "diameter_tolerance": 0.05,
-  "density": 1.2,
+  "density": 1.19,
   "min_print_temperature": 250,
   "max_print_temperature": 280,
   "min_bed_temperature": 100,

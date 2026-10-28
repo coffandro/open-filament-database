@@ -6,6 +6,7 @@
   "id": "ash_grey",
   "name": "Ash Grey",
   "color_hex": "#575E75",
+  "transmission_distance": 0.1,
   "traits": {
     "matte": true,
     "industrially_compostable": true

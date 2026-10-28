@@ -13,7 +13,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
 const mocks = vi.hoisted(() => ({
-	getGitHubToken: vi.fn(() => 'gh-token'),
+	getGitHubToken: vi.fn((): string | undefined => 'gh-token'),
 	getGitHubUser: vi.fn(async () => ({ login: 'octocat' })),
 	forkRepo: vi.fn(async () => ({ owner: 'octocat', repo: 'fork' })),
 	getLatestCommitSha: vi.fn(async () => 'sha-1'),
@@ -22,7 +22,10 @@ const mocks = vi.hoisted(() => ({
 	createTree: vi.fn(async () => 'tree-new'),
 	createCommit: vi.fn(async () => 'commit-1'),
 	updateRef: vi.fn(async () => {}),
-	createPullRequest: vi.fn(async () => ({ html_url: 'https://github.com/x/y/pull/42', number: 42 })),
+	createPullRequest: vi.fn(async (..._args: unknown[]) => ({
+		html_url: 'https://github.com/x/y/pull/42',
+		number: 42
+	})),
 	buildTreeItems: vi.fn(async () => ({
 		treeItems: [{ path: 'data/acme/brand.json', mode: '100644', type: 'blob', content: '{}' }],
 		skippedPaths: [] as string[],
