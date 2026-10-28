@@ -4,5 +4,7 @@
   "name": "Cai Lab",
   "website": "https://www.cailab3d.com/",
   "logo": "logo.png",
-  "origin": "Unknown"
+  "discontinued": false,
+  "origin": "HK",
+  "source": "https://www.cailab3d.com/pages/about-cailab"
 }
