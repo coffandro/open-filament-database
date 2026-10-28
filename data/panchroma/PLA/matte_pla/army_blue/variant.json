@@ -6,6 +6,7 @@
   "id": "army_blue",
   "name": "Army Blue",
   "color_hex": "#062B4D",
+  "transmission_distance": 0.1,
   "traits": {
     "matte": true,
     "industrially_compostable": true

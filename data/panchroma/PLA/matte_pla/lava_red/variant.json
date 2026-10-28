@@ -6,6 +6,7 @@
   "id": "lava_red",
   "name": "Lava Red",
   "color_hex": "#DE1619",
+  "transmission_distance": 1.9,
   "traits": {
     "matte": true,
     "industrially_compostable": true

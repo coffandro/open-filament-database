@@ -6,6 +6,7 @@
   "id": "lime_green",
   "name": "Lime Green",
   "color_hex": "#D0E740",
+  "transmission_distance": 2.4,
   "traits": {
     "matte": true,
     "industrially_compostable": true

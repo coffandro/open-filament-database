@@ -82,6 +82,12 @@ CREATE TABLE IF NOT EXISTS filament (
     chamber_temperature INTEGER,
     min_print_speed REAL,
     max_print_speed REAL,
+    max_volumetric_speed REAL,
+    min_fan_speed INTEGER,
+    max_fan_speed INTEGER,
+    dry_temperature INTEGER,
+    dry_time REAL,
+    enclosure TEXT,  -- required | recommended | not_needed
     min_nozzle_diameter REAL,
     data_sheet_url TEXT,
     safety_sheet_url TEXT,
@@ -102,6 +108,7 @@ CREATE TABLE IF NOT EXISTS variant (
     name TEXT NOT NULL,
     color_hex TEXT NOT NULL,
     hex_variants TEXT,  -- JSON array
+    transmission_distance REAL,  -- mm
     color_standards TEXT,  -- JSON
     traits TEXT,  -- JSON
     discontinued INTEGER NOT NULL DEFAULT 0

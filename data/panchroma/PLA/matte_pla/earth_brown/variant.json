@@ -6,6 +6,7 @@
   "id": "earth_brown",
   "name": "Earth Brown",
   "color_hex": "#7C594A",
+  "transmission_distance": 0.2,
   "traits": {
     "matte": true,
     "industrially_compostable": true

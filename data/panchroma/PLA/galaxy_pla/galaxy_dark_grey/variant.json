@@ -6,6 +6,7 @@
   "id": "galaxy_dark_grey",
   "name": "Galaxy Dark Grey",
   "color_hex": "#4D5557",
+  "transmission_distance": 0.4,
   "discontinued": false,
   "traits": {
     "glitter": true,

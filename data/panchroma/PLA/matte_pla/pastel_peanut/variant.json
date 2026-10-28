@@ -6,6 +6,7 @@
   "id": "pastel_peanut",
   "name": "Pastel Peanut",
   "color_hex": "#C29572",
+  "transmission_distance": 0.7,
   "traits": {
     "matte": true,
     "industrially_compostable": true
