@@ -1,0 +1,97 @@
+name: Brand sign-off
+# Brands listed in ofd/brand_claims.json are claimed by their manufacturer: a PR
+# touching data/<brand_id>/ needs an approving review from one of the brand's
+# representatives on its latest commit. This publishes that as the `Brand sign-off`
+# commit status (make it a required check on main), requests the representatives'
+# review and keeps a sticky comment on the PR. Maintainers can override with the
+# `brand-signoff-waived` label.
+#
+# Runs as pull_request_target / workflow_run so the workflow, the check logic and the
+# claims registry all come from the base branch: a PR cannot edit its way past the
+# check, and fork PRs still get a token that can post statuses. NEVER check out or run
+# the PR's head here.
+#
+# Reviews from forks only get a read-only token, so pull_request_review is relayed
+# through brand_signoff_relay.yaml and re-evaluated here via workflow_run.
+#
+# Run it by hand with no PR number to evaluate every open PR, e.g. right after the
+# check is made required, so PRs opened before that get their status.
+on:
+  pull_request_target:
+    types: [ opened, synchronize, reopened, ready_for_review, labeled, unlabeled ]
+  workflow_run:
+    workflows: [ Brand sign-off review relay ]
+    types: [ completed ]
+  workflow_dispatch:
+    inputs:
+      pr:
+        description: 'Pull request number; leave empty for every open PR.'
+        required: false
+
+permissions:
+  contents: read
+  statuses: write
+  pull-requests: write
+  issues: write
+
+# Both triggers must share one key per PR, so a stale evaluation can never finish after
+# (and overwrite) a newer one. The relay's run name is that key.
+concurrency:
+  group: ${{ github.event.pull_request && format('Brand sign-off relay for PR #{0}', github.event.pull_request.number) || github.event.workflow_run.display_title || 'brand-signoff-dispatch' }}
+  cancel-in-progress: false
+
+jobs:
+  brand_signoff:
+    runs-on: ubuntu-24.04
+    name: Brand sign-off
+    steps:
+      - name: Resolve PR numbers
+        id: pr
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EVENT: ${{ github.event_name }}
+          PR_NUMBER: ${{ github.event.pull_request.number || inputs.pr }}
+          # Set by the relay's run-name. Untrusted (the relay runs from the PR), but
+          # only ever parsed as a number: the evaluation reads everything from the API.
+          RELAY_TITLE: ${{ github.event.workflow_run.display_title }}
+        run: |
+          if [ -z "$PR_NUMBER" ] && [ "$EVENT" = workflow_dispatch ]; then
+            PR_NUMBER="$(gh pr list -R "$GITHUB_REPOSITORY" --state open --limit 1000 --json number -q '.[].number' | tr '\n' ' ')"
+          elif [ -z "$PR_NUMBER" ]; then
+            PR_NUMBER="$(printf '%s' "$RELAY_TITLE" | sed -nE 's/^Brand sign-off relay for PR #([0-9]+)$/\1/p')"
+          fi
+          if ! printf '%s' "$PR_NUMBER" | grep -Eq '^[0-9]+( [0-9]+)* ?$'; then
+            echo "::error::Could not determine the PR number(s): '$PR_NUMBER'"
+            exit 1
+          fi
+          echo "numbers=$PR_NUMBER" >> "$GITHUB_OUTPUT"
+      # Comments and review requests post as the repo bot (OFD_REPO_BOT);
+      # without it they fall back to github-actions.
+      - name: Repo bot token
+        id: bot
+        if: vars.OFD_REPO_BOT_APP_ID != ''
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          app-id: ${{ vars.OFD_REPO_BOT_APP_ID }}
+          private-key: ${{ secrets.OFD_REPO_BOT_PRIVATE_KEY }}
+      - name: Checkout base
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Evaluate and publish sign-off
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OFD_BOT_TOKEN: ${{ steps.bot.outputs.token }}
+          PRS: ${{ steps.pr.outputs.numbers }}
+        run: |
+          failed=0
+          for pr in $PRS; do
+            echo "::group::PR #$pr"
+            python -m ofd claims check --pr "$pr" --post || { echo "::error::PR #$pr failed"; failed=1; }
+            echo "::endgroup::"
+          done
+          exit $failed
