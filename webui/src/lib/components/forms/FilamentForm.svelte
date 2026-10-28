@@ -23,7 +23,8 @@
 		checkNameLeadingCase,
 		checkNameWhitespace,
 		checkPlaceholderEntries,
-		findDuplicateName
+		findDuplicateName,
+		findInvertedRanges
 	} from '$lib/utils/dataQuality';
 	import { loadSearchIndex, layerChanges } from '$lib/services/searchIndex';
 	import type { SearchRecord } from '$lib/types/search';
@@ -257,6 +258,17 @@
 		);
 	}
 
+	// A min above its max (e.g. fan speed 80% - 20%) would be copied as-is into slicer
+	// presets. Almost always the two values entered the wrong way round.
+	let invertedRanges = $derived(findInvertedRanges(formData));
+
+	function fixInvertedRanges() {
+		for (const { low, high, lowValue, highValue } of invertedRanges) {
+			formData[low] = highValue;
+			formData[high] = lowValue;
+		}
+	}
+
 	/**
 	 * `data_sheet_url` and `safety_sheet_url` are meant to reach a TDS and an SDS — two
 	 * different documents. 3dhojor's merged filament (#461) has both pointing at the same
@@ -448,6 +460,21 @@
 		blank. A blank entry reads downstream as a certification with no name — remove
 		{blankCertifications.length === 1 ? 'it' : 'them'}, or fill
 		{blankCertifications.length === 1 ? 'it' : 'them'} in.
+	</FixHint>
+{/if}
+{#if invertedRanges.length > 0}
+	<FixHint
+		level="error"
+		fixLabel="Swap"
+		onFix={fixInvertedRanges}
+		fixTitle="Swap each pair so the lower value comes first"
+		class="mb-4"
+	>
+		{#each invertedRanges as range, i (range.low)}
+			{i > 0 ? ' ' : ''}<code>{range.low}</code> ({range.lowValue}) is greater than
+			<code>{range.high}</code> ({range.highValue}).
+		{/each}
+		The values are probably swapped.
 	</FixHint>
 {/if}
 {#if sheetIssue}

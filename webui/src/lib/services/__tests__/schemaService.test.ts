@@ -11,7 +11,7 @@ import { writable } from 'svelte/store';
 
 const apiBaseUrlStore = vi.hoisted(() => {
 	// Use a real writable to mimic the actual store shape
-	const { writable } = require('svelte/store');
+	const { writable } = require('svelte/store') as typeof import('svelte/store');
 	return writable<string>('');
 });
 

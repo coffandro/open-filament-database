@@ -153,8 +153,9 @@ def _check_name_whitespace(data, file_path: Path, base: Path) -> list[Validation
 # --- Rule: inverted ranges ----------------------------------------------------
 
 # (lower, upper) filament fields where the lower value must not exceed the upper.
-# JSON Schema can't compare two fields, so this is the only place the pairing is
-# enforced; the exporters copy both values straight into slicer presets.
+# JSON Schema can't compare two fields, so this is where the pairing is enforced; the
+# exporters copy both values straight into slicer presets. Mirrored by ``RANGE_PAIRS``
+# in ``webui/src/lib/utils/dataQuality.ts``.
 _RANGE_PAIRS = (
     ("min_print_temperature", "max_print_temperature"),
     ("min_bed_temperature", "max_bed_temperature"),

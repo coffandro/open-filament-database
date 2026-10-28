@@ -19,9 +19,11 @@ const mocks = vi.hoisted(() => ({
 	runCloudValidation: vi.fn(),
 	sendWebhook: vi.fn(),
 	trackSubmission: vi.fn(),
-	getSimplyPrintToken: vi.fn(() => 'fake-token'),
-	getSimplyPrintUser: vi.fn(async () => ({ id: 1, email: 'u@example.com' })),
-	checkRateLimit: vi.fn(() => ({ allowed: true }))
+	getSimplyPrintToken: vi.fn((): string | undefined => 'fake-token'),
+	getSimplyPrintUser: vi.fn(
+		async (): Promise<{ id: number; email: string | null }> => ({ id: 1, email: 'u@example.com' })
+	),
+	checkRateLimit: vi.fn((): { allowed: boolean; retryAfterMs?: number } => ({ allowed: true }))
 }));
 
 vi.mock('$lib/server/anonBot', () => ({
