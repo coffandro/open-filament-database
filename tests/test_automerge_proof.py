@@ -130,6 +130,14 @@ def test_off_site_or_user_written_pages_do_not_count():
     assert "user-written" in check(leaf(), proof(url=forum), {forum: PAGE})
 
 
+def test_an_unheated_bed_can_be_proven():
+    """CookieCAD PETG: "Bed Temperature 0-80°C" was refused as not a temperature."""
+    page = "PLA Basic. Bed Temperature 0-80°C."
+    quote = "Bed Temperature 0-80°C"
+    lf = leaf("/min_bed_temperature", 0)
+    assert check(lf, proof(0, quote=quote, pointer="/min_bed_temperature"), {URL: page}) is None
+
+
 def test_min_and_max_must_be_the_right_end_of_a_range():
     assert "top of the range" in check(
         leaf("/min_print_temperature", 220), proof(220, pointer="/min_print_temperature")

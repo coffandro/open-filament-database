@@ -24,11 +24,12 @@ name: Auto-merge
 # MODES: repo variable OFD_AUTOMERGE = off (default) | shadow | on. Shadow posts the
 # check ("Would auto-merge after ...") and never merges; run it for a few weeks first.
 #
-# TOKEN: a dedicated GitHub App (vars.OFD_AUTOMERGE_APP_ID, secrets.
-# OFD_AUTOMERGE_PRIVATE_KEY) with Contents, Pull requests and Checks write. It must NOT
-# be a bypass actor of the main ruleset: the repo bot is (see style_data.yaml), and a
-# merge by it would skip every required check. GITHUB_TOKEN can't be used either: its
-# merges don't trigger style_data.yaml, so new entities would get no UUIDs.
+# TOKEN: the repo bot (vars.OFD_REPO_BOT_APP_ID, secrets.OFD_REPO_BOT_PRIVATE_KEY),
+# which needs Contents, Pull requests, Checks and Issues write and Actions read. It is
+# a bypass actor of the main ruleset, so GitHub won't stop its merges on a red check:
+# the script does instead, re-reading every required check (E16) and validating the
+# merged tree (E19) right before merging at the pinned commit. GITHUB_TOKEN can't be
+# used: its merges don't trigger style_data.yaml, so new entities would get no UUIDs.
 
 on:
   workflow_run:
@@ -92,8 +93,8 @@ jobs:
         if: steps.pr.outputs.proceed == 'true'
         uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
         with:
-          app-id: ${{ vars.OFD_AUTOMERGE_APP_ID }}
-          private-key: ${{ secrets.OFD_AUTOMERGE_PRIVATE_KEY }}
+          app-id: ${{ vars.OFD_REPO_BOT_APP_ID }}
+          private-key: ${{ secrets.OFD_REPO_BOT_PRIVATE_KEY }}
           permission-checks: write
           permission-pull-requests: read
           permission-contents: read
@@ -121,7 +122,7 @@ jobs:
           GH_TOKEN: ${{ steps.app.outputs.token }}
           PR: ${{ steps.pr.outputs.pr }}
           OFD_AUTOMERGE: ${{ vars.OFD_AUTOMERGE }}
-          OFD_AUTOMERGE_APP_ID: ${{ vars.OFD_AUTOMERGE_APP_ID }}
+          OFD_AUTOMERGE_APP_ID: ${{ vars.OFD_REPO_BOT_APP_ID }}
           OFD_AUTOMERGE_BLOCKED_USERS: ${{ vars.OFD_AUTOMERGE_BLOCKED_USERS }}
         run: python -m ofd automerge evaluate --pr "$PR" --post
 
@@ -140,8 +141,8 @@ jobs:
         id: app
         uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
         with:
-          app-id: ${{ vars.OFD_AUTOMERGE_APP_ID }}
-          private-key: ${{ secrets.OFD_AUTOMERGE_PRIVATE_KEY }}
+          app-id: ${{ vars.OFD_REPO_BOT_APP_ID }}
+          private-key: ${{ secrets.OFD_REPO_BOT_PRIVATE_KEY }}
           permission-checks: write
           permission-contents: write
           permission-pull-requests: write
@@ -166,7 +167,7 @@ jobs:
           GH_TOKEN: ${{ steps.app.outputs.token }}
           DRY_RUN: ${{ inputs.dry_run }}
           OFD_AUTOMERGE: ${{ vars.OFD_AUTOMERGE }}
-          OFD_AUTOMERGE_APP_ID: ${{ vars.OFD_AUTOMERGE_APP_ID }}
+          OFD_AUTOMERGE_APP_ID: ${{ vars.OFD_REPO_BOT_APP_ID }}
           OFD_AUTOMERGE_BLOCKED_USERS: ${{ vars.OFD_AUTOMERGE_BLOCKED_USERS }}
         run: |
           flags=()

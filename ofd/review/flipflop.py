@@ -65,8 +65,11 @@ class FlipFlop:
 
     def to_dict(self) -> dict:
         data = asdict(self)
-        for change in data["timeline"]:
-            change["value"] = None if change["value"] is _MISSING else change["value"]
+        # asdict deep-copies values, so the sentinel must be checked on the originals.
+        for copy, change in zip(data["timeline"], self.timeline, strict=True):
+            copy["value"] = None if change.value is _MISSING else change.value
+        if self.new_value is _MISSING:
+            data["new_value"] = None
         data["message"] = self.describe()
         return data
 

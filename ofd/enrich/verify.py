@@ -44,6 +44,8 @@ TEMPERATURE_FIELDS = {
     "max_dry_temperature",
     "dry_temperature",
 }
+# An unheated bed is a real spec ("Bed: 0-60 °C"); a nozzle or dryer at 0 °C is not.
+ZERO_OK_TEMPERATURES = {"min_bed_temperature", "max_bed_temperature"}
 SHEET_FIELDS = {"data_sheet_url", "safety_sheet_url"}
 
 # Other copied numbers (#767): field -> (whole numbers only, lowest, highest).
@@ -162,6 +164,7 @@ def normalize(text: str) -> str:
     text = unicodedata.normalize("NFKC", text).lower()
     text = re.sub(r"[‐-―−]", "-", text)  # dashes and minus signs
     text = text.replace(" ", " ").replace("’", "'").replace("“", '"').replace("”", '"')
+    text = re.sub(r"\s+(?=[°%])", "", text)  # "60 °C" and "60°C" are the same quote
     return re.sub(r"\s+", " ", text).strip()
 
 
@@ -316,8 +319,9 @@ def verify(enrichment: dict, fetcher: Fetcher, stores_dir: Path) -> str | None:
     quote = normalize(enrichment.get("source_quote") or "")
 
     if field in TEMPERATURE_FIELDS:
-        if isinstance(value, bool) or not isinstance(value, int) or not 0 < value < 500:
-            return "temperature must be a whole number of °C"
+        low = 0 if field in ZERO_OK_TEMPERATURES else 1
+        if isinstance(value, bool) or not isinstance(value, int) or not low <= value < 500:
+            return f"temperature must be a whole number of °C from {low} to 499"
         if problem := _verify_quoted(enrichment, fetcher):
             return problem
         return None if number_in(value, quote) else "value is not in the quote"

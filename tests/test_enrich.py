@@ -96,6 +96,22 @@ def test_quote_must_be_on_the_page_and_value_in_the_quote(tmp_path):
     assert "did not load" in verify(temp(220, "x", url="https://blocked.example/"), fetcher, stores)
 
 
+def test_an_unheated_bed_is_a_temperature_but_a_cold_nozzle_is_not(tmp_path):
+    fetcher = FakeFetcher({TDS: "Nozzle: 0-220 °C. Bed Temperature 0-80°C."})
+    stores = tmp_path / "stores"
+    bed = temp(0, "Bed Temperature 0-80°C", pointer="/min_bed_temperature")
+    assert verify(bed, fetcher, stores) is None
+    nozzle = temp(0, "Nozzle: 0-220 °C", pointer="/min_print_temperature")
+    assert "from 1 to 499" in verify(nozzle, fetcher, stores)
+
+
+def test_a_space_before_the_degree_sign_does_not_matter(tmp_path):
+    """filaments.ca writes "60 °C - 80°C"; the model quoted "60°C - 80°C" (#747)."""
+    fetcher = FakeFetcher({TDS: "Use a heated print bed set to 60 °C - 80°C."})
+    quote = "heated print bed set to 60°C - 80 °C"
+    assert verify(temp(80, quote, pointer="/max_bed_temperature"), fetcher, tmp_path) is None
+
+
 def test_number_matching_respects_boundaries_and_decimal_commas():
     assert number_in(220, "190-220 °c")
     assert not number_in(22, "190-220 °c")

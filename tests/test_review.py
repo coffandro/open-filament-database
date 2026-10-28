@@ -12,7 +12,7 @@ import subprocess
 import pytest
 
 from ofd.review.checks import MaterialStats, run_checks
-from ofd.review.flipflop import detect
+from ofd.review.flipflop import _MISSING, Change, FlipFlop, detect
 from ofd.review.gitdata import TreeReader, changed_files
 from ofd.review.jsonlines import line_of, pointer_lines
 from ofd.review.render import extract_ai_section, inline_comments, summary
@@ -198,6 +198,15 @@ def test_setting_a_value_back_is_a_flip_flop(repo):
     found = detect(repo.path, base, changes)
     assert [(f.pointer, f.kind) for f in found] == [("/max_print_temperature", "revert")]
     assert "Bob" in found[0].describe()
+
+
+def test_an_absent_value_serialises_as_null():
+    """asdict deep-copies the sentinel, which then crashed json.dumps (#773)."""
+    flip = FlipFlop("f.json", "/a", "revert", _MISSING, [Change(_MISSING, "Alice", "a" * 7, "")])
+    data = json.loads(json.dumps(flip.to_dict()))
+    assert data["new_value"] is None
+    assert data["timeline"][0]["value"] is None
+    assert "(absent)" in data["message"]
 
 
 def test_bot_churn_is_not_a_flip_flop(repo):
