@@ -51,7 +51,14 @@ OPTIONAL_STRING_FIELDS = {
 }
 
 # URL fields whose tracking/affiliate query params should be stripped.
-URL_FIELDS = {"url", "data_sheet_url", "safety_sheet_url", "storefront_url", "website", "source_url"}
+URL_FIELDS = {
+    "url",
+    "data_sheet_url",
+    "safety_sheet_url",
+    "storefront_url",
+    "website",
+    "source_url",
+}
 
 # Known tracking query-parameter keys (lowercased). Keep in sync with the ofd-validator Rust
 # rule (crates/ofd-validator-core/src/validators/url_tracker.rs) and the webui urlSanitizer.ts.
