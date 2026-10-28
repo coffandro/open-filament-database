@@ -8,6 +8,6 @@
   "min_print_temperature": 230,
   "max_print_temperature": 260,
   "min_bed_temperature": 60,
-  "max_bed_temperature": 80,
+  "max_bed_temperature": 100,
   "data_sheet_url": "https://siraya.tech/pages/rebound-peba-85a-filament-tds"
 }
