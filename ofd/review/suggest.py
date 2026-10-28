@@ -17,12 +17,16 @@ import copy
 import difflib
 import json
 from dataclasses import dataclass, field
+from functools import lru_cache
 from pathlib import Path
 
 import jsonschema
+from referencing import Registry, Resource
+from referencing.jsonschema import DRAFT7
 
 from ofd.review.gitdata import ChangedFile
 from ofd.review.jsonlines import pointer_lines, resolve, set_value
+from ofd.review.sustainability import TRAITS as SUSTAINABILITY_TRAITS
 from ofd.scripts.style_data import build_key_order_map, sort_json_keys
 
 SCHEMAS_DIR = Path(__file__).resolve().parents[2] / "schemas"
@@ -47,12 +51,30 @@ class Outcome:
     rejected: list[tuple[dict, str]] = field(default_factory=list)
 
 
+@lru_cache(maxsize=1)
+def _registry() -> tuple[dict[str, dict], Registry]:
+    """Every schema, reachable by the ``$ref`` spellings the schemas use.
+
+    ``filament_schema.json`` points at ``./sustainability_schema.json`` (#768), so a
+    schema validated on its own can't resolve its references.
+    """
+    schemas: dict[str, dict] = {}
+    resources = []
+    for schema_file in sorted(SCHEMAS_DIR.glob("*_schema.json")):
+        schema = json.loads(schema_file.read_text(encoding="utf-8"))
+        schemas[schema_file.name] = schema
+        resource = Resource.from_contents(schema, default_specification=DRAFT7)
+        for uri in {schema_file.name, f"./{schema_file.name}", schema.get("$id")} - {None}:
+            resources.append((uri, resource))
+    return schemas, Registry().with_resources(resources)
+
+
 def schema_errors(doc, kind: str) -> set[str]:
-    schema_file = SCHEMAS_DIR / f"{kind}_schema.json"
-    if not schema_file.exists():
+    schemas, registry = _registry()
+    schema = schemas.get(f"{kind}_schema.json")
+    if schema is None:
         return set()
-    schema = json.loads(schema_file.read_text(encoding="utf-8"))
-    validator = jsonschema.validators.validator_for(schema)(schema)
+    validator = jsonschema.validators.validator_for(schema)(schema, registry=registry)
     return {
         f"{'/'.join(map(str, e.absolute_path))}: {e.message}" for e in validator.iter_errors(doc)
     }
@@ -108,6 +130,16 @@ def build_suggestions(enrichments: list[dict], changes: list[ChangedFile]) -> Ou
     for enrichment in enrichments:
         if enrichment.get("path") not in by_path:
             outcome.rejected.append((enrichment, "not a file this PR adds or changes"))
+            continue
+        # Sustainability figures are only ever checked here, never proposed: they need a
+        # verified quote and go through `ofd enrich` and the sustainability gate.
+        pointer = str(enrichment.get("pointer", ""))
+        if (
+            "sustainability" in pointer
+            or "container_details" in pointer
+            or ("/traits" in pointer and any(t in pointer for t in SUSTAINABILITY_TRAITS))
+        ):
+            outcome.rejected.append((enrichment, "sustainability data is never suggested"))
             continue
         grouped.setdefault(enrichment["path"], []).append(enrichment)
 

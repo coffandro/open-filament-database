@@ -167,7 +167,7 @@ def test_gaps_list_missing_fields_and_template_rechecks(tmp_path):
         },
     )
     stats = SimpleNamespace(templates={"PLA": {(190, 230, 50, 70): 68}})
-    filament_gap, size_gap = brand_gaps(root, "acme", stats, limit=10)
+    filament_gap, variant_gap, size_gap = brand_gaps(root, "acme", stats, limit=10)
     assert filament_gap.recheck == [
         "min_print_temperature",
         "max_print_temperature",
@@ -175,6 +175,11 @@ def test_gaps_list_missing_fields_and_template_rechecks(tmp_path):
         "max_bed_temperature",
     ]
     assert "data_sheet_url" in filament_gap.missing
+    assert {"dry_temperature", "enclosure", "sustainability/recycled_content"} <= set(
+        filament_gap.missing
+    )
+    assert variant_gap.path.endswith("black/variant.json")
+    assert variant_gap.missing == ["transmission_distance"]
     assert size_gap.prefix == "/0" and size_gap.missing == [
         "gtin",
         "article_number",
@@ -183,7 +188,14 @@ def test_gaps_list_missing_fields_and_template_rechecks(tmp_path):
 
 
 def _report():
-    return {"applied": [], "confirmed": [], "unverified": [], "rejected": [], "not_found": []}
+    return {
+        "applied": [],
+        "confirmed": [],
+        "derived": [],
+        "unverified": [],
+        "rejected": [],
+        "not_found": [],
+    }
 
 
 def test_apply_writes_only_gap_fields_in_schema_order(tmp_path):
@@ -227,3 +239,170 @@ def test_pr_body_lists_changes_and_what_was_not_applied(tmp_path):
     body = pr_body(report)
     assert "| Acme · PLA · PLA Basic | `max_print_temperature` | — | `220` |" in body
     assert "quote not found on the source page" in body
+
+
+# --- #767 fields ----------------------------------------------------------------
+
+
+def test_new_filament_numbers_are_checked_like_temperatures(tmp_path):
+    root = tree(tmp_path)
+    fetcher = FakeFetcher({TDS: "Cooling fan: 80% · Max volumetric speed 21 mm³/s"})
+    fan = temp(80, "Cooling fan: 80%", pointer="/min_fan_speed")
+    assert verify(fan, fetcher, root / "stores") is None
+    assert "between 0 and 100" in verify({**fan, "value": 180}, fetcher, root / "stores")
+    flow = temp(21, "Max volumetric speed 21 mm³/s", pointer="/max_volumetric_speed")
+    assert verify(flow, fetcher, root / "stores") is None
+    assert verify({**flow, "value": 24}, fetcher, root / "stores") == "value is not in the quote"
+
+
+def test_enclosure_needs_a_quote_about_the_enclosure(tmp_path):
+    root = tree(tmp_path)
+    fetcher = FakeFetcher({TDS: "An enclosed printer is recommended. Print fast."})
+    good = temp("recommended", "An enclosed printer is recommended.", pointer="/enclosure")
+    assert verify(good, fetcher, root / "stores") is None
+    vague = {**good, "source_quote": "Print fast."}
+    assert verify(vague, fetcher, root / "stores") == "the quote says nothing about an enclosure"
+    assert "must be one of" in verify({**good, "value": "yes"}, fetcher, root / "stores")
+    # Recommended is not required.
+    assert "is required" in verify({**good, "value": "required"}, fetcher, root / "stores")
+
+
+def test_a_chamber_temperature_is_not_an_enclosure_statement(tmp_path):
+    root = tree(tmp_path)
+    quote = "Preheat the HT90 (Nozzle: 410 °C, Heatbed: 150 °C, Chamber: 90 °C)"
+    fetcher = FakeFetcher({TDS: quote})
+    e = temp("required", quote, pointer="/enclosure")
+    assert verify(e, fetcher, root / "stores") == "the quote says nothing about an enclosure"
+
+
+# --- sustainability (#768) -------------------------------------------------------
+
+SUS_URL = "https://acme.example/sustainability"
+SUS_PAGE = (
+    "Our rPLA is made from 100% post-industrial recycled PLA, collected from our own factory."
+)
+
+
+def recycled(pct=100, quote="made from 100% post-industrial recycled PLA", **extra):
+    return {
+        "path": "data/acme/PLA/basic/filament.json",
+        "pointer": "/sustainability/recycled_content",
+        "value": {
+            "pct": pct,
+            "pct_qualifier": "exact",
+            "type": "post_industrial",
+            "evidence": "supplier_declaration",
+            "source_type": "primary",
+            "source_url": SUS_URL,
+            "source_quote": quote,
+            "retrieved": "1999-01-01",
+            **extra,
+        },
+        "source_url": SUS_URL,
+        "source_type": "primary",
+    }
+
+
+def test_sustainability_entry_is_verified_and_dated_by_the_script():
+    from datetime import date
+
+    from ofd.enrich import sustainability
+
+    fetcher = FakeFetcher({SUS_URL: SUS_PAGE})
+    e = recycled()
+    reason, _ = sustainability.verify(e, fetcher, "acme", today=date(2026, 10, 28))
+    assert reason is None
+    assert e["value"]["retrieved"] == "2026-10-28"
+
+    wrong, _ = sustainability.verify(recycled(pct=90), fetcher, "acme")
+    assert wrong and "90" in wrong
+    banned, _ = sustainability.verify(recycled(notes="carbon neutral"), fetcher, "acme")
+    assert banned and "never be stored" in banned
+
+
+def test_applying_recycled_content_sets_the_trait_on_colours(tmp_path):
+    root = tree(tmp_path)
+    gaps = brand_gaps(root, "acme", NO_TEMPLATES, limit=10)
+    report = _report()
+    apply(root, [recycled()], gaps, report)
+    filament = json.loads((root / "data/acme/PLA/basic/filament.json").read_text())
+    variant = json.loads((root / "data/acme/PLA/basic/black/variant.json").read_text())
+    assert filament["sustainability"]["recycled_content"]["pct"] == 100
+    assert variant["traits"] == {"recycled": True}
+    assert report["derived"] == [
+        {"path": "data/acme/PLA/basic/black/variant.json", "pointer": "/traits/recycled"}
+    ]
+
+
+def test_validator_errors_undo_the_write(tmp_path):
+    root = tree(tmp_path)
+    gaps = brand_gaps(root, "acme", NO_TEMPLATES, limit=10)
+    report = _report()
+    before = (root / "data/acme/PLA/basic/filament.json").read_text()
+    # The number is not in the quote, which the validator refuses.
+    apply(root, [recycled(quote="made from post-industrial recycled PLA")], gaps, report)
+    assert (root / "data/acme/PLA/basic/filament.json").read_text() == before
+    assert "traits" not in json.loads((root / "data/acme/PLA/basic/black/variant.json").read_text())
+    assert report["applied"] == [] and report["rejected"][0]["reason"].startswith("validator:")
+
+
+def test_sources_log_rows_stay_sorted(tmp_path):
+    from datetime import date
+
+    from ofd.enrich import sustainability
+
+    log = tmp_path / "docs/sustainability-sources.md"
+    log.parent.mkdir()
+    log.write_text(
+        "# Log\n\n| Brand | Checked | Found | Sources |\n|---|---|---|---|\n"
+        "| zeta | 2026-01-01 | Nothing published | — |\n\n## Open questions\n"
+    )
+    day = date(2026, 10, 28)
+    sustainability.update_log(
+        tmp_path, "acme", sustainability.log_row("acme", "rPLA 100%", [SUS_URL], day)
+    )
+    sustainability.update_log(tmp_path, "zeta", sustainability.log_row("zeta", "", [], day))
+    rows = [
+        line
+        for line in log.read_text().splitlines()
+        if line.startswith("| ") and "Brand" not in line
+    ]
+    assert rows == [
+        f"| acme | 2026-10-28 | rPLA 100% | <{SUS_URL}> |",
+        "| zeta | 2026-10-28 | Nothing published | — |",
+    ]
+    assert "## Open questions" in log.read_text()
+
+
+# --- brand claims (#808) ---------------------------------------------------------
+
+
+def test_claimed_brands_keep_their_values(tmp_path):
+    root = tree(
+        tmp_path,
+        filament={
+            "id": "basic",
+            "name": "PLA Basic",
+            "diameter_tolerance": 0.02,
+            "density": 1.24,
+            "min_print_temperature": 190,
+            "max_print_temperature": 230,
+            "min_bed_temperature": 50,
+            "max_bed_temperature": 70,
+        },
+    )
+    stats = SimpleNamespace(templates={"PLA": {(190, 230, 50, 70): 68}})
+    gap = brand_gaps(root, "acme", stats, limit=10, claimed=True)[0]
+    assert gap.recheck == [] and "data_sheet_url" in gap.missing
+
+
+def test_pr_body_asks_for_the_representatives_sign_off(tmp_path):
+    root = tree(tmp_path)
+    gaps = brand_gaps(root, "acme", NO_TEMPLATES, limit=10)
+    report = {
+        **_report(),
+        "brand": "acme",
+        "claimed_by": ["acme-rep"],
+        "gaps": [vars(g) for g in gaps],
+    }
+    assert "needs a sign-off from @acme-rep" in pr_body(report)

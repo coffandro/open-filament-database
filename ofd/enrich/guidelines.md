@@ -49,12 +49,48 @@ so a guess gains nothing.
 |---|---|---|
 | `min_print_temperature`, `max_print_temperature` | integer °C | nozzle temperature range |
 | `min_bed_temperature`, `max_bed_temperature` | integer °C | |
-| `max_dry_temperature` | integer °C | the drying temperature; if the source gives one value, use it |
+| `max_dry_temperature` | integer °C | the highest safe drying temperature |
+| `dry_temperature` | integer °C | the *recommended* drying temperature; "Drying: 55 °C for 8 h" is `dry_temperature` 55 and `dry_time` 8 |
+| `dry_time` | number, hours | drying time at `dry_temperature`; for a range like "4-6 h" leave it out |
+| `max_volumetric_speed` | number, mm³/s | max flow, only when the source states it in mm³/s |
+| `min_fan_speed`, `max_fan_speed` | integer % (0-100) | part-cooling fan; a single value goes in both only if the source gives one value |
+| `enclosure` | `required`, `recommended` or `not_needed` | only when the source says so; quote the sentence about the enclosure or chamber |
 | `data_sheet_url` | URL | the TDS document itself (usually a PDF), not a shop page; `source_url` = the same URL, quote optional |
 | `safety_sheet_url` | URL | the SDS / MSDS document itself |
+| `transmission_distance` | number, mm | the colour's TD (HueForge / lithophane), on a variant; only the manufacturer's published figure |
 | `gtin` | string of digits | the barcode (EAN/UPC) for this colour **and** spool size; never compute or guess one |
 | `article_number` | string | the manufacturer's SKU for this colour and size |
 | `purchase_links` | array | `[{"store_id": "<folder under stores/>", "url": "<product page>"}]`; only stores that exist under `stores/`, the exact colour/size page, no tracking parameters |
+
+## Sustainability data
+
+Gaps may list `sustainability/recycled_content`, `sustainability/bio_based_content`,
+`sustainability/carbon_footprints` and `sustainability/relative_claims` on a filament.
+These figures are copied into CO₂ calculations and consumer-facing material, so read
+the "🌱 Sustainability data" section of `docs/manual.md` and the schema in
+`schemas/sustainability_schema.json` before you propose one, and follow them exactly:
+
+- **Copy, never compute**, and quote the sentence that contains the number. The check
+  needs an unbroken piece of the quote of at least 15 characters around each number.
+- **The brand's own page, PDF, blog or declaration.** A retailer or press copy only
+  when the original is gone, with `source_type: "secondary"`.
+- **Never** an offset, tree planting, "carbon / climate / CO₂ neutral", "eco-friendly",
+  "most sustainable" or biodegradability marketing, and never a company-wide
+  footprint as a product figure. A brand that only publishes those has nothing to add.
+- Every qualifier must match the source: "up to 89%" is `pct_qualifier: "up_to"`;
+  use `unknown` for any unit, scope or type the source doesn't state. A `standard`,
+  `verifier`, `tool` or EPD number only when the page names it.
+- The value is the whole entry: an object for `recycled_content` / `bio_based_content`,
+  an array of entries for `carbon_footprints` / `relative_claims`. Every entry carries
+  its own `source_url`, `source_quote` and `source_type`. Leave `retrieved` out; the
+  script sets it.
+- Only propose an entry for a filament the source is about. A brand-wide statement
+  ("all our PLA is 100% recycled") applies to each filament it names.
+
+Whether or not you found anything, return `sustainability_log`: `found` is one line
+for the brand's row in `docs/sustainability-sources.md` (e.g. "Recycled content for
+rPLA and rPETG; no footprints published"), `sources` the pages you checked. When no
+sustainability gaps were listed, return `sustainability_log: null`.
 
 ## Output
 
@@ -64,6 +100,7 @@ Return one JSON object matching the provided schema:
   list (`pointer` = the gap's entity pointer + `/` + field, e.g. `/max_bed_temperature`
   or `/2/gtin`), `value` with the right JSON type, `source_url`, `source_quote`,
   `source_type`, and optionally a short `note`.
+- `sustainability_log`: see above.
 - `not_found`: gaps you researched without a usable result: `path`, the `fields`, and a
   one-line `note` (e.g. "no TDS published; product page lists only nozzle temps").
 

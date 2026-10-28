@@ -56,6 +56,14 @@
 		{:else if pr.draft}
 			<MessageBanner type="info" message="This pull request is still a draft." />
 		{:else}
+			{#each checks.blocking as gate}
+				<div class="mb-4 rounded-lg border border-destructive/20 bg-destructive/10 p-4 text-sm text-destructive">
+					<strong>{gate.context}</strong> is {gate.state}{gate.description ? `: ${gate.description}` : ''}.
+					{#if gate.url}
+						<a href={gate.url} target="_blank" rel="noopener noreferrer" class="underline">Details</a>
+					{/if}
+				</div>
+			{/each}
 			{#if pr.mergeable === false}
 				<MessageBanner type="error" message="GitHub reports conflicts ({pr.mergeable_state}); the merge will likely be refused." />
 			{/if}
@@ -80,7 +88,7 @@
 					rows="3"
 					class="mb-4 w-full rounded-md border bg-background p-3 text-sm"
 				>{data.message}</textarea>
-				<Button type="submit" disabled={submitting}>
+				<Button type="submit" disabled={submitting || checks.blocking.length > 0}>
 					{submitting ? 'Merging…' : 'LGTM & merge'}
 				</Button>
 				<p class="mt-2 text-xs text-muted-foreground">

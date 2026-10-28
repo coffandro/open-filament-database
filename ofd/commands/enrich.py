@@ -15,7 +15,7 @@ import sys
 from pathlib import Path
 
 from ofd.enrich.gaps import brand_gaps
-from ofd.enrich.run import DEFAULT_LIMIT, enrich_brand, pr_body
+from ofd.enrich.run import DEFAULT_LIMIT, claimed_by, enrich_brand, pr_body
 from ofd.review.checks import MaterialStats
 from ofd.review.gitdata import TreeReader
 from ofd.review.model import DEFAULT_BUDGET_USD, DEFAULT_MODEL
@@ -45,6 +45,9 @@ Examples:
     p_gaps.add_argument(
         "--limit", type=int, default=DEFAULT_LIMIT, help="Max gaps (default: %(default)s)"
     )
+    p_gaps.add_argument(
+        "--no-sustainability", action="store_true", help="Leave sustainability sections out"
+    )
     p_gaps.set_defaults(func=run_gaps)
 
     p_run = actions.add_parser("run", help="Research and fill a brand's gaps")
@@ -57,6 +60,11 @@ Examples:
         "--budget", type=float, default=DEFAULT_BUDGET_USD, help="USD cap (default: %(default)s)"
     )
     p_run.add_argument("--dry-run", action="store_true", help="Verify but don't edit files")
+    p_run.add_argument(
+        "--no-sustainability",
+        action="store_true",
+        help="Don't research sustainability data (#768) this run",
+    )
     p_run.add_argument("--report", type=Path, help="Write the run report JSON here")
     p_run.add_argument("--pr-body", type=Path, help="Write the PR description here")
     p_run.set_defaults(func=run_enrich)
@@ -64,7 +72,18 @@ Examples:
 
 def run_gaps(args: argparse.Namespace) -> int:
     stats = MaterialStats(TreeReader(project_root, "HEAD"))
-    for gap in brand_gaps(project_root, args.brand, stats, args.limit):
+    representatives = claimed_by(project_root, args.brand)
+    if representatives:
+        print(f"Claimed by {', '.join(representatives)}: template values are not re-checked.")
+    gaps = brand_gaps(
+        project_root,
+        args.brand,
+        stats,
+        args.limit,
+        sustainability=not args.no_sustainability,
+        claimed=bool(representatives),
+    )
+    for gap in gaps:
         recheck = f" (recheck {', '.join(gap.recheck)})" if gap.recheck else ""
         print(f"{gap.label}: {', '.join(gap.missing) or '-'}{recheck}")
     return 0
@@ -79,6 +98,7 @@ def run_enrich(args: argparse.Namespace) -> int:
             model=args.model,
             budget_usd=args.budget,
             write=not args.dry_run,
+            research_sustainability=not args.no_sustainability,
         )
     except ValueError as exc:
         print(f"Error: {exc}", file=sys.stderr)

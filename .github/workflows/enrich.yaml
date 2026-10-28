@@ -34,6 +34,10 @@ on:
       budget:
         description: 'Max USD for the model per brand.'
         default: '2'
+      sustainability:
+        description: 'Also research sustainability data (#768) and log the brand in docs/sustainability-sources.md.'
+        type: boolean
+        default: true
 
 permissions:
   contents: read
@@ -95,6 +99,7 @@ jobs:
           BRANDS: ${{ inputs.brands }}
           LIMIT: ${{ inputs.limit }}
           BUDGET: ${{ inputs.budget }}
+          SUSTAINABILITY: ${{ inputs.sustainability }}
           BASE: ${{ github.event.repository.default_branch }}
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
@@ -110,6 +115,11 @@ jobs:
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           fi
           failed=0
+          extra=()
+          [ "$SUSTAINABILITY" = true ] || extra+=(--no-sustainability)
+          # A brand's row in the sustainability log is worth a PR on its own: a "nothing
+          # published" result saves the next person the same search.
+          paths=(data docs/sustainability-sources.md)
           for brand in $(printf '%s' "$BRANDS" | tr ',' ' '); do
             if ! printf '%s' "$brand" | grep -Eq '^[a-z0-9+]+(_[a-z0-9+]+)*$'; then
               echo "::error::'$brand' is not a brand id"; failed=1; continue
@@ -117,13 +127,13 @@ jobs:
             echo "::group::$brand"
             branch="enrich/${brand}-${GITHUB_RUN_ID}"
             git checkout -q -B "$branch" "origin/$BASE"
-            if ! python -m ofd enrich run --brand "$brand" --limit "$LIMIT" --budget "$BUDGET" \
+            if ! python -m ofd enrich run --brand "$brand" --limit "$LIMIT" --budget "$BUDGET" "${extra[@]}" \
                  --report "$RUNNER_TEMP/$brand.json" --pr-body "$RUNNER_TEMP/$brand.md"; then
               echo "::error::Enrichment of $brand failed; see the log above."
               git checkout -q -- . ; failed=1; echo "::endgroup::"; continue
             fi
             cat "$RUNNER_TEMP/$brand.md" >> "$GITHUB_STEP_SUMMARY"
-            if git diff --quiet -- data; then
+            if git diff --quiet -- "${paths[@]}"; then
               echo "$brand: nothing verified to change."
               echo "::endgroup::"; continue
             fi
@@ -131,7 +141,7 @@ jobs:
               printf '\n> Opened with the default token, so checks did not run. Close and reopen this PR to run them.\n' \
                 >> "$RUNNER_TEMP/$brand.md"
             fi
-            git add data
+            git add -- "${paths[@]}"
             git commit -q -m "Enrich $brand with sourced data"
             git push -q origin "$branch"
             gh pr create --base "$BASE" --head "$branch" \

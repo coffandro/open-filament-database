@@ -65,3 +65,36 @@ def create_review(repo: str, number: int, commit_id: str, body: str, comments: l
         "POST",
         {"commit_id": commit_id, "event": "COMMENT", "body": body, "comments": comments},
     )
+
+
+def set_status(
+    repo: str, sha: str, context: str, state: str, description: str, url: str = ""
+) -> None:
+    payload = {"state": state, "context": context, "description": description[:140]}
+    if url:
+        payload["target_url"] = url
+    api(f"repos/{repo}/statuses/{sha}", "POST", payload)
+
+
+def remove_label(repo: str, number: int, label: str) -> None:
+    try:
+        api(f"repos/{repo}/issues/{number}/labels/{label}", "DELETE")
+    except GitHubError:
+        pass  # already gone
+
+
+def last_labeler(repo: str, number: int, label: str) -> str | None:
+    """Who most recently added ``label`` to the issue or PR."""
+    actor = None
+    for event in api_list(f"repos/{repo}/issues/{number}/events?per_page=100"):
+        if event.get("event") == "labeled" and (event.get("label") or {}).get("name") == label:
+            actor = (event.get("actor") or {}).get("login")
+    return actor
+
+
+def can_write(repo: str, login: str) -> bool:
+    try:
+        permission = api(f"repos/{repo}/collaborators/{login}/permission")
+    except GitHubError:
+        return False
+    return (permission or {}).get("permission") in ("admin", "maintain", "write")

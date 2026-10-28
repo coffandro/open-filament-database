@@ -89,6 +89,13 @@ export const actions: Actions = {
 				error: 'New commits were pushed since you opened this page. Reload and review them first.'
 			});
 		}
+		// Re-read the gates now: a sign-off can be withdrawn after the page loaded.
+		const { blocking } = await getCheckSummary(token, owner, repo, sha);
+		if (blocking.length > 0) {
+			return fail(409, {
+				error: `Not merged: ${blocking.map((b) => `${b.context} is ${b.state}`).join(', ')}.`
+			});
+		}
 
 		// Merge first: it is the step that can be refused (conflicts, branch protection,
 		// a push in between), and a thank-you on an unmerged PR would be misleading.

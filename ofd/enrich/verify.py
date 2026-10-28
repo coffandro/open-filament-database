@@ -42,8 +42,28 @@ TEMPERATURE_FIELDS = {
     "min_bed_temperature",
     "max_bed_temperature",
     "max_dry_temperature",
+    "dry_temperature",
 }
 SHEET_FIELDS = {"data_sheet_url", "safety_sheet_url"}
+
+# Other copied numbers (#767): field -> (whole numbers only, lowest, highest).
+NUMBER_FIELDS = {
+    "dry_time": (False, 0, 72),
+    "max_volumetric_speed": (False, 0, 200),
+    "min_fan_speed": (True, 0, 100),
+    "max_fan_speed": (True, 0, 100),
+    "transmission_distance": (False, 0, 100),
+}
+ENCLOSURE_VALUES = {"required", "recommended", "not_needed"}
+# The quote must be about the enclosure itself: a chamber temperature alone ("Chamber:
+# 90 °C") is a setting, not a statement that an enclosure is required.
+_ENCLOSURE_WORDS = re.compile(r"enclos|closed (?:printer|frame|chamber)|open[- ]frame")
+# And its wording must match the value.
+_ENCLOSURE_VALUE_WORDS = {
+    "required": re.compile(r"requir|must|necessary|needed|essential|mandatory"),
+    "recommended": re.compile(r"recommend|advis|suggest|prefer|ideal|best|helps?\b"),
+    "not_needed": re.compile(r"\bno\b|\bnot\b|without|n't|unnecessary|open[- ]frame"),
+}
 
 
 @dataclass
@@ -53,31 +73,82 @@ class Page:
     text: str = ""
     is_pdf: bool = False
     error: str = ""
+    # Where the request ended up after redirects; "" when it never loaded.
+    final_url: str = ""
+    # The <title> and first <h1>, normalized: what the page says it is about.
+    title: str = ""
+    # ``text`` without site chrome (nav, header, footer, aside): what the page is
+    # about, as opposed to the menu listing every product of the brand.
+    main: str = ""
+
+    @property
+    def content(self) -> str:
+        return self.main or self.text
+
+
+_CHROME_TAGS = {"nav", "header", "footer", "aside"}
 
 
 class _TextExtractor(HTMLParser):
     def __init__(self):
         super().__init__(convert_charrefs=True)
         self.parts: list[str] = []
+        self.main: list[str] = []
+        self.title: list[str] = []
         self._skip = 0
+        # [tag, nesting] for each open chrome element (nav, header, role=navigation...).
+        self._chrome: list[list] = []
+        self._in_title = False
+        self._in_h1 = False
+        self._h1_done = False
 
     def handle_starttag(self, tag, attrs):
         if tag in ("script", "style", "noscript", "svg"):
             self._skip += 1
+        if self._chrome and tag == self._chrome[-1][0]:
+            self._chrome[-1][1] += 1
+        elif tag in _CHROME_TAGS or dict(attrs).get("role") in (
+            "navigation",
+            "banner",
+            "contentinfo",
+        ):
+            self._chrome.append([tag, 1])
+        if tag == "title":
+            self._in_title = True
+        if tag == "h1" and not self._h1_done and not self._chrome:
+            self._in_h1 = True
 
     def handle_endtag(self, tag):
         if tag in ("script", "style", "noscript", "svg") and self._skip:
             self._skip -= 1
+        if self._chrome and tag == self._chrome[-1][0]:
+            self._chrome[-1][1] -= 1
+            if self._chrome[-1][1] == 0:
+                self._chrome.pop()
+        if tag == "title":
+            self._in_title = False
+        if tag == "h1" and self._in_h1:
+            self._in_h1, self._h1_done = False, True
 
     def handle_data(self, data):
-        if not self._skip:
-            self.parts.append(data)
+        if self._in_title or self._in_h1:
+            self.title.append(data)
+        if self._skip or self._in_title:
+            return
+        self.parts.append(data)
+        if not self._chrome:
+            self.main.append(data)
 
 
 def html_text(html: str) -> str:
+    return html_parts(html)[0]
+
+
+def html_parts(html: str) -> tuple[str, str, str]:
+    """``(all text, text outside site chrome, title + first h1)``."""
     parser = _TextExtractor()
     parser.feed(html)
-    return " ".join(parser.parts)
+    return " ".join(parser.parts), " ".join(parser.main), " ".join(parser.title)
 
 
 def pdf_text(data: bytes) -> str:
@@ -114,6 +185,7 @@ class Fetcher:
                 data = response.read(MAX_BYTES)
                 content_type = response.headers.get("Content-Type", "")
                 charset = response.headers.get_content_charset() or "utf-8"
+                final_url = response.geturl()
         except urllib.error.HTTPError as exc:
             return Page(url, False, error=f"HTTP {exc.code}")
         except (urllib.error.URLError, TimeoutError, OSError) as exc:
@@ -121,23 +193,52 @@ class Fetcher:
 
         if "pdf" in content_type or data.startswith(b"%PDF"):
             try:
-                return Page(url, True, normalize(pdf_text(data)), is_pdf=True)
+                return Page(url, True, normalize(pdf_text(data)), is_pdf=True, final_url=final_url)
             except ImportError:
                 return Page(url, False, is_pdf=True, error="pypdf is not installed")
             except Exception as exc:  # pypdf raises many kinds on broken files
                 return Page(url, False, is_pdf=True, error=f"unreadable PDF ({exc})")
-        return Page(url, True, normalize(html_text(data.decode(charset, errors="replace"))))
+        text, main, title = html_parts(data.decode(charset, errors="replace"))
+        return Page(
+            url,
+            True,
+            normalize(text),
+            final_url=final_url,
+            title=normalize(title),
+            main=normalize(main),
+        )
 
 
-def quote_on_page(quote: str, page: Page) -> bool:
-    """The quote, or each part of it around an ellipsis, appears on the page in order."""
-    fragments = [f for f in re.split(r"…|\.\.\.", normalize(quote)) if len(f.strip()) >= 4]
+# A separator a reader inserts between spec-table cells ("Print Temp / 240-270") that
+# the page text doesn't have ("print temp 240-270"). Only with whitespace on one side,
+# so "1/2" or "12:30" inside a value are left alone.
+_CELL_SEPARATOR = re.compile(r"\s*[/|:]\s+|\s+[/|:]\s*")
+
+
+def _comparable(text: str) -> str:
+    return re.sub(r"\s+", " ", _CELL_SEPARATOR.sub(" ", text)).strip()
+
+
+def quote_on_page(quote: str, page: Page, max_gap: int | None = None) -> bool:
+    """The quote, or each part of it around an ellipsis, appears on the page in order.
+
+    ``max_gap`` caps how far apart consecutive parts may be, so "190 … 230" can't
+    stitch two unrelated numbers together from opposite ends of a page.
+    """
+    fragments = [
+        _comparable(f) for f in re.split(r"…|\.\.\.", normalize(quote)) if len(f.strip()) >= 4
+    ]
     if not fragments:
         return False
-    position = 0
+    text = _comparable(page.text)
+    position = None
     for fragment in fragments:
-        found = page.text.find(fragment.strip(), position)
+        start = 0 if position is None else position
+        found = text.find(fragment.strip(), start)
         if found == -1:
+            return False
+        # find() returns the nearest occurrence, so nothing closer exists.
+        if max_gap is not None and position is not None and found - position > max_gap:
             return False
         position = found + len(fragment.strip())
     return True
@@ -220,6 +321,27 @@ def verify(enrichment: dict, fetcher: Fetcher, stores_dir: Path) -> str | None:
         if problem := _verify_quoted(enrichment, fetcher):
             return problem
         return None if number_in(value, quote) else "value is not in the quote"
+
+    if field in NUMBER_FIELDS:
+        whole, low, high = NUMBER_FIELDS[field]
+        number = isinstance(value, (int, float)) and not isinstance(value, bool)
+        if not number or (whole and not float(value).is_integer()) or not low <= value <= high:
+            kind = "a whole number" if whole else "a number"
+            return f"must be {kind} between {low} and {high}"
+        if problem := _verify_quoted(enrichment, fetcher):
+            return problem
+        return None if number_in(value, quote) else "value is not in the quote"
+
+    if field == "enclosure":
+        if value not in ENCLOSURE_VALUES:
+            return f"must be one of {', '.join(sorted(ENCLOSURE_VALUES))}"
+        if problem := _verify_quoted(enrichment, fetcher):
+            return problem
+        if not _ENCLOSURE_WORDS.search(quote):
+            return "the quote says nothing about an enclosure"
+        if not _ENCLOSURE_VALUE_WORDS[value].search(quote):
+            return f"the quote doesn't say an enclosure is {value.replace('_', ' ')}"
+        return None
 
     if field in SHEET_FIELDS:
         if not isinstance(value, str):

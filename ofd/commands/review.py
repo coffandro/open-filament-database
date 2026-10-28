@@ -47,7 +47,16 @@ Examples:
     p_run = actions.add_parser("run", help="Review a pull request")
     p_run.add_argument("--pr", type=int, required=True, help="Pull request number")
     p_run.add_argument("--repo", default=repo_default, help="owner/name (default: %(default)s)")
-    p_run.add_argument("--no-ai", action="store_true", help="Skip the model pass")
+    p_run.add_argument(
+        "--ai",
+        choices=("always", "auto", "never"),
+        default="always",
+        help="Model pass: always, never, or auto = only when sustainability data is touched "
+        "(default: %(default)s). Sustainability changes fail the gate without one.",
+    )
+    p_run.add_argument(
+        "--no-ai", dest="ai", action="store_const", const="never", help="Same as --ai never"
+    )
     p_run.add_argument("--model", default=DEFAULT_MODEL, help="Model id (default: %(default)s)")
     p_run.add_argument(
         "--budget", type=float, default=DEFAULT_BUDGET_USD, help="USD cap (default: %(default)s)"
@@ -57,11 +66,21 @@ Examples:
     )
     p_run.add_argument("--output", type=Path, help="Write the result JSON here")
     p_run.add_argument("--post", action="store_true", help="Post to the pull request")
+    p_run.add_argument(
+        "--drop-override",
+        action="store_true",
+        help="Remove the sustainability-verified label if this PR touches sustainability",
+    )
     p_run.set_defaults(func=run_review)
 
     p_post = actions.add_parser("post", help="Post a result written by `run --output`")
     p_post.add_argument("--input", type=Path, required=True, help="Result JSON")
     p_post.add_argument("--repo", default=repo_default, help="owner/name (default: %(default)s)")
+    p_post.add_argument(
+        "--drop-override",
+        action="store_true",
+        help="Remove the sustainability-verified label if this PR touches sustainability",
+    )
     p_post.set_defaults(func=run_post)
 
 
@@ -71,7 +90,7 @@ def run_review(args: argparse.Namespace) -> int:
             project_root,
             args.repo,
             args.pr,
-            use_model=not args.no_ai,
+            ai=args.ai,
             model=args.model,
             budget_usd=args.budget,
             head_dir=args.head_dir,
@@ -83,19 +102,21 @@ def run_review(args: argparse.Namespace) -> int:
     if args.output:
         args.output.write_text(json.dumps(result, indent=2, ensure_ascii=False), encoding="utf-8")
     if args.post:
-        post(args.repo, result)
-    else:
-        print(render(result))
-        for comment in result.get("comments", []):
-            print(f"--- inline: {comment['path']}:{comment['line']}\n{comment['body']}\n")
+        return post(args.repo, result, args.drop_override)
+    print(render(result))
+    for comment in result.get("comments", []):
+        print(f"--- inline: {comment['path']}:{comment['line']}\n{comment['body']}\n")
+    gate = result["sustainability"]["gate"]
+    print(
+        f"{gate['state'].upper()}: Sustainability sources: {gate['description']}", file=sys.stderr
+    )
     return 0
 
 
 def run_post(args: argparse.Namespace) -> int:
     result = json.loads(args.input.read_text(encoding="utf-8"))
     try:
-        post(args.repo, result)
+        return post(args.repo, result, args.drop_override)
     except github.GitHubError as exc:
         print(f"Error: {exc}", file=sys.stderr)
         return 1
-    return 0

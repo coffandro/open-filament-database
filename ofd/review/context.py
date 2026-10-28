@@ -87,3 +87,40 @@ def build_context(
             break
         text += "\n" + section
     return text
+
+
+MAX_PROOF_LINES = 60
+
+
+def values_section(leaves) -> str:
+    """The "Values to prove" and "Needs a maintainer" lists for proof mode.
+
+    ``leaves`` are ``ofd.automerge.proof.Leaf``; ``classify`` decides which a script can
+    check. The model only proposes sources for the first list; it must not research
+    the second.
+    """
+    from ofd.automerge.proof import PROVABLE, classify
+
+    provable = [leaf for leaf in leaves if classify(leaf) == PROVABLE]
+    human = [leaf for leaf in leaves if classify(leaf) != PROVABLE]
+    if not leaves:
+        return ""
+    lines = ["## Values to prove", ""]
+    if provable:
+        lines += [
+            f"- `{leaf.path}` `{leaf.pointer}` = `{json.dumps(leaf.after, ensure_ascii=False)}`"
+            for leaf in provable[:MAX_PROOF_LINES]
+        ]
+        if len(provable) > MAX_PROOF_LINES:
+            lines.append(f"- ... and {len(provable) - MAX_PROOF_LINES} more (skip them)")
+    else:
+        lines.append("- none: leave `proofs` empty")
+    if human:
+        lines += ["", "## Needs a maintainer (don't research these)", ""]
+        lines += [
+            f"- `{leaf.path}` `{leaf.pointer or '(whole file)'}` ({leaf.op})"
+            for leaf in human[:MAX_PROOF_LINES]
+        ]
+        if len(human) > MAX_PROOF_LINES:
+            lines.append(f"- ... and {len(human) - MAX_PROOF_LINES} more")
+    return "\n".join(lines) + "\n"

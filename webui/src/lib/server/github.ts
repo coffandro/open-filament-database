@@ -496,21 +496,74 @@ export async function getPullRequestForReview(
 	};
 }
 
-/** Check runs on a commit, bucketed so the page can warn before merging on red. */
+/**
+ * Commit statuses that must be green before the merge page will merge, whatever branch
+ * protection says: the brand representative's sign-off (`brand_signoff.yaml`, #808)
+ * and the sustainability source check (`ai_review.yaml`, #768). Each workflow turns
+ * its own status green when a maintainer applies its override label, so there is no
+ * bypass here. Both post a status on every PR, so a missing one means the workflow
+ * hasn't run or crashed, and blocks too: fail closed. For a PR opened before a gate
+ * existed, run that workflow by hand.
+ */
+export const MERGE_GATES = ['Brand sign-off', 'Sustainability sources'];
+
+export interface CheckSummary {
+	passed: number;
+	failed: string[];
+	pending: string[];
+	/** Merge gates (see {@link MERGE_GATES}) that are not green or missing, with why. */
+	blocking: Array<{ context: string; state: string; description: string; url: string | null }>;
+}
+
+/**
+ * Check runs and commit statuses on a commit, bucketed so the page can warn before
+ * merging on red. Statuses matter: the merge gates are statuses, not check runs.
+ */
 export async function getCheckSummary(
 	token: string,
 	owner: string,
 	repo: string,
 	sha: string
-): Promise<{ passed: number; failed: string[]; pending: string[] }> {
-	const response = await ghFetch(token, `/repos/${owner}/${repo}/commits/${sha}/check-runs?per_page=100`);
-	if (!response.ok) throw await ghError(response, 'Failed to get checks');
-	const body = await response.json();
-	const summary = { passed: 0, failed: [] as string[], pending: [] as string[] };
-	for (const run of body.check_runs ?? []) {
+): Promise<CheckSummary> {
+	const [runsResponse, statusResponse] = await Promise.all([
+		ghFetch(token, `/repos/${owner}/${repo}/commits/${sha}/check-runs?per_page=100`),
+		ghFetch(token, `/repos/${owner}/${repo}/commits/${sha}/status?per_page=100`)
+	]);
+	if (!runsResponse.ok) throw await ghError(runsResponse, 'Failed to get checks');
+	if (!statusResponse.ok) throw await ghError(statusResponse, 'Failed to get statuses');
+	const runs = await runsResponse.json();
+	const combined = await statusResponse.json();
+
+	const summary: CheckSummary = { passed: 0, failed: [], pending: [], blocking: [] };
+	for (const run of runs.check_runs ?? []) {
 		if (run.status !== 'completed') summary.pending.push(run.name);
 		else if (['success', 'neutral', 'skipped'].includes(run.conclusion)) summary.passed++;
 		else summary.failed.push(run.name);
+	}
+	// The combined endpoint already keeps only the latest status per context.
+	for (const status of combined.statuses ?? []) {
+		if (status.state === 'success') summary.passed++;
+		else if (status.state === 'pending') summary.pending.push(status.context);
+		else summary.failed.push(status.context);
+		if (MERGE_GATES.includes(status.context) && status.state !== 'success') {
+			summary.blocking.push({
+				context: status.context,
+				state: status.state,
+				description: status.description ?? '',
+				url: status.target_url ?? null
+			});
+		}
+	}
+	const posted = new Set((combined.statuses ?? []).map((s: { context: string }) => s.context));
+	for (const context of MERGE_GATES) {
+		if (!posted.has(context)) {
+			summary.blocking.push({
+				context,
+				state: 'missing',
+				description: 'not reported on this commit; run its workflow',
+				url: null
+			});
+		}
 	}
 	return summary;
 }

@@ -319,7 +319,34 @@ def test_summary_keeps_the_previous_ai_section_on_a_free_rerun():
         {"pr": 1, "head_sha": "b" * 40, "findings": [], "model": None}, extract_ai_section(first)
     )
     assert "Looks good." in rerun
-    assert "/review" not in rerun
+    assert "No AI review on this run" not in rerun
+    # Carried over from commit a…, so it says it's outdated, once, however often it's carried.
+    assert "**Outdated:**" in rerun and "`aaaaaaa`" in rerun
+    again = summary(
+        {"pr": 1, "head_sha": "c" * 40, "findings": [], "model": None}, extract_ai_section(rerun)
+    )
+    assert again.count("**Outdated:**") == 1
+    assert "Covers `ccccccc`" in again
+
+
+def test_model_text_cannot_ping_people():
+    text = summary(
+        {
+            "pr": 1,
+            "head_sha": "a" * 40,
+            "findings": [],
+            "model": {"model": "m", "cost_usd": 0, "summary": "Thanks @octocat", "findings": []},
+        }
+    )
+    assert "@octocat" not in text
+    assert "octocat" in text
+
+
+def test_spend_marker_round_trips():
+    from ofd.review.render import parse_spend
+
+    text = summary({"pr": 1, "head_sha": "a" * 40, "findings": [], "spent_usd": 1.5})
+    assert parse_spend(text) == 1.5
 
 
 def test_model_findings_go_inline_only_on_diff_lines(repo):

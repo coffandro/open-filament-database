@@ -77,7 +77,7 @@ beforeEach(() => {
 	mocks.getGitHubUser.mockResolvedValue({ login: 'maintainer' });
 	mocks.getRepoPermission.mockResolvedValue('write');
 	mocks.getPullRequestForReview.mockResolvedValue({ ...PR });
-	mocks.getCheckSummary.mockResolvedValue({ passed: 4, failed: [], pending: [] });
+	mocks.getCheckSummary.mockResolvedValue({ passed: 4, failed: [], pending: [], blocking: [] });
 });
 
 describe('load', () => {
@@ -140,6 +140,20 @@ describe('merge action', () => {
 		const result: any = await actions.merge(event({ sha: 'abc123' }));
 		expect(result.status).toBe(502);
 		expect(result.data.error).toContain('not mergeable');
+		expect(mocks.createIssueComment).not.toHaveBeenCalled();
+	});
+
+	it('refuses while a merge gate such as the brand sign-off is not green', async () => {
+		mocks.getCheckSummary.mockResolvedValue({
+			passed: 3,
+			failed: [],
+			pending: ['Brand sign-off'],
+			blocking: [{ context: 'Brand sign-off', state: 'pending', description: '', url: null }]
+		});
+		const result: any = await actions.merge(event({ sha: 'abc123' }));
+		expect(result.status).toBe(409);
+		expect(result.data.error).toContain('Brand sign-off is pending');
+		expect(mocks.mergePullRequest).not.toHaveBeenCalled();
 		expect(mocks.createIssueComment).not.toHaveBeenCalled();
 	});
 
