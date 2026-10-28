@@ -4,9 +4,9 @@
   "name": "TPU V2 Flexibel",
   "diameter_tolerance": 0.08,
   "density": 1.23,
+  "shore_hardness_a": 94,
   "min_print_temperature": 205,
   "max_print_temperature": 235,
   "min_bed_temperature": 30,
-  "max_bed_temperature": 60,
-  "shore_hardness_a": 94
+  "max_bed_temperature": 60
 }
