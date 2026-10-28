@@ -42,9 +42,10 @@ permissions:
   actions: write
 
 # Every evaluation of a PR must share one key, so a stale evaluation can never finish
-# after (and overwrite) a newer one. The relay's run name is that key.
+# after (and overwrite) a newer one. The relay's run name is that key. Quoted: an
+# unquoted " #" would start a YAML comment and cut the expression off.
 concurrency:
-  group: ${{ (github.event.pull_request.number || inputs.pr) && format('Brand sign-off relay for PR #{0}', github.event.pull_request.number || inputs.pr) || github.event.workflow_run.display_title || 'brand-signoff-fan-out' }}
+  group: "${{ (github.event.pull_request.number || inputs.pr) && format('Brand sign-off relay for PR #{0}', github.event.pull_request.number || inputs.pr) || github.event.workflow_run.display_title || 'brand-signoff-fan-out' }}"
   cancel-in-progress: false
 
 jobs:
@@ -102,7 +103,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Set up Python
         if: steps.pr.outputs.number != ''
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
       - name: Install dependencies
